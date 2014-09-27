@@ -1,0 +1,21 @@
+* ¿Por qué necesidad de crear algoritmos propietarios y no usar los de la BIOS?
+* ¿Qué tipo de algoritmo de seguridad se usa más? ¿Por qué? -> Caracterizar
+* Encontrar el conjunto de algoritmos más eficiente -> obtener su tiempo
+* Estudiar las diferentes formas de acceso al código del algoritmo junto con soluciones para evitarlas [caso Nintendo 3DS]
+* Determinar los tipos de ficheros que se protegen y ver los más protegidos.
+* Determinar el nivel de protección de datos del juego (escala y clasificación) -> ¿Por qué se ha hecho tan seguro ese juego?
+* ¿Se comprime para utilizar una tarjeta de tamaño inferior?
+* ¿Se repiten algoritmos? -> requerir confirmación visual, varias versiones (ARM/thumb) del mismo
+* Obtener muestras representativas en el estudio [ventas / desarrolladores con más juegos]
+
+Anexo 1:
+Crear un algoritmo óptimo y obtener resultados sobre todos los juegos
+Implementarlo en un videojuego
+
+Anexo 2:
+Implementar HTTPS sobre servidor y cambiar certificados.
+De esta forma se proteje DLC y datos de usuario.
+
+Anexo 3:
+Manual de buenas prácticas
+Exportable a móviles

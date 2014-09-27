@@ -1,0 +1,12 @@
+* ¿Logo de Nintendo para proteger contenidos? -> evitar difusión de juegos
+* Igualdad entre cifrar y comprimir datos en este contexto. 
+* Análisis por bloques de algunos algoritmos (mejor si hay de varias consolas)
+* Primero libros con contenidos a proteger:
+  + 100 Classic books
+  + Guitar Hero
+  + Cocina conmigo
+  + Spacifasdf
+* Clasificación de algoritmos:
+  + 1: Se descifra todo el fichero aunque no se vaya a usar parte de él (sacar contenido entero de la RAM)
+  + 2: Solo se descifra algun bloque (cifrado por bloques) o se escribe a 0 el resto 
+  + 3: Solo lo que se ve en la pantalla y desperdigado
