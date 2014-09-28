@@ -1,10 +1,10 @@
 Objetivos
 =========
-*Encontrar, estudiar y explicar mécanismos de protección de datos (**DRM**)
+_Encontrar, estudiar y explicar mécanismos de protección de datos (**DRM**)
 implementados en videojuegos (principalmente **Nintendo DS**).
-Estudiar su aplicabilidad sobre aplicaciones para dispositivos móviles.*
+Estudiar su aplicabilidad sobre aplicaciones para dispositivos móviles._
 
-* **Relacionados con *DRM***
+* **Relacionados con _DRM_**
  * Técnicas de protección de juego.
    * Introducción a cifrado sobre tarjeta.
    * Logo de Nintendo en cabecera de juegos.
@@ -19,6 +19,7 @@ Estudiar su aplicabilidad sobre aplicaciones para dispositivos móviles.*
    * Borrado de memoria.
    * Cifrado de archivo por bloques.
    * Lectura parcial de archivo.
+
 > [Desde Wikipedia](http://es.wikipedia.org/wiki/Gesti%C3%B3n_digital_de_derechos#.C2.BFC.C3.B3mo_afectan_al_software_libre.3F)
 >
 > El acceso a contenidos digitales sometidos a DRM usando programas modificados por el usuario no está permitido, y por lo general exige el uso de sistemas operativos privativos [...]
@@ -32,7 +33,7 @@ Estudiar su aplicabilidad sobre aplicaciones para dispositivos móviles.*
 
 ###Anexo 1
 + Manual de buenas prácticas al diseñar un mecanismo.
-+ Exportable a móviles (*Android*.
++ Exportable a móviles (*Android*).
 
 
 ###Anexo 2
