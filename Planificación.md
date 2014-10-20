@@ -32,7 +32,7 @@
  | Juegos ya estudiados      | 08/12 - 21/12 |
  | Primera ronda (10 juegos) | 22/12 - 11/01 |
  | Segunda ronda (5 juegos)  | 12/01 - 22/02 |
- | Tercera ronda (10 juegos) | 23/02 - 05/03 |
+ | Tercera ronda (10 juegos) | 23/02 - 05/04 |
  | Conclusiones              | 30/03 - 26/04 |
  | Cuarta ronda (8 juegos)   | 06/04 - 26/04 |
 
