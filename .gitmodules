@@ -1,0 +1,3 @@
+[submodule "NitroDebugger"]
+	path = NitroDebugger
+	url = https://github.com/pleonex/NitroDebugger
