@@ -29,14 +29,13 @@ namespace DataBrithm
 		public static void Main(string[] args)
 		{
 			Application.Initialize(ToolkitType.Gtk);
-			var mainWindow = new Window {
-				Title = "Xwt Demo Application",
-				Width = 500,
-				Height = 400
-			};
+
+			var mainWindow = new MainWindow();
 			mainWindow.Show();
 			Application.Run();
+
 			mainWindow.Dispose();
+			Application.Dispose();
 		}
 	}
 }
