@@ -1,3 +1,6 @@
 [submodule "NitroDebugger"]
 	path = NitroDebugger
 	url = https://github.com/pleonex/NitroDebugger
+[submodule "DataBrithm/libs/xwt"]
+	path = DataBrithm/libs/xwt
+	url = http://github.com/mono/xwt
