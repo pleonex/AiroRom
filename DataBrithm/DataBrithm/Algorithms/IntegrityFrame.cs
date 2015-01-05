@@ -1,5 +1,5 @@
 ﻿//
-//  IntegrityAlgorithm.cs
+//  IntegrityFrame.cs
 //
 //  Author:
 //       Benito Palacios Sánchez <benito356@gmail.com>
@@ -18,18 +18,19 @@
 //
 //  You should have received a copy of the GNU General Public License
 //  along with this program.  If not, see <http://www.gnu.org/licenses/>.
+using System;
+
 namespace DataBrithm
 {
-	public class IntegrityAlgorithm : AlgorithmInfo
+	public partial class IntegrityFrame
 	{
-		public IntegrityAlgorithm()
-		{
-			Type = AlgorithmType.Integrity;
-		}
+		readonly IntegrityAlgorithm algorithm;
 
-		public int  HashSize { get; set; }
-		public bool IsBroken { get; set; }
-		public byte[] Key { get; set; }
+		public IntegrityFrame(IntegrityAlgorithm algorithm)
+		{
+			this.algorithm = algorithm;
+			CreateComponents();
+		}
 	}
 }
 

@@ -66,7 +66,13 @@
       <DependentUpon>EncryptionFrame.cs</DependentUpon>
     </Compile>
     <Compile Include="Algorithms\CompressionFrame.cs" />
-    <Compile Include="Algorithms\CompressionFrame.Designer.cs" />
+    <Compile Include="Algorithms\CompressionFrame.Designer.cs">
+      <DependentUpon>CompressionFrame.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Algorithms\IntegrityFrame.cs" />
+    <Compile Include="Algorithms\IntegrityFrame.Designer.cs">
+      <DependentUpon>IntegrityFrame.cs</DependentUpon>
+    </Compile>
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Algorithms\" />

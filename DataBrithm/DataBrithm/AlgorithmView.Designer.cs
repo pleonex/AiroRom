@@ -51,7 +51,7 @@ namespace DataBrithm
 
 			// Create components
 			algorithmSpecific = new Frame { HeightRequest = 120 };
-			algorithmSpecific.Content = new CompressionFrame(new CompressionAlgorithm());
+			algorithmSpecific.Content = new IntegrityFrame(new IntegrityAlgorithm());
 
 			idBtn = new SpinButton {
 				Digits = 0,

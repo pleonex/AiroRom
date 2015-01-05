@@ -1,5 +1,5 @@
 ﻿//
-//  IntegrityAlgorithm.cs
+//  IntegrityFrame.Designer.cs
 //
 //  Author:
 //       Benito Palacios Sánchez <benito356@gmail.com>
@@ -18,18 +18,41 @@
 //
 //  You should have received a copy of the GNU General Public License
 //  along with this program.  If not, see <http://www.gnu.org/licenses/>.
+using System;
+using Xwt;
+
 namespace DataBrithm
 {
-	public class IntegrityAlgorithm : AlgorithmInfo
+	public partial class IntegrityFrame : Table
 	{
-		public IntegrityAlgorithm()
-		{
-			Type = AlgorithmType.Integrity;
-		}
+		SpinButton hashSizeBtn;
+		CheckBox   isBrokenCheck;
+		TextEntry  keyTxt;
 
-		public int  HashSize { get; set; }
-		public bool IsBroken { get; set; }
-		public byte[] Key { get; set; }
+		void CreateComponents()
+		{
+			Margin = 10;
+
+			isBrokenCheck = new CheckBox("Is broken?");
+			keyTxt = new TextEntry {
+				MultiLine = true,
+				HeightRequest = 50
+			};
+
+			hashSizeBtn = new SpinButton {
+				Digits = 0,
+				IncrementValue = 64,
+				MaximumValue = 10000
+			};
+
+			Add(new Label("Hash size:"), 0, 0, hexpand: false);
+			Add(hashSizeBtn, 1, 0, hexpand: false, hpos: WidgetPlacement.Start);
+
+			Add(isBrokenCheck, 2, 0, hexpand: true, hpos: WidgetPlacement.End);
+
+			Add(new Label("Key:"), 0, 1);
+			Add(keyTxt, 0, 2, colspan: 3, vexpand: true);
+		}
 	}
 }
 
