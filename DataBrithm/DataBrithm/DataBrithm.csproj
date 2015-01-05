@@ -51,6 +51,7 @@
     <Compile Include="Algorithms\CompressionAlgorithm.cs" />
     <Compile Include="Algorithms\IntegrityAlgorithm.cs" />
     <Compile Include="Algorithms\AlgorithmInfoFactory.cs" />
+    <Compile Include="AlgorithmView.cs" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Algorithms\" />

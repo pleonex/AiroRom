@@ -27,6 +27,7 @@ namespace DataBrithm
 	{
 		TreeView algorithmList;
 		GameInfoWidget gameInfo;
+		AlgorithmView algorithmView;
 
 		public MainWindow()
 		{
@@ -60,8 +61,11 @@ namespace DataBrithm
 			vbox.PackStart(gameInfoFrame);
 
 			// ... then the algorithm info
+			algorithmView = new AlgorithmView();
+
 			var algorithmInfoFrame = new Frame();
-			algorithmInfoFrame.Label = "Algorithm information";
+			algorithmInfoFrame.Label   = "Algorithm information";
+			algorithmInfoFrame.Content = algorithmView;
 			vbox.PackStart(algorithmInfoFrame);
 
 			// Set window content
