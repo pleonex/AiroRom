@@ -49,8 +49,11 @@ namespace DataBrithm
 			hpaned.Panel1.Content = algorithmList;
 
 			// In the right the info about the algorithm
-			var vbox = new VBox();
-			hpaned.Panel2.Content = vbox;
+			var infoControlBox = new HBox();
+			hpaned.Panel2.Content = infoControlBox;
+
+			var infoBox = new VBox();
+			infoControlBox.PackStart(infoBox, true);
 
 			// ... first general game info
 			gameInfo = new GameInfoWidget();
@@ -58,7 +61,7 @@ namespace DataBrithm
 			var gameInfoFrame = new Frame();
 			gameInfoFrame.Label   = "Game information";
 			gameInfoFrame.Content = gameInfo;
-			vbox.PackStart(gameInfoFrame, false);
+			infoBox.PackStart(gameInfoFrame, false);
 
 			// ... then the algorithm info
 			algorithmView = new AlgorithmView();
@@ -66,7 +69,18 @@ namespace DataBrithm
 			var algorithmInfoFrame = new Frame();
 			algorithmInfoFrame.Label   = "Algorithm information";
 			algorithmInfoFrame.Content = algorithmView;
-			vbox.PackStart(algorithmInfoFrame, true);
+			infoBox.PackStart(algorithmInfoFrame, true);
+
+			// Create panel buttons bar
+			var buttonBar = new VBox();
+			infoControlBox.PackStart(buttonBar, false);
+
+			buttonBar.MarginRight  = 5;
+			buttonBar.MarginTop    = 5;
+			buttonBar.MarginBottom = 5;
+			buttonBar.PackEnd(new Button(StockIcons.Add));
+			buttonBar.PackEnd(new Button(StockIcons.Information));
+			buttonBar.PackEnd(new Button(StockIcons.Remove));
 
 			// Set window content
 			Padding = new WidgetSpacing();
