@@ -161,6 +161,8 @@ namespace DataBrithm
 
 			Add(new Label("Details"), 0, 8);
 			Add(detailsTxt, 0, 9, colspan: 4, vexpand: true);
+
+			ChangeSensitive(false);
 		}
 
 		void ChangeSensitive(bool sensible)
@@ -179,6 +181,7 @@ namespace DataBrithm
 			bestAlgorithmCombo.Sensitive = sensible;
 			qualityBtn.Sensitive = sensible;
 			detailsTxt.Sensitive = sensible;
+			algorithmSpecific.Sensitive = sensible;
 		}
 	}
 }
