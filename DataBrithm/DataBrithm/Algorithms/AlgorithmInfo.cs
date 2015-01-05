@@ -48,7 +48,7 @@ namespace DataBrithm
 		public string Company { get; set; }
 		public Device Device { get; set; }
 
-		public AlgorithmType Type { get; set; }
+		public AlgorithmType Type { get; protected set; }
 		public bool CanBeDetected { get; set; }
 		public int  Instructions  { get; set; }
 		public string BasedOn { get; set; }
