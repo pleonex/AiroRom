@@ -28,7 +28,9 @@ namespace DataBrithm
 		}
 
 		public bool IsSymmetric { get; set; }
-		public byte Key { get; set; }
+		public byte[] Key { get; set; }
+
+		public string CrcName { get; set; }
 	}
 }
 

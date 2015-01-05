@@ -40,12 +40,12 @@ namespace DataBrithm
 		Integrity
 	}
 
-	public class AlgorithmInfo
+	public abstract class AlgorithmInfo
 	{
 		public string Name { get; set; }
 		public int Id { get; set; }
 		public int GameId  { get; set; }
-		public int Company { get; set; }
+		public string Company { get; set; }
 		public Device Device { get; set; }
 
 		public AlgorithmType Type { get; set; }
