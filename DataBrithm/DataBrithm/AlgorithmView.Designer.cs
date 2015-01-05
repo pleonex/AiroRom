@@ -51,7 +51,7 @@ namespace DataBrithm
 
 			// Create components
 			algorithmSpecific = new Frame { HeightRequest = 120 };
-			algorithmSpecific.Content = new EncryptionFrame(new EncryptionAlgorithm());
+			algorithmSpecific.Content = new CompressionFrame(new CompressionAlgorithm());
 
 			idBtn = new SpinButton {
 				Digits = 0,
@@ -146,7 +146,7 @@ namespace DataBrithm
 			Add(new Label("Based on:"), 2, 5);
 			Add(basedOnTxt, 3, 5);
 
-			Add(algorithmSpecific, 0, 6, colspan: 4, vexpand: true);
+			Add(algorithmSpecific, 0, 6, colspan: 4);
 
 			Add(new Label("Best algorithm:"), 0, 7);
 			Add(bestAlgorithmCombo, 1, 7);

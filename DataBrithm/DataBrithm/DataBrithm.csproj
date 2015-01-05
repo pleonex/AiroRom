@@ -65,6 +65,8 @@
     <Compile Include="Algorithms\EncryptionFrame.Designer.cs">
       <DependentUpon>EncryptionFrame.cs</DependentUpon>
     </Compile>
+    <Compile Include="Algorithms\CompressionFrame.cs" />
+    <Compile Include="Algorithms\CompressionFrame.Designer.cs" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Algorithms\" />
