@@ -27,6 +27,9 @@ namespace DataBrithm
 {
 	public class GameInfoWidget : HBox
 	{
+		const string CoverUrl = 
+			"http://www.advanscene.com/offline/imgs/ADVANsCEne_NDS/{0}-{1}/{2}a.png";
+
 		ImageView gameCoverView;
 
 		public GameInfoWidget()
@@ -65,18 +68,25 @@ namespace DataBrithm
 			infoEntries.Add(new InfoText("None"), 1, 6);
 
 			// Set a test cover
-			const string cover =
-				"http://www.advanscene.com/offline/imgs/ADVANsCEne_NDS/1-500/1a.png";
-			var webClient = new WebClient();
-			Stream webCoverStream = webClient.OpenRead(cover);
-
-			Image gameCover = Image.FromStream(webCoverStream);
 			gameCoverView = new ImageView();
-			gameCoverView.Image = gameCover;
 			gameCoverView.HeightRequest = 192;	// Cut image to get only front cover
 			gameCoverView.BackgroundColor = Colors.Black;	// Must be set to cut image
 			gameCoverView.MarginRight = 10;
+			UpdateCover(1);
 			PackEnd(gameCoverView);
+		}
+
+		void UpdateCover(int gameId)
+		{
+			// Gets the URL
+			int minId = gameId - (gameId % 500) + 1;	// In steps of 500
+			int maxId = minId + 499;
+			string cover = string.Format(CoverUrl, minId, maxId, gameId);
+
+			// Downloads and sets the cover
+			var webClient = new WebClient();
+			Stream webCoverStream = webClient.OpenRead(cover);
+			gameCoverView.Image = Image.FromStream(webCoverStream);
 		}
 
 		class InfoText : Label
