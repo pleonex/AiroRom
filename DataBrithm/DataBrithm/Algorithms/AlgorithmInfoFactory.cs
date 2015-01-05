@@ -19,6 +19,8 @@
 //  You should have received a copy of the GNU General Public License
 //  along with this program.  If not, see <http://www.gnu.org/licenses/>.
 using System;
+using System.Xml.Linq;
+using YAXLib;
 
 namespace DataBrithm
 {
@@ -44,6 +46,32 @@ namespace DataBrithm
 			default:
 				throw new FormatException("Unsupported type");
 			}
+		}
+
+		public static AlgorithmInfo FromXml(XElement element)
+		{
+			// Read type
+			var typeName = element.Element("Type").Value;
+
+			YAXSerializer serializer = null;
+			switch (typeName) {
+			case "Encryption":
+				serializer = new YAXSerializer(typeof(EncryptionAlgorithm));
+				break;
+
+			case "Compression":
+				serializer = new YAXSerializer(typeof(CompressionAlgorithm));
+				break;
+
+			case "Integrity":
+				serializer = new YAXSerializer(typeof(IntegrityAlgorithm));
+				break;
+
+			default:
+				return null;
+			}
+
+			return (AlgorithmInfo)serializer.Deserialize(element);
 		}
 	}
 }

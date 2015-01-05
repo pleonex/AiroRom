@@ -41,6 +41,8 @@
     <Reference Include="YAXLib">
       <HintPath>..\packages\YAXLib.2.13\lib\YAXLib.dll</HintPath>
     </Reference>
+    <Reference Include="System.Xml" />
+    <Reference Include="System.Xml.Linq" />
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Program.cs" />
@@ -73,6 +75,7 @@
     <Compile Include="Algorithms\IntegrityFrame.Designer.cs">
       <DependentUpon>IntegrityFrame.cs</DependentUpon>
     </Compile>
+    <Compile Include="AlgorithmManager.cs" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Algorithms\" />
