@@ -50,6 +50,7 @@
     <Compile Include="Algorithms\EncryptionAlgorithm.cs" />
     <Compile Include="Algorithms\CompressionAlgorithm.cs" />
     <Compile Include="Algorithms\IntegrityAlgorithm.cs" />
+    <Compile Include="Algorithms\AlgorithmInfoFactory.cs" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Algorithms\" />
