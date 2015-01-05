@@ -25,7 +25,8 @@ namespace DataBrithm
 {
 	public class MainWindow : Window
 	{
-		TreeView algoList;
+		TreeView algorithmList;
+		GameInfoWidget gameInfo;
 
 		public MainWindow()
 		{
@@ -34,31 +35,39 @@ namespace DataBrithm
 
 		void CreateComponents()
 		{
-			Title = "DataBrithm - Game Algorithms DB";
-			Width = 740;
+			Title  = "DataBrithm - Game Algorithms DB";
+			Width  = 800;
 			Height = 600;
 	
 			var hpaned = new HPaned();
-			hpaned.BackgroundColor = Colors.LightSteelBlue;
+			hpaned.BackgroundColor = Color.FromBytes(149, 167, 185);
 
-			algoList = new TreeView();
-			hpaned.Panel1.Content = algoList;
+			// In the left we have the list of algorithms
+			algorithmList = new TreeView();
+			algorithmList.WidthRequest = 150;
+			hpaned.Panel1.Content = algorithmList;
 
+			// In the right the info about the algorithm
 			var vbox = new VBox();
-
-			var gameInfo = new Frame();
-			gameInfo.Label = "Game information";
-			gameInfo.HeightRequest = 250;
-			vbox.PackStart(gameInfo);
-
-			var algoInfo = new Frame();
-			algoInfo.Label = "Algorithm information";
-			vbox.PackStart(algoInfo);
-
 			hpaned.Panel2.Content = vbox;
 
+			// ... first general game info
+			gameInfo = new GameInfoWidget();
+
+			var gameInfoFrame = new Frame();
+			gameInfoFrame.Label   = "Game information";
+			gameInfoFrame.Content = gameInfo;
+			vbox.PackStart(gameInfoFrame);
+
+			// ... then the algorithm info
+			var algorithmInfoFrame = new Frame();
+			algorithmInfoFrame.Label = "Algorithm information";
+			vbox.PackStart(algorithmInfoFrame);
+
+			// Set window content
 			Padding = new WidgetSpacing();
 			Content = hpaned;
+
 			CloseRequested += HandleCloseRequested;
 		}
 
