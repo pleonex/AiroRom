@@ -58,7 +58,7 @@ namespace DataBrithm
 			var gameInfoFrame = new Frame();
 			gameInfoFrame.Label   = "Game information";
 			gameInfoFrame.Content = gameInfo;
-			vbox.PackStart(gameInfoFrame);
+			vbox.PackStart(gameInfoFrame, false);
 
 			// ... then the algorithm info
 			algorithmView = new AlgorithmView();
@@ -66,7 +66,7 @@ namespace DataBrithm
 			var algorithmInfoFrame = new Frame();
 			algorithmInfoFrame.Label   = "Algorithm information";
 			algorithmInfoFrame.Content = algorithmView;
-			vbox.PackStart(algorithmInfoFrame);
+			vbox.PackStart(algorithmInfoFrame, true);
 
 			// Set window content
 			Padding = new WidgetSpacing();

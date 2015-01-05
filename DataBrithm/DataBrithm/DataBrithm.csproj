@@ -52,6 +52,7 @@
     <Compile Include="Algorithms\IntegrityAlgorithm.cs" />
     <Compile Include="Algorithms\AlgorithmInfoFactory.cs" />
     <Compile Include="AlgorithmView.cs" />
+    <Compile Include="Algorithms\EncryptionFrame.cs" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Algorithms\" />

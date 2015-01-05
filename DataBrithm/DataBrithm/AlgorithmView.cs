@@ -43,6 +43,8 @@ namespace DataBrithm
 		SpinButton qualityBtn;
 		TextEntry  detailsTxt;
 
+		Frame algorithmSpecific;
+
 		public AlgorithmView()
 		{
 			CreateComponents();
@@ -53,6 +55,9 @@ namespace DataBrithm
 			Margin = 10;
 
 			// Create components
+			algorithmSpecific = new Frame { HeightRequest = 120 };
+			algorithmSpecific.Content = new EncryptionFrame(new EncryptionAlgorithm());
+
 			idBtn = new SpinButton {
 				Digits = 0,
 				IncrementValue = 1,
@@ -146,14 +151,16 @@ namespace DataBrithm
 			Add(new Label("Based on:"), 2, 5);
 			Add(basedOnTxt, 3, 5);
 
-			Add(new Label("Best algorithm:"), 0, 6);
-			Add(bestAlgorithmCombo, 1, 6);
+			Add(algorithmSpecific, 0, 6, colspan: 4, vexpand: true);
 
-			Add(new Label("Quality:"), 2, 6);
-			Add(qualityBtn, 3, 6, hpos: WidgetPlacement.Start);
+			Add(new Label("Best algorithm:"), 0, 7);
+			Add(bestAlgorithmCombo, 1, 7);
 
-			Add(new Label("Details"), 0, 7);
-			Add(detailsTxt, 0, 8, colspan: 4);
+			Add(new Label("Quality:"), 2, 7);
+			Add(qualityBtn, 3, 7, hpos: WidgetPlacement.Start);
+
+			Add(new Label("Details"), 0, 8);
+			Add(detailsTxt, 0, 9, colspan: 4, vexpand: true);
 		}
 
 		void ChangeSensitive(bool sensible)
