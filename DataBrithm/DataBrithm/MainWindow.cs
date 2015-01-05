@@ -19,74 +19,14 @@
 //  You should have received a copy of the GNU General Public License
 //  along with this program.  If not, see <http://www.gnu.org/licenses/>.
 using Xwt;
-using Xwt.Drawing;
 
 namespace DataBrithm
 {
-	public class MainWindow : Window
+	public partial class MainWindow
 	{
-		TreeView algorithmList;
-		GameInfoWidget gameInfo;
-		AlgorithmView algorithmView;
-
 		public MainWindow()
 		{
 			CreateComponents();
-		}
-
-		void CreateComponents()
-		{
-			Title  = "DataBrithm - Game Algorithms DB";
-			Width  = 800;
-			Height = 600;
-	
-			var hpaned = new HPaned();
-			hpaned.BackgroundColor = Color.FromBytes(149, 167, 185);
-
-			// In the left we have the list of algorithms
-			algorithmList = new TreeView();
-			algorithmList.WidthRequest = 150;
-			hpaned.Panel1.Content = algorithmList;
-
-			// In the right the info about the algorithm
-			var infoControlBox = new HBox();
-			hpaned.Panel2.Content = infoControlBox;
-
-			var infoBox = new VBox();
-			infoControlBox.PackStart(infoBox, true);
-
-			// ... first general game info
-			gameInfo = new GameInfoWidget();
-
-			var gameInfoFrame = new Frame();
-			gameInfoFrame.Label   = "Game information";
-			gameInfoFrame.Content = gameInfo;
-			infoBox.PackStart(gameInfoFrame, false);
-
-			// ... then the algorithm info
-			algorithmView = new AlgorithmView();
-
-			var algorithmInfoFrame = new Frame();
-			algorithmInfoFrame.Label   = "Algorithm information";
-			algorithmInfoFrame.Content = algorithmView;
-			infoBox.PackStart(algorithmInfoFrame, true);
-
-			// Create panel buttons bar
-			var buttonBar = new VBox();
-			infoControlBox.PackStart(buttonBar, false);
-
-			buttonBar.MarginRight  = 5;
-			buttonBar.MarginTop    = 5;
-			buttonBar.MarginBottom = 5;
-			buttonBar.PackEnd(new Button(StockIcons.Add));
-			buttonBar.PackEnd(new Button(StockIcons.Information));
-			buttonBar.PackEnd(new Button(StockIcons.Remove));
-
-			// Set window content
-			Padding = new WidgetSpacing();
-			Content = hpaned;
-
-			CloseRequested += HandleCloseRequested;
 		}
 
 		void HandleCloseRequested(object sender, CloseRequestedEventArgs e)

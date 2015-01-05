@@ -1,5 +1,5 @@
 ﻿//
-//  GameInfoWidget.cs
+//  EncryptionFrame.Designer.cs
 //
 //  Author:
 //       Benito Palacios Sánchez <benito356@gmail.com>
@@ -19,33 +19,36 @@
 //  You should have received a copy of the GNU General Public License
 //  along with this program.  If not, see <http://www.gnu.org/licenses/>.
 using Xwt;
-using Xwt.Drawing;
-using System.IO;
-using System.Net;
 
 namespace DataBrithm
 {
-	public partial class GameInfoView
+	public partial class EncryptionFrame : Table
 	{
-		const string CoverUrl = 
-			"http://www.advanscene.com/offline/imgs/ADVANsCEne_NDS/{0}-{1}/{2}a.png";
+		CheckBox symmetricCheck;
+		TextEntry keyTxt;
+		TextEntry crcName;
 
-		public GameInfoView()
+		void CreateComponents()
 		{
-			CreateComponents();
-		}
+			Margin = 10;
 
-		void UpdateCover(int gameId)
-		{
-			// Gets the URL
-			int minId = gameId - (gameId % 500) + 1;	// In steps of 500
-			int maxId = minId + 499;
-			string cover = string.Format(CoverUrl, minId, maxId, gameId);
+			symmetricCheck = new CheckBox("Is symmetryc?");
+			symmetricCheck.WidthRequest = 205;
 
-			// Downloads and sets the cover
-			var webClient = new WebClient();
-			Stream webCoverStream = webClient.OpenRead(cover);
-			gameCoverView.Image = Image.FromStream(webCoverStream);
+			crcName = new TextEntry();
+
+			keyTxt = new TextEntry {
+				MultiLine = true,
+				HeightRequest = 50,
+			};
+
+			Add(symmetricCheck, 0, 0, hexpand: false);
+
+			Add(new Label("CRC Name:"), 1, 0, hexpand: false);
+			Add(crcName, 2, 0, hexpand: true);
+
+			Add(new Label("Key:"), 0, 1);
+			Add(keyTxt, 0, 2, colspan: 3, vexpand: true);
 		}
 	}
 }

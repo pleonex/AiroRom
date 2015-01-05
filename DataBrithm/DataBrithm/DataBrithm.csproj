@@ -53,6 +53,18 @@
     <Compile Include="Algorithms\AlgorithmInfoFactory.cs" />
     <Compile Include="AlgorithmView.cs" />
     <Compile Include="Algorithms\EncryptionFrame.cs" />
+    <Compile Include="AlgorithmView.Designer.cs">
+      <DependentUpon>AlgorithmView.cs</DependentUpon>
+    </Compile>
+    <Compile Include="GameInfoView.Designer.cs">
+      <DependentUpon>GameInfoView.cs</DependentUpon>
+    </Compile>
+    <Compile Include="MainWindow.Designer.cs">
+      <DependentUpon>MainWindow.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Algorithms\EncryptionFrame.Designer.cs">
+      <DependentUpon>EncryptionFrame.cs</DependentUpon>
+    </Compile>
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Algorithms\" />

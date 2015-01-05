@@ -19,50 +19,27 @@
 //  You should have received a copy of the GNU General Public License
 //  along with this program.  If not, see <http://www.gnu.org/licenses/>.
 using System;
-using Xwt;
 
 namespace DataBrithm
 {
-	public class EncryptionFrame : Table
+	public partial class EncryptionFrame
 	{
-		EncryptionAlgorithm algorithm;
-
-		CheckBox symmetricCheck;
-		TextEntry keyTxt;
-		TextEntry crcName;
-
+		readonly EncryptionAlgorithm algorithm;
+		
 		public EncryptionFrame(EncryptionAlgorithm algorithm)
 		{
 			this.algorithm = algorithm;
 			CreateComponents();
+			SetValues();
 		}
 
-		void CreateComponents()
+		void SetValues()
 		{
-			Margin = 10;
-
-			symmetricCheck = new CheckBox("Is symmetryc?");
 			symmetricCheck.Active = algorithm.IsSymmetric;
-			symmetricCheck.WidthRequest = 205;
+			crcName.Text = algorithm.CrcName;
 
-			crcName = new TextEntry {
-				Text = algorithm.CrcName
-			};
-
-			keyTxt = new TextEntry {
-				MultiLine = true,
-				HeightRequest = 50,
-			};
 			if (algorithm.Key != null)
 				keyTxt.Text = BitConverter.ToString(algorithm.Key).Replace('-', ' ');
-
-			Add(symmetricCheck, 0, 0, hexpand: false);
-
-			Add(new Label("CRC Name:"), 1, 0, hexpand: false);
-			Add(crcName, 2, 0, hexpand: true);
-
-			Add(new Label("Key:"), 0, 1);
-			Add(keyTxt, 0, 2, colspan: 3, vexpand: true);
 		}
 	}
 }
