@@ -43,5 +43,12 @@
     <Compile Include="Program.cs" />
     <Compile Include="MainWindow.cs" />
     <Compile Include="GameInfoWidget.cs" />
+    <Compile Include="Algorithms\AlgorithmInfo.cs" />
+    <Compile Include="Algorithms\EncryptionAlgorithm.cs" />
+    <Compile Include="Algorithms\CompressionAlgorithm.cs" />
+    <Compile Include="Algorithms\IntegrityAlgorithm.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Algorithms\" />
   </ItemGroup>
 </Project>
