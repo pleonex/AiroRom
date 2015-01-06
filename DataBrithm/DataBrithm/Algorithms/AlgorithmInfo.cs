@@ -60,5 +60,7 @@ namespace DataBrithm
 		public int BestAlgorithm { get; set; }
 		public double Quality { get; set; }
 		public string Details { get; set; }
+
+		public abstract Xwt.Drawing.Image Icon { get; }
 	}
 }

@@ -79,8 +79,20 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Algorithms\" />
+    <Folder Include="res\" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="..\res\compress.png">
+      <Link>res\compress.png</Link>
+    </EmbeddedResource>
+    <EmbeddedResource Include="..\res\key.png">
+      <Link>res\key.png</Link>
+    </EmbeddedResource>
+    <EmbeddedResource Include="..\res\pencil.png">
+      <Link>res\pencil.png</Link>
+    </EmbeddedResource>
   </ItemGroup>
 </Project>

@@ -47,7 +47,7 @@ namespace DataBrithm
 			if (viewMode.SelectedIndex == 0) {
 				foreach (AlgorithmInfo info in AlgorithmManager.Instance.AlgorithmList)
 					store.AddNode()
-						.SetValue(iconCol, null)
+						.SetValue(iconCol, info.Icon)
 						.SetValue(nameCol, info.Name)
 						.SetValue(infoCol, info);
 			}

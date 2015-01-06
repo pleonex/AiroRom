@@ -30,6 +30,12 @@ namespace DataBrithm
 		public int  HashSize { get; set; }
 		public bool IsBroken { get; set; }
 		public byte[] Key { get; set; }
+
+		public override Xwt.Drawing.Image Icon {
+			get {
+				return Xwt.Drawing.Image.FromResource("DataBrithm.res.pencil.png");
+			}
+		}
 	}
 }
 

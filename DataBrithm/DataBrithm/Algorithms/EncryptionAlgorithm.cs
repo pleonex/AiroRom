@@ -31,6 +31,12 @@ namespace DataBrithm
 		public byte[] Key { get; set; }
 
 		public string CrcName { get; set; }
+
+		public override Xwt.Drawing.Image Icon {
+			get {
+				return Xwt.Drawing.Image.FromResource("DataBrithm.res.key.png");
+			}
+		}
 	}
 }
 

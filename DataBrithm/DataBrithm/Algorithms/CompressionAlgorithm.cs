@@ -37,6 +37,12 @@ namespace DataBrithm
 		public bool IsHeaderEncrypted { get; set; }
 		public bool IsSubFilesEncrypted { get; set; }
 		public int[] EncryptionAlgorithms { get; set; }
+
+		public override Xwt.Drawing.Image Icon {
+			get {
+				return Xwt.Drawing.Image.FromResource("DataBrithm.res.compress.png");
+			}
+		}
 	}
 
 }
