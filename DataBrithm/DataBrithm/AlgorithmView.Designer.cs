@@ -51,7 +51,6 @@ namespace DataBrithm
 
 			// Create components
 			algorithmSpecific = new Frame { HeightRequest = 120 };
-			algorithmSpecific.Content = new IntegrityFrame(new IntegrityAlgorithm());
 
 			idBtn = new SpinButton {
 				Digits = 0,
@@ -156,27 +155,6 @@ namespace DataBrithm
 
 			Add(new Label("Details"), 0, 8);
 			Add(detailsTxt, 0, 9, colspan: 4, vexpand: true);
-
-			ChangeSensitive(false);
-		}
-
-		void ChangeSensitive(bool sensible)
-		{
-			idBtn.Sensitive       = sensible;
-			gameIdBtn.Sensitive   = sensible;
-			nameTxt.Sensitive     = sensible;
-			companyTxt.Sensitive  = sensible;
-			deviceCombo.Sensitive = sensible;
-			detectableCheck.Sensitive = sensible;
-			instructionsBtn.Sensitive = sensible;
-			basedOnTxt.Sensitive = sensible;
-			filesBtn.Sensitive   = sensible;
-			filesCombo.Sensitive = sensible;
-			filesFreqBtn.Sensitive = sensible;
-			bestAlgorithmCombo.Sensitive = sensible;
-			qualityBtn.Sensitive = sensible;
-			detailsTxt.Sensitive = sensible;
-			algorithmSpecific.Sensitive = sensible;
 		}
 	}
 }

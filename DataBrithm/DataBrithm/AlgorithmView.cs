@@ -28,6 +28,42 @@ namespace DataBrithm
 		{
 			CreateComponents();
 		}
+
+		public void SetAlgorithm(AlgorithmInfo algorithm)
+		{
+			idBtn.Value     = algorithm.Id;
+			gameIdBtn.Value = algorithm.GameId;
+			nameTxt.Text    = algorithm.Name;
+			companyTxt.Text = algorithm.Company;
+			typeCombo.SelectedText   = algorithm.Type.ToString();
+			deviceCombo.SelectedText = algorithm.Device.ToString();
+			detectableCheck.Active   = algorithm.CanBeDetected;
+			instructionsBtn.Value    = algorithm.Instructions;
+			basedOnTxt.Text = algorithm.BasedOn;
+			filesBtn.Value  = algorithm.Files;
+			filesCombo.SelectedText = algorithm.FileType.ToString();
+			filesFreqBtn.Value = algorithm.FileFrecuencyAccess;
+			bestAlgorithmCombo.SelectedIndex = algorithm.BestAlgorithm;
+			qualityBtn.Value = algorithm.Quality;
+			detailsTxt.Text  = algorithm.Details;
+
+			if (algorithmSpecific.Content != null)
+				algorithmSpecific.Content.Dispose();
+
+			switch (algorithm.Type) {
+			case AlgorithmType.Compression:
+				algorithmSpecific.Content = new CompressionFrame((CompressionAlgorithm)algorithm);
+				break;
+
+			case AlgorithmType.Encryption:
+				algorithmSpecific.Content = new EncryptionFrame((EncryptionAlgorithm)algorithm);
+				break;
+
+			case AlgorithmType.Integrity:
+				algorithmSpecific.Content = new IntegrityFrame((IntegrityAlgorithm)algorithm);
+				break;
+			}
+		}
 	}
 }
 

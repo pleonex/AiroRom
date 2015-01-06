@@ -40,6 +40,7 @@ namespace DataBrithm
 			algorithmTree.Columns.Add("Algorithms", iconCol, nameCol);
 
 			viewMode.SelectionChanged += UpdateList;
+			algorithmTree.SelectionChanged += AlgorithmSelected;
 		}
 
 		void UpdateList(object sender, EventArgs e)
@@ -51,6 +52,13 @@ namespace DataBrithm
 						.SetValue(nameCol, info.Name)
 						.SetValue(infoCol, info);
 			}
+		}
+
+		void AlgorithmSelected (object sender, EventArgs e)
+		{
+			AlgorithmInfo info = store.GetNavigatorAt(algorithmTree.SelectedRow).GetValue(infoCol);
+			if (info != null)
+				algorithmView.SetAlgorithm(info);
 		}
 
 		void HandleCloseRequested(object sender, CloseRequestedEventArgs e)
