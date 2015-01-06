@@ -25,7 +25,9 @@ namespace DataBrithm
 {
 	public partial class MainWindow : Window
 	{
-		TreeView algorithmList;
+		TreeView algorithmTree;
+		ComboBox viewMode;
+
 		GameInfoView gameInfo;
 		AlgorithmView algorithmView;
 
@@ -39,9 +41,21 @@ namespace DataBrithm
 			hpaned.BackgroundColor = Color.FromBytes(149, 167, 185);
 
 			// In the left we have the list of algorithms
-			algorithmList = new TreeView();
-			algorithmList.WidthRequest = 150;
-			hpaned.Panel1.Content = algorithmList;
+			var algorithmBox = new VBox();
+			hpaned.Panel1.Content = algorithmBox;
+
+			algorithmTree = new TreeView();
+			algorithmTree.WidthRequest = 150;
+			algorithmTree.HeadersVisible = false;
+			algorithmBox.PackStart(algorithmTree, true, true);
+
+			viewMode = new ComboBox();
+			viewMode.Items.Add("Algorithm list");
+			var viewModeBox = new HBox();
+			viewModeBox.MarginLeft = 10;
+			viewModeBox.PackStart(new Label("View Mode:"));
+			viewModeBox.PackStart(viewMode);
+			algorithmBox.PackStart(viewModeBox);
 
 			// In the right the info about the algorithm
 			var infoControlBox = new HBox();

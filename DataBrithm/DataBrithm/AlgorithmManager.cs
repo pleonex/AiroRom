@@ -28,7 +28,7 @@ namespace DataBrithm
 		static AlgorithmManager CurrentInstance;
 		static readonly string FileName = "Algorithms.xml";
 
-		private AlgorithmManager()
+		AlgorithmManager()
 		{
 			ReadXml();
 		}
@@ -42,17 +42,15 @@ namespace DataBrithm
 			}
 		}
 
-		public IEnumerable<AlgorithmInfo> AlgorithmList { get; private set; }
+		public IList<AlgorithmInfo> AlgorithmList { get; private set; }
 
 		void ReadXml()
 		{
 			XDocument doc = XDocument.Load(FileName);
 
-			var algorithms = new List<AlgorithmInfo>();
+			AlgorithmList = new List<AlgorithmInfo>();
 			foreach (XElement element in doc.Root.Element("AlgorithmList").Elements())
-				algorithms.Add(AlgorithmInfoFactory.FromXml(element));
-
-			AlgorithmList = algorithms;
+				AlgorithmList.Add(AlgorithmInfoFactory.FromXml(element));
 		}
 	}
 }

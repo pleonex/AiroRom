@@ -18,15 +18,39 @@
 //
 //  You should have received a copy of the GNU General Public License
 //  along with this program.  If not, see <http://www.gnu.org/licenses/>.
+using System;
 using Xwt;
+using Xwt.Drawing;
 
 namespace DataBrithm
 {
 	public partial class MainWindow
 	{
+		TreeStore store;
+		DataField<Image> iconCol = new DataField<Image>();
+		DataField<string> nameCol = new DataField<string>();
+		DataField<AlgorithmInfo> infoCol = new DataField<AlgorithmInfo>();
+
 		public MainWindow()
 		{
 			CreateComponents();
+
+			store = new TreeStore(iconCol, nameCol, infoCol);
+			algorithmTree.DataSource = store;
+			algorithmTree.Columns.Add("Algorithms", iconCol, nameCol);
+
+			viewMode.SelectionChanged += UpdateList;
+		}
+
+		void UpdateList(object sender, EventArgs e)
+		{
+			if (viewMode.SelectedIndex == 0) {
+				foreach (AlgorithmInfo info in AlgorithmManager.Instance.AlgorithmList)
+					store.AddNode()
+						.SetValue(iconCol, null)
+						.SetValue(nameCol, info.Name)
+						.SetValue(infoCol, info);
+			}
 		}
 
 		void HandleCloseRequested(object sender, CloseRequestedEventArgs e)
