@@ -76,6 +76,7 @@
       <DependentUpon>IntegrityFrame.cs</DependentUpon>
     </Compile>
     <Compile Include="AlgorithmManager.cs" />
+    <Compile Include="GameInfoManager.cs" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Algorithms\" />
