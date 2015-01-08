@@ -20,20 +20,28 @@
 //  along with this program.  If not, see <http://www.gnu.org/licenses/>.
 using Xwt;
 using Xwt.Drawing;
+using System;
+using System.Net;
+using System.IO;
 
 namespace DataBrithm
 {
 	public partial class GameInfoView
 	{
+		WebClient webClient;
+
 		public GameInfoView()
 		{
+			webClient = new WebClient();
+			webClient.OpenReadCompleted += HandleOpenReadCompleted;
+			this.Disposed += HandleDisposed;
+
 			CreateComponents();
 		}
 
 		public void SetGame(Device dev, int releaseNum)
 		{
 			var info = GameInfoManager.Instance.GetGameInfo(dev, releaseNum);
-			gameCoverView.Image = info.Cover;
 			title.Text   = info.Title;
 			company.Text = info.Company;
 			region.Text  = info.Region.ToString();
@@ -49,6 +57,26 @@ namespace DataBrithm
 				size.Text = (info.Size / (1 << 10)).ToString() + " KB";
 			else
 				size.Text = info.Size + " B";
+
+			DownloadCover(info.CoverUrl);
+		}
+
+		void DownloadCover(string url)
+		{
+			webClient.OpenReadAsync(new Uri(url));
+		}
+
+		void HandleOpenReadCompleted (object sender, OpenReadCompletedEventArgs e)
+		{
+			if (!e.Cancelled && e.Error == null)
+				Application.Invoke(() => gameCoverView.Image = Image.FromStream(e.Result));
+		}
+
+		void HandleDisposed (object sender, EventArgs e)
+		{
+			if (webClient.IsBusy)
+				webClient.CancelAsync();
+			webClient.Dispose();
 		}
 	}
 }

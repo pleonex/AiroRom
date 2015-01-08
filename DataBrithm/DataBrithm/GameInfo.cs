@@ -103,17 +103,12 @@ namespace DataBrithm
 			return info;
 		}
 
-		public Image Cover {
+		public string CoverUrl {
 			get {
 				// Gets the URL
 				int minId = ReleaseId - (ReleaseId % 500) + 1;	// In steps of 500
 				int maxId = minId + 499;
-				string cover = string.Format(coverUrls[Device], minId, maxId, ReleaseId);
-
-				// Downloads and gets the cover
-				var webClient = new WebClient();
-				Stream webCoverStream = webClient.OpenRead(cover);
-				return Image.FromStream(webCoverStream);
+				return string.Format(coverUrls[Device], minId, maxId, ReleaseId);
 			}
 		}
 	}

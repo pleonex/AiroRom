@@ -65,6 +65,9 @@ namespace DataBrithm
 
 		void HandleCloseRequested(object sender, CloseRequestedEventArgs e)
 		{
+			gameInfo.Dispose();
+			algorithmView.Dispose();
+			
 			Application.Exit();
 		}
 	}
