@@ -47,8 +47,8 @@ namespace DataBrithm
 
 			ratioBalancedBtn = new SpinButton {
 				Digits = 2,
-				IncrementValue = 5,
-				MaximumValue = 100
+				MaximumValue = 100,
+				Sensitive = false
 			};
 
 			avgSubfilesBtn = new SpinButton {

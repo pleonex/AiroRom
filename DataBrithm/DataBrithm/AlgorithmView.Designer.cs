@@ -101,9 +101,9 @@ namespace DataBrithm
 				filesCombo.Items.Add(type);
 
 			qualityBtn = new SpinButton {
-				Digits = 2,
-				IncrementValue = 5,
-				MaximumValue = 100
+				Digits = 1,
+				MaximumValue = 1000,
+				Sensitive = false
 			};
 
 			bestAlgorithmCombo = new ComboBox();
