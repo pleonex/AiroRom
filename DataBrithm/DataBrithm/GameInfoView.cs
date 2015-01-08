@@ -37,10 +37,18 @@ namespace DataBrithm
 			title.Text   = info.Title;
 			company.Text = info.Company;
 			region.Text  = info.Region.ToString();
-			size.Text    = info.Size.ToString();
 			releaseNumber.Text = info.ReleaseId.ToString();
 			language.Text = info.Language.ToString();
 			saveType.Text = info.SaveType;
+
+			if (info.Size >= (1 << 30))
+				size.Text = (info.Size / (1 << 30)).ToString() + " GB";
+			else if (info.Size >= (1 << 20))
+				size.Text = (info.Size / (1 << 20)).ToString() + " MB";
+			else if (info.Size >= (1 << 10))
+				size.Text = (info.Size / (1 << 10)).ToString() + " KB";
+			else
+				size.Text = info.Size + " B";
 		}
 	}
 }
