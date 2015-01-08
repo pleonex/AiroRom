@@ -57,8 +57,10 @@ namespace DataBrithm
 		void AlgorithmSelected (object sender, EventArgs e)
 		{
 			AlgorithmInfo info = store.GetNavigatorAt(algorithmTree.SelectedRow).GetValue(infoCol);
-			if (info != null)
+			if (info != null) {
 				algorithmView.SetAlgorithm(info);
+				gameInfo.SetGame(info.Device, info.GameId);
+			}
 		}
 
 		void HandleCloseRequested(object sender, CloseRequestedEventArgs e)

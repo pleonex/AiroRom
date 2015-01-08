@@ -20,6 +20,10 @@
 //  along with this program.  If not, see <http://www.gnu.org/licenses/>.
 using System;
 using System.Xml.Linq;
+using System.Collections.Generic;
+using Xwt.Drawing;
+using System.Net;
+using System.IO;
 
 namespace DataBrithm
 {
@@ -35,6 +39,11 @@ namespace DataBrithm
 
 	public class GameInfo
 	{
+		readonly Dictionary<Device, string> coverUrls = new Dictionary<Device, string> {
+			{ Device.NintendoDS, "http://www.advanscene.com/offline/imgs/ADVANsCEne_NDS/{0}-{1}/{2}a.png" },
+			{ Device.PSP, "http://www.advanscene.com/offline/imgs/ADVANsCEne_PSN/{0}-{1}/{2}a.png" }
+		};
+
 		GameInfo()
 		{
 		}
@@ -62,6 +71,20 @@ namespace DataBrithm
 			info.SaveType = xentry.Element("saveType").Value;
 
 			return info;
+		}
+
+		public Image Cover {
+			get {
+				// Gets the URL
+				int minId = ReleaseId - (ReleaseId % 500) + 1;	// In steps of 500
+				int maxId = minId + 499;
+				string cover = string.Format(coverUrls[Device], minId, maxId, ReleaseId);
+
+				// Downloads and gets the cover
+				var webClient = new WebClient();
+				Stream webCoverStream = webClient.OpenRead(cover);
+				return Image.FromStream(webCoverStream);
+			}
 		}
 	}
 }

@@ -20,32 +20,27 @@
 //  along with this program.  If not, see <http://www.gnu.org/licenses/>.
 using Xwt;
 using Xwt.Drawing;
-using System.IO;
-using System.Net;
 
 namespace DataBrithm
 {
 	public partial class GameInfoView
 	{
-		const string CoverUrl = 
-			"http://www.advanscene.com/offline/imgs/ADVANsCEne_NDS/{0}-{1}/{2}a.png";
-
 		public GameInfoView()
 		{
 			CreateComponents();
 		}
 
-		void UpdateCover(int gameId)
+		public void SetGame(Device dev, int releaseNum)
 		{
-			// Gets the URL
-			int minId = gameId - (gameId % 500) + 1;	// In steps of 500
-			int maxId = minId + 499;
-			string cover = string.Format(CoverUrl, minId, maxId, gameId);
-
-			// Downloads and sets the cover
-			var webClient = new WebClient();
-			Stream webCoverStream = webClient.OpenRead(cover);
-			gameCoverView.Image = Image.FromStream(webCoverStream);
+			var info = GameInfoManager.Instance.GetGameInfo(dev, releaseNum);
+			gameCoverView.Image = info.Cover;
+			title.Text   = info.Title;
+			company.Text = info.Company;
+			region.Text  = info.Region.ToString();
+			size.Text    = info.Size.ToString();
+			releaseNumber.Text = info.ReleaseId.ToString();
+			language.Text = info.Language.ToString();
+			saveType.Text = info.SaveType;
 		}
 	}
 }
