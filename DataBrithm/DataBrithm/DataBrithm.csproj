@@ -77,6 +77,7 @@
     </Compile>
     <Compile Include="AlgorithmManager.cs" />
     <Compile Include="GameInfoManager.cs" />
+    <Compile Include="GameInfo.cs" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Algorithms\" />

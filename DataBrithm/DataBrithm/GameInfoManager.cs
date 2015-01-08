@@ -20,6 +20,7 @@
 //  along with this program.  If not, see <http://www.gnu.org/licenses/>.
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Xml.Linq;
 
 namespace DataBrithm
@@ -27,7 +28,8 @@ namespace DataBrithm
 	public class GameInfoManager
 	{
 		static GameInfoManager CurrentInstance;
-		readonly Dictionary<Device, XElement> gameDb = new Dictionary<Device, XElement>();
+		readonly Dictionary<Device, IEnumerable<XElement>> gameDb = 
+			new Dictionary<Device, IEnumerable<XElement>>();
 
 		GameInfoManager()
 		{
@@ -44,15 +46,18 @@ namespace DataBrithm
 			}
 		}
 
-		public void GetGameInfo(Device dev, int releaseNum)
+		public GameInfo GetGameInfo(Device dev, int releaseNum)
 		{
-			throw new NotImplementedException();
+			XElement xinfo = gameDb[dev]
+				.First(n => n.Element("releaseNumber").Value == releaseNum.ToString());
+
+			return GameInfo.FromXml(dev, xinfo);
 		}
 
-		XElement ParseXml(string filename)
+		IEnumerable<XElement> ParseXml(string filename)
 		{
 			XDocument doc = XDocument.Load(filename);
-			return doc.Root.Element("games");
+			return doc.Root.Element("games").Elements();
 		}
 	}
 }
