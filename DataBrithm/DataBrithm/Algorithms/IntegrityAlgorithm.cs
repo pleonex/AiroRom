@@ -36,6 +36,12 @@ namespace DataBrithm
 				return Xwt.Drawing.Image.FromResource("DataBrithm.res.pencil.png");
 			}
 		}
+
+		protected override double SpecificQuality {
+			get {
+				return System.Math.Sqrt(HashSize) * (IsBroken ? 0 : 1) + Key.Length * 2;
+			}
+		}
 	}
 }
 

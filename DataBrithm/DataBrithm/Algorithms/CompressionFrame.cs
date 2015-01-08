@@ -39,7 +39,7 @@ namespace DataBrithm
 			avgSubfilesBtn.Value = algorithm.AverageSubFiles;
 			supportDirectAccessCheck.Active = algorithm.SupportsInmediateAccess;
 			isHeaderEncryptedCheck.Active = algorithm.IsHeaderEncrypted;
-			areSubfilesEncryptedCheck.Active = algorithm.IsSubFilesEncrypted;
+			areSubfilesEncryptedCheck.Active = algorithm.AreSubFilesEncrypted;
 
 			string txt = "";
 			foreach (int id in algorithm.EncryptionAlgorithms)

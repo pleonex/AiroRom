@@ -28,19 +28,35 @@ namespace DataBrithm
 		}
 
 		public double CompressionRatio { get; set; }
-		public double BalancedCompressionRatio { get; set; }
+		public double BalancedCompressionRatio { 
+			get {
+				return CompressionRatio * FileFrecuencyAccess;
+			}
+		}
 
 		public bool SupportsSubFiles { get; set; }
 		public double AverageSubFiles { get; set; }
 		public bool SupportsInmediateAccess { get; set; }
 
 		public bool IsHeaderEncrypted { get; set; }
-		public bool IsSubFilesEncrypted { get; set; }
+		public bool AreSubFilesEncrypted { get; set; }
 		public int[] EncryptionAlgorithms { get; set; }
 
 		public override Xwt.Drawing.Image Icon {
 			get {
 				return Xwt.Drawing.Image.FromResource("DataBrithm.res.compress.png");
+			}
+		}
+
+		protected override double SpecificQuality {
+			get {
+				double ratioPoints    = CompressionRatio;
+				double subfilesPoints = System.Math.Sqrt(AverageSubFiles) *
+					(SupportsInmediateAccess ? 10 : 0.1);
+				double encryptPoints  = (IsHeaderEncrypted ? 20 : 0) +
+					(AreSubFilesEncrypted ? 10 : 0) + 20 * EncryptionAlgorithms.Length;
+
+				return ratioPoints + subfilesPoints + encryptPoints;
 			}
 		}
 	}

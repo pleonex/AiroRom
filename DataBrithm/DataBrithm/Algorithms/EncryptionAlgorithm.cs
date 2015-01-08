@@ -37,6 +37,14 @@ namespace DataBrithm
 				return Xwt.Drawing.Image.FromResource("DataBrithm.res.key.png");
 			}
 		}
+
+		protected override double SpecificQuality {
+			get {
+				double crcPoints = string.IsNullOrEmpty(CrcName) ? 0 : 20;
+				double symmetricPoints = IsSymmetric ? 0 : 20;
+				return crcPoints + symmetricPoints + System.Math.Sqrt(Key.Length);
+			}
+		}
 	}
 }
 

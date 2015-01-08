@@ -18,6 +18,8 @@
 //
 //  You should have received a copy of the GNU General Public License
 //  along with this program.  If not, see <http://www.gnu.org/licenses/>.
+using System;
+
 namespace DataBrithm
 {
 	public enum Device {
@@ -42,6 +44,8 @@ namespace DataBrithm
 
 	public abstract class AlgorithmInfo
 	{
+		const double InstructionNormalizer = 10;
+
 		public string Name { get; set; }
 		public int Id { get; set; }
 		public int GameId  { get; set; }
@@ -58,9 +62,21 @@ namespace DataBrithm
 		public double   FileFrecuencyAccess { get; set; }
 
 		public int BestAlgorithm { get; set; }
-		public double Quality { get; set; }
 		public string Details { get; set; }
 
 		public abstract Xwt.Drawing.Image Icon { get; }
+
+		public double Quality { 
+			get {
+				double filePoints  = Math.Sqrt(Files * FileFrecuencyAccess / 2);
+				double codeQuality = (Instructions > 0) ? (InstructionNormalizer / Instructions) : 0;
+				double extra = CanBeDetected ? 20 : 0;
+				double specific = SpecificQuality;
+
+				return extra + codeQuality + filePoints + specific;
+			}
+		}
+
+		protected abstract double SpecificQuality { get; }
 	}
 }
