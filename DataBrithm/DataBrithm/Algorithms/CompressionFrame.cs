@@ -28,6 +28,23 @@ namespace DataBrithm
 		{
 			this.algorithm = algorithm;
 			CreateComponents();
+			SetValues();
+		}
+
+		void SetValues()
+		{
+			ratioBtn.Value = algorithm.CompressionRatio;
+			ratioBalancedBtn.Value = algorithm.BalancedCompressionRatio;
+			supportSubfilesCheck.Active = algorithm.SupportsSubFiles;
+			avgSubfilesBtn.Value = algorithm.AverageSubFiles;
+			supportDirectAccessCheck.Active = algorithm.SupportsInmediateAccess;
+			isHeaderEncryptedCheck.Active = algorithm.IsHeaderEncrypted;
+			areSubfilesEncryptedCheck.Active = algorithm.IsSubFilesEncrypted;
+
+			string txt = "";
+			foreach (int id in algorithm.EncryptionAlgorithms)
+				txt += id.ToString() + " ";
+			algorithmUsedTxt.Text = txt;
 		}
 	}
 }

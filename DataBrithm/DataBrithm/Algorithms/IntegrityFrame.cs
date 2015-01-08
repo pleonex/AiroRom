@@ -30,6 +30,16 @@ namespace DataBrithm
 		{
 			this.algorithm = algorithm;
 			CreateComponents();
+			SetValues();
+		}
+
+		void SetValues()
+		{
+			hashSizeBtn.Value = algorithm.HashSize;
+			isBrokenCheck.Active = algorithm.IsBroken;
+
+			if (algorithm.Key != null)
+				keyTxt.Text = BitConverter.ToString(algorithm.Key).Replace('-', ' ');
 		}
 	}
 }
