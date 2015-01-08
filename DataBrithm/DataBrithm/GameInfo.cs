@@ -27,14 +27,44 @@ using System.IO;
 
 namespace DataBrithm
 {
-	[Flags]
-	public enum GameRegion : byte {
+	public enum GameRegion : int {
+		Europe      = 0,
+		USA         = 1,
+		Germany     = 2,
+		China       = 3,
+		Spain       = 4,
+		France      = 5,
+		Italy       = 6,
+		Japan       = 7,
+		Netherlands = 8,
 
+		Denmark     = 10,
+		Finland     = 11,
+		Norway      = 12,
+
+		Australia   = 19,
+
+		South_Korea = 22,
 	}
 
 	[Flags]
-	public enum GameLanguage : byte {
+	public enum GameLanguage : int {
+		French     = 1 << 0,
+		English_UK = 1 << 1,
+		Chinese    = 1 << 2,
+		Danish     = 1 << 3,
+		Dutch      = 1 << 4,
+		Finnish    = 1 << 5,
+		German     = 1 << 6,
+		Italian    = 1 << 7,
+		Japan      = 1 << 8,
+		Norwegian  = 1 << 9,
+		Polish     = 1 << 10,
+		Portuguese = 1 << 11,
+		Spanish    = 1 << 12,
+		Swedish    = 1 << 13,
 
+		Korean     = 1 << 16
 	}
 
 	public class GameInfo
