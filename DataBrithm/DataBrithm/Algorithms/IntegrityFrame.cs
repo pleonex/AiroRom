@@ -19,27 +19,44 @@
 //  You should have received a copy of the GNU General Public License
 //  along with this program.  If not, see <http://www.gnu.org/licenses/>.
 using System;
+using Xwt;
+using System.Linq;
 
 namespace DataBrithm
 {
-	public partial class IntegrityFrame
+	public partial class IntegrityFrame : IAlgorithmFrame
 	{
-		readonly IntegrityAlgorithm algorithm;
+		IntegrityAlgorithm algorithm;
 
-		public IntegrityFrame(IntegrityAlgorithm algorithm)
+		public IntegrityFrame()
 		{
-			this.algorithm = algorithm;
 			CreateComponents();
-			SetValues();
 		}
 
-		void SetValues()
+		public void SetAlgorithm(AlgorithmInfo algorithm)
 		{
-			hashSizeBtn.Value = algorithm.HashSize;
-			isBrokenCheck.Active = algorithm.IsBroken;
+			this.algorithm = algorithm as IntegrityAlgorithm;
+			if (this.algorithm == null)
+				throw new ArgumentException("Invalid algorithm type");
 
-			if (algorithm.Key != null)
-				keyTxt.Text = BitConverter.ToString(algorithm.Key).Replace('-', ' ');
+			hashSizeBtn.Value = this.algorithm.HashSize;
+			isBrokenCheck.Active = this.algorithm.IsBroken;
+
+			if (this.algorithm.Key != null)
+				keyTxt.Text = BitConverter.ToString(this.algorithm.Key).Replace('-', ' ');
+		}
+
+		public void UpdateAlgorithm()
+		{
+			algorithm.HashSize = (int)hashSizeBtn.Value;
+			algorithm.IsBroken = isBrokenCheck.Active;
+
+			string[] key = keyTxt.Text.Split(' ');
+			algorithm.Key = key.Select(k => Convert.ToByte(k, 16)).ToArray();
+		}
+
+		public Widget View {
+			get { return view; }
 		}
 	}
 }

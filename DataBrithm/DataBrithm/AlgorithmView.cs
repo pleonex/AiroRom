@@ -51,22 +51,25 @@ namespace DataBrithm
 			qualityBtn.Value = algorithm.Quality;
 			detailsTxt.Text  = algorithm.Details;
 
-			if (algorithmSpecific.Content != null)
-				algorithmSpecific.Content.Dispose();
+			if (algorithmSpecificView != null)
+				algorithmSpecificView.View.Dispose();
 
 			switch (algorithm.Type) {
 			case AlgorithmType.Compression:
-				algorithmSpecific.Content = new CompressionFrame((CompressionAlgorithm)algorithm);
+				algorithmSpecificView = new CompressionFrame();
 				break;
 
 			case AlgorithmType.Encryption:
-				algorithmSpecific.Content = new EncryptionFrame((EncryptionAlgorithm)algorithm);
+				algorithmSpecificView = new EncryptionFrame();
 				break;
 
 			case AlgorithmType.Integrity:
-				algorithmSpecific.Content = new IntegrityFrame((IntegrityAlgorithm)algorithm);
+				algorithmSpecificView = new IntegrityFrame();
 				break;
 			}
+
+			algorithmSpecificView.SetAlgorithm(algorithm);
+			algorithmSpecific.Content = algorithmSpecificView.View;
 		}
 
 		public void UpdateAlgorithm()
@@ -84,6 +87,8 @@ namespace DataBrithm
 			algorithm.FileFrecuencyAccess = filesFreqBtn.Value;
 			algorithm.BestAlgorithm = bestAlgorithmCombo.SelectedIndex;
 			algorithm.Details = detailsTxt.Text;
+
+			algorithmSpecificView.UpdateAlgorithm();
 		}
 	}
 }

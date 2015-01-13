@@ -44,6 +44,7 @@ namespace DataBrithm
 		TextEntry  detailsTxt;
 
 		Frame algorithmSpecific;
+		IAlgorithmFrame algorithmSpecificView;
 
 		void CreateComponents()
 		{

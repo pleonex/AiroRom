@@ -18,33 +18,56 @@
 //
 //  You should have received a copy of the GNU General Public License
 //  along with this program.  If not, see <http://www.gnu.org/licenses/>.
+using System;
+using System.Linq;
+using Xwt;
+
 namespace DataBrithm
 {
-	public partial class CompressionFrame
+	public partial class CompressionFrame : IAlgorithmFrame
 	{
-		readonly CompressionAlgorithm algorithm;
+		CompressionAlgorithm algorithm;
 
-		public CompressionFrame(CompressionAlgorithm algorithm)
+		public CompressionFrame()
 		{
-			this.algorithm = algorithm;
 			CreateComponents();
-			SetValues();
 		}
 
-		void SetValues()
+		public void SetAlgorithm(AlgorithmInfo algorithm)
 		{
-			ratioBtn.Value = algorithm.CompressionRatio;
-			ratioBalancedBtn.Value = algorithm.BalancedCompressionRatio;
-			supportSubfilesCheck.Active = algorithm.SupportsSubFiles;
-			avgSubfilesBtn.Value = algorithm.AverageSubFiles;
-			supportDirectAccessCheck.Active = algorithm.SupportsInmediateAccess;
-			isHeaderEncryptedCheck.Active = algorithm.IsHeaderEncrypted;
-			areSubfilesEncryptedCheck.Active = algorithm.AreSubFilesEncrypted;
+			this.algorithm = algorithm as CompressionAlgorithm;
+			if (this.algorithm == null)
+				throw new ArgumentException("Invalid algorithm type");
+
+			ratioBtn.Value                   = this.algorithm.CompressionRatio;
+			ratioBalancedBtn.Value           = this.algorithm.BalancedCompressionRatio;
+			supportSubfilesCheck.Active      = this.algorithm.SupportsSubFiles;
+			avgSubfilesBtn.Value             = this.algorithm.AverageSubFiles;
+			supportDirectAccessCheck.Active  = this.algorithm.SupportsInmediateAccess;
+			isHeaderEncryptedCheck.Active    = this.algorithm.IsHeaderEncrypted;
+			areSubfilesEncryptedCheck.Active = this.algorithm.AreSubFilesEncrypted;
 
 			string txt = "";
-			foreach (int id in algorithm.EncryptionAlgorithms)
+			foreach (int id in this.algorithm.EncryptionAlgorithms)
 				txt += id.ToString() + " ";
 			algorithmUsedTxt.Text = txt;
+		}
+
+		public void UpdateAlgorithm()
+		{
+			algorithm.CompressionRatio         = ratioBtn.Value;
+			algorithm.SupportsSubFiles         = supportSubfilesCheck.Active;
+			algorithm.AverageSubFiles          = avgSubfilesBtn.Value;
+			algorithm.SupportsInmediateAccess  = supportDirectAccessCheck.Active;
+			algorithm.IsHeaderEncrypted        = isHeaderEncryptedCheck.Active;
+			algorithm.AreSubFilesEncrypted     = areSubfilesEncryptedCheck.Active;
+
+			string[] ids = algorithmUsedTxt.Text.Split(' ');
+			algorithm.EncryptionAlgorithms = ids.Select(id => Convert.ToInt32(id)).ToArray();
+		}
+
+		public Widget View {
+			get { return view; }
 		}
 	}
 }

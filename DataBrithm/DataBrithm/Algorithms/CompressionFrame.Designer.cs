@@ -22,8 +22,9 @@ using Xwt;
 
 namespace DataBrithm
 {
-	public partial class CompressionFrame : Table
+	public partial class CompressionFrame
 	{
+		Table view;
 		SpinButton ratioBtn;
 		SpinButton ratioBalancedBtn;
 
@@ -37,7 +38,8 @@ namespace DataBrithm
 
 		void CreateComponents()
 		{
-			Margin = 10;
+			view = new Table();
+			view.Margin = 10;
 
 			ratioBtn = new SpinButton {
 				Digits = 2,
@@ -65,23 +67,23 @@ namespace DataBrithm
 			algorithmUsedTxt = new TextEntry();
 
 			// Add components
-			Add(new Label("Ratio:"), 0, 0);
-			Add(ratioBtn, 1, 0, hpos: WidgetPlacement.Start);
+			view.Add(new Label("Ratio:"), 0, 0);
+			view.Add(ratioBtn, 1, 0, hpos: WidgetPlacement.Start);
 
-			Add(new Label("Balanced ratio:"), 2, 0);
-			Add(ratioBalancedBtn, 3, 0, hpos: WidgetPlacement.Start);
+			view.Add(new Label("Balanced ratio:"), 2, 0);
+			view.Add(ratioBalancedBtn, 3, 0, hpos: WidgetPlacement.Start);
 
-			Add(supportSubfilesCheck, 0, 1, colspan: 2);
-			Add(supportDirectAccessCheck, 2, 1, colspan: 2);
+			view.Add(supportSubfilesCheck, 0, 1, colspan: 2);
+			view.Add(supportDirectAccessCheck, 2, 1, colspan: 2);
 
-			Add(isHeaderEncryptedCheck, 0, 2, colspan: 2);
-			Add(areSubfilesEncryptedCheck, 2, 2, colspan: 2);
+			view.Add(isHeaderEncryptedCheck, 0, 2, colspan: 2);
+			view.Add(areSubfilesEncryptedCheck, 2, 2, colspan: 2);
 
-			Add(new Label("# Subfiles:"), 0, 3);
-			Add(avgSubfilesBtn, 1, 3, hpos: WidgetPlacement.Start);
+			view.Add(new Label("# Subfiles:"), 0, 3);
+			view.Add(avgSubfilesBtn, 1, 3, hpos: WidgetPlacement.Start);
 
-			Add(new Label("Algorithms used:"), 2, 3);
-			Add(algorithmUsedTxt, 3, 3, hexpand: true);
+			view.Add(new Label("Algorithms used:"), 2, 3);
+			view.Add(algorithmUsedTxt, 3, 3, hexpand: true);
 		}
 	}
 }

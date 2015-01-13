@@ -19,27 +19,44 @@
 //  You should have received a copy of the GNU General Public License
 //  along with this program.  If not, see <http://www.gnu.org/licenses/>.
 using System;
+using System.Linq;
+using Xwt;
 
 namespace DataBrithm
 {
-	public partial class EncryptionFrame
+	public partial class EncryptionFrame : IAlgorithmFrame
 	{
-		readonly EncryptionAlgorithm algorithm;
+		EncryptionAlgorithm algorithm;
 		
-		public EncryptionFrame(EncryptionAlgorithm algorithm)
+		public EncryptionFrame()
 		{
-			this.algorithm = algorithm;
 			CreateComponents();
-			SetValues();
 		}
 
-		void SetValues()
+		public void SetAlgorithm(AlgorithmInfo algorithm)
 		{
-			symmetricCheck.Active = algorithm.IsSymmetric;
-			crcName.Text = algorithm.CrcName;
+			this.algorithm = algorithm as EncryptionAlgorithm;
+			if (this.algorithm == null)
+				throw new ArgumentException("Invalid algorithm type");
 
-			if (algorithm.Key != null)
-				keyTxt.Text = BitConverter.ToString(algorithm.Key).Replace('-', ' ');
+			symmetricCheck.Active = this.algorithm.IsSymmetric;
+			crcName.Text = this.algorithm.CrcName;
+
+			if (this.algorithm.Key != null)
+				keyTxt.Text = BitConverter.ToString(this.algorithm.Key).Replace('-', ' ');
+		}
+
+		public void UpdateAlgorithm()
+		{
+			algorithm.IsSymmetric = symmetricCheck.Active;
+			algorithm.CrcName = crcName.Text;
+
+			string[] key = keyTxt.Text.Split(' ');
+			algorithm.Key = key.Select(k => Convert.ToByte(k, 16)).ToArray();
+		}
+
+		public Widget View {
+			get { return view; }
 		}
 	}
 }

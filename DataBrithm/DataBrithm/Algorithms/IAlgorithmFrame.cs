@@ -1,5 +1,5 @@
 ﻿//
-//  IntegrityFrame.Designer.cs
+//  IAlgorithmFrame.cs
 //
 //  Author:
 //       Benito Palacios Sánchez <benito356@gmail.com>
@@ -23,38 +23,12 @@ using Xwt;
 
 namespace DataBrithm
 {
-	public partial class IntegrityFrame
+	public interface IAlgorithmFrame
 	{
-		Table view;
-		SpinButton hashSizeBtn;
-		CheckBox   isBrokenCheck;
-		TextEntry  keyTxt;
+		void SetAlgorithm(AlgorithmInfo algorithm);
+		void UpdateAlgorithm();
 
-		void CreateComponents()
-		{
-			view = new Table();
-			view.Margin = 10;
-
-			isBrokenCheck = new CheckBox("Is broken?");
-			keyTxt = new TextEntry {
-				MultiLine = true,
-				HeightRequest = 50
-			};
-
-			hashSizeBtn = new SpinButton {
-				Digits = 0,
-				IncrementValue = 64,
-				MaximumValue = 10000
-			};
-
-			view.Add(new Label("Hash size:"), 0, 0, hexpand: false);
-			view.Add(hashSizeBtn, 1, 0, hexpand: false, hpos: WidgetPlacement.Start);
-
-			view.Add(isBrokenCheck, 2, 0, hexpand: true, hpos: WidgetPlacement.End);
-
-			view.Add(new Label("Key:"), 0, 1);
-			view.Add(keyTxt, 0, 2, colspan: 3, vexpand: true);
-		}
+		Widget View { get; }
 	}
 }
 

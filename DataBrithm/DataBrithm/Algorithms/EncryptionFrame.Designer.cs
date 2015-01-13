@@ -22,15 +22,17 @@ using Xwt;
 
 namespace DataBrithm
 {
-	public partial class EncryptionFrame : Table
+	public partial class EncryptionFrame
 	{
+		Table view;
 		CheckBox symmetricCheck;
 		TextEntry keyTxt;
 		TextEntry crcName;
 
 		void CreateComponents()
 		{
-			Margin = 10;
+			view = new Table();
+			view.Margin = 10;
 
 			symmetricCheck = new CheckBox("Is symmetryc?");
 			symmetricCheck.WidthRequest = 205;
@@ -42,13 +44,13 @@ namespace DataBrithm
 				HeightRequest = 50,
 			};
 
-			Add(symmetricCheck, 0, 0, hexpand: false);
+			view.Add(symmetricCheck, 0, 0, hexpand: false);
 
-			Add(new Label("CRC Name:"), 1, 0, hexpand: false);
-			Add(crcName, 2, 0, hexpand: true);
+			view.Add(new Label("CRC Name:"), 1, 0, hexpand: false);
+			view.Add(crcName, 2, 0, hexpand: true);
 
-			Add(new Label("Key:"), 0, 1);
-			Add(keyTxt, 0, 2, colspan: 3, vexpand: true);
+			view.Add(new Label("Key:"), 0, 1);
+			view.Add(keyTxt, 0, 2, colspan: 3, vexpand: true);
 		}
 	}
 }
