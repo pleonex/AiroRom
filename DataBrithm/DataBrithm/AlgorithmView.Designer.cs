@@ -68,12 +68,12 @@ namespace DataBrithm
 			companyTxt = new TextEntry();
 
 			deviceCombo = new ComboBox();
-			foreach (string dev in Enum.GetNames(typeof(Device)))
+			foreach (Device dev in Enum.GetValues(typeof(Device)))
 				deviceCombo.Items.Add(dev);
 
 			typeCombo = new ComboBox();
 			typeCombo.Sensitive = false;	// Forbidden change algorithm type
-			foreach (string type in Enum.GetNames(typeof(AlgorithmType)))
+			foreach (AlgorithmType type in Enum.GetValues(typeof(AlgorithmType)))
 				typeCombo.Items.Add(type);
 
 			detectableCheck = new CheckBox("Autodetectable?");
@@ -97,7 +97,7 @@ namespace DataBrithm
 
 			basedOnTxt = new TextEntry();
 			filesCombo = new ComboBox();
-			foreach (string type in Enum.GetNames(typeof(FileType)))
+			foreach (FileType type in Enum.GetValues(typeof(FileType)))
 				filesCombo.Items.Add(type);
 
 			qualityBtn = new SpinButton {

@@ -30,6 +30,9 @@ namespace DataBrithm
 
 		GameInfoView gameInfo;
 		AlgorithmView algorithmView;
+		Button btnAdd;
+		Button btnEdit;
+		Button btnRemove;
 
 		void CreateComponents()
 		{
@@ -87,9 +90,15 @@ namespace DataBrithm
 			buttonBar.MarginRight  = 5;
 			buttonBar.MarginTop    = 5;
 			buttonBar.MarginBottom = 5;
-			buttonBar.PackEnd(new Button(StockIcons.Add));
-			buttonBar.PackEnd(new Button(StockIcons.Information));
-			buttonBar.PackEnd(new Button(StockIcons.Remove));
+
+			btnAdd = new Button(StockIcons.Add);
+			buttonBar.PackEnd(btnAdd);
+
+			btnEdit = new Button(StockIcons.Information);
+			buttonBar.PackEnd(btnEdit);
+
+			btnRemove = new Button(StockIcons.Remove);
+			buttonBar.PackEnd(btnRemove);
 
 			// Set window content
 			Padding = new WidgetSpacing();

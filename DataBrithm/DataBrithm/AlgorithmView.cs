@@ -24,6 +24,8 @@ namespace DataBrithm
 {
 	public partial class AlgorithmView
 	{
+		AlgorithmInfo algorithm;
+
 		public AlgorithmView()
 		{
 			CreateComponents();
@@ -31,17 +33,19 @@ namespace DataBrithm
 
 		public void SetAlgorithm(AlgorithmInfo algorithm)
 		{
+			this.algorithm = algorithm;
+
 			idBtn.Value     = algorithm.Id;
 			gameIdBtn.Value = algorithm.GameId;
 			nameTxt.Text    = algorithm.Name;
 			companyTxt.Text = algorithm.Company;
-			typeCombo.SelectedText   = algorithm.Type.ToString();
-			deviceCombo.SelectedText = algorithm.Device.ToString();
+			typeCombo.SelectedItem   = algorithm.Type;
+			deviceCombo.SelectedItem = algorithm.Device;
 			detectableCheck.Active   = algorithm.CanBeDetected;
 			instructionsBtn.Value    = algorithm.Instructions;
 			basedOnTxt.Text = algorithm.BasedOn;
 			filesBtn.Value  = algorithm.Files;
-			filesCombo.SelectedText = algorithm.FileType.ToString();
+			filesCombo.SelectedItem = algorithm.FileType;
 			filesFreqBtn.Value = algorithm.FileFrecuencyAccess;
 			bestAlgorithmCombo.SelectedIndex = algorithm.BestAlgorithm;
 			qualityBtn.Value = algorithm.Quality;
@@ -63,6 +67,23 @@ namespace DataBrithm
 				algorithmSpecific.Content = new IntegrityFrame((IntegrityAlgorithm)algorithm);
 				break;
 			}
+		}
+
+		public void UpdateAlgorithm()
+		{
+			algorithm.Id = (int)idBtn.Value;
+			algorithm.GameId = (int)gameIdBtn.Value;
+			algorithm.Name = nameTxt.Text;
+			algorithm.Company = companyTxt.Text;
+			algorithm.Device = (Device)deviceCombo.SelectedItem;
+			algorithm.CanBeDetected = detectableCheck.Active;
+			algorithm.Instructions = (int)instructionsBtn.Value;
+			algorithm.BasedOn = basedOnTxt.Text;
+			algorithm.Files = (int)filesBtn.Value;
+			algorithm.FileType = (FileType)filesCombo.SelectedItem;
+			algorithm.FileFrecuencyAccess = filesFreqBtn.Value;
+			algorithm.BestAlgorithm = bestAlgorithmCombo.SelectedIndex;
+			algorithm.Details = detailsTxt.Text;
 		}
 	}
 }

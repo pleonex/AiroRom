@@ -41,10 +41,31 @@ namespace DataBrithm
 
 			viewMode.SelectionChanged += UpdateList;
 			algorithmTree.SelectionChanged += AlgorithmSelected;
+			btnEdit.Clicked += EditClicked;
+		}
+
+		void EditClicked (object sender, EventArgs e)
+		{
+			AlgorithmInfo selected = store.GetNavigatorAt(algorithmTree.SelectedRow).GetValue(infoCol);
+
+			algorithmView.UpdateAlgorithm();
+			AlgorithmManager.Instance.Save();
+
+			UpdateList(sender, e);
+
+			TreeNavigator nav = store.GetFirstNode();
+			do {
+				if (nav.GetValue(infoCol) == selected) {
+					algorithmTree.SelectRow(nav.CurrentPosition);
+					break;
+				}
+			} while (nav.MoveNext());
 		}
 
 		void UpdateList(object sender, EventArgs e)
 		{
+			store.Clear();
+
 			if (viewMode.SelectedIndex == 0) {
 				foreach (AlgorithmInfo info in AlgorithmManager.Instance.AlgorithmList)
 					store.AddNode()
@@ -56,6 +77,9 @@ namespace DataBrithm
 
 		void AlgorithmSelected (object sender, EventArgs e)
 		{
+			if (algorithmTree.SelectedRow == null)
+				return;
+
 			AlgorithmInfo info = store.GetNavigatorAt(algorithmTree.SelectedRow).GetValue(infoCol);
 			if (info != null) {
 				algorithmView.SetAlgorithm(info);
