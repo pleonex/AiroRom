@@ -73,6 +73,30 @@ namespace DataBrithm
 
 			return (AlgorithmInfo)serializer.Deserialize(element);
 		}
+
+		public static XElement ToXml(AlgorithmInfo algorithm)
+		{
+			YAXSerializer serializer = null;
+
+			switch (algorithm.Type) {
+			case AlgorithmType.Encryption:
+				serializer = new YAXSerializer(typeof(EncryptionAlgorithm));
+				break;
+
+			case AlgorithmType.Compression:
+				serializer = new YAXSerializer(typeof(CompressionAlgorithm));
+				break;
+
+			case AlgorithmType.Integrity:
+				serializer = new YAXSerializer(typeof(IntegrityAlgorithm));
+				break;
+
+			default:
+				return null;
+			}
+
+			return XElement.Parse(serializer.Serialize(algorithm));
+		}
 	}
 }
 

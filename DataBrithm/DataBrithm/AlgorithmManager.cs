@@ -52,6 +52,20 @@ namespace DataBrithm
 			foreach (XElement element in doc.Root.Element("AlgorithmList").Elements())
 				AlgorithmList.Add(AlgorithmInfoFactory.FromXml(element));
 		}
+
+		public void Save()
+		{
+			XDocument doc = new XDocument();
+			doc.Add(new XElement("AlgorithmManager"));
+
+			XElement xmlList = new XElement("AlgorithmList");
+			doc.Root.Add(xmlList);
+
+			foreach (AlgorithmInfo info in AlgorithmList)
+				xmlList.Add(AlgorithmInfoFactory.ToXml(info));
+
+			doc.Save(FileName);
+		}
 	}
 }
 
