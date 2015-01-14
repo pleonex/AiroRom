@@ -53,8 +53,9 @@ namespace DataBrithm
 				double ratioPoints    = CompressionRatio;
 				double subfilesPoints = System.Math.Sqrt(AverageSubFiles) *
 					(SupportsInmediateAccess ? 10 : 0.1);
+				int algorithmsPoint = (EncryptionAlgorithms == null) ? 0 : 20 * EncryptionAlgorithms.Length;
 				double encryptPoints  = (IsHeaderEncrypted ? 20 : 0) +
-					(AreSubFilesEncrypted ? 10 : 0) + 20 * EncryptionAlgorithms.Length;
+					(AreSubFilesEncrypted ? 10 : 0) + algorithmsPoint;
 
 				return ratioPoints + subfilesPoints + encryptPoints;
 			}

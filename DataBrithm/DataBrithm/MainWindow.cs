@@ -42,6 +42,40 @@ namespace DataBrithm
 			viewMode.SelectionChanged += UpdateList;
 			algorithmTree.SelectionChanged += AlgorithmSelected;
 			btnEdit.Clicked += EditClicked;
+			btnAdd.Clicked += AddClicked;
+		}
+
+		void AddClicked (object sender, EventArgs e)
+		{
+			Dialog dialog = new Dialog();
+			dialog.Title = "New algorithm info";
+
+			Table dialogContent = new Table();
+			dialog.Content = dialogContent;
+
+			dialogContent.Add(new Label("Type:"), 0, 0);
+
+			var typeCombo = new ComboBox();
+			foreach (var t in Enum.GetValues(typeof(AlgorithmType)))
+				typeCombo.Items.Add(t);
+
+			dialogContent.Add(typeCombo, 1, 0);
+
+			dialog.Buttons.Add(new DialogButton(Command.Add));
+			dialog.Buttons.Add(new DialogButton(Command.Cancel));
+
+			var result = dialog.Run(this);
+			dialog.Dispose();
+
+			if (result == Command.Add) {
+				var newAlgorithm = AlgorithmInfoFactory.FromType((AlgorithmType)typeCombo.SelectedItem);
+				newAlgorithm.Name = "New Algorithm";
+				AlgorithmManager.Instance.AlgorithmList.Add(newAlgorithm);
+				AlgorithmManager.Instance.Save();
+
+				UpdateList(sender, e);
+				SelectAlgorithm(newAlgorithm);
+			}
 		}
 
 		void EditClicked (object sender, EventArgs e)
@@ -52,14 +86,7 @@ namespace DataBrithm
 			AlgorithmManager.Instance.Save();
 
 			UpdateList(sender, e);
-
-			TreeNavigator nav = store.GetFirstNode();
-			do {
-				if (nav.GetValue(infoCol) == selected) {
-					algorithmTree.SelectRow(nav.CurrentPosition);
-					break;
-				}
-			} while (nav.MoveNext());
+			SelectAlgorithm(selected);
 		}
 
 		void UpdateList(object sender, EventArgs e)
@@ -75,7 +102,18 @@ namespace DataBrithm
 			}
 		}
 
-		void AlgorithmSelected (object sender, EventArgs e)
+		void SelectAlgorithm(AlgorithmInfo algorithm)
+		{
+			TreeNavigator nav = store.GetFirstNode();
+			do {
+				if (nav.GetValue(infoCol) == algorithm) {
+					algorithmTree.SelectRow(nav.CurrentPosition);
+					break;
+				}
+			} while (nav.MoveNext());
+		}
+
+		void AlgorithmSelected(object sender, EventArgs e)
 		{
 			if (algorithmTree.SelectedRow == null)
 				return;

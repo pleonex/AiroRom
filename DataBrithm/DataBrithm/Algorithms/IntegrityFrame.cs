@@ -51,8 +51,10 @@ namespace DataBrithm
 			algorithm.HashSize = (int)hashSizeBtn.Value;
 			algorithm.IsBroken = isBrokenCheck.Active;
 
-			string[] key = keyTxt.Text.Split(' ');
-			algorithm.Key = key.Select(k => Convert.ToByte(k, 16)).ToArray();
+			if (keyTxt.Text.Length > 0) {
+				string[] key = keyTxt.Text.Split(' ');
+				algorithm.Key = key.Select(k => Convert.ToByte(k, 16)).ToArray();
+			}
 		}
 
 		public Widget View {

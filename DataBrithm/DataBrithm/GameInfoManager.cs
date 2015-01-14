@@ -49,7 +49,9 @@ namespace DataBrithm
 		public GameInfo GetGameInfo(Device dev, int releaseNum)
 		{
 			XElement xinfo = gameDb[dev]
-				.First(n => n.Element("releaseNumber").Value == releaseNum.ToString());
+				.FirstOrDefault(n => n.Element("releaseNumber").Value == releaseNum.ToString());
+			if (xinfo == null)
+				return null;
 
 			return GameInfo.FromXml(dev, xinfo);
 		}

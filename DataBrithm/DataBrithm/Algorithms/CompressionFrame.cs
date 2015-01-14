@@ -47,10 +47,12 @@ namespace DataBrithm
 			isHeaderEncryptedCheck.Active    = this.algorithm.IsHeaderEncrypted;
 			areSubfilesEncryptedCheck.Active = this.algorithm.AreSubFilesEncrypted;
 
-			string txt = "";
-			foreach (int id in this.algorithm.EncryptionAlgorithms)
-				txt += id.ToString() + " ";
-			algorithmUsedTxt.Text = txt;
+			if (this.algorithm.EncryptionAlgorithms != null) {
+				string txt = "";
+				foreach (int id in this.algorithm.EncryptionAlgorithms)
+					txt += id.ToString() + " ";
+				algorithmUsedTxt.Text = txt;
+			}
 		}
 
 		public void UpdateAlgorithm()
@@ -62,8 +64,10 @@ namespace DataBrithm
 			algorithm.IsHeaderEncrypted        = isHeaderEncryptedCheck.Active;
 			algorithm.AreSubFilesEncrypted     = areSubfilesEncryptedCheck.Active;
 
-			string[] ids = algorithmUsedTxt.Text.Split(' ');
-			algorithm.EncryptionAlgorithms = ids.Select(id => Convert.ToInt32(id)).ToArray();
+			if (algorithmUsedTxt.Text.Length > 0) {
+				string[] ids = algorithmUsedTxt.Text.Split(' ');
+				algorithm.EncryptionAlgorithms = ids.Select(id => Convert.ToInt32(id)).ToArray();
+			}
 		}
 
 		public Widget View {

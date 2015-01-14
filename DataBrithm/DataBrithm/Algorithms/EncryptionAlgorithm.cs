@@ -42,7 +42,8 @@ namespace DataBrithm
 			get {
 				double crcPoints = string.IsNullOrEmpty(CrcName) ? 0 : 20;
 				double symmetricPoints = IsSymmetric ? 0 : 20;
-				return crcPoints + symmetricPoints + System.Math.Sqrt(Key.Length);
+				double keyPoints = (Key == null) ? 0 : System.Math.Sqrt(Key.Length);
+				return crcPoints + symmetricPoints + keyPoints;
 			}
 		}
 	}

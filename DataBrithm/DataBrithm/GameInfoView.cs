@@ -42,6 +42,9 @@ namespace DataBrithm
 		public void SetGame(Device dev, int releaseNum)
 		{
 			var info = GameInfoManager.Instance.GetGameInfo(dev, releaseNum);
+			if (info == null)
+				return;
+
 			title.Text   = info.Title;
 			company.Text = info.Company;
 			region.Text  = info.Region.ToString();

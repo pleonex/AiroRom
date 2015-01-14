@@ -39,7 +39,8 @@ namespace DataBrithm
 
 		protected override double SpecificQuality {
 			get {
-				return System.Math.Sqrt(HashSize) * (IsBroken ? 0 : 1) + Key.Length * 2;
+				int keyPoints = (Key == null) ? 0 : Key.Length * 2;
+				return System.Math.Sqrt(HashSize) * (IsBroken ? 0 : 1) + keyPoints;
 			}
 		}
 	}
