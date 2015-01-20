@@ -32,7 +32,6 @@ namespace DataBrithm
 		AlgorithmView algorithmView;
 		Button btnAdd;
 		Button btnEdit;
-		Button btnRemove;
 
 		void CreateComponents()
 		{
@@ -96,9 +95,6 @@ namespace DataBrithm
 
 			btnEdit = new Button(StockIcons.Information);
 			buttonBar.PackEnd(btnEdit);
-
-			btnRemove = new Button(StockIcons.Remove);
-			buttonBar.PackEnd(btnRemove);
 
 			// Set window content
 			Padding = new WidgetSpacing();

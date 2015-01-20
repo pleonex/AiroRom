@@ -43,6 +43,8 @@ namespace DataBrithm
 			algorithmTree.SelectionChanged += AlgorithmSelected;
 			btnEdit.Clicked += EditClicked;
 			btnAdd.Clicked += AddClicked;
+
+			viewMode.SelectedIndex = 0;
 		}
 
 		void AddClicked (object sender, EventArgs e)
@@ -65,8 +67,6 @@ namespace DataBrithm
 			dialog.Buttons.Add(new DialogButton(Command.Cancel));
 
 			var result = dialog.Run(this);
-			dialog.Dispose();
-
 			if (result == Command.Add) {
 				var newAlgorithm = AlgorithmInfoFactory.FromType((AlgorithmType)typeCombo.SelectedItem);
 				newAlgorithm.Name = "New Algorithm";
@@ -76,6 +76,8 @@ namespace DataBrithm
 				UpdateList(sender, e);
 				SelectAlgorithm(newAlgorithm);
 			}
+
+			dialog.Dispose();
 		}
 
 		void EditClicked (object sender, EventArgs e)
