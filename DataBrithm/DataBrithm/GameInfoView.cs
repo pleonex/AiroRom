@@ -36,8 +36,10 @@ namespace DataBrithm
 		public void SetGame(Device dev, int releaseNum)
 		{
 			var info = GameInfoManager.Instance.GetGameInfo(dev, releaseNum);
-			if (info == null)
+			if (info == null) {
+				Reset();
 				return;
+			}
 
 			title.Text   = info.Title;
 			company.Text = info.Company;
@@ -57,6 +59,18 @@ namespace DataBrithm
 				size.Text = info.Size + " B";
 
 			CoverManager.Instage.GetCover(info.Device, info.ReleaseId, HandleOpenCoverCompleted);
+		}
+
+		void Reset()
+		{
+			title.Text   = string.Empty;
+			company.Text = string.Empty;
+			region.Text  = string.Empty;
+			releaseNumber.Text = string.Empty;
+			language.Text = string.Empty;
+			saveType.Text = string.Empty;
+			size.Text = string.Empty;
+			gameCoverView.Image = null;
 		}
 
 		void HandleOpenCoverCompleted(bool error, Stream stream)
