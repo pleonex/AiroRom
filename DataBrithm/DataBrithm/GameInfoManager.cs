@@ -37,7 +37,7 @@ namespace DataBrithm
 		GameInfoManager()
 		{
 			gameDb.Add(Device.NintendoDS, ParseXml("ADVANsCEne_NDS.xml"));
-			gameDb.Add(Device.PSP, ParseXml("ADVANsCEne_PSN.xml"));
+			gameDb.Add(Device.PSP, ParseXml("ADVANsCEne_PSP.xml"));
 		}
 
 		public static GameInfoManager Instance {
