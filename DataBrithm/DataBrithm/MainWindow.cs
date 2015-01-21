@@ -70,6 +70,7 @@ namespace DataBrithm
 			if (result == Command.Add) {
 				var newAlgorithm = AlgorithmInfoFactory.FromType((AlgorithmType)typeCombo.SelectedItem);
 				newAlgorithm.Name = "New Algorithm";
+				newAlgorithm.Id = AlgorithmManager.Instance.AlgorithmList.Count;
 				AlgorithmManager.Instance.AlgorithmList.Add(newAlgorithm);
 				AlgorithmManager.Instance.Save();
 
