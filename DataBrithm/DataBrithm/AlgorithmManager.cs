@@ -57,11 +57,11 @@ namespace DataBrithm
 			}
 		}
 
-		public IList<AlgorithmInfo> AlgorithmList { get; private set; }
+		public SortedSet<AlgorithmInfo> AlgorithmList { get; private set; }
 
 		void ReadXml()
 		{
-			AlgorithmList = new List<AlgorithmInfo>();
+			AlgorithmList = new SortedSet<AlgorithmInfo>(new SortById());
 			if (!File.Exists(filePath))
 				return;
 
@@ -82,6 +82,18 @@ namespace DataBrithm
 				xmlList.Add(AlgorithmInfoFactory.ToXml(info));
 
 			doc.Save(filePath);
+		}
+
+		class SortById : IComparer<AlgorithmInfo>
+		{
+			public int Compare(AlgorithmInfo info1, AlgorithmInfo info2)
+			{
+				int compId = info1.Id.CompareTo(info2.Id);
+				if (compId != 0)
+					return compId;
+
+				return info1.Name.CompareTo(info2.Name);
+			}
 		}
 	}
 }

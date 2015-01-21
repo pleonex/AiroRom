@@ -85,7 +85,10 @@ namespace DataBrithm
 		{
 			AlgorithmInfo selected = store.GetNavigatorAt(algorithmTree.SelectedRow).GetValue(infoCol);
 
+			AlgorithmManager.Instance.AlgorithmList.Remove(selected);
 			algorithmView.UpdateAlgorithm();
+
+			AlgorithmManager.Instance.AlgorithmList.Add(selected);
 			AlgorithmManager.Instance.Save();
 
 			UpdateList(sender, e);
