@@ -35,7 +35,7 @@ namespace DataBrithm
 
 		readonly Dictionary<Device, string> coverUrls = new Dictionary<Device, string> {
 			{ Device.NintendoDS, "http://www.advanscene.com/offline/imgs/ADVANsCEne_NDS/{0}-{1}/{2}a.png" },
-			{ Device.PSP, "http://www.advanscene.com/offline/imgs/ADVANsCEne_PSN/{0}-{1}/{2}a.png" }
+			{ Device.PSP, "http://www.advanscene.com/offline/imgs/ADVANsCEne_PSP/{0}-{1}/{2}a.png" }
 		};
 
 		CoverManager()
