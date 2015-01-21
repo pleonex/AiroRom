@@ -50,7 +50,6 @@ namespace DataBrithm
 
 		void ReadXml()
 		{
-			Xwt.MessageDialog.ShowMessage(FilePath);
 			XDocument doc = XDocument.Load(FilePath);
 
 			AlgorithmList = new List<AlgorithmInfo>();

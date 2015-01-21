@@ -67,6 +67,8 @@ namespace DataBrithm
 			if (algorithmUsedTxt.Text.Length > 0) {
 				string[] ids = algorithmUsedTxt.Text.Split(' ');
 				algorithm.EncryptionAlgorithms = ids.Select(id => Convert.ToInt32(id)).ToArray();
+			} else {
+				algorithm.EncryptionAlgorithms = null;
 			}
 		}
 

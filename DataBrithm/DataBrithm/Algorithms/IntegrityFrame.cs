@@ -54,6 +54,8 @@ namespace DataBrithm
 			if (keyTxt.Text.Length > 0) {
 				string[] key = keyTxt.Text.Split(' ');
 				algorithm.Key = key.Select(k => Convert.ToByte(k, 16)).ToArray();
+			} else {
+				algorithm.Key = null;
 			}
 		}
 
