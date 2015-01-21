@@ -79,6 +79,7 @@
     <Compile Include="GameInfoManager.cs" />
     <Compile Include="GameInfo.cs" />
     <Compile Include="Algorithms\IAlgorithmFrame.cs" />
+    <Compile Include="CoverManager.cs" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Algorithms\" />

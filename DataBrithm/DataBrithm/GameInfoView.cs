@@ -28,14 +28,8 @@ namespace DataBrithm
 {
 	public partial class GameInfoView
 	{
-		WebClient webClient;
-
 		public GameInfoView()
 		{
-			webClient = new WebClient();
-			webClient.OpenReadCompleted += HandleOpenReadCompleted;
-			this.Disposed += HandleDisposed;
-
 			CreateComponents();
 		}
 
@@ -51,6 +45,7 @@ namespace DataBrithm
 			releaseNumber.Text = info.ReleaseId.ToString();
 			language.Text = info.Language.ToString();
 			saveType.Text = info.SaveType;
+			gameCoverView.Image = null;
 
 			if (info.Size >= (1 << 30))
 				size.Text = (info.Size / (1 << 30)).ToString() + " GB";
@@ -61,25 +56,20 @@ namespace DataBrithm
 			else
 				size.Text = info.Size + " B";
 
-			DownloadCover(info.CoverUrl);
+			CoverManager.Instage.GetCover(info.Device, info.ReleaseId, HandleOpenCoverCompleted);
 		}
 
-		void DownloadCover(string url)
+		void HandleOpenCoverCompleted(bool error, Stream stream)
 		{
-			webClient.OpenReadAsync(new Uri(url));
-		}
+			Action action = () => {
+				gameCoverView.Image = Image.FromStream(stream);
+				stream.Close();
+			};
 
-		void HandleOpenReadCompleted (object sender, OpenReadCompletedEventArgs e)
-		{
-			if (!e.Cancelled && e.Error == null)
-				Application.Invoke(() => gameCoverView.Image = Image.FromStream(e.Result));
-		}
-
-		void HandleDisposed (object sender, EventArgs e)
-		{
-			if (webClient.IsBusy)
-				webClient.CancelAsync();
-			webClient.Dispose();
+			if (!error)
+				Application.Invoke(action);
+			else
+				Application.Invoke(() => MessageDialog.ShowError("Error downloading cover"));
 		}
 	}
 }
