@@ -1,6 +1,116 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <AlgorithmManager>
   <AlgorithmList>
+    <CompressionAlgorithm>
+      <CompressionRatio>0</CompressionRatio>
+      <BalancedCompressionRatio>0</BalancedCompressionRatio>
+      <SupportsSubFiles>False</SupportsSubFiles>
+      <AverageSubFiles>0</AverageSubFiles>
+      <SupportsInmediateAccess>False</SupportsInmediateAccess>
+      <IsHeaderEncrypted>False</IsHeaderEncrypted>
+      <AreSubFilesEncrypted>False</AreSubFilesEncrypted>
+      <EncryptionAlgorithms />
+      <Icon>
+        <HasFixedSize>True</HasFixedSize>
+        <Size>
+          <IsZero>False</IsZero>
+          <Width>16</Width>
+          <Height>16</Height>
+        </Size>
+        <Width>16</Width>
+        <Height>16</Height>
+      </Icon>
+      <Name>BIOS - LZSS</Name>
+      <Id>0</Id>
+      <GameId>0</GameId>
+      <Company>Nintendo</Company>
+      <Device>NintendoDS</Device>
+      <Type>Compression</Type>
+      <CanBeDetected>True</CanBeDetected>
+      <Instructions>0</Instructions>
+      <BasedOn>
+      </BasedOn>
+      <Files>0</Files>
+      <FileType>Generic</FileType>
+      <FileFrecuencyAccess>1</FileFrecuencyAccess>
+      <BestAlgorithm>-1</BestAlgorithm>
+      <Details>
+      </Details>
+      <Quality>20</Quality>
+    </CompressionAlgorithm>
+    <CompressionAlgorithm>
+      <CompressionRatio>0</CompressionRatio>
+      <BalancedCompressionRatio>0</BalancedCompressionRatio>
+      <SupportsSubFiles>False</SupportsSubFiles>
+      <AverageSubFiles>0</AverageSubFiles>
+      <SupportsInmediateAccess>False</SupportsInmediateAccess>
+      <IsHeaderEncrypted>False</IsHeaderEncrypted>
+      <AreSubFilesEncrypted>False</AreSubFilesEncrypted>
+      <EncryptionAlgorithms />
+      <Icon>
+        <HasFixedSize>True</HasFixedSize>
+        <Size>
+          <IsZero>False</IsZero>
+          <Width>16</Width>
+          <Height>16</Height>
+        </Size>
+        <Width>16</Width>
+        <Height>16</Height>
+      </Icon>
+      <Name>BIOS - HUFFMAN</Name>
+      <Id>1</Id>
+      <GameId>0</GameId>
+      <Company>Nintendo</Company>
+      <Device>NintendoDS</Device>
+      <Type>Compression</Type>
+      <CanBeDetected>True</CanBeDetected>
+      <Instructions>0</Instructions>
+      <BasedOn>
+      </BasedOn>
+      <Files>0</Files>
+      <FileType>Generic</FileType>
+      <FileFrecuencyAccess>1</FileFrecuencyAccess>
+      <BestAlgorithm>-1</BestAlgorithm>
+      <Details>Soporta 4 y 8 bits</Details>
+      <Quality>20</Quality>
+    </CompressionAlgorithm>
+    <CompressionAlgorithm>
+      <CompressionRatio>0</CompressionRatio>
+      <BalancedCompressionRatio>0</BalancedCompressionRatio>
+      <SupportsSubFiles>False</SupportsSubFiles>
+      <AverageSubFiles>0</AverageSubFiles>
+      <SupportsInmediateAccess>False</SupportsInmediateAccess>
+      <IsHeaderEncrypted>False</IsHeaderEncrypted>
+      <AreSubFilesEncrypted>False</AreSubFilesEncrypted>
+      <EncryptionAlgorithms />
+      <Icon>
+        <HasFixedSize>True</HasFixedSize>
+        <Size>
+          <IsZero>False</IsZero>
+          <Width>16</Width>
+          <Height>16</Height>
+        </Size>
+        <Width>16</Width>
+        <Height>16</Height>
+      </Icon>
+      <Name>BIOS - RLE</Name>
+      <Id>2</Id>
+      <GameId>0</GameId>
+      <Company>Nintendo</Company>
+      <Device>NintendoDS</Device>
+      <Type>Compression</Type>
+      <CanBeDetected>True</CanBeDetected>
+      <Instructions>0</Instructions>
+      <BasedOn>
+      </BasedOn>
+      <Files>0</Files>
+      <FileType>Generic</FileType>
+      <FileFrecuencyAccess>1</FileFrecuencyAccess>
+      <BestAlgorithm>-1</BestAlgorithm>
+      <Details>
+      </Details>
+      <Quality>20</Quality>
+    </CompressionAlgorithm>
     <EncryptionAlgorithm>
       <IsSymmetric>True</IsSymmetric>
       <Key />
@@ -16,13 +126,13 @@
         <Height>16</Height>
       </Icon>
       <Name>Ninokuni - DLC</Name>
-      <Id>0</Id>
+      <Id>3</Id>
       <GameId>5604</GameId>
       <Company>Level 5</Company>
       <Device>NintendoDS</Device>
       <Type>Encryption</Type>
       <CanBeDetected>False</CanBeDetected>
-      <Instructions>2</Instructions>
+      <Instructions>0</Instructions>
       <BasedOn>RC4</BasedOn>
       <Files>1</Files>
       <FileType>DLC</FileType>
@@ -30,7 +140,7 @@
       <BestAlgorithm>-1</BestAlgorithm>
       <Details>
       </Details>
-      <Quality>25.3535533905933</Quality>
+      <Quality>20.3535533905933</Quality>
     </EncryptionAlgorithm>
     <IntegrityAlgorithm>
       <HashSize>160</HashSize>
@@ -52,7 +162,7 @@
         <Height>16</Height>
       </Icon>
       <Name>Ninokuni - Save</Name>
-      <Id>1</Id>
+      <Id>4</Id>
       <GameId>5604</GameId>
       <Company>Level 5</Company>
       <Device>NintendoDS</Device>
@@ -88,10 +198,9 @@
         <Height>16</Height>
       </Icon>
       <Name>Boku - GZ</Name>
-      <Id>3</Id>
-      <GameId>0</GameId>
-      <Company>
-      </Company>
+      <Id>5</Id>
+      <GameId>488</GameId>
+      <Company>Sony</Company>
       <Device>PSP</Device>
       <Type>Compression</Type>
       <CanBeDetected>False</CanBeDetected>
@@ -124,7 +233,7 @@
         <Height>16</Height>
       </Icon>
       <Name>Layton4 - GFSA</Name>
-      <Id>4</Id>
+      <Id>6</Id>
       <GameId>6446</GameId>
       <Company>Level 5</Company>
       <Device>NintendoDS</Device>
@@ -161,15 +270,14 @@
         <Height>16</Height>
       </Icon>
       <Name>Layton4 - LZSS</Name>
-      <Id>5</Id>
+      <Id>7</Id>
       <GameId>6446</GameId>
       <Company>Level 5</Company>
       <Device>NintendoDS</Device>
       <Type>Compression</Type>
       <CanBeDetected>True</CanBeDetected>
       <Instructions>0</Instructions>
-      <BasedOn>
-      </BasedOn>
+      <BasedOn>LZSS</BasedOn>
       <Files>0</Files>
       <FileType>Generic</FileType>
       <FileFrecuencyAccess>0</FileFrecuencyAccess>
@@ -198,15 +306,14 @@
         <Height>16</Height>
       </Icon>
       <Name>Layton4 - HUFFMAN</Name>
-      <Id>6</Id>
+      <Id>8</Id>
       <GameId>6446</GameId>
       <Company>Level 5</Company>
       <Device>NintendoDS</Device>
       <Type>Compression</Type>
       <CanBeDetected>True</CanBeDetected>
       <Instructions>0</Instructions>
-      <BasedOn>
-      </BasedOn>
+      <BasedOn>HUFFMAN</BasedOn>
       <Files>0</Files>
       <FileType>Generic</FileType>
       <FileFrecuencyAccess>0</FileFrecuencyAccess>
@@ -234,15 +341,14 @@
         <Height>16</Height>
       </Icon>
       <Name>Layton4 - RLE</Name>
-      <Id>6</Id>
+      <Id>9</Id>
       <GameId>6446</GameId>
       <Company>Level 5</Company>
       <Device>NintendoDS</Device>
       <Type>Compression</Type>
       <CanBeDetected>True</CanBeDetected>
       <Instructions>0</Instructions>
-      <BasedOn>
-      </BasedOn>
+      <BasedOn>RLE</BasedOn>
       <Files>0</Files>
       <FileType>Generic</FileType>
       <FileFrecuencyAccess>0</FileFrecuencyAccess>
