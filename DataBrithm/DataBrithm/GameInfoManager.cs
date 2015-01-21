@@ -20,13 +20,16 @@
 //  along with this program.  If not, see <http://www.gnu.org/licenses/>.
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
+using System.Reflection;
 using System.Xml.Linq;
 
 namespace DataBrithm
 {
 	public class GameInfoManager
 	{
+		static readonly string FileDir = Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location);
 		static GameInfoManager CurrentInstance;
 		readonly Dictionary<Device, IEnumerable<XElement>> gameDb = 
 			new Dictionary<Device, IEnumerable<XElement>>();
@@ -58,7 +61,8 @@ namespace DataBrithm
 
 		IEnumerable<XElement> ParseXml(string filename)
 		{
-			XDocument doc = XDocument.Load(filename);
+			string filePath = System.IO.Path.Combine(FileDir, filename);
+			XDocument doc = XDocument.Load(filePath);
 			return doc.Root.Element("games").Elements();
 		}
 	}

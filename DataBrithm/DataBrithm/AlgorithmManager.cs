@@ -20,13 +20,17 @@
 //  along with this program.  If not, see <http://www.gnu.org/licenses/>.
 using System.Collections.Generic;
 using System.Xml.Linq;
+using System;
+using System.Reflection;
+using System.IO;
 
 namespace DataBrithm
 {
 	public class AlgorithmManager
 	{
 		static AlgorithmManager CurrentInstance;
-		static readonly string FileName = "Algorithms.xml";
+		static readonly string FileDir = Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location);
+		static readonly string FilePath = Path.Combine(FileDir, "Algorithms.xml");
 
 		AlgorithmManager()
 		{
@@ -46,7 +50,8 @@ namespace DataBrithm
 
 		void ReadXml()
 		{
-			XDocument doc = XDocument.Load(FileName);
+			Xwt.MessageDialog.ShowMessage(FilePath);
+			XDocument doc = XDocument.Load(FilePath);
 
 			AlgorithmList = new List<AlgorithmInfo>();
 			foreach (XElement element in doc.Root.Element("AlgorithmList").Elements())
@@ -64,7 +69,7 @@ namespace DataBrithm
 			foreach (AlgorithmInfo info in AlgorithmList)
 				xmlList.Add(AlgorithmInfoFactory.ToXml(info));
 
-			doc.Save(FileName);
+			doc.Save(FilePath);
 		}
 	}
 }
