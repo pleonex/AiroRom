@@ -4,3 +4,6 @@
 [submodule "DataBrithm/libs/xwt"]
 	path = DataBrithm/libs/xwt
 	url = http://github.com/mono/xwt
+[submodule "Games/Layton4/libgame"]
+	path = Games/Layton4/libgame
+	url = git@github.com:pleoneX/libgame.git
