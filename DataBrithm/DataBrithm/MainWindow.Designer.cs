@@ -53,6 +53,7 @@ namespace DataBrithm
 
 			viewMode = new ComboBox();
 			viewMode.Items.Add("Algorithm list");
+			viewMode.Items.Add("Order by game");
 			var viewModeBox = new HBox();
 			viewModeBox.MarginLeft = 10;
 			viewModeBox.PackStart(new Label("View Mode:"));

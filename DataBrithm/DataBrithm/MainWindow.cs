@@ -96,13 +96,50 @@ namespace DataBrithm
 		{
 			store.Clear();
 
-			if (viewMode.SelectedIndex == 0) {
-				foreach (AlgorithmInfo info in AlgorithmManager.Instance.AlgorithmList)
-					store.AddNode()
-						.SetValue(iconCol, info.Icon)
-						.SetValue(nameCol, info.Name)
-						.SetValue(infoCol, info);
+			foreach (AlgorithmInfo info in AlgorithmManager.Instance.AlgorithmList) {
+				if (viewMode.SelectedIndex == 0)
+					InsertAlgorithm(store.AddNode(), info);
+				else if (viewMode.SelectedIndex == 1)
+					InsertInGameList(info);
 			}
+		}
+
+		void InsertAlgorithm(TreeNavigator navigator, AlgorithmInfo info)
+		{
+			navigator
+				.SetValue(iconCol, info.Icon)
+				.SetValue(nameCol, info.Name)
+				.SetValue(infoCol, info);
+		}
+
+		void InsertInGameList(AlgorithmInfo info)
+		{
+			var gameInfo = GameInfoManager.Instance.GetGameInfo(info.Device, info.GameId);
+			string title;
+			if (gameInfo != null)
+				title = string.Format("{0} [{1}]", gameInfo.Title, gameInfo.Device);
+			else
+				title = "Unknown";
+
+			var navigator = SearchNode(title);
+			if (navigator == null)
+				navigator = store.AddNode().SetValue(nameCol, title);
+
+			InsertAlgorithm(navigator.AddChild(), info);
+		}
+
+		TreeNavigator SearchNode(string name)
+		{
+			TreeNavigator navigator = store.GetFirstNode();
+			if (navigator.CurrentPosition == null)
+				return null;
+
+			do {
+				if (name == navigator.GetValue(nameCol))
+					return navigator;
+			} while (navigator.MoveNext());
+
+			return null;
 		}
 
 		void SelectAlgorithm(AlgorithmInfo algorithm)
