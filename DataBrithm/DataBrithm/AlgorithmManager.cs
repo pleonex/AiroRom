@@ -28,13 +28,24 @@ namespace DataBrithm
 {
 	public class AlgorithmManager
 	{
+		static readonly string Filename = "Algorithms.xml";
 		static AlgorithmManager CurrentInstance;
-		static readonly string FileDir = Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location);
-		static readonly string FilePath = Path.Combine(FileDir, "Algorithms.xml");
+		static string FileDir;
+		string filePath;
 
 		AlgorithmManager()
 		{
+			if (string.IsNullOrEmpty(FileDir))
+				FileDir = Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location);
+			filePath = Path.Combine(FileDir, Filename);
+
 			ReadXml();
+		}
+
+		public static void SetFilePath(string path)
+		{
+			if (CurrentInstance == null)
+				FileDir = path;
 		}
 
 		public static AlgorithmManager Instance {
@@ -50,9 +61,11 @@ namespace DataBrithm
 
 		void ReadXml()
 		{
-			XDocument doc = XDocument.Load(FilePath);
-
 			AlgorithmList = new List<AlgorithmInfo>();
+			if (!File.Exists(filePath))
+				return;
+
+			XDocument doc = XDocument.Load(filePath);
 			foreach (XElement element in doc.Root.Element("AlgorithmList").Elements())
 				AlgorithmList.Add(AlgorithmInfoFactory.FromXml(element));
 		}
@@ -68,7 +81,7 @@ namespace DataBrithm
 			foreach (AlgorithmInfo info in AlgorithmList)
 				xmlList.Add(AlgorithmInfoFactory.ToXml(info));
 
-			doc.Save(FilePath);
+			doc.Save(filePath);
 		}
 	}
 }

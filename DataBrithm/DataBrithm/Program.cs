@@ -28,7 +28,10 @@ namespace DataBrithm
 		[STAThread]
 		public static void Main(string[] args)
 		{
-			Application.Initialize(ToolkitType.Gtk);
+			Application.Initialize();
+
+			if (args.Length > 0)
+				AlgorithmManager.SetFilePath(args[0]);
 
 			var mainWindow = new MainWindow();
 			mainWindow.Show();
