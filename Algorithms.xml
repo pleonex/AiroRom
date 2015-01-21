@@ -1,0 +1,255 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<AlgorithmManager>
+  <AlgorithmList>
+    <EncryptionAlgorithm>
+      <IsSymmetric>True</IsSymmetric>
+      <Key />
+      <CrcName>CRC32</CrcName>
+      <Icon>
+        <HasFixedSize>True</HasFixedSize>
+        <Size>
+          <IsZero>False</IsZero>
+          <Width>16</Width>
+          <Height>16</Height>
+        </Size>
+        <Width>16</Width>
+        <Height>16</Height>
+      </Icon>
+      <Name>Ninokuni - DLC</Name>
+      <Id>0</Id>
+      <GameId>5604</GameId>
+      <Company>Level 5</Company>
+      <Device>NintendoDS</Device>
+      <Type>Encryption</Type>
+      <CanBeDetected>False</CanBeDetected>
+      <Instructions>2</Instructions>
+      <BasedOn>RC4</BasedOn>
+      <Files>1</Files>
+      <FileType>DLC</FileType>
+      <FileFrecuencyAccess>0.25</FileFrecuencyAccess>
+      <BestAlgorithm>-1</BestAlgorithm>
+      <Details>
+      </Details>
+      <Quality>25.3535533905933</Quality>
+    </EncryptionAlgorithm>
+    <IntegrityAlgorithm>
+      <HashSize>160</HashSize>
+      <IsBroken>False</IsBroken>
+      <Key>
+        <Byte>110</Byte>
+        <Byte>110</Byte>
+        <Byte>107</Byte>
+        <Byte>110</Byte>
+      </Key>
+      <Icon>
+        <HasFixedSize>True</HasFixedSize>
+        <Size>
+          <IsZero>False</IsZero>
+          <Width>16</Width>
+          <Height>16</Height>
+        </Size>
+        <Width>16</Width>
+        <Height>16</Height>
+      </Icon>
+      <Name>Ninokuni - Save</Name>
+      <Id>1</Id>
+      <GameId>5604</GameId>
+      <Company>Level 5</Company>
+      <Device>NintendoDS</Device>
+      <Type>Integrity</Type>
+      <CanBeDetected>False</CanBeDetected>
+      <Instructions>0</Instructions>
+      <BasedOn>SHA-1</BasedOn>
+      <Files>1</Files>
+      <FileType>Save</FileType>
+      <FileFrecuencyAccess>0.25</FileFrecuencyAccess>
+      <BestAlgorithm>-1</BestAlgorithm>
+      <Details>
+      </Details>
+      <Quality>21.0026640312668</Quality>
+    </IntegrityAlgorithm>
+    <CompressionAlgorithm>
+      <CompressionRatio>0</CompressionRatio>
+      <BalancedCompressionRatio>0</BalancedCompressionRatio>
+      <SupportsSubFiles>False</SupportsSubFiles>
+      <AverageSubFiles>0</AverageSubFiles>
+      <SupportsInmediateAccess>False</SupportsInmediateAccess>
+      <IsHeaderEncrypted>False</IsHeaderEncrypted>
+      <AreSubFilesEncrypted>False</AreSubFilesEncrypted>
+      <EncryptionAlgorithms />
+      <Icon>
+        <HasFixedSize>True</HasFixedSize>
+        <Size>
+          <IsZero>False</IsZero>
+          <Width>16</Width>
+          <Height>16</Height>
+        </Size>
+        <Width>16</Width>
+        <Height>16</Height>
+      </Icon>
+      <Name>Boku - GZ</Name>
+      <Id>3</Id>
+      <GameId>0</GameId>
+      <Company>
+      </Company>
+      <Device>PSP</Device>
+      <Type>Compression</Type>
+      <CanBeDetected>False</CanBeDetected>
+      <Instructions>0</Instructions>
+      <BasedOn>GZip</BasedOn>
+      <Files>0</Files>
+      <FileType>Generic</FileType>
+      <FileFrecuencyAccess>1</FileFrecuencyAccess>
+      <BestAlgorithm>-1</BestAlgorithm>
+      <Details>Algunos archivos tienen una cabecera redundante con el tamaño descomprimido</Details>
+      <Quality>0</Quality>
+    </CompressionAlgorithm>
+    <CompressionAlgorithm>
+      <CompressionRatio>0</CompressionRatio>
+      <BalancedCompressionRatio>0</BalancedCompressionRatio>
+      <SupportsSubFiles>True</SupportsSubFiles>
+      <AverageSubFiles>0</AverageSubFiles>
+      <SupportsInmediateAccess>False</SupportsInmediateAccess>
+      <IsHeaderEncrypted>True</IsHeaderEncrypted>
+      <AreSubFilesEncrypted>True</AreSubFilesEncrypted>
+      <EncryptionAlgorithms />
+      <Icon>
+        <HasFixedSize>True</HasFixedSize>
+        <Size>
+          <IsZero>False</IsZero>
+          <Width>16</Width>
+          <Height>16</Height>
+        </Size>
+        <Width>16</Width>
+        <Height>16</Height>
+      </Icon>
+      <Name>Layton4 - GFSA</Name>
+      <Id>4</Id>
+      <GameId>6446</GameId>
+      <Company>Level 5</Company>
+      <Device>NintendoDS</Device>
+      <Type>Compression</Type>
+      <CanBeDetected>True</CanBeDetected>
+      <Instructions>0</Instructions>
+      <BasedOn>
+      </BasedOn>
+      <Files>3</Files>
+      <FileType>Generic</FileType>
+      <FileFrecuencyAccess>1</FileFrecuencyAccess>
+      <BestAlgorithm>-1</BestAlgorithm>
+      <Details>
+      </Details>
+      <Quality>51.2247448713916</Quality>
+    </CompressionAlgorithm>
+    <CompressionAlgorithm>
+      <CompressionRatio>0</CompressionRatio>
+      <BalancedCompressionRatio>0</BalancedCompressionRatio>
+      <SupportsSubFiles>False</SupportsSubFiles>
+      <AverageSubFiles>0</AverageSubFiles>
+      <SupportsInmediateAccess>False</SupportsInmediateAccess>
+      <IsHeaderEncrypted>False</IsHeaderEncrypted>
+      <AreSubFilesEncrypted>False</AreSubFilesEncrypted>
+      <EncryptionAlgorithms />
+      <Icon>
+        <HasFixedSize>True</HasFixedSize>
+        <Size>
+          <IsZero>False</IsZero>
+          <Width>16</Width>
+          <Height>16</Height>
+        </Size>
+        <Width>16</Width>
+        <Height>16</Height>
+      </Icon>
+      <Name>Layton4 - LZSS</Name>
+      <Id>5</Id>
+      <GameId>6446</GameId>
+      <Company>Level 5</Company>
+      <Device>NintendoDS</Device>
+      <Type>Compression</Type>
+      <CanBeDetected>True</CanBeDetected>
+      <Instructions>0</Instructions>
+      <BasedOn>
+      </BasedOn>
+      <Files>0</Files>
+      <FileType>Generic</FileType>
+      <FileFrecuencyAccess>0</FileFrecuencyAccess>
+      <BestAlgorithm>-1</BestAlgorithm>
+      <Details>
+      </Details>
+      <Quality>20</Quality>
+    </CompressionAlgorithm>
+    <CompressionAlgorithm>
+      <CompressionRatio>0</CompressionRatio>
+      <BalancedCompressionRatio>0</BalancedCompressionRatio>
+      <SupportsSubFiles>False</SupportsSubFiles>
+      <AverageSubFiles>0</AverageSubFiles>
+      <SupportsInmediateAccess>False</SupportsInmediateAccess>
+      <IsHeaderEncrypted>False</IsHeaderEncrypted>
+      <AreSubFilesEncrypted>False</AreSubFilesEncrypted>
+      <EncryptionAlgorithms />
+      <Icon>
+        <HasFixedSize>True</HasFixedSize>
+        <Size>
+          <IsZero>False</IsZero>
+          <Width>16</Width>
+          <Height>16</Height>
+        </Size>
+        <Width>16</Width>
+        <Height>16</Height>
+      </Icon>
+      <Name>Layton4 - HUFFMAN</Name>
+      <Id>6</Id>
+      <GameId>6446</GameId>
+      <Company>Level 5</Company>
+      <Device>NintendoDS</Device>
+      <Type>Compression</Type>
+      <CanBeDetected>True</CanBeDetected>
+      <Instructions>0</Instructions>
+      <BasedOn>
+      </BasedOn>
+      <Files>0</Files>
+      <FileType>Generic</FileType>
+      <FileFrecuencyAccess>0</FileFrecuencyAccess>
+      <BestAlgorithm>-1</BestAlgorithm>
+      <Details>Soporte 4 y 8 bits</Details>
+      <Quality>20</Quality>
+    </CompressionAlgorithm>
+    <CompressionAlgorithm>
+      <CompressionRatio>0</CompressionRatio>
+      <BalancedCompressionRatio>0</BalancedCompressionRatio>
+      <SupportsSubFiles>False</SupportsSubFiles>
+      <AverageSubFiles>0</AverageSubFiles>
+      <SupportsInmediateAccess>False</SupportsInmediateAccess>
+      <IsHeaderEncrypted>False</IsHeaderEncrypted>
+      <AreSubFilesEncrypted>False</AreSubFilesEncrypted>
+      <EncryptionAlgorithms />
+      <Icon>
+        <HasFixedSize>True</HasFixedSize>
+        <Size>
+          <IsZero>False</IsZero>
+          <Width>16</Width>
+          <Height>16</Height>
+        </Size>
+        <Width>16</Width>
+        <Height>16</Height>
+      </Icon>
+      <Name>Layton4 - RLE</Name>
+      <Id>6</Id>
+      <GameId>6446</GameId>
+      <Company>Level 5</Company>
+      <Device>NintendoDS</Device>
+      <Type>Compression</Type>
+      <CanBeDetected>True</CanBeDetected>
+      <Instructions>0</Instructions>
+      <BasedOn>
+      </BasedOn>
+      <Files>0</Files>
+      <FileType>Generic</FileType>
+      <FileFrecuencyAccess>0</FileFrecuencyAccess>
+      <BestAlgorithm>-1</BestAlgorithm>
+      <Details>
+      </Details>
+      <Quality>20</Quality>
+    </CompressionAlgorithm>
+  </AlgorithmList>
+</AlgorithmManager>
