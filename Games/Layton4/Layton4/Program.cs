@@ -44,7 +44,8 @@ namespace Layton4
 			container.SetFormat<Gfsa>();
 			container.Format.Read();
 			foreach (var block in container.Files.Cast<GameFile>())
-				block.Stream.WriteTo(Path.Combine(executableDir, block.Name));
+				block.Files.Cast<GameFile>().First()
+					.Stream.WriteTo(Path.Combine(executableDir, block.Name));
 		}
 	}
 }

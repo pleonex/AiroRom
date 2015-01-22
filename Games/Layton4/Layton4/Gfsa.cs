@@ -46,7 +46,10 @@ namespace Layton4
 				uint nextOffset = reader.ReadUInt32(); strIn.Seek(-4, SeekMode.Current);
 
 				var subStream = new DataStream(strIn, offset, nextOffset - offset);
-				this.File.AddFile(new GameFile("Block" + i.ToString() + ".bin", subStream));
+				var subFile = new GameFile("Block" + i.ToString() + ".bin", subStream);
+				subFile.SetFormat<GfsaBlock>();
+				subFile.Format.Read();
+				File.AddFile(subFile);
 			}
 		}
 
