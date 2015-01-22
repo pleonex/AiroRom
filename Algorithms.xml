@@ -221,7 +221,11 @@
       <SupportsInmediateAccess>False</SupportsInmediateAccess>
       <IsHeaderEncrypted>True</IsHeaderEncrypted>
       <AreSubFilesEncrypted>True</AreSubFilesEncrypted>
-      <EncryptionAlgorithms />
+      <EncryptionAlgorithms>
+        <Int32>7</Int32>
+        <Int32>8</Int32>
+        <Int32>9</Int32>
+      </EncryptionAlgorithms>
       <Icon>
         <HasFixedSize>True</HasFixedSize>
         <Size>
@@ -248,7 +252,7 @@
       <BestAlgorithm>-1</BestAlgorithm>
       <Details>
       </Details>
-      <Quality>51.2247448713916</Quality>
+      <Quality>111.224744871392</Quality>
     </CompressionAlgorithm>
     <CompressionAlgorithm>
       <CompressionRatio>0</CompressionRatio>
@@ -357,5 +361,68 @@
       </Details>
       <Quality>20</Quality>
     </CompressionAlgorithm>
+    <EncryptionAlgorithm>
+      <IsSymmetric>False</IsSymmetric>
+      <Key />
+      <CrcName>
+      </CrcName>
+      <Icon>
+        <HasFixedSize>True</HasFixedSize>
+        <Size>
+          <IsZero>False</IsZero>
+          <Width>16</Width>
+          <Height>16</Height>
+        </Size>
+        <Width>16</Width>
+        <Height>16</Height>
+      </Icon>
+      <Name>API - Communicaciones</Name>
+      <Id>10</Id>
+      <GameId>0</GameId>
+      <Company>Nintendo</Company>
+      <Device>NintendoDS</Device>
+      <Type>Encryption</Type>
+      <CanBeDetected>False</CanBeDetected>
+      <Instructions>0</Instructions>
+      <BasedOn>SSL (HTTPS)</BasedOn>
+      <Files>0</Files>
+      <FileType>Generic</FileType>
+      <FileFrecuencyAccess>0</FileFrecuencyAccess>
+      <BestAlgorithm>-1</BestAlgorithm>
+      <Details>
+      </Details>
+      <Quality>20</Quality>
+    </EncryptionAlgorithm>
+    <IntegrityAlgorithm>
+      <HashSize>0</HashSize>
+      <IsBroken>False</IsBroken>
+      <Key />
+      <Icon>
+        <HasFixedSize>True</HasFixedSize>
+        <Size>
+          <IsZero>False</IsZero>
+          <Width>16</Width>
+          <Height>16</Height>
+        </Size>
+        <Width>16</Width>
+        <Height>16</Height>
+      </Icon>
+      <Name>API - Overlays</Name>
+      <Id>11</Id>
+      <GameId>0</GameId>
+      <Company>Nintendo</Company>
+      <Device>NintendoDS</Device>
+      <Type>Integrity</Type>
+      <CanBeDetected>True</CanBeDetected>
+      <Instructions>0</Instructions>
+      <BasedOn>HMAC</BasedOn>
+      <Files>0</Files>
+      <FileType>Generic</FileType>
+      <FileFrecuencyAccess>1</FileFrecuencyAccess>
+      <BestAlgorithm>-1</BestAlgorithm>
+      <Details>
+      </Details>
+      <Quality>20</Quality>
+    </IntegrityAlgorithm>
   </AlgorithmList>
 </AlgorithmManager>
