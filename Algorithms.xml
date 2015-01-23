@@ -424,5 +424,157 @@
       </Details>
       <Quality>20</Quality>
     </IntegrityAlgorithm>
+    <CompressionAlgorithm>
+      <CompressionRatio>0</CompressionRatio>
+      <BalancedCompressionRatio>0</BalancedCompressionRatio>
+      <SupportsSubFiles>True</SupportsSubFiles>
+      <AverageSubFiles>0</AverageSubFiles>
+      <SupportsInmediateAccess>False</SupportsInmediateAccess>
+      <IsHeaderEncrypted>False</IsHeaderEncrypted>
+      <AreSubFilesEncrypted>False</AreSubFilesEncrypted>
+      <EncryptionAlgorithms />
+      <Icon>
+        <HasFixedSize>True</HasFixedSize>
+        <Size>
+          <IsZero>False</IsZero>
+          <Width>16</Width>
+          <Height>16</Height>
+        </Size>
+        <Width>16</Width>
+        <Height>16</Height>
+      </Icon>
+      <Name>Musashi - Text</Name>
+      <Id>12</Id>
+      <GameId>0</GameId>
+      <Company>Square Enix</Company>
+      <Device>PS1</Device>
+      <Type>Compression</Type>
+      <CanBeDetected>False</CanBeDetected>
+      <Instructions>0</Instructions>
+      <BasedOn>LZSS</BasedOn>
+      <Files>0</Files>
+      <FileType>Text</FileType>
+      <FileFrecuencyAccess>0.5</FileFrecuencyAccess>
+      <BestAlgorithm>-1</BestAlgorithm>
+      <Details>
+      </Details>
+      <Quality>0</Quality>
+    </CompressionAlgorithm>
+    <CompressionAlgorithm>
+      <CompressionRatio>0</CompressionRatio>
+      <BalancedCompressionRatio>0</BalancedCompressionRatio>
+      <SupportsSubFiles>True</SupportsSubFiles>
+      <AverageSubFiles>0</AverageSubFiles>
+      <SupportsInmediateAccess>True</SupportsInmediateAccess>
+      <IsHeaderEncrypted>False</IsHeaderEncrypted>
+      <AreSubFilesEncrypted>True</AreSubFilesEncrypted>
+      <EncryptionAlgorithms>
+        <Int32>15</Int32>
+      </EncryptionAlgorithms>
+      <Icon>
+        <HasFixedSize>True</HasFixedSize>
+        <Size>
+          <IsZero>False</IsZero>
+          <Width>16</Width>
+          <Height>16</Height>
+        </Size>
+        <Width>16</Width>
+        <Height>16</Height>
+      </Icon>
+      <Name>London Life - DARC</Name>
+      <Id>13</Id>
+      <GameId>6446</GameId>
+      <Company>Level 5</Company>
+      <Device>NintendoDS</Device>
+      <Type>Compression</Type>
+      <CanBeDetected>True</CanBeDetected>
+      <Instructions>0</Instructions>
+      <BasedOn>
+      </BasedOn>
+      <Files>1</Files>
+      <FileType>Generic</FileType>
+      <FileFrecuencyAccess>1</FileFrecuencyAccess>
+      <BestAlgorithm>-1</BestAlgorithm>
+      <Details>
+      </Details>
+      <Quality>50.7071067811865</Quality>
+    </CompressionAlgorithm>
+    <CompressionAlgorithm>
+      <CompressionRatio>0</CompressionRatio>
+      <BalancedCompressionRatio>0</BalancedCompressionRatio>
+      <SupportsSubFiles>True</SupportsSubFiles>
+      <AverageSubFiles>0</AverageSubFiles>
+      <SupportsInmediateAccess>True</SupportsInmediateAccess>
+      <IsHeaderEncrypted>False</IsHeaderEncrypted>
+      <AreSubFilesEncrypted>True</AreSubFilesEncrypted>
+      <EncryptionAlgorithms>
+        <Int32>0</Int32>
+        <Int32>1</Int32>
+        <Int32>2</Int32>
+      </EncryptionAlgorithms>
+      <Icon>
+        <HasFixedSize>True</HasFixedSize>
+        <Size>
+          <IsZero>False</IsZero>
+          <Width>16</Width>
+          <Height>16</Height>
+        </Size>
+        <Width>16</Width>
+        <Height>16</Height>
+      </Icon>
+      <Name>London Life - ARCHIVE</Name>
+      <Id>14</Id>
+      <GameId>6446</GameId>
+      <Company>Level 5</Company>
+      <Device>NintendoDS</Device>
+      <Type>Compression</Type>
+      <CanBeDetected>False</CanBeDetected>
+      <Instructions>0</Instructions>
+      <BasedOn>
+      </BasedOn>
+      <Files>0</Files>
+      <FileType>Generic</FileType>
+      <FileFrecuencyAccess>1</FileFrecuencyAccess>
+      <BestAlgorithm>-1</BestAlgorithm>
+      <Details>
+      </Details>
+      <Quality>70</Quality>
+    </CompressionAlgorithm>
+    <CompressionAlgorithm>
+      <CompressionRatio>0</CompressionRatio>
+      <BalancedCompressionRatio>0</BalancedCompressionRatio>
+      <SupportsSubFiles>False</SupportsSubFiles>
+      <AverageSubFiles>0</AverageSubFiles>
+      <SupportsInmediateAccess>False</SupportsInmediateAccess>
+      <IsHeaderEncrypted>False</IsHeaderEncrypted>
+      <AreSubFilesEncrypted>False</AreSubFilesEncrypted>
+      <EncryptionAlgorithms />
+      <Icon>
+        <HasFixedSize>True</HasFixedSize>
+        <Size>
+          <IsZero>False</IsZero>
+          <Width>16</Width>
+          <Height>16</Height>
+        </Size>
+        <Width>16</Width>
+        <Height>16</Height>
+      </Icon>
+      <Name>London Life - DENC</Name>
+      <Id>15</Id>
+      <GameId>6446</GameId>
+      <Company>Level 5</Company>
+      <Device>NintendoDS</Device>
+      <Type>Compression</Type>
+      <CanBeDetected>True</CanBeDetected>
+      <Instructions>0</Instructions>
+      <BasedOn>BIOS - LZSS</BasedOn>
+      <Files>0</Files>
+      <FileType>Generic</FileType>
+      <FileFrecuencyAccess>1</FileFrecuencyAccess>
+      <BestAlgorithm>-1</BestAlgorithm>
+      <Details>
+      </Details>
+      <Quality>20</Quality>
+    </CompressionAlgorithm>
   </AlgorithmList>
 </AlgorithmManager>
