@@ -1683,6 +1683,8 @@ bool Adhoc_Init()
 
 	Adhoc_Reset();
 
+	create_packet();
+
 	WIFI_LOG(1, "Ad-hoc: initialization successful.\n");
 
 	return true;
@@ -1692,6 +1694,12 @@ void Adhoc_DeInit()
 {
 	if (wifi_socket >= 0)
 		closesocket(wifi_socket);
+
+	if (captured_packets != NULL)
+	{
+		fclose(captured_packets);
+		captured_packets = NULL;
+	}
 }
 
 void Adhoc_Reset()
@@ -1728,6 +1736,9 @@ void Adhoc_SendPacket(u8* packet, u32 len)
 
 	int nbytes = sendto(wifi_socket, (const char*)frame, frameLen, 0, &sendAddr, sizeof(sockaddr_t));
 	
+	// Store the packet in the PCAP file.
+	save_packet(frame, frameLen, Adhoc.usecCounter / 1000000, Adhoc.usecCounter % 1000000, false);
+
 	WIFI_LOG(4, "Ad-hoc: sent %i/%i bytes of packet.\n", nbytes, frameLen);
 
 	delete[] frame;
@@ -1798,6 +1809,9 @@ void Adhoc_usTrigger()
 						(u8)fromAddr.sa_data[2], (u8)fromAddr.sa_data[3], 
 						(u8)fromAddr.sa_data[4], (u8)fromAddr.sa_data[5],
 						ntohs(*(u16*)&fromAddr.sa_data[0]));*/
+					// Store the packet in the PCAP file.
+					save_packet(buf, nbytes, Adhoc.usecCounter / 1000000, Adhoc.usecCounter % 1000000, true);
+
 					WIFI_LOG(2, "Ad-hoc: received a packet of %i bytes, frame control: %04X\n", packetLen, *(u16*)&ptr[0]);
 					//WIFI_LOG(2, "Storing packet at %08X.\n", 0x04804000 + (wifiMac.RXWriteCursor<<1));
 
