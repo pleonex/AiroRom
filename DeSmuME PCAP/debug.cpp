@@ -1,6 +1,6 @@
-/*  Copyright (C) 2008 Guillaume Duhamel
-    Copyright (C) 2009-2010 DeSmuME team
-    Copyright (C) 2014 pleonex
+/*
+	Copyright (C) 2006 Guillaume Duhamel
+	Copyright (C) 2006-2011 DeSmuME team
 
 	This file is free software: you can redistribute it and/or modify
 	it under the terms of the GNU General Public License as published by
@@ -23,8 +23,7 @@
 #include <stdio.h>
 #include "MMU.h"
 #include "armcpu.h"
-#include "arm_instructions.h"
-#include "thumb_instructions.h"
+#include "instructions.h"
 #include "cp15.h"
 #include "NDSSystem.h"
 #include "utils/xstring.h"
@@ -39,9 +38,9 @@ armcpu_t* TDebugEventData::cpu() { return procnum==0?&NDS_ARM9:&NDS_ARM7; }
 TDebugEventData DebugEventData;
 u32 debugFlag;
 
-// PACKET HACK VARS
+// FUNCTION EXPORTER
 FILE *log_ptr;	// File to store the dumped data
-const u32 rc4_addr[2] = { 0x020986A8, 0x02098710 };	// Start and end address of RC4 algorithm
+const u32 rc4_addr[2] = { 0x020986A8, 0x02098710 };	// Start and end address of function (RC4 algorithm)
 
 //DEBUG CONFIGURATION
 const bool debug_acl = false;
@@ -53,7 +52,7 @@ static bool acl_check_access(u32 adr, u32 access) {
 	if(NDS_ARM9.CPSR.bits.mode != USR)
 		access |= 1;
 	
-	if (armcp15_isAccessAllowed((armcp15_t *)NDS_ARM9.coproc[15],adr,access)==FALSE) {
+	if (cp15.isAccessAllowed(adr,access)==FALSE) {
 		HandleDebugEvent(DEBUG_EVENT_ACL_EXCEPTION);
 	}
 	return true;
@@ -95,7 +94,7 @@ void HandleDebugEvent_Execute()
 	// RC4 algoritm function.
 	return;
 
-	// This method is called twice, so ommit one call.
+	// This method is called twice, so ommit the second one.
 	extern bool nds_debug_continuing[2];
 	if (nds_debug_continuing[DebugEventData.procnum]) {
 		nds_debug_continuing[DebugEventData.procnum] = false;
@@ -382,9 +381,9 @@ void IdeasLog(armcpu_t* cpu)
 	//don't emit a newline. that is a pain in the butt.
 }
 
-void NocashMessage(armcpu_t* cpu)
+void NocashMessage(armcpu_t* cpu, int offset)
 {
-	u32 adr = cpu->instruct_adr + 6;
+	u32 adr = cpu->instruct_adr + offset;
 
 	std::string todo;
 	for(;;) {
