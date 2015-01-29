@@ -55,6 +55,8 @@
 #define BASEPORT 7000
 
 // PCAP file to store the Ethernet packets.
+#define BIGENDIAN16(x) ( (x >> 8) | ((x & 0xFF) << 8) )
+#define BIGENDIAN32(x) ( (x >> 24) | ((x & 0xFF0000) >> 8) | ((x & 0xFF00) << 8) | ((x & 0xFF) << 24) )
 FILE* captured_packets;
 clock_t conn_time_begin;
 
@@ -1882,12 +1884,8 @@ void Adhoc_SendPacket(u8* packet, u32 len)
 	memcpy(ptr, packet, len);
 
 	int nbytes = sendto(wifi_socket, (const char*)frame, frameLen, 0, &sendAddr, sizeof(sockaddr_t));
-	
-	// Store the packet in the PCAP file.
-	if (captured_packets == NULL)
-		create_packet();
 
-	save_packet(frame, frameLen, false);
+	save_adhocPacket(frame, frameLen, &sendAddr, true);
 
 	WIFI_LOG(4, "Ad-hoc: sent %i/%i bytes of packet.\n", nbytes, frameLen);
 
@@ -1950,7 +1948,7 @@ void Adhoc_msTrigger()
 					ntohs(*(u16*)&fromAddr.sa_data[0]));*/
 
 				// Store the packet in the PCAP file.
-				save_packet(buf, nbytes, true);
+				save_adhocPacket(buf, nbytes, &fromAddr, false);
 
 				WIFI_LOG(3, "Ad-hoc: received a packet of %i bytes, frame control: %04X\n", packetLen, *(u16*)&ptr[0]);
 				WIFI_LOG(4, "Storing packet at %08X.\n", 0x04804000 + (wifiMac.RXWriteCursor<<1));
@@ -2328,7 +2326,7 @@ void SoftAP_SendPacket(u8 *packet, u32 len)
 
 				if(wifi_bridge != NULL) {
 					// Store the packet in the PCAP file.
-					save_packet(epacket, epacketLen, false);
+					save_packet(epacket, epacketLen);
 
 					// Send it
 					CurrentWifiHandler->PCAP_sendpacket(wifi_bridge, epacket, epacketLen);
@@ -2387,7 +2385,7 @@ static void SoftAP_RXHandler(u_char* user, const struct pcap_pkthdr* h, const u_
 	// Filter broadcast because of privacy. They aren't needed to study the protocol with the nintendo server
 	// and can include PC Discovery protocols
 	if (!WIFI_isBroadcastMAC(&data[0]))
-		save_packet(data, h->len, true);
+		save_packet(data, h->len);
 
 	u16 rxflags = 0x0018;
 	if (WIFI_compareMAC(wifiMac.bss.bytes, (u8*)SoftAP_MACAddr))
@@ -2450,11 +2448,11 @@ static void create_packet()
 	);
 
 	// Open as binary write
-	printf("Capture log: %s\n", file_name);
+	WIFI_LOG(2, "Capture log: %s\n", file_name);
 	captured_packets = fopen(file_name, "wb");
 	if (captured_packets == NULL)
 	{
-		printf("Can't create capture log file: %s\n", file_name);
+		WIFI_LOG(1, "Can't create capture log file: %s\n", file_name);
 	}
 	else
 	{
@@ -2486,23 +2484,23 @@ static void create_packet()
 /*
  Save an Ethernet packet into the PCAP file of the current connection.
 */
-static void save_packet(u8* packet, u32 len, bool isReceived)
+static void save_packet(u8* packet, u32 len)
 {
 	if (captured_packets == NULL)
 	{
-		printf("Can't save packet... %d\n", isReceived);
+		WIFI_LOG(1, "Can't save packet...\n");
 		return;
 	}
 
 	// Get relative milliseconds, I now it measures runtime but AFIK it's the best cross-platform way
 	clock_t conn_time_current = clock();
-	int diff_ms = (int)((conn_time_begin - conn_time_current) * 1000. / CLOCKS_PER_SEC);
+	int diff_ms = (int)((conn_time_current - conn_time_begin) * 1000. / CLOCKS_PER_SEC);
 	int t_s = diff_ms / 1000;
 	int t_ms = diff_ms % 1000;
 
 	// Add the packet
 	// more info: http://www.kroosec.com/2012/10/a-look-at-pcap-file-format.html
-	printf("WIFI: Saving packet of %04x bytes | %d\n", len, isReceived);
+	WIFI_LOG(4, "WIFI: Saving packet of %04x bytes\n", len);
 
 	// First create the header
 	fwrite(&t_s,  sizeof(char), 4, captured_packets); // This should be seconds since Unix Epoch, but it works :D
@@ -2515,6 +2513,76 @@ static void save_packet(u8* packet, u32 len, bool isReceived)
 
 	// Flush the file
 	fflush(captured_packets);
+}
+
+/*
+ Save a packet into the PCAP file of the current connection.
+*/
+static void save_adhocPacket(u8* packet, u32 len, void* addrGen, bool isSent)
+{
+	// Store the packet in the PCAP file.
+	if (captured_packets == NULL)
+		create_packet();
+
+	sockaddr_t* addr = (sockaddr_t*)addrGen;
+	u16 ethLen = 0x0E;
+	u16 ipLen  = 0x14;
+	u16 udpLen = 0x08;
+	u32 protoLen = ethLen + ipLen + udpLen;
+	u32 frameLen = protoLen + len;
+
+	// Create a new pointer for the frame
+	u8* frame = new u8[frameLen];
+	u8* ptr = frame;
+
+	// Write Ethernet link layer
+	if (isSent)
+	{
+		// ... Write dest MAC
+		*(u32*)ptr = 0xFFFFFFFF;			ptr += 4;
+		*(u16*)ptr = 0xFFFF;				ptr += 2;
+		// ... Write src MAC
+		*(u32*)ptr = *(u32*)FW_Mac;			ptr += 4;
+		*(u16*)ptr = *(u16*)(FW_Mac + 4);	ptr += 2;
+	}
+	else
+	{
+		// ... Write dest MAC
+		*(u32*)ptr = *(u32*)FW_Mac;			ptr += 4;
+		*(u16*)ptr = *(u16*)(FW_Mac + 4);	ptr += 2;
+		// ... Write src MAC
+		*(u32*)ptr = 0xFFFFFFFF;			ptr += 4;
+		*(u16*)ptr = 0xFFFF;				ptr += 2;
+	}
+
+	// ... Type, 0x0800
+	*(u16*)ptr = BIGENDIAN16(0x0800);	ptr += 2;
+
+	// Write IP network layer
+	*ptr = 0x45;	ptr++;	// Version 4 & 20 bytes of header (5 * 4)
+	*ptr = 0x00;	ptr++;	// Traffic priority and so
+	*(u16*)ptr = BIGENDIAN16(frameLen - ethLen);	ptr += 2;	// Total length
+	*(u16*)ptr = 0x00;				ptr += 2;	// ID, doesn't matter
+	*(u16*)ptr = 0x00;				ptr += 2;	// Frame offset, no fragmentation
+	*ptr = 0x80;					ptr++;		// TTL
+	*ptr = 0x11;					ptr++;		// UDP transport protocol
+	*(u16*)ptr = 0x00;				ptr += 2;	// CRC, wireshark does not check it
+	*ptr = (u8)addr->sa_data[2];	ptr++;		// Source IP
+	*ptr = (u8)addr->sa_data[3];	ptr++;
+	*ptr = (u8)addr->sa_data[4];	ptr++;
+	*ptr = (u8)addr->sa_data[5];	ptr++;
+	*(u32*)ptr = 0xFFFFFFFF;		ptr += 4;	// Destination IP, assume broadcast
+
+	// Write UDP transport layer
+	*(u16*)ptr = BIGENDIAN16(BASEPORT);		ptr += 2;	// Source port
+	*(u16*)ptr = BIGENDIAN16(BASEPORT);		ptr += 2;	// Destination port
+	*(u16*)ptr = BIGENDIAN16(len + 8);		ptr += 2;	// Total length
+	*(u16*)ptr = 0x00;	ptr += 2;	// CRC, wireshark does not check it
+
+	// Copy the payload
+	memcpy(ptr, packet, len);
+
+	save_packet(frame, frameLen);
 }
 
 #endif

@@ -180,7 +180,8 @@
 
 // PCAP dumper
 static void create_packet();
-static void save_packet(u8* packet, u32 len, bool isReceived);
+static void save_packet(u8* packet, u32 len);
+static void save_adhocPacket(u8* packet, u32 len, void* addr, bool isSent);
 
 /* Referenced as RF_ in dswifi: rffilter_t */
 /* based on the documentation for the RF2958 chip of RF Micro Devices */
