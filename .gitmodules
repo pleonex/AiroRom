@@ -10,3 +10,6 @@
 [submodule "Games/Boku1PSP"]
 	path = Games/Boku1PSP
 	url = git@github.com:pleonex/Boku-no-Natsuyasumi.git
+[submodule "Games/libgame"]
+	path = Games/libgame
+	url = git@github.com:pleonex/libgame.git
