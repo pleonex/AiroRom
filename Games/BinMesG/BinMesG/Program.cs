@@ -19,6 +19,7 @@
 //  You should have received a copy of the GNU General Public License
 //  along with this program.  If not, see <http://www.gnu.org/licenses/>.
 using System;
+using Libgame;
 
 namespace BinMesG
 {
@@ -26,7 +27,18 @@ namespace BinMesG
 	{
 		public static void Main(string[] args)
 		{
+			var xconf = System.Xml.Linq.XDocument.Load(
+				"/home/benito/Dropbox/Ninokuni español/NinoPatcher/Ninokuni español.xml");
+			Configuration.Initialize(xconf);
 
+			var root = GameFolderFactory.FromPath("/home/benito/workdir");
+
+			string filename = "n195_jp15_dorayaki_s";
+			var file = root.Files[filename + ".bmg"] as GameFile;
+			file.SetFormat<Bmg>();
+			file.Format.Read();
+			System.IO.File.Delete("/home/benito/workdir/" + filename + ".xml");
+			file.Format.Export("/home/benito/workdir/" + filename + ".xml");
 		}
 	}
 }
