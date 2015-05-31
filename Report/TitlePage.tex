@@ -1,0 +1,63 @@
+% Copyright (c) 2015 Benito Palacios S√°nchez - All Rights Reserved.
+% Esta obra est√° licenciada bajo la Licencia Creative Commons Atribuci√≥n 4.0
+% Internacional. Para ver una copia de esta licencia, visita
+% http://creativecommons.org/licenses/by/4.0/.
+
+% Put the UGR logo as background
+\newcommand\BgImgCenter[1]{%
+    \AddToShipoutPicture*{%
+        \AtPageCenter{%
+            \makebox(0,0){%
+                \includegraphics%
+                [width=0.9\paperwidth]{#1}
+            }
+        }
+    }
+}
+
+% Necessary since we are working with the '@' char for variables
+\makeatletter
+
+% Different box for center text
+\newcommand\topBox[1]{    \vtop{\centering #1} }
+\newcommand\centerBox[1]{ \vbox{\centering #1} }
+\newcommand\bottomBox[1]{ \vbox{\centering #1} }
+
+% Style for the first page
+\def\makeFirstPage{%
+    \thispagestyle{empty} \hspace*{0cm} \vbox to \vsize{%
+        \vspace{20mm}
+        \topBox{\Large \@author}
+        \vfill
+        \centerBox{\Huge \textsc{\@title}}
+        \vspace{5mm}
+        \centerBox{\large \@docType}
+        \vfill
+        \vfill
+        \bottomBox{\@location \\ \@date}
+    }
+    \clearpage
+}
+
+% Define the variables
+\def\date#1{\def\@date{#1}}
+\def\author#1{\def\@author{#1}}
+\def\title#1{\def\@title{#1}}
+\def\location#1{\def\@location{#1}}
+\def\docType#1{\def\@docType{#1}}
+
+% Restore the '@' mode
+\makeatother
+
+% Constants
+\title{Mecanismos de protecciÛn de datos en videojuegos}
+\author{Benito Palacios S·nchez}
+\location{Universidad de Granada}
+\docType{Trabajo Fin de Grado}
+
+% First page
+\BgImgCenter{imgs/ugr.png}
+\makeFirstPage
+
+
+Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
