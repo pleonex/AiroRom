@@ -21,7 +21,7 @@
 % Font
 \usepackage[T1]{fontenc}        % Output font
 \usepackage[latin1]{inputenc}   % Input encoding
-\usepackage[spanish]{babel}     % For Spanish texts
+\usepackage[spanish,english]{babel}     % For Spanish texts
 
 % Extra packages
 \usepackage{graphicx}           % For graphics
@@ -30,11 +30,21 @@
 % My packages
 \usepackage{TitleStyle}
 
+% Create abstract type
+\usepackage{fancyhdr}
+\pagestyle{empty}
+\newenvironment{abstract}%
+{\cleardoublepage\null\vfill\begin{center}%
+ \bfseries \abstractname\end{center}}%
+{\vfill\null}
+
 \begin{document}
 
 \frontmatter
 \input{TitlePage}
-%\input{abstract}
+\input{Abstract}
+
+\selectlanguage{spanish}
 %\input{chapter1}
 %\input{tableOfContent}
 
