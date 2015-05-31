@@ -1,0 +1,38 @@
+% Copyright (c) 2015 Benito Palacios Sánchez - All Rights Reserved.
+% Esta obra está licenciada bajo la Licencia Creative Commons Atribución 4.0
+% Internacional. Para ver una copia de esta licencia, visita
+% http://creativecommons.org/licenses/by/4.0/.
+%
+% Layout from: https://tug.org/pracjourn/2008-1/mori/mori.pdf
+
+\NeedsTeXFormat{LaTeX2e}
+\ProvidesPackage{LayoutStyle}[2015/05/31 Thesis Layout Style]
+\RequirePackage[T1]{fontenc}        % Output font
+\RequirePackage[latin1]{inputenc}   % Input encoding
+\RequirePackage{fancyhdr}           % Base layout
+
+\newcommand{\fncyfront}{%
+    \fancyhead[RO]{{\footnotesize\rightmark}}
+    \fancyfoot[RO]{\thepage}
+    \fancyhead[LE]{\footnotesize{\leftmark}}
+    \fancyfoot[LE]{\thepage}
+    \fancyhead[RE,LO]{}
+    \fancyfoot[C]{}
+    \renewcommand{\headrulewidth}{0.3pt}
+}
+
+\newcommand{\fncymain}{%
+    \fancyhead[RO]{{\footnotesize\rightmark}}
+    \fancyfoot[RO]{\thepage}
+    \fancyhead[LE]{{\footnotesize\leftmark}}
+    \fancyfoot[LE]{\thepage}
+    \fancyfoot[C]{}
+    \renewcommand{\headrulewidth}{0.3pt}
+}
+
+\def\cleardoublepage{\clearpage\if@twoside
+\ifodd\c@page
+\else\hbox{}\thispagestyle{empty}\newpage
+\if@twocolumn\hbox{}\newpage\fi\fi\fi}
+
+\endinput

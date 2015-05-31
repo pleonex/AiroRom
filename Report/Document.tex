@@ -8,20 +8,12 @@
 \pdfoutput=1
 
 % Margins
-\def\lmargen{2cm}
-\def\rmargen{2cm}
-\def\umargen{2cm}
-\def\dmargen{2cm}
-\def\encuade{0.5cm}
-
-% Interlines
-\renewcommand{\baselinestretch}{1}
-\setlength{\parskip}{1ex}
+\usepackage[a4paper,margin=2cm,footskip=.5cm]{geometry}
 
 % Font
 \usepackage[T1]{fontenc}        % Output font
 \usepackage[latin1]{inputenc}   % Input encoding
-\usepackage[spanish,english]{babel}     % For Spanish texts
+\usepackage[english,spanish]{babel}     % For Spanish texts
 
 % Extra packages
 \usepackage{graphicx}           % For graphics
@@ -31,6 +23,7 @@
 
 % My packages
 \usepackage{TitleStyle}
+\usepackage{LayoutStyle}
 
 % Create abstract type
 \usepackage{fancyhdr}
@@ -41,7 +34,9 @@
 {\vfill\null}
 
 \begin{document}
+\pagestyle{fancy}
 
+\fncyfront
 \frontmatter
 \input{TitlePage}
 \input{Abstract}
@@ -50,6 +45,7 @@
 \selectlanguage{spanish}
 \tableofcontents
 
+\fncymain
 \mainmatter
 %\input{chapter1}
 

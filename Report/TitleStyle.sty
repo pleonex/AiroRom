@@ -31,7 +31,7 @@
 
 % Style for the first page
 \newcommand\makefirstpage{%
-    \thispagestyle{empty} \hspace*{0cm} \vbox to \vsize{%
+    \thispagestyle{empty} \vbox to \vsize{%
         \vspace{20mm}
         \topBox{\Large \@author}
         \vfill
@@ -69,12 +69,12 @@
         \vfill
         \rightBox{\@tutorType}{}{}
         \vspace{5mm}
-        \rightBox{\Large \@tutor \dotfill}
+        \rightBox{\Large \@tutor}
 
         % Bottom
         \vfill
         \vfill
-        \centerBox{\@sessionDate \@date \\ \@academicDate}
+        \centerBox{\@sessionDate \\ \@date \\ \@academicDate}
     }
     \clearpage
 }
