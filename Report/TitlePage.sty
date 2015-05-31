@@ -1,0 +1,55 @@
+% Copyright (c) 2015 Benito Palacios Sánchez - All Rights Reserved.
+% Esta obra está licenciada bajo la Licencia Creative Commons Atribución 4.0
+% Internacional. Para ver una copia de esta licencia, visita
+% http://creativecommons.org/licenses/by/4.0/.
+%
+% Layout from: https://tug.org/pracjourn/2008-1/mori/mori.pdf
+% Example code from: http://zoonek.free.fr/LaTeX/LaTeX_samples_title/0.html
+
+\NeedsTeXFormat{LaTeX2e}
+\ProvidesPackage{TitlePage}[2015/05/31 Thesis Title Pages]
+\RequirePackage{eso-pic}            % For background image
+\RequirePackage[T1]{fontenc}        % Output font
+\RequirePackage[latin1]{inputenc}   % Input encoding
+
+% Put the logo as background
+\newcommand\BgImgCenter[1]{%
+    \AddToShipoutPicture*{%
+        \AtPageCenter{%
+            \makebox(0,0){%
+                \includegraphics%
+                [width=0.9\paperwidth]{#1}
+            }
+        }
+    }
+}
+
+% Different box for center text
+\newcommand\topBox[1]{    \vtop{\centering #1} }
+\newcommand\centerBox[1]{ \vbox{\centering #1} }
+\newcommand\bottomBox[1]{ \vbox{\centering #1} }
+
+% Style for the first page
+\newcommand\makeFirstPage{%
+    \thispagestyle{empty} \hspace*{0cm} \vbox to \vsize{%
+        \vspace{20mm}
+        \topBox{\Large \@author}
+        \vfill
+        \centerBox{\Huge \textsc{\@title}}
+        \vspace{5mm}
+        \centerBox{\large \@docType}
+        \vfill
+        \vfill
+        \bottomBox{\@location \\ \@date}
+    }
+    \clearpage
+}
+
+% Define the variables
+\def\date#1{\def\@date{#1}}
+\def\author#1{\def\@author{#1}}
+\def\title#1{\def\@title{#1}}
+\def\location#1{\def\@location{#1}}
+\def\docType#1{\def\@docType{#1}}
+
+\endinput
