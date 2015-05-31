@@ -7,13 +7,13 @@
 % Example code from: http://zoonek.free.fr/LaTeX/LaTeX_samples_title/0.html
 
 \NeedsTeXFormat{LaTeX2e}
-\ProvidesPackage{TitlePage}[2015/05/31 Thesis Title Pages]
+\ProvidesPackage{TitleStyle}[2015/05/31 Thesis Title Pages]
 \RequirePackage{eso-pic}            % For background image
 \RequirePackage[T1]{fontenc}        % Output font
 \RequirePackage[latin1]{inputenc}   % Input encoding
 
 % Put the logo as background
-\newcommand\BgImgCenter[1]{%
+\newcommand\bgimgcenter[1]{%
     \AddToShipoutPicture*{%
         \AtPageCenter{%
             \makebox(0,0){%
@@ -27,10 +27,11 @@
 % Different box for center text
 \newcommand\topBox[1]{    \vtop{\centering #1} }
 \newcommand\centerBox[1]{ \vbox{\centering #1} }
-\newcommand\bottomBox[1]{ \vbox{\centering #1} }
+\newcommand\rightBox[1] { \rlap{\vbox{\raggedright #1}}
+}
 
 % Style for the first page
-\newcommand\makeFirstPage{%
+\newcommand\makefirstpage{%
     \thispagestyle{empty} \hspace*{0cm} \vbox to \vsize{%
         \vspace{20mm}
         \topBox{\Large \@author}
@@ -40,16 +41,58 @@
         \centerBox{\large \@docType}
         \vfill
         \vfill
-        \bottomBox{\@location \\ \@date}
+        \centerBox{\@university \\ \@date}
+    }
+    \clearpage
+}
+
+% Style for the second page
+\newcommand\makesecondpage{%
+    \thispagestyle{empty} \vbox to \vsize{%
+        % Top
+        \vspace{5mm}
+        \topBox{\includegraphics{\@logo}}
+        \vspace{5mm}
+        \centerBox{\Large \textsc{\@university} \\ \@faculty}
+        \hrulefill\par
+        \vspace{5mm}
+        \centerBox{\@course}
+
+        % Center
+        \vfill
+        \centerBox{\huge \textsc{\@title}}
+        \vspace{15mm}
+        \centerBox{\@docType}
+        \vspace{5mm}
+        \centerBox{\Large \@author}
+
+        \vfill
+        \vfill
+        \rightBox{\@tutorType}{}{}
+        \vspace{5mm}
+        \rightBox{\Large \@tutor \dotfill}
+
+        % Bottom
+        \vfill
+        \vfill
+        \centerBox{\@sessionDate \@date \\ \@academicDate}
     }
     \clearpage
 }
 
 % Define the variables
 \def\date#1{\def\@date{#1}}
-\def\author#1{\def\@author{#1}}
 \def\title#1{\def\@title{#1}}
-\def\location#1{\def\@location{#1}}
+\def\author#1{\def\@author{#1}}
+\def\tutorType#1{\def\@tutorType{#1}}
+\def\tutor#1{\def\@tutor{#1}}
 \def\docType#1{\def\@docType{#1}}
+\def\sessionDate#1{\def\@sessionDate{#1}}
+\def\academicDate#1{\def\@academicDate{#1}}
+
+\def\logo#1{\def\@logo{#1}}
+\def\university#1{\def\@university{#1}}
+\def\faculty#1{\def\@faculty{#1}}
+\def\course#1{\def\@course{#1}}
 
 \endinput
