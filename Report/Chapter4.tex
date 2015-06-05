@@ -3,10 +3,22 @@
 % Internacional. Para ver una copia de esta licencia, visita
 % http://creativecommons.org/licenses/by/4.0/.
 
-\chapter{Seguridad por Copyright}
+\chapter{Seguridad y derechos de autor}
+
+A día de hoy uno de las principales preocupaciones de la industria respecto a la difusión de su obra se centra en los derechos de autor.
+Esto es especialmente notable en el mundo de los videojuegos acosado por una piratería continua que causa pérdidas millonarias de dinero\footnote{http://drm.web.unc.edu/games}.
+De este contexto nace la idea del \ac{DRM}.
+Se trata en un mecanismo con el único fin de imposibilitar la distribución no autorizada de contenido.
+Existe mecanismos desde los más sencillos y antiguos como son las claves que vienen impresas en un CD a los más nuevos que incluyen el cifrado del videojuego con datos personales de la cuenta del usuario\footnote{http://www.darthnull.org/2014/10/06/ios-encryption} o una conexión necesaria a los servidores de las compañía.
+Las características comunes de estas técnicas se pueden resumir en los siguientes puntos\footnote{http://es.wikipedia.org/wiki/Gestión_digital_de_derechos}.
 
 \begin{itemize}
-    \item Algunos archivos deben ser protegidos para evitar su difusión.
-    \item Juegos con e-books
-    \item Juegos con sonidos (NDS y iOS).
+    \item Detectar quién accede a cada obra, cuándo y bajo qué condiciones.
+    \item Autorizar o denegar de manera inapelable el acceso a la obra.
+    \item Autorizan el acceso bajo condiciones restrictivas.
 \end{itemize}
+
+Estos mecanismos a nivel general se basan en \textit{software} siendo lo frecuente el cifrado de contenido de forma que solo las \emph{aplicaciones autorizadas} tienen las claves y algoritmos necesarios para acceder a él.
+En otros casos, es el propio sistema operativo quien se encarga de esta tarea, esto se encuentra generalmente en entornos cerrados donde no es posible ejecutar aplicaciones no autorizadas para acceder a la memoria RAM donde se encontraría la aplicación.\footnote{Este es el caso del sistema operativo iOS donde el cifrado de la aplicación la realiza el \textit{kernel}. Una vez se pudo ejecutar aplicaciones no firmadas, fue fácil descifrar el contenido de terceras aplicaciones leyendo la memoria RAM.}.
+
+El principal problema es la posibilidad de aplicar métodos de \emph{ingeniería inversa} sobre el \textit{software} autorizado. Una vez conocido cómo una aplicación accede al contenido protegido, nada imposibilitar crear una versión que también lo permita.
