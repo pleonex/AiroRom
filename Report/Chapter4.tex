@@ -42,6 +42,10 @@ En cambio, debido a una gran falta de seguridad en su distribución digital, en p
 
 El libro digital se encuentra codificado en el archivo \textit{hd05\_es.sdat} dentro de la carpeta principal en formato \emph{PSAR}.
 Se trata de un fichero que contiene archivos comprimidos.
-La compresión en este caso fue obvia pues en la posición \verb!0x0C! se encuentra en ASCII la cadena de caracteres \verb!zlib!.
+La compresión en este caso fue obvia pues en la posición \verb!0x0C! se encuentra en ASCII la cadena de caracteres \verb!zlib! (figura~\ref{fig:c4-psar}).
 Además el fichero no presenta dificultad en su descifrado pues se basa como en la mayoría de su tipo en incluir después de la cabecera todas las posiciones y tamaños de los archivos que incluye.
 En el repositorio de este trabajo se incluye un programa desarrollado para su descompresión.\footnote{\url{https://github.com/pleonex/Ninokuni/tree/master/Programs/PS3/NinoDecompiler}}.
+
+\includefigure{fig:c4-psar}%
+{Primeros \textit{bytes} del fichero \emph{PSAR}.}%
+{imgs/C4-PSAR.png}

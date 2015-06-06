@@ -35,4 +35,13 @@
 \else\hbox{}\thispagestyle{empty}\newpage
 \if@twocolumn\hbox{}\newpage\fi\fi\fi}
 
+\newcommand{\includefigure}[3]{%
+    \begin{figure}
+        \centering
+        \includegraphics{#3}
+        \caption{#2}
+        \label{#1}
+    \end{figure}
+}
+
 \endinput
