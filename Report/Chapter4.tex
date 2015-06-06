@@ -6,11 +6,11 @@
 \chapter{Seguridad y derechos de autor}
 
 A día de hoy uno de las principales preocupaciones de la industria respecto a la difusión de su obra se centra en los derechos de autor.
-Esto es especialmente notable en el mundo de los videojuegos acosado por una piratería continua que causa pérdidas millonarias de dinero\footnote{http://drm.web.unc.edu/games}.
+Esto es especialmente notable en el mundo de los videojuegos acosado por una piratería continua que causa pérdidas millonarias de dinero\footnote{\url{http://drm.web.unc.edu/games}}.
 De este contexto nace la idea del \ac{DRM}.
 Se trata en un mecanismo con el único fin de imposibilitar la distribución no autorizada de contenido.
-Existe mecanismos desde los más sencillos y antiguos como son las claves que vienen impresas en un CD a los más nuevos que incluyen el cifrado del videojuego con datos personales de la cuenta del usuario\footnote{http://www.darthnull.org/2014/10/06/ios-encryption} o una conexión necesaria a los servidores de las compañía.
-Las características comunes de estas técnicas se pueden resumir en los siguientes puntos\footnote{http://es.wikipedia.org/wiki/Gestión_digital_de_derechos}.
+Existe mecanismos desde los más sencillos y antiguos como son las claves que vienen impresas en un CD a los más nuevos que incluyen el cifrado del videojuego con datos personales de la cuenta del usuario\footnote{\url{http://www.darthnull.org/2014/10/06/ios-encryption}} o una conexión necesaria a los servidores de las compañía.
+Las características comunes de estas técnicas se pueden resumir en los siguientes puntos\footnote{\url{http://es.wikipedia.org/wiki/Gestión_digital_de_derechos}}.
 
 \begin{itemize}
     \item Detectar quién accede a cada obra, cuándo y bajo qué condiciones.
@@ -22,3 +22,26 @@ Estos mecanismos a nivel general se basan en \textit{software} siendo lo frecuen
 En otros casos, es el propio sistema operativo quien se encarga de esta tarea, esto se encuentra generalmente en entornos cerrados donde no es posible ejecutar aplicaciones no autorizadas para acceder a la memoria RAM donde se encontraría la aplicación.\footnote{Este es el caso del sistema operativo iOS donde el cifrado de la aplicación la realiza el \textit{kernel}. Una vez se pudo ejecutar aplicaciones no firmadas, fue fácil descifrar el contenido de terceras aplicaciones leyendo la memoria RAM.}.
 
 El principal problema es la posibilidad de aplicar métodos de \emph{ingeniería inversa} sobre el \textit{software} autorizado. Una vez conocido cómo una aplicación accede al contenido protegido, nada imposibilitar crear una versión que también lo permita.
+
+\textbf{TODO INTRO}
+
+En las siguientes secciones se analizará mecanismos de seguridad que diferentes juegos aplican sobre materiales con derechos de autor.
+Se analizará en primer lugar dos videojuegos que incluyen uno o más libros electrónicos y a continuación otros que incluyen canciones.
+El resultado en todos estos casos ha sido la carencia de cualquier mecanismo eficaz.
+
+\section{Libros electrónicos}
+\paragraph{Ninokuni y la Ira de la Bruja Blanca}~\\
+El primero juego a tratar será \textit{Ninokuni y La Ira de la Bruja Blanca} desarrollado por \textit{Level-5} para \textit{Play Station 3} en el año 2011.
+Se trata de una versión muy similar a la que salió dos años antes para la \textit{Nintendo DS} que incluía un libro físico imprescindible para el jugador.
+
+Debido a los problemas de traducción y distribución de este libro, ese juego no salió de Japón.
+En el caso de esta versión para \textit{Play Station 3} y aprovechando las capacidades de una pantalla grande el libro de tradujo y se incluyó en el juego pudiendo acceder a él mediante un visor especial accesible desde un menú.
+En la edición coleccionasta del juego si se daba una copia física en inglés.
+El denominado \textit{Vademécum del mago} en la primera versión del juego nunca se llego a escanear siendo imposible de encontrarlo en Internet.
+En cambio, debido a una gran falta de seguridad en su distribución digital, en pocos días se pudo acceder a los archivos del juego y realizar una sencilla conversión a PDF.
+
+El libro digital se encuentra codificado en el archivo \textit{hd05\_es.sdat} dentro de la carpeta principal en formato \emph{PSAR}.
+Se trata de un fichero que contiene archivos comprimidos.
+La compresión en este caso fue obvia pues en la posición \verb!0x0C! se encuentra en ASCII la cadena de caracteres \verb!zlib!.
+Además el fichero no presenta dificultad en su descifrado pues se basa como en la mayoría de su tipo en incluir después de la cabecera todas las posiciones y tamaños de los archivos que incluye.
+En el repositorio de este trabajo se incluye un programa desarrollado para su descompresión.\footnote{\url{https://github.com/pleonex/Ninokuni/tree/master/Programs/PS3/NinoDecompiler}}.
