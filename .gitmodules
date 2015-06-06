@@ -13,3 +13,6 @@
 [submodule "Games/libgame"]
 	path = Games/libgame
 	url = git@github.com:pleonex/libgame.git
+[submodule "Games/ninokuni"]
+	path = Games/ninokuni
+	url = https://github.com/pleonex/ninokuni
