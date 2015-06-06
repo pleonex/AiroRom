@@ -35,12 +35,12 @@ El primero juego a tratar será \textit{Ninokuni y La Ira de la Bruja Blanca} des
 Se trata de una versión muy similar a la que salió dos años antes para la \textit{Nintendo DS} que incluía un libro físico imprescindible para el jugador.
 
 Debido a los problemas de traducción y distribución de este libro, ese juego no salió de Japón.
-En el caso de esta versión para \textit{Play Station 3} y aprovechando las capacidades de una pantalla grande el libro de tradujo y se incluyó en el juego pudiendo acceder a él mediante un visor especial accesible desde un menú.
+En el caso de esta versión para \ac{PS3} y aprovechando las capacidades de una pantalla grande el libro de tradujo y se incluyó en el juego pudiendo acceder a él mediante un visor especial accesible desde un menú.
 En la edición coleccionasta del juego si se daba una copia física en inglés.
 El denominado \textit{Vademécum del mago} en la primera versión del juego nunca se llego a escanear siendo imposible de encontrarlo en Internet.
 En cambio, debido a una gran falta de seguridad en su distribución digital, en pocos días se pudo acceder a los archivos del juego y realizar una sencilla conversión a PDF.
 
-El libro digital se encuentra codificado en el archivo \textit{hd05\_es.sdat} dentro de la carpeta principal en formato \emph{PSAR}.
+El libro digital se encuentra codificado en el archivo \textit{hd05\_es.sdat} dentro de la carpeta principal en formato \emph{PSAR} (común en juegos de \ac{PS3}).
 Se trata de un fichero que contiene archivos comprimidos.
 La compresión en este caso fue obvia pues en la posición \verb!0x0C! se encuentra en ASCII la cadena de caracteres \verb!zlib! (figura~\ref{fig:c4-psar}).
 Además el fichero no presenta dificultad en su descifrado pues se basa como en la mayoría de su tipo en incluir después de la cabecera todas las posiciones y tamaños de los archivos que incluye.
@@ -49,3 +49,6 @@ En el repositorio de este trabajo se incluye un programa desarrollado para su de
 \includefigure{fig:c4-psar}%
 {Primeros \textit{bytes} del fichero \emph{PSAR}.}%
 {imgs/C4-PSAR.png}
+
+Descomprimiendo el fichero se encuentran nueve archivos de los cuales destaca uno de 438 MB \textit{data/book/es/BigData/gdv.dat}.
+Su formato en este caso no es frecuente pero tampoco difícil de analizar pues yendo extrayendo un bloque de datos, sistemas operativos con reconocimiento automático de formato detectan que es \emph{JPEG}.

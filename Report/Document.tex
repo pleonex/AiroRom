@@ -14,7 +14,7 @@
 \usepackage{parskip}            % For paragraph separation
 \setlength{\parindent}{15pt}    % Paragraph indentation
 \widowpenalties 1 10000         % No page break in inside pragraph
-\raggedbottom
+\raggedbottom{}
 
 % Font
 \usepackage[T1]{fontenc}        % Output font
@@ -28,6 +28,7 @@
 \usepackage{indentfirst}        % Indent first paragraph too
 \usepackage{hyperref}           % For intenal and external links
 \usepackage[printonlyused,withpage,footnote]{acronym} % List of acronyms
+\usepackage[hypcap]{caption}    % For captions
 
 % My packages
 \usepackage{TitleStyle}
@@ -44,7 +45,7 @@
 \begin{document}
     \pagestyle{fancy}
 
-    \fncyfront
+    \fncyfront{}
     \frontmatter
     \input{TitlePage}
     \input{Abstract}
@@ -53,8 +54,8 @@
     \selectlanguage{spanish}
     \tableofcontents
 
-    \fncymain
-    \mainmatter
+    \fncymain{}
+    \mainmatter{}
     \input{Chapter1}
     \input{Chapter2}
     \input{Chapter3}
@@ -67,7 +68,7 @@
     \appendix
     \input{Appendix1}
 
-    \backmatter
+    \backmatter{}
     \input{Bibliography}
     \input{Acronyms}
 
