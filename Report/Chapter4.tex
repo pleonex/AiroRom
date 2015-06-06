@@ -43,8 +43,34 @@ En cambio, debido a una gran falta de seguridad en su distribución digital, en p
 El libro digital se encuentra codificado en el archivo \textit{hd05\_es.sdat} dentro de la carpeta principal en formato \emph{PSAR} (común en juegos de \ac{PS3}).
 Se trata de un fichero que contiene archivos comprimidos.
 La compresión en este caso fue obvia pues en la posición \verb!0x0C! se encuentra en ASCII la cadena de caracteres \verb!zlib! (figura~\ref{fig:c4-psar}).
-Además el fichero no presenta dificultad en su descifrado pues se basa como en la mayoría de su tipo en incluir después de la cabecera todas las posiciones y tamaños de los archivos que incluye.
+Además el fichero no presenta dificultad en su descifrado pues se basa como en la mayoría de su tipo en incluir después de la cabecera todas las posiciones y tamaños de los archivos que incluye (tabla~\ref{tab:c4-psar}).
 En el repositorio de este trabajo se incluye un programa desarrollado para su descompresión.\footnote{\url{https://github.com/pleonex/Ninokuni/tree/master/Programs/PS3/NinoDecompiler}}.
+
+\ctable[
+    caption = Especificación de formato PSAR,
+    label   = tab:c4-psar,
+    pos     = h
+]{ccl}{
+    \tnote[a]{\textit{File Info Table}. Tabla con información genérica de los archivos.}
+    \tnote[b] {Los archivos pueden estar comprimidos.}
+    \tnote[c] {El primer archivo con código MD5 nulo contiene la lista de nombres y rutas de ficheros.}
+}{                                                                      \FL
+    Posición      & Tamaño        & Descripción                         \ML
+    \textsf{0x00} & \textsf{0x04} & Identificador: \textsf{PSAR}        \NN
+    \textsf{0x04} & \textsf{0x04} & Versión: \textsf{0x00010004}        \NN
+    \textsf{0x08} & \textsf{0x04} & Compresión: \textsf{zlib}           \NN
+    \textsf{0x0C} & \textsf{0x04} & Posición de los datos               \NN
+    \textsf{0x10} & \textsf{0x04} & Tamaño del FIT\tmark[a]             \NN
+    \textsf{0x14} & \textsf{0x04} & Número de archivos                  \NN
+    \textsf{0x18} & \textsf{0x04} & Reservado                           \NN
+    \textsf{0x1C} & \textsf{0x04} & Reservado                           \ML
+    \multicolumn{3}{c}{FIT}                                             \ML
+    \textsf{0x00} & \textsf{0x10} & Código MD5 del nombre del fichero   \NN
+    \textsf{0x10} & \textsf{0x04} & Desconocido                         \NN
+    \textsf{0x14} & \textsf{0x05} & Posición de los datos               \NN
+    \textsf{0x19} & \textsf{0x05} & Tamaño de los datos                 \ML
+    \multicolumn{3}{c}{Archivos\tmark[b]\tmark[c]}                       \LL
+}
 
 \includefigure{fig:c4-psar}%
 {Primeros \textit{bytes} del fichero \emph{PSAR}.}%
