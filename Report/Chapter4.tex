@@ -42,7 +42,7 @@ En cambio, debido a una gran falta de seguridad en su distribución digital, en p
 
 El libro digital se encuentra codificado en el archivo \textit{hd05\_es.sdat} dentro de la carpeta principal en formato \emph{PSAR} (común en juegos de \ac{PS3}).
 Se trata de un fichero que contiene archivos comprimidos.
-La compresión en este caso fue obvia pues en la posición \verb!0x0C! se encuentra en ASCII la cadena de caracteres \verb!zlib! (figura~\ref{fig:c4-psar}).
+La compresión en este caso fue obvia pues en la posición \textsf{0x0C} se encuentra en ASCII la cadena de caracteres \textsf{zlib} (figura~\ref{fig:c4-psar}).
 Además el fichero no presenta dificultad en su descifrado pues se basa como en la mayoría de su tipo en incluir después de la cabecera todas las posiciones y tamaños de los archivos que incluye (tabla~\ref{tab:c4-psar}).
 En el repositorio de este trabajo se incluye un programa desarrollado para su descompresión.\footnote{\url{https://github.com/pleonex/Ninokuni/tree/master/Programs/PS3/NinoDecompiler}}.
 
@@ -64,12 +64,12 @@ En el repositorio de este trabajo se incluye un programa desarrollado para su de
     \textsf{0x14} & \textsf{0x04} & Número de archivos                  \NN
     \textsf{0x18} & \textsf{0x04} & Reservado                           \NN
     \textsf{0x1C} & \textsf{0x04} & Reservado                           \ML
-    \multicolumn{3}{c}{FIT}                                             \ML
+    \multicolumn{3}{c}{FIT}                                             \NN
     \textsf{0x00} & \textsf{0x10} & Código MD5 del nombre del fichero   \NN
     \textsf{0x10} & \textsf{0x04} & Desconocido                         \NN
     \textsf{0x14} & \textsf{0x05} & Posición de los datos               \NN
     \textsf{0x19} & \textsf{0x05} & Tamaño de los datos                 \ML
-    \multicolumn{3}{c}{Archivos\tmark[b]\tmark[c]}                       \LL
+    \multicolumn{3}{c}{Archivos\tmark[b]\tmark[c]}                      \LL
 }
 
 \includefigure{fig:c4-psar}%
@@ -77,4 +77,56 @@ En el repositorio de este trabajo se incluye un programa desarrollado para su de
 {imgs/C4-PSAR.png}
 
 Descomprimiendo el fichero se encuentran nueve archivos de los cuales destaca uno de 438 MB \textit{data/book/es/BigData/gdv.dat}.
-Su formato en este caso no es frecuente pero tampoco difícil de analizar pues yendo extrayendo un bloque de datos, sistemas operativos con reconocimiento automático de formato detectan que es \emph{JPEG}.
+Por su tamaño se intuye su contenido.
+Su formato de nuevo fácil de analizar pues tras unas largas cabeceras, al inicio de los datos hay una cabecera con las siglas \emph{JPEG}.
+A continuación en la figura~\ref{tab:c4-gvd} se muestra la especificación de este tipo de fichero que contiene cada una de las hojas del libro electrónico.
+
+
+\ctable[
+    caption = Especificación de formato GVD,
+    label   = tab:c4-gvd,
+    pos     = h
+]{ccl}{
+    \tnote[a]{Hay un bloque por página.}
+    \tnote[b]{Relativo al inicio del bloque de datos.}
+    \tnote[c]{La codificación del nombre es ASCII.}
+    \tnote[d]{Hay un bloque por cada calidad.}
+}{                                                                          \FL
+    Posición      & Tamaño        & Descripción                             \ML
+    \textsf{0x00} & \textsf{0x08} & Identificador: \textsf{TGDT0100}        \NN
+    \textsf{0x08} & \textsf{0x04} & Número de páginas                       \NN
+    \textsf{0x0C} & \textsf{0x04} & Posición de los datos                   \ML
+    \multicolumn{3}{c}{Bloques GVD\tmark[a]}                                \NN
+    \textsf{0x00} & \textsf{0x04} & Posición del nombre\tmark[b]\tmark[c]   \NN
+    \textsf{0x04} & \textsf{0x04} & Tamaño del nombre                       \NN
+    \textsf{0x08} & \textsf{0x04} & Posición de los datos\tmark[b]          \NN
+    \textsf{0x0C} & \textsf{0x04} & Tamaño de los datos                     \ML
+    \multicolumn{3}{c}{Información de la página}                            \NN
+    \textsf{0x00} & \textsf{0x04} & Identificador bloque: \textsf{GVEW0100} \NN
+    \textsf{0x04} & \textsf{0x04} & Identificador imagen: \textsf{JPEG0100} \NN
+    \textsf{0x08} & \textsf{0x04} & Ancho de la imagen con más calidad      \NN
+    \textsf{0x0C} & \textsf{0x04} & Alto de la imagen con más calidad       \NN
+    \textsf{0x10} & \textsf{0x04} & Identificador: \textsf{BLK\_}           \NN
+    \textsf{0x14} & \textsf{0x04} & Tamaño del bloque                       \NN
+    \textsf{0x18} & \textsf{0x04} & ID                                      \NN
+    \textsf{0x1C} & \textsf{0x04} & Reservado                               \NN
+    \textsf{0x20} & \textsf{0x04} & Constante \textsf{0x20}                 \NN
+    \textsf{0x24} & \textsf{0x04} & Constante \textsf{0x04}                 \ML
+    \multicolumn{3}{c}{Datos de la página\tmark[d]}                         \NN
+    \textsf{0x00} & \textsf{0x04} & Posición X de la imagen en la página    \NN
+    \textsf{0x04} & \textsf{0x04} & Posición Y de la imagen en la página    \NN
+    \textsf{0x08} & \textsf{0x04} & Calidad                                 \NN
+    \textsf{0x0C} & \textsf{0x04} & Tamaño de los datos                     \NN
+    \textsf{0x10} & \textsf{0x04} & Desconocido                             \NN
+    \textsf{0x14} & \textsf{0x04} & Desconocido                             \NN
+    \textsf{0x18} & \textsf{0x04} & Ancho                                   \NN
+    \textsf{0x1C} & \textsf{0x04} & Alto                                    \NN
+    \textsf{0x20} & Variable      & Datos                                   \LL
+}
+
+Como se aprecia, una página se compone de diferentes imágenes \textsf{JPEG} concatenadas.
+Tras este análisis, desde el primer fichero directamente extraído de la carpeta del juego en formato \textsf{PSAR} hasta este que contiene cada una de las páginas en formato \textsf{GVD} no se ha apreciado ningún mecanismo que intente proteger o dificultar la tarea de extraer cada una de las páginas.
+Incluso los formatos de las propias imágenes son estándar.
+
+Cabe destacar también, que la \ac{PS3} provee de mecanismos nativos para cifrar archivos que sí se usa para proteger el resto de datos del juego como imágenes y textos (archivo \textit{hs06\_es.adat.sdat}).
+Este formatos con extensión \textsf{sdat} y cabecera \textsf{NPD} usa las claves internas y mecanismos internos de cifrado de la consola que asegura su confidencialidad\footnote{Ha día de hoy ya se ha podido romper este mecanismo. \url{https://github.com/Hykem/make_npdata}}.
