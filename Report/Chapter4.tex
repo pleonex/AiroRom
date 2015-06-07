@@ -56,6 +56,7 @@ En el repositorio de este trabajo se incluye un programa desarrollado para su de
     \tnote[c] {El primer archivo con código MD5 nulo contiene la lista de nombres y rutas de ficheros.}
 }{                                                                      \FL
     Posición      & Tamaño        & Descripción                         \ML
+    \multicolumn{3}{c}{Cabecera}                                        \NN
     \textsf{0x00} & \textsf{0x04} & Identificador: \textsf{PSAR}        \NN
     \textsf{0x04} & \textsf{0x04} & Versión: \textsf{0x00010004}        \NN
     \textsf{0x08} & \textsf{0x04} & Compresión: \textsf{zlib}           \NN
@@ -91,8 +92,11 @@ A continuación en la figura~\ref{tab:c4-gvd} se muestra la especificación de est
     \tnote[b]{Relativo al inicio del bloque de datos.}
     \tnote[c]{La codificación del nombre es ASCII.}
     \tnote[d]{Hay un bloque por cada calidad.}
+    \tnote[e]{Los datos pueden estar comprimidos en \textsf{GVMP}, en ese
+    caso el primer bloque será la imagen \textsf{JPEG}.}
 }{                                                                          \FL
     Posición      & Tamaño        & Descripción                             \ML
+    \multicolumn{3}{c}{Cabecera}                                            \NN
     \textsf{0x00} & \textsf{0x08} & Identificador: \textsf{TGDT0100}        \NN
     \textsf{0x08} & \textsf{0x04} & Número de páginas                       \NN
     \textsf{0x0C} & \textsf{0x04} & Posición de los datos                   \ML
@@ -121,7 +125,12 @@ A continuación en la figura~\ref{tab:c4-gvd} se muestra la especificación de est
     \textsf{0x14} & \textsf{0x04} & Desconocido                             \NN
     \textsf{0x18} & \textsf{0x04} & Ancho                                   \NN
     \textsf{0x1C} & \textsf{0x04} & Alto                                    \NN
-    \textsf{0x20} & Variable      & Datos                                   \LL
+    \textsf{0x20} & Variable      & Imagen \textsf{JPEG}\tmark[e]           \ML
+    \multicolumn{3}{c}{GVMP}                                                \NN
+    \textsf{0x00} & \textsf{0x04} & Identificador: \textsf{GVMP}            \NN
+    \textsf{0x04} & \textsf{0x04} & Número de bloques.                      \NN
+    \textsf{0x08} & \textsf{0x04} & Posición de los datos del primer bloque \NN
+    \textsf{0x0C} & \textsf{0x04} & Tamaño de los datos del primer bloque   \LL
 }
 
 Como se aprecia, una página se compone de diferentes imágenes \textsf{JPEG} concatenadas.
@@ -130,3 +139,18 @@ Incluso los formatos de las propias imágenes son estándar.
 
 Cabe destacar también, que la \ac{PS3} provee de mecanismos nativos para cifrar archivos que sí se usa para proteger el resto de datos del juego como imágenes y textos (archivo \textit{hs06\_es.adat.sdat}).
 Este formatos con extensión \textsf{sdat} y cabecera \textsf{NPD} usa las claves internas y mecanismos internos de cifrado de la consola que asegura su confidencialidad\footnote{Ha día de hoy ya se ha podido romper este mecanismo. \url{https://github.com/Hykem/make_npdata}}.
+
+
+\section{Bandas sonoras}
+\begin{itemize}
+    \item Juegos de NDS con música
+    \item Música en Ninokuni / Layton
+    \item Música del juego de iOS
+\end{itemize}
+
+
+\section{Vídeos}
+\begin{itemize}
+    \item Vídeos en PS3
+    \item Vídeos en NDS
+\end{itemize}
