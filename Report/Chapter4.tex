@@ -176,9 +176,28 @@ Las música de los videojuegos es una de sus partes más importantes.
 De ahí que se llegue a vender de forma a parte siendo este el objetivo de muchas compañías\footnote{Incluso vídeos de partidas de videojuegos pueden ser censurados en Youtube por derechos de autor. \url{http://www.develop-online.net/news/we-are-not-evil-trolls-indmusic-responds-to-youtube-copyright-anger/0187578}}.
 Además existe el género \textit{musical} en el cual canciones recientes y con derechos de autor se pueden incluir dentro del juego.
 
+La discusión de este tipo de juegos caería sobre si al pagar el juego se está pagando también las canciones.
+En ese caso, ¿se paga solo poder usarlas durante el juego?, ¿para escucharlas hay que tener la consola encendida con el juego encendido?, ¿es legal extraer el audio para escucharlo desde otro dispositivo?.
+De ser así, ¿por qué no se facilita un código y descargar esta música desde páginas oficiales?, ¿por qué se venden ediciones especiales con un CD de audio?.
+
 En esta sección se pretende analizar mecanismos de seguridad sobre los archivos musicales del juego. En primer luego se analizará el género musical para pasar a ver casos donde la banda sonora se ha vendido de forma externa al juego.
 
-\subsection{Elite Beat Agents y Osu! Tatakae! Ouendan!}
+\subsection{Osu! Tatakae! Ouendan! y Elite Beat Agents}
+\textit{Osu! Tatakae! Ouendan!} se trata de un juego japonés para la \textit{Nintendo DS} que salió en 2005.
+En occidente salió también una segunda versión que usaba el mismo motor un año después, \textit{Elite Beat Agents}.
+Se trata de dos juegos musicales donde hay que seguir el ritmo de canciones conocidas de los años 80 y 90 con el lápiz.
+Internamente los dos juegos son idénticos cambiando solo el contenido pero no la estructura.
+
+Las canciones están comprimidas dentro del archivo de sonido estándar en \ac{NDS}: \textsf{SDAT}.
+El formato, posiblemente soportado nativamente por la \ac{API} de la consola, permite almacenar sonido tanto sintetizado parecido a \ac{MIDI} como digitalizado.
+Para este último se permite varias codificaciones: \ac{PCM} de 8 bits, \ac{PCM} de 16 bits y \ac{IMA-ADPCM} siendo esta la que más calidad provee y el que se usa en estos juegos (figura~\ref{fig:c4-elite}).
+
+\includefigure{fig:c4-elite}%
+{Archivos comprimidos en \textsf{SDAT} y codificados con \ac{IMA-ADPCM} visto con Tinke.}%
+{imgs/C4-Elite.png}
+
+Esto no provee ninguna protección pues no se usa ningún tipo de cifrado y se usa una codificación y formato estándar de la consola y muy estudiado.
+Sin embargo, por facilidades técnicas las canciones vienen en fragmentos y la dificultad recae en saber el orden de los mismos para recomponerla.
 
 \subsection{Saga Guitar Hero}
 
