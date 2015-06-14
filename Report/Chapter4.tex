@@ -5,7 +5,7 @@
 
 \chapter{Contenido con derechos de autor}
 
-A día de hoy uno de las principales preocupaciones de la industria respecto a la difusión de su obra se centra en los derechos de autor.
+A día de hoy una de las principales preocupaciones de la industria respecto a la difusión de su obra se centra en los derechos de autor.
 Esto es especialmente notable en el mundo de los videojuegos acosado por una piratería continua que causa pérdidas millonarias de dinero\footnote{\url{http://drm.web.unc.edu/games}}.
 De este contexto nace la idea del \ac{DRM}.
 Se trata en un mecanismo con el único fin de imposibilitar la distribución no autorizada de contenido.
@@ -15,19 +15,35 @@ Las características comunes de estas técnicas se pueden resumir en los siguiente
 \begin{itemize}
     \item Detectar quién accede a cada obra, cuándo y bajo qué condiciones.
     \item Autorizar o denegar de manera inapelable el acceso a la obra.
-    \item Autorizan el acceso bajo condiciones restrictivas.
+    \item Autorizar el acceso bajo condiciones restrictivas.
 \end{itemize}
 
 Estos mecanismos a nivel general se basan en \textit{software} siendo lo frecuente el cifrado de contenido de forma que solo las \emph{aplicaciones autorizadas} tienen las claves y algoritmos necesarios para acceder a él.
 En otros casos, es el propio sistema operativo quien se encarga de esta tarea, esto se encuentra generalmente en entornos cerrados donde no es posible ejecutar aplicaciones no autorizadas para acceder a la memoria RAM donde se encontraría la aplicación.\footnote{Este es el caso del sistema operativo iOS donde el cifrado de la aplicación la realiza el \textit{kernel}. Una vez se pudo ejecutar aplicaciones no firmadas, fue fácil descifrar el contenido de terceras aplicaciones leyendo la memoria RAM.}.
 
-El principal problema es la posibilidad de aplicar métodos de \emph{ingeniería inversa} sobre el \textit{software} autorizado. Una vez conocido cómo una aplicación accede al contenido protegido, nada imposibilitar crear una versión que también lo permita.
+El principal problema es la posibilidad de aplicar métodos de \emph{ingeniería inversa} sobre el \textit{software} autorizado.
+Una vez conocido cómo una aplicación accede al contenido protegido, nada imposibilitar crear una versión que también lo permita.
+De aquí vienen la necesidad de trabajar sobre entornos cerrados cada vez más frecuentes en videoconsolas y móviles.
+Una alternativa sería implementar el algoritmo en \textit{hardware}.
 
-\textbf{TODO INTRO}
+Aun encontrando un algoritmo eficiente en términos de protección y sin sobrecarga a la hora de procesado, una vulnerabilidad inevitable es el denominado \textit{agujero analógico}.
+Este consiste en reconvertir un medio digital en analógico, perdiendo los mecanismos DRM.
+Por ejemplo: grabar música con un micrófono que se está reproduciendo, hacer una captura de pantalla a una imagen, grabar la pantalla o copiar a mano o incluso escanear un libro.
+
+Además, se da el problema de que el contenido podría quedar ligado al dispositivo de una compañía, como el caso de los iPod donde solo se admitía música con el mecanismo DRM de Apple\footnote{\url{http://arstechnica.com/tech-policy/2014/10/apple-will-face-350m-trial-over-ipod-drm/}}.
+
+Por motivos como estos y por todas las libertades de las que se le priva al usuario al aplicar este mecanismo existen numeros detractores.
+Ejemplos son la \acl{EFF} o incluso desarrolladoras famosas como \textit{CD Projekt Red}\footnote{\url{http://www.elotrolado.net/noticia_cd-projekt-red-sobre-el-drm-no-queremos-asaltar-a-nadie_25083}}.
+Numeros problemas se han dado en el mundo de los videojuegos que han llevado a esta situación de división.
+Los más notables se dan en consolas como \acl{PS3} y XBox donde para algunos juegos es necesaria una conexión con un servidor siempre que se quiere comenzar un juego (denominados \url{https://en.wikipedia.org/wiki/Always-on_DRM}{Always-on DRM}).
+Esto priva al usuario de la posibilidad de jugar sin tener una conexión a Internet (casos se irse de vacaciones) o de casos donde se caen los servidores de la compañía.
+
+Se trata de un bucle, pues al aumentar la piratería se crean medidas más restrictivas como quitar la posibilidad de comprar juegos de segunda mano en Play Station 4 o Xbox One, lo que desagrada al usuario e intenta buscar vías más asequibles que acaban fomentando la piratería. 
 
 En las siguientes secciones se analizará mecanismos de seguridad que diferentes juegos aplican sobre materiales con derechos de autor.
 Se analizará en primer lugar dos videojuegos que incluyen uno o más libros electrónicos y a continuación otros que incluyen canciones.
-El resultado en todos estos casos ha sido la carencia de cualquier mecanismo eficaz.
+El resultado en todos estos casos ha sido la carencia de cualquier mecanismo a la hora de proteger los contenidos, excepto en el material en formato de vídeo descrito en la última sección.
+También destaca la distribución de material adicional e imprescindible para el juego como el caso de un libro físico en \textit{Ni no kuni} para \acl{NDS} o \textit{hardware} en la saga \textit{Guitar Hero: On Tour}.
 
 \section{Libros electrónicos}
 \subsection{Ninokuni y la Ira de la Bruja Blanca}
@@ -38,6 +54,7 @@ Debido a los problemas de traducción y distribución de este libro, ese juego no 
 En el caso de esta versión para \ac{PS3} y aprovechando las capacidades de una pantalla grande el libro de tradujo y se incluyó en el juego pudiendo acceder a él mediante un visor especial accesible desde un menú.
 En la edición coleccionasta del juego si se daba una copia física en inglés.
 El denominado \textit{Vademécum del mago} en la primera versión del juego nunca se llego a escanear siendo imposible de encontrarlo en Internet.
+Al no encontrase disponible en Internet
 En cambio, debido a una gran falta de seguridad en su distribución digital, en pocos días se pudo acceder a los archivos del juego y realizar una sencilla conversión a PDF.
 
 El libro digital se encuentra codificado en el archivo \textit{hd05\_es.sdat} dentro de la carpeta principal en formato \emph{PSAR} (común en juegos de \ac{PS3}).
