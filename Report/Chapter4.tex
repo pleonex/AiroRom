@@ -44,7 +44,7 @@ El libro digital se encuentra codificado en el archivo \textit{hd05\_es.sdat} de
 Se trata de un fichero que contiene archivos comprimidos.
 La compresión en este caso fue obvia pues en la posición \textsf{0x08} se encuentra en ASCII la cadena de caracteres \textsf{zlib} (figura~\ref{fig:c4-psar}).
 Además el fichero no presenta dificultad en su descifrado pues se basa como en la mayoría de su tipo en incluir después de la cabecera todas las posiciones y tamaños de los archivos que incluye (tabla~\ref{tab:c4-psar}).
-En el repositorio de este trabajo se incluye un programa desarrollado para su descompresión\footnote{\url{https://github.com/pleonex/Ninokuni/tree/master/Programs/PS3/NinoDecompiler}}.
+En el \href{https://github.com/pleonex/Ninokuni/tree/master/Programs/PS3/NinoDecompiler}{repositorio} de este trabajo se incluye un programa desarrollado para su descompresión.
 
 \ctable[
     caption = Especificación de formato PSAR,
@@ -137,7 +137,7 @@ Tras este análisis, desde el primer fichero directamente extraído de la carpeta 
 Incluso los formatos de las propias imágenes son estándar.
 
 Cabe destacar también, que la \ac{PS3} provee de mecanismos nativos para cifrar archivos que sí se usa para proteger el resto de datos del juego como imágenes y textos (archivo \textit{hs06\_es.adat.sdat}).
-Este formatos con extensión \textsf{sdat} y cabecera \textsf{NPD} usa las claves internas y mecanismos internos de cifrado de la consola que asegura su confidencialidad\footnote{A día de hoy ya se ha podido romper este mecanismo. \url{https://github.com/Hykem/make_npdata}}.
+Este formatos con extensión \textsf{sdat} y cabecera \textsf{NPD} usa las claves internas y mecanismos internos de cifrado de la consola que asegura su confidencialidad\footnote{A día de hoy ya se ha podido romper este mecanismo:  \href{https://github.com/Hykem/make_npdata}{make\_npdata}.}.
 
 \subsection{100 Classic Book Collection}
 El segundo juego que se ha analizado para comprobar su seguridad en cuanto a libros electrónicos ha sido \textit{100 Classic Book Collection}.
@@ -311,8 +311,24 @@ Sin embargo, al igual que pasó con los juegos anteriormente descritos, la seguri
 En este caso, si se cuenta con un móvil con acceso al sistema de archivos (\textit{jailbreak} en el caso de iOS) y se accede a la carpeta de la aplicación se puede encontrar toda la banda sonara en formato \textsc{WAV}.
 
 \section{Vídeos}
-\textbf{TODO: Intro}
+Hoy en día y cada vez más, las videoconsolas tienen más potencia y resolución.
+Tal punto es, que muchas de ellas son más potentes que los computadores de la época.
+Esto ha permitido introducir escenas tanto generadas por ordenador como de anime en los videojuegos.
+Muchas de ellas se han llegado a considerar películas participando grandes estudios de animación como el caso de \textit{Studio Ghibli} en \textit{Ni no kuni}.
+
+Si bien de nuevo está presente el problema del agujero analógico, en algunos casos se ha aprovechado la creación de una codificación propia para la consola para proteger estos contenidos.
 
 \subsection{\acl{PS3}}
+En esta consola, la protección de muchos archivos se confió en la imposibilidad de descifrar archivos con una clave que sólo se conocía por la consola como se discutió con los libros electrónicos.
+
+El formato estándar tiene extensión \textsc{pam} y no es más que una codificación \textsc{MPEG} con una cabecera de 1000 bytes prescindible para su decodificación.
+En este \href{https://github.com/pleonex/Ninokuni/tree/master/Programs/PS3/pam2mpg}{repositorio} se desarrolló un programa que convierte los archivos a formato \textsc{MPEG}.
 
 \subsection{\acl{NDS}}
+Caso distinto es el de esta consola.
+Aun con menos potencia, cinemáticas de alta calidad han sido desarrolladas.
+La mayoría de juegos usa una codificación propietaria proporcionada por Nintendo y desarrollada por Mobiclip (tras la compra de Nintendo pasó a llamarse \textit{Nintendo European Research and Development}).
+
+A día de hoy nadie ha sido capaz de estudiar la codificación debido a la complejidad de la misma.
+Al estar desarrollada explícitamente para la consola y basarse en piezas específicas de \textit{hardware}, se requiere un tiempo y conocimientos que superan el valor de la misma.
+La alternativa a la hora de extraer recursos de este calibre es grabar la pantalla mientras se reproduce el juego en un emulador\footnote{El emulador \href{http://desmume.org/}{DeSmuME} tiene esta funcionalidad implementada.}.
