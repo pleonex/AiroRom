@@ -5,6 +5,8 @@
 *.pdf
 *.synctex.gz
 *.toc
+*.lof
+*.lot
 *.out
 
 ## Ignore Visual Studio temporary files, build results, and

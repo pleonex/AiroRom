@@ -328,24 +328,6 @@ La banda sonora fue compuesta por Tim Shiel y puede comprarse en \href{https://i
 Sin embargo, al igual que pasó con los juegos anteriormente descritos, la seguridad ante una posible extracción se dejó en la capa del binario del juego.
 En este caso, si se cuenta con un móvil con acceso al sistema de archivos (\textit{jailbreak} en el caso de iOS) y se accede a la carpeta de la aplicación se puede encontrar toda la banda sonara en formato \textsc{WAV}.
 
-Otro tema de interés en este juego, aunque no relacionado con derechos de autor pero sí con pérdidas ecnónimas, son los niveles adicionales.
-Se trata de una compra integrada en la aplicación por 0.99? que añade un nuevo conjunto de pruebas.
-Analizando de nuevo el contenido de la carpeta centrándose en estos niveles, se averigua que estos están presentes en el juego y que mediante la compra se activan.
-La búsqueda se centra por tanto en saber dónde se guarda la configuración del juego para ver si está protegida que como se verá no es así.
-
-\includefigure{fig:c4-duet}%
-{Filas de la base de datos de \textit{Duet} que activan el contenido extra.}%
-{imgs/C4-Duet.png}
-
-En la carpeta \textit{Documents} de la aplicación existen tres bases de datos \textit{sqlite}.
-Abriendo la de mayor tamaño, \textit{persistent-data.db}, y gracias a su nombre que nos indica que hay datos persistentes, es decir, constantes en cada ejecución del juego nos encontramos las filas de la figura~\ref{fig:c4-duet}.
-En ella se ve como los valores que activan el contenido extra, el contenido de pago, están puestos a \textsf{0}, el valor que corresponde a \textit{desactivado} por lo general.
-Si se cambia a \textsf{1} y se inicia la aplicación de nuevo nos encontraremos con este contenido activado.
-
-La protección ante este tipo de casos es tan sencilla como poner una contraseña a la base de datos.
-Se trata de un mecanismo que está implementado nativamente\footnote{\url{http://web.archive.org/web/20070813071554/http://sqlite.phxsoftware.com/forums/t/130.aspx}} en las bibliotecas de \textit{sqlite} y muy sencillo de usar.
-La contraseña se puede almacenar en texto plano en la aplicación, pues dificultará la tarea de conocerla y al valer el contenido tan poco (menos de 1?) no compensará el esfuerzo dedicado como se ha discutido en capítulos anteriores.
-
 \section{Vídeos}
 Hoy en día y cada vez más, las videoconsolas tienen más potencia y resolución.
 Tal punto es, que muchas de ellas son más potentes que los computadores de la época.
