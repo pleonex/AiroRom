@@ -286,7 +286,21 @@ De nuevo las canciones vienen sin proteger dentro del juego encontrándolas dentr
 Este formato tiene una cabecera de 512 bytes siguiéndole tres pistas musicales de la canción en formato estándar de la \textit{Nintendo DS} \textsc{SWAV}.
 Mezclando estas tres pistas se obtiene la canción original sin pérdidas.
 
-\subsection{Professor Layton y Ni no kuni}
+\subsection{Level-5}
+El estudio \textit{Level-5} se centra en el desarrollo de juegos para la \textit{Nintendo DS}.
+Cabe destacarlo como objeto de estudio pues la banda sonora de juegos tan famosos como \textit{El Profesor Layton}, \textit{Inazuma Eleven} o \textit{Ni no kuni} ha estado codificada en un formato propietario y exclusivo.
+
+El formato \textsc{SADL} es un contenedor que admite las codificaciones \ac{IMA-ADPCM} y una desarrollada por el estudio \textit{Procyon}.
+Esta última, se trata de una variante de \ac{IMA-ADPCM} con algoritmo predictivo lo que ofrece gran compresión sin pérdida de calidad apenas.
+
+Esto permitió por ejemplo en el caso de \textit{Ni no kuni} introducir en el juego una banda sonora grabada por la orquesta de Tokio.
+Además, al ser propietario y único para estos juegos tanto el formato de archivo como de codificación de las muestras, dificultó la tarea de extracción y hubieron de pasar varios años hasta que se investigó.
+En este \href{https://github.com/pleonex/SADL-Audio-format}{repositorio} se ha investigado y desarrollado un programa para convertir este formato de audio.
+
+Al proteger los archivos e imposibilitar su extracción, se permite abrir el mercado ante la posibilidad de vender la banda sonora de forma externa como pasó con este juego\footnote{\href{http://www.play-asia.com/ni-no-kuni-shikkoku-no-madoushi-original-soundtrack/13/704299}{Tienda virtual} donde se podía comprar el CD de audio.}.
+
+Caso distinto es la versión para \acl{PS3}\footnote{Esta banda sonora también se \href{http://www.amazon.com/Ni-Kuni-Wrath-Original-Soundtrack/dp/B00DRS6UKQ}{vendió} aparte.} de este juego dado que el formato de los archivos es estándar y se puede reproducir con programas como \href{http://www.videolan.org/vlc/}{VLC}.
+La protección en este juego se centra en el empaquetado de todos los archivos (excepto el libro electrónico) que como se describió en la primera sección viene protegida con una clave propia de la consola.
 
 \subsection{Duet}
 
@@ -294,6 +308,6 @@ Mezclando estas tres pistas se obtiene la canción original sin pérdidas.
 \section{Vídeos}
 \textbf{TODO: Intro}
 
-\subsection{Formato en \textit{Play Station 3}}
+\subsection{\acl{PS3}}
 
-\subsection{Formato en \textit{Nintendo DS}}
+\subsection{\acl{NDS}}
