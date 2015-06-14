@@ -173,7 +173,7 @@ Si bien es cierto que todas estas obras son clásicas, sin derechos de autor a dí
 
 \section{Bandas sonoras}
 Las música de los videojuegos es una de sus partes más importantes.
-De ahí que se llegue a vender de forma a parte siendo este el objetivo de muchas compañías\footnote{Incluso vídeos de partidas de videojuegos pueden ser censurados en Youtube por derechos de autor. \url{http://www.develop-online.net/news/we-are-not-evil-trolls-indmusic-responds-to-youtube-copyright-anger/0187578}}.
+De ahí que se llegue a vender de forma a parte siendo este el objetivo de muchas compañías\footnote{\href{http://www.develop-online.net/news/we-are-not-evil-trolls-indmusic-responds-to-youtube-copyright-anger/0187578}{Incluso vídeos de partidas de videojuegos pueden ser censurados en Youtube por derechos de autor.}}.
 Además existe el género \textit{musical} en el cual canciones recientes y con derechos de autor se pueden incluir dentro del juego.
 
 La discusión de este tipo de juegos caería sobre si al pagar el juego se está pagando también las canciones.
@@ -199,9 +199,92 @@ Para este último se permite varias codificaciones: \ac{PCM} de 8 bits, \ac{PCM} 
 Esto no provee ninguna protección pues no se usa ningún tipo de cifrado y se usa una codificación y formato estándar de la consola y muy estudiado.
 Sin embargo, por facilidades técnicas las canciones vienen en fragmentos y la dificultad recae en saber el orden de los mismos para recomponerla.
 
-\subsection{Saga Guitar Hero}
+\subsection{Guitar Hero: On Tour}
+\textit{Guitar Hero: On Tour} es una serie de tres videojuegos para la \textit{Nintendo DS} desarrollados por \textit{Vicarius Visions} y que salieron en 2008 y 2009.
+Son juegos musicales donde el jugador simula estar tocando una guitarra a la vez que escucha canciones desde los años 70 hasta la actualidad.
+Se caracterizan por incluir una pieza de \textit{hardware} extra e imprescindible para el juego denominado \textit{Guitar Grip}.
+Este aparato tiene los cuatro botones que la guitarra simulada que se conectan en el segundo \textit{slot} de la consola.
 
-\subsection{Jam Sessions}
+Gracias a incluir \textit{hardware} adicional hace que no sea posible piratear el juego~(figura \ref{fig:c4-guitarGrip}), pues no había forma de jugar sin esta
+\footnote{Más tarde se descubrió un \href{https://gbatemp.net/threads/how-to-change-buttons-on-guitar-hero-on-tour-hack.275789/\#post-3411881}{parche} para poder jugar usando los botones de la consola y no necesitar \textit{Guitar Grip}.}.
+
+\includefigure{fig:c4-guitarGrip}%
+{\textit{Guitar Grip} necesario para jugar a la saga \textit{Guitar Hero: On Tour}.}%
+{imgs/C4-GuitarGrip.png}
+
+Analizando el primer juego de la saga, se puede ver que todos los archivos están contenidos en los ficheros \textit{mainFIGS.gfc} y \textit{mainFIGS.gob}. Si bien la estructura del primer fichero parece sencilla: 4 bytes con el tamaño y otros 4 bytes con la posición del fichero.
+Sin embargo, el archivo que contiene todos los datos está cifrado.
+El código ensamblador con el algoritmo de descifrado cuenta con alrededor de 1900 líneas de instrucciones que hacen muy difícil su comprensión y que, como se comentó en el segundo capítulo, hace que el esfuerzo valga más que el contenido.
+
+Al ser un juego famoso, ha habido investigaciones sobre el formato de los ficheros. Destaca la siguiente \href{http://www.scorehero.com/forum/viewtopic.php?t=67124}{entrada} de foro donde se describe como extraer las caciones. La estructura de este formato se describe en la tabla~\ref{tab:c4-guitarHero}.
+
+\ctable[
+    caption = Especificación del formato de \textit{Guitar Hero: On Tour},
+    label   = tab:c4-guitarHero,
+    pos     = h
+]{ccl}{
+    \tnote[a]{Información extraída de \href{http://slowhero.moto-coda.org/tech/ungob.pl}{ungob.pl}.}
+    \tnote[b]{Los datos del fichero están codificados en \textit{big-endian}.}
+    \tnote[c]{Se describe la primera entrada.}
+    \tnote[d]{Si es el último bloque el valor será \textsc{0x7FFF}.}
+}{                                                                          \FL
+    Posición      & Tamaño        & Descripción                             \ML
+    \multicolumn{3}{c}{Cabecera\tmark[a]\tmark[b]}                          \NN
+    \textsc{0x00} & \textsc{0x04} & Identificador: \textsc{0x00008008}      \NN
+    \textsc{0x04} & \textsc{0x04} & Tamaño del archivo \textsc{GOB}         \NN
+    \textsc{0x08} & \textsc{0x04} & Número de bloques                       \NN
+    \textsc{0x0C} & \textsc{0x04} & Número de archivos                      \ML
+    \multicolumn{3}{c}{Tabla de bloques\tmark[c]}                           \NN
+    \textsc{0x00} & \textsc{0x04} & Tamaño del bloque                       \NN
+    \textsc{0x04} & \textsc{0x04} & Posición del bloque                     \NN
+    \textsc{0x08} & \textsc{0x04} & Posición del siguiente bloque\tmark[d]  \NN
+    \textsc{0x0C} & \textsc{0x04} & Tipo de bloque: \textsc{0x30} descomprimido, \textsc{0x7A} comprimido con \textit{zlib}                              \ML
+    \multicolumn{3}{c}{Tabla desconocida\tmark[c]}                          \NN
+    \textsc{0x00} & \textsc{0x04} & Desconocido                             \ML
+    \multicolumn{3}{c}{Tabla de ficheros\tmark[c]}                          \NN
+    \textsc{0x00} & \textsc{0x04} & CRC32 del nombre en minúscula           \NN
+    \textsc{0x04} & \textsc{0x04} & Tamaño del fichero                      \NN
+    \textsc{0x08} & \textsc{0x04} & Posición del primer bloque              \LL
+}
+
+La primera edición del juego provee de buenos mecanismos frente tanto a la distribución ilícita del juego mediante \textit{hardware} adicional como de extración de canciones mediante un algoritmo muy largo de descifrar.
+
+Sin embargo, se encuentra un descuido en las siguientes dos ediciones del juego.
+Los archivos no llegaron a ser empaquetados en formato \textsc{GFC} + \textsc{GOB} ni protegidos de ninguna manera.
+Se haya dentro del juego las carpetas \textit{StrmFIGS} y \textit{TracksFIGS} (nótese la terminación \textit{FIGS} usada anteriormente para nombrar al archivo \textsc{GOB}).
+Dentro se puede encontrar las canciones en formato \textsc{Vorbis OGG} estándar\footnote{Datos obtenido de la siguiente \href{http://forum.xentax.com/viewtopic.php?f=10&t=3092}{entrada} de foro}.
+En concreto, por facilidades técnicas se han separado cada canción en tres archivos, uno con la base de guitarra, otra con la base de batería y otra con la voz.
+Las dos primeras están codificadas en \textsc{OGG} y la tercera en \textsc{HWAS}.
+Este último formato se trata de \textsc{IMA-ADPCM - Vorbis VOX} con una cabecera de 512 bytes descrita en la tabla~\ref{tab:c4-vox}.
+Mezclando las tres pistas se obtiene una versión casi perfecta del audio original.
+
+\ctable[
+    caption = Especificación del formato \textit{HWAS},
+    label   = tab:c4-vox,
+    pos     = h
+]{ccl}{
+
+}{                                                                          \FL
+    Posición      & Tamaño        & Descripción                             \ML
+    \multicolumn{3}{c}{Cabecera\tmark[a]\tmark[b]}                          \NN
+    \textsc{0x00} & \textsc{0x04} & Identificador: \textsc{hwas}            \NN
+    \textsc{0x04} & \textsc{0x04} & Desconocido                             \NN
+    \textsc{0x08} & \textsc{0x04} & Frecuencia de muestreo                  \NN
+    \textsc{0x0C} & \textsc{0x04} & Número de canales                       \NN
+    \textsc{0x10} & \textsc{0x04} & Reservado                               \NN
+    \textsc{0x14} & \textsc{0x04} & Tamaño de los datos de audio            \NN
+    \textsc{0x18} & \textsc{0x04} & Número de muestras                      \NN
+    \textsc{0x1C} & \textsc{0x1E4} & Reservado                              \ML
+    \multicolumn{3}{c}{Datos de audio en IMA-ADPCM}                         \LL
+}
+
+\subsection{Guitar Rock}
+\textit{Guitar Rock} es un juego desarrollado por \textit{Gameloft} en el año 2008 para la \textit{Nintendo DS}.
+Su jugabilidad es muy parecida a la de \textit{Guitar Hero: On Tour} diferenciándose en que no necesita \textit{hardware} como el \textit{Guitar Grip}.
+
+De nuevo las canciones vienen sin proteger dentro del juego encontrándolas dentro de los archivos \textit{trackX.bar}.
+Este formato tiene una cabecera de 512 bytes siguiéndole tres pistas musicales de la canción en formato estándar de la \textit{Nintendo DS} \textsc{SWAV}.
+Mezclando estas tres pistas se obtiene la canción original sin pérdidas.
 
 \subsection{Professor Layton y Ni no kuni}
 
