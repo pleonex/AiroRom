@@ -1,0 +1,68 @@
+Portada:
+✔ Portada 1 @done(2015-06-16 01:14)
+✔ Portada 2 @done(2015-06-16 01:14)
+
+Abstract:
+☐ English version
+☐ Versión en español
+
+Introducción (5-págs máximo):
+☐ Contexto: Crecimiento de los videojuegos e importancia en seguridad.
+☐ Objetivos de este trabajo.
+☐ Organización del trabajo.
+
+Estado del arte:
+☐ Explicar plataformas y clasificarlas en cerrados o abiertos.
+☐ Explicar por encima aspectos de seguridad a tratar.
+☐ Introducción a la ingeniería inversa de REDO.
+☐ Aspectos legales de la ingeniería inversa (cap. 12 xbox y pág. 17 negro)
+☐ Problema de siempre poder descompilar (cap. 13 negro).
+
+Requisitos, planificación y costes:
+☐ Objetivos específicos y tareas para llevarlos a cabo. Repo y wiki.
+☐ Planificación.
+☐ Recursos y costes.
+
+Traducciones:
+☐ Mods (http://es.wikipedia.org/wiki/Mod_%28videojuegos%29)
+☐ Problema no tan conocido en las empresas.
+☐ Caso Pokémon en NDS (4 casos, ver evolución).
+☐ Caso Ninokuni.
+☐ Analizar proyectos abandonados.
+
+Copyright:
+✔ Introducción @done(2015-06-16 01:14)
+✔ E-books: Ninokuni @done(2015-06-16 01:14)
+✔ E-boobks: 100 Classics books @done(2015-06-16 01:14)
+✔ BSO: Elite Beat Agents @done(2015-06-16 01:14)
+✔ BSO: Guitar Hero @done(2015-06-16 01:14)
+✔ BSO: Guitar Rock @done(2015-06-16 01:14)
+✔ BSO: Level-5 (Ninokuni NDS y PS3 y Layton) @done(2015-06-16 01:14)
+✔ BSO: Duet @done(2015-06-16 01:14)
+✔ Vídeo: PS3 @done(2015-06-16 01:14)
+✔ Vídeo: NDS @done(2015-06-16 01:14)
+☐ Sprite resource web (http://www.spriters-resource.com/)
+☐ Profundizar en Guitar Hero: On Tours
+☐ Introducción: Añadir información del cap. 13 negro.
+
+Multijugador y DLC:
+☐ Introducir en el tema y su importancia en proteger comunicación.
+☐ Seguridad no puede depender del juego (Layton 4).
+☐ Fallo de seguridad en servidores de Nintendo.
+☐ Antiguo fallo de seguridad en Clash of Clans, Wally y Duet
+☐ Fallo en Preguntados.
+☐ Seguridad en Ninokuni.
+
+Juegos famosos:
+☐ New Super Mario Bros
+☐ NintenDogs
+☐ Mario Kart DS
+☐ Babyz
+
+Resultados:
+☐ Resumen de los fallos de seguridad visto.
+☐ Recomendar soluciones.
+
+Conclusiones:
+☐ Conclusiones.
+☐ Trabajo futuro.
