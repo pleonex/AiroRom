@@ -19,6 +19,7 @@
 //  You should have received a copy of the GNU General Public License
 //  along with this program.  If not, see <http://www.gnu.org/licenses/>.
 using System;
+using YAXLib;
 
 namespace DataBrithm
 {
@@ -64,6 +65,7 @@ namespace DataBrithm
 		public int BestAlgorithm { get; set; }
 		public string Details { get; set; }
 
+		[YAXDontSerialize]
 		public abstract Xwt.Drawing.Image Icon { get; }
 
 		public double Quality { 
