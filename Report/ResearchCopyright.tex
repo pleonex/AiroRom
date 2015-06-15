@@ -7,7 +7,7 @@
 
 A día de hoy una de las principales preocupaciones de la industria respecto a la difusión de su obra se centra en los derechos de autor.
 Esto es especialmente notable en el mundo de los videojuegos acosado por una piratería continua que causa pérdidas millonarias de dinero\footnote{\url{http://drm.web.unc.edu/games}}.
-De este contexto nace la idea del \ac{DRM}.
+De este contexto nace la idea del \acs{DRM}.
 Se trata en un mecanismo con el único fin de imposibilitar la distribución no autorizada de contenido.
 Existe mecanismos desde los más sencillos y antiguos como son las claves que vienen impresas en un CD a los más nuevos que incluyen el cifrado del videojuego con datos personales de la cuenta del usuario\footnote{\url{http://www.darthnull.org/2014/10/06/ios-encryption}} o una conexión necesaria a los servidores de las compañía.
 Las características comunes de estas técnicas se pueden resumir en los siguientes puntos\footnote{\url{http://es.wikipedia.org/wiki/Gestión_digital_de_derechos}}.
@@ -51,13 +51,13 @@ El primero juego a tratar será \textit{Ninokuni y La Ira de la Bruja Blanca} des
 Se trata de una versión muy similar a la que salió dos años antes para la \textit{Nintendo DS} que incluía un libro físico imprescindible para el jugador.
 
 Debido a los problemas de traducción y distribución de este libro, ese juego no salió de Japón.
-En el caso de esta versión para \ac{PS3} y aprovechando las capacidades de una pantalla grande el libro de tradujo y se incluyó en el juego pudiendo acceder a él mediante un visor especial accesible desde un menú.
+En el caso de esta versión para \acs{PS3} y aprovechando las capacidades de una pantalla grande el libro de tradujo y se incluyó en el juego pudiendo acceder a él mediante un visor especial accesible desde un menú.
 En la edición coleccionista del juego si se daba una copia física en inglés.
 El denominado \textit{Vademécum del mago} en la primera versión del juego nunca se llego a escanear siendo imposible de encontrarlo en Internet.
 Al no encontrase disponible en Internet
 En cambio, debido a una gran falta de seguridad en su distribución digital, en pocos días se pudo acceder a los archivos del juego y realizar una sencilla conversión a PDF.
 
-El libro digital se encuentra codificado en el archivo \textit{hd05\_es.sdat} dentro de la carpeta principal en formato \emph{PSAR} (común en juegos de \ac{PS3}).
+El libro digital se encuentra codificado en el archivo \textit{hd05\_es.sdat} dentro de la carpeta principal en formato \emph{PSAR} (común en juegos de \acs{PS3}).
 Se trata de un fichero que contiene archivos comprimidos.
 La compresión en este caso fue obvia pues en la posición \textsf{0x08} se encuentra en ASCII la cadena de caracteres \textsf{zlib} (figura~\ref{fig:cr-psar}).
 Además el fichero no presenta dificultad en su descifrado pues se basa como en la mayoría de su tipo en incluir después de la cabecera todas las posiciones y tamaños de los archivos que incluye (tabla~\ref{tab:cr-psar}).
@@ -153,7 +153,7 @@ Como se aprecia, una página se compone de diferentes imágenes \textsf{JPEG} conc
 Tras este análisis, desde el primer fichero directamente extraído de la carpeta del juego en formato \textsf{PSAR} hasta este que contiene cada una de las páginas en formato \textsf{GVD} no se ha apreciado ningún mecanismo que intente proteger o dificultar la tarea de extraer cada una de las páginas.
 Incluso los formatos de las propias imágenes son estándar.
 
-Cabe destacar también, que la \ac{PS3} provee de mecanismos nativos para cifrar archivos que sí se usa para proteger el resto de datos del juego como imágenes y textos (archivo \textit{hs06\_es.adat.sdat}).
+Cabe destacar también, que la \acs{PS3} provee de mecanismos nativos para cifrar archivos que sí se usa para proteger el resto de datos del juego como imágenes y textos (archivo \textit{hs06\_es.adat.sdat}).
 Este formatos con extensión \textsf{sdat} y cabecera \textsf{NPD} usa las claves internas y mecanismos internos de cifrado de la consola que asegura su confidencialidad\footnote{A día de hoy ya se ha podido romper este mecanismo:  \href{https://github.com/Hykem/make_npdata}{make\_npdata}.}.
 
 \subsection{100 Classic Book Collection}
@@ -205,12 +205,12 @@ En occidente salió también una segunda versión que usaba el mismo motor un año d
 Se trata de dos juegos musicales donde hay que seguir el ritmo de canciones conocidas de los años 80 y 90 con el lápiz.
 Internamente los dos juegos son idénticos cambiando solo el contenido pero no la estructura.
 
-Las canciones están comprimidas dentro del archivo de sonido estándar en \ac{NDS}: \textsf{SDAT}.
-El formato, posiblemente soportado nativamente por la \ac{API} de la consola, permite almacenar sonido tanto sintetizado parecido a \ac{MIDI} como digitalizado.
-Para este último se permite varias codificaciones: \ac{PCM} de 8 bits, \ac{PCM} de 16 bits y \ac{IMA-ADPCM} siendo esta la que más calidad provee y el que se usa en estos juegos (figura~\ref{fig:cr-elite}).
+Las canciones están comprimidas dentro del archivo de sonido estándar en \acs{NDS}: \textsf{SDAT}.
+El formato, posiblemente soportado nativamente por la \acs{API} de la consola, permite almacenar sonido tanto sintetizado parecido a \acs{MIDI} como digitalizado.
+Para este último se permite varias codificaciones: \acs{PCM} de 8 bits, \acs{PCM} de 16 bits y \acs{IMA-ADPCM} siendo esta la que más calidad provee y el que se usa en estos juegos (figura~\ref{fig:cr-elite}).
 
 \includefigure{fig:cr-elite}%
-{Archivos comprimidos en \textsf{SDAT} y codificados con \ac{IMA-ADPCM} visto con Tinke.}%
+{Archivos comprimidos en \textsf{SDAT} y codificados con \acs{IMA-ADPCM} visto con Tinke.}%
 {imgs/CR-Elite.png}
 
 Esto no provee ninguna protección pues no se usa ningún tipo de cifrado y se usa una codificación y formato estándar de la consola y muy estudiado.
@@ -307,8 +307,8 @@ Mezclando estas tres pistas se obtiene la canción original sin pérdidas.
 El estudio \textit{Level-5} se centra en el desarrollo de juegos para la \textit{Nintendo DS}.
 Cabe destacarlo como objeto de estudio pues la banda sonora de juegos tan famosos como \textit{El Profesor Layton}, \textit{Inazuma Eleven} o \textit{Ni no kuni} ha estado codificada en un formato propietario y exclusivo.
 
-El formato \textsc{SADL} es un contenedor que admite las codificaciones \ac{IMA-ADPCM} y una desarrollada por el estudio \textit{Procyon}.
-Esta última, se trata de una variante de \ac{IMA-ADPCM} con algoritmo predictivo lo que ofrece gran compresión sin pérdida de calidad apenas.
+El formato \textsc{SADL} es un contenedor que admite las codificaciones \acs{IMA-ADPCM} y una desarrollada por el estudio \textit{Procyon}.
+Esta última, se trata de una variante de \acs{IMA-ADPCM} con algoritmo predictivo lo que ofrece gran compresión sin pérdida de calidad apenas.
 
 Esto permitió por ejemplo en el caso de \textit{Ni no kuni} introducir en el juego una banda sonora grabada por la orquesta de Tokio.
 Además, al ser propietario y único para estos juegos tanto el formato de archivo como de codificación de las muestras, dificultó la tarea de extracción y hubieron de pasar varios años hasta que se investigó.
