@@ -19,12 +19,12 @@ Se trata de una compra integrada en la aplicación por 0.99 euros que añade un nu
 Analizando de nuevo el contenido de la carpeta centrándose en estos niveles, se averigua que estos están presentes en el juego y que mediante la compra se activan.
 La búsqueda se centra por tanto en saber dónde se guarda la configuración del juego para ver si está protegida que como se verá no es así.
 
-\includefigure{fig:c6-duet}%
+\includefigure{fig:mp-duet}%
 {Filas de la base de datos de \textit{Duet} que activan el contenido extra.}%
-{imgs/C6-Duet.png}
+{imgs/MP-Duet.png}
 
 En la carpeta \textit{Documents} de la aplicación existen tres bases de datos \textit{sqlite}.
-Abriendo la de mayor tamaño, \textit{persistent-data.db}, y gracias a su nombre que nos indica que hay datos persistentes, es decir, constantes en cada ejecución del juego nos encontramos las filas de la figura~\ref{fig:c6-duet}.
+Abriendo la de mayor tamaño, \textit{persistent-data.db}, y gracias a su nombre que nos indica que hay datos persistentes, es decir, constantes en cada ejecución del juego nos encontramos las filas de la figura~\ref{fig:mp-duet}.
 En ella se ve como los valores que activan el contenido extra, el contenido de pago, están puestos a \textsf{0}, el valor que corresponde a \textit{desactivado} por lo general.
 Si se cambia a \textsf{1} y se inicia la aplicación de nuevo nos encontraremos con este contenido activado.
 

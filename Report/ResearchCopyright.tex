@@ -59,13 +59,13 @@ En cambio, debido a una gran falta de seguridad en su distribución digital, en p
 
 El libro digital se encuentra codificado en el archivo \textit{hd05\_es.sdat} dentro de la carpeta principal en formato \emph{PSAR} (común en juegos de \ac{PS3}).
 Se trata de un fichero que contiene archivos comprimidos.
-La compresión en este caso fue obvia pues en la posición \textsf{0x08} se encuentra en ASCII la cadena de caracteres \textsf{zlib} (figura~\ref{fig:c4-psar}).
-Además el fichero no presenta dificultad en su descifrado pues se basa como en la mayoría de su tipo en incluir después de la cabecera todas las posiciones y tamaños de los archivos que incluye (tabla~\ref{tab:c4-psar}).
+La compresión en este caso fue obvia pues en la posición \textsf{0x08} se encuentra en ASCII la cadena de caracteres \textsf{zlib} (figura~\ref{fig:cr-psar}).
+Además el fichero no presenta dificultad en su descifrado pues se basa como en la mayoría de su tipo en incluir después de la cabecera todas las posiciones y tamaños de los archivos que incluye (tabla~\ref{tab:cr-psar}).
 En el \href{https://github.com/pleonex/Ninokuni/tree/master/Programs/PS3/NinoDecompiler}{repositorio} de este trabajo se incluye un programa desarrollado para su descompresión.
 
 \ctable[
     caption = Especificación de formato PSAR,
-    label   = tab:c4-psar,
+    label   = tab:cr-psar,
     pos     = h
 ]{ccl}{
     \tnote[a]{\textit{File Info Table}. Tabla con información genérica de los archivos.}
@@ -90,19 +90,19 @@ En el \href{https://github.com/pleonex/Ninokuni/tree/master/Programs/PS3/NinoDec
     \multicolumn{3}{c}{Archivos\tmark[b]\tmark[c]}                      \LL
 }
 
-\includefigure{fig:c4-psar}%
+\includefigure{fig:cr-psar}%
 {Primeros \textit{bytes} del fichero \emph{PSAR}.}%
-{imgs/C4-PSAR.png}
+{imgs/CR-PSAR.png}
 
 Descomprimiendo el fichero se encuentran nueve archivos de los cuales destaca uno de 438 MB \textit{data/book/es/BigData/gdv.dat}.
 Por su tamaño se intuye su contenido.
 Su formato de nuevo fácil de analizar pues tras unas largas cabeceras, al inicio de los datos hay una cabecera con las siglas \emph{JPEG}.
-A continuación en la figura~\ref{tab:c4-gvd} se muestra la especificación de este tipo de fichero que contiene cada una de las hojas del libro electrónico.
+A continuación en la figura~\ref{tab:cr-gvd} se muestra la especificación de este tipo de fichero que contiene cada una de las hojas del libro electrónico.
 
 
 \ctable[
     caption = Especificación de formato GVD,
-    label   = tab:c4-gvd,
+    label   = tab:cr-gvd,
 ]{ccl}{
     \tnote[a]{Hay un bloque por página.}
     \tnote[b]{Relativo al inicio del bloque de datos.}
@@ -162,11 +162,11 @@ Desarrollado por \textit{HaperCollins} en 2008 para la \textit{Nintendo DS}.
 No se trata de un juego propiamente dicho, si no de una colección de libros junto a un visor, de forma que la videoconsola se convierte en un lector.
 Como el nombre indica, el juego contiene entorno a 100 libros incluyendo descargables.
 
-El formato que contiene los libros de nuevo no tiene mecanismo alguno de protección siendo incluso más sencillo que el caso anterior (table~\ref{tab:c4-100books}). De los hasta 23 bloques que contiene un libro, el primero contiene información del libro, del segundo al quinto imágenes de portada y el resto el texto del libro junto a resumen y descripción del autor (figura~\ref{fig:c4-100books}).
+El formato que contiene los libros de nuevo no tiene mecanismo alguno de protección siendo incluso más sencillo que el caso anterior (table~\ref{tab:cr-100books}). De los hasta 23 bloques que contiene un libro, el primero contiene información del libro, del segundo al quinto imágenes de portada y el resto el texto del libro junto a resumen y descripción del autor (figura~\ref{fig:cr-100books}).
 
 \ctable[
     caption = Especificación del formato de \textit{100 Classic Books},
-    label   = tab:c4-100books,
+    label   = tab:cr-100books,
     pos     = h
 ]{ccl}{
     \tnote[a]{Algunos bloques pueden estar vacíos.}
@@ -181,9 +181,9 @@ El formato que contiene los libros de nuevo no tiene mecanismo alguno de protecc
     \multicolumn{3}{c}{Bloques\tmark[a]\tmark[b]}                       \LL
 }
 
-\includefigure{fig:c4-100books}%
+\includefigure{fig:cr-100books}%
 {Extracto de texto de un libro de \textit{100 Classic Books}.}%
-{imgs/C4-100Books.png}
+{imgs/CR-100Books.png}
 
 Si bien es cierto que todas estas obras son clásicas, sin derechos de autor a día de hoy, el trabajo de maquetado y adaptación sí se puede cobrar.
 
@@ -207,11 +207,11 @@ Internamente los dos juegos son idénticos cambiando solo el contenido pero no la
 
 Las canciones están comprimidas dentro del archivo de sonido estándar en \ac{NDS}: \textsf{SDAT}.
 El formato, posiblemente soportado nativamente por la \ac{API} de la consola, permite almacenar sonido tanto sintetizado parecido a \ac{MIDI} como digitalizado.
-Para este último se permite varias codificaciones: \ac{PCM} de 8 bits, \ac{PCM} de 16 bits y \ac{IMA-ADPCM} siendo esta la que más calidad provee y el que se usa en estos juegos (figura~\ref{fig:c4-elite}).
+Para este último se permite varias codificaciones: \ac{PCM} de 8 bits, \ac{PCM} de 16 bits y \ac{IMA-ADPCM} siendo esta la que más calidad provee y el que se usa en estos juegos (figura~\ref{fig:cr-elite}).
 
-\includefigure{fig:c4-elite}%
+\includefigure{fig:cr-elite}%
 {Archivos comprimidos en \textsf{SDAT} y codificados con \ac{IMA-ADPCM} visto con Tinke.}%
-{imgs/C4-Elite.png}
+{imgs/CR-Elite.png}
 
 Esto no provee ninguna protección pues no se usa ningún tipo de cifrado y se usa una codificación y formato estándar de la consola y muy estudiado.
 Sin embargo, por facilidades técnicas las canciones vienen en fragmentos y la dificultad recae en saber el orden de los mismos para recomponerla.
@@ -222,22 +222,22 @@ Son juegos musicales donde el jugador simula estar tocando una guitarra a la vez
 Se caracterizan por incluir una pieza de \textit{hardware} extra e imprescindible para el juego denominado \textit{Guitar Grip}.
 Este aparato tiene los cuatro botones que la guitarra simulada que se conectan en el segundo \textit{slot} de la consola.
 
-Gracias a incluir \textit{hardware} adicional hace que no sea posible piratear el juego~(figura \ref{fig:c4-guitarGrip}), pues no había forma de jugar sin esta
+Gracias a incluir \textit{hardware} adicional hace que no sea posible piratear el juego~(figura \ref{fig:cr-guitarGrip}), pues no había forma de jugar sin esta
 \footnote{Más tarde se descubrió un \href{https://gbatemp.net/threads/how-to-change-buttons-on-guitar-hero-on-tour-hack.275789/\#post-3411881}{parche} para poder jugar usando los botones de la consola y no necesitar \textit{Guitar Grip}.}.
 
-\includefigure{fig:c4-guitarGrip}%
+\includefigure{fig:cr-guitarGrip}%
 {\textit{Guitar Grip} necesario para jugar a la saga \textit{Guitar Hero: On Tour}.}%
-{imgs/C4-GuitarGrip.png}
+{imgs/CR-GuitarGrip.png}
 
 Analizando el primer juego de la saga, se puede ver que todos los archivos están contenidos en los ficheros \textit{mainFIGS.gfc} y \textit{mainFIGS.gob}. Si bien la estructura del primer fichero parece sencilla: 4 bytes con el tamaño y otros 4 bytes con la posición del fichero.
 Sin embargo, el archivo que contiene todos los datos está cifrado.
 El código ensamblador con el algoritmo de descifrado cuenta con alrededor de 1900 líneas de instrucciones que hacen muy difícil su comprensión y que, como se comentó en el segundo capítulo, hace que el esfuerzo valga más que el contenido.
 
-Al ser un juego famoso, ha habido investigaciones sobre el formato de los ficheros. Destaca la siguiente \href{http://www.scorehero.com/forum/viewtopic.php?t=67124}{entrada} de foro donde se describe como extraer las canciones. La estructura de este formato se describe en la tabla~\ref{tab:c4-guitarHero}.
+Al ser un juego famoso, ha habido investigaciones sobre el formato de los ficheros. Destaca la siguiente \href{http://www.scorehero.com/forum/viewtopic.php?t=67124}{entrada} de foro donde se describe como extraer las canciones. La estructura de este formato se describe en la tabla~\ref{tab:cr-guitarHero}.
 
 \ctable[
     caption = Especificación del formato de \textit{Guitar Hero: On Tour},
-    label   = tab:c4-guitarHero,
+    label   = tab:cr-guitarHero,
     pos     = h
 ]{ccl}{
     \tnote[a]{Información extraída de \href{http://slowhero.moto-coda.org/tech/ungob.pl}{ungob.pl} y corroborada.}
@@ -272,12 +272,12 @@ Se haya dentro del juego las carpetas \textit{StrmFIGS} y \textit{TracksFIGS} (n
 Dentro se puede encontrar las canciones en formato \textsc{Vorbis OGG} estándar\footnote{Datos obtenido de la siguiente \href{http://forum.xentax.com/viewtopic.php?f=10&t=3092}{entrada} de foro}.
 En concreto, por facilidades técnicas se han separado cada canción en tres archivos, uno con la base de guitarra, otra con la base de batería y otra con la voz.
 Las dos primeras están codificadas en \textsc{OGG} y la tercera en \textsc{HWAS}.
-Este último formato se trata de \textsc{IMA-ADPCM - Vorbis VOX} con una cabecera de 512 bytes descrita en la tabla~\ref{tab:c4-vox}.
+Este último formato se trata de \textsc{IMA-ADPCM - Vorbis VOX} con una cabecera de 512 bytes descrita en la tabla~\ref{tab:cr-vox}.
 Mezclando las tres pistas se obtiene una versión casi perfecta del audio original.
 
 \ctable[
     caption = Especificación del formato \textit{HWAS},
-    label   = tab:c4-vox,
+    label   = tab:cr-vox,
     pos     = h
 ]{ccl}{
 
