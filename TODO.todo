@@ -15,7 +15,7 @@ Estado del arte:
 ☐ Explicar plataformas y clasificarlas en cerrados o abiertos.
 ☐ Explicar por encima aspectos de seguridad a tratar.
 ☐ Introducción a la ingeniería inversa de REDO.
-☐ Aspectos legales de la ingeniería inversa (cap. 12 xbox y pág. 17 negro)
+☐ Aspectos legales de ingeniería inversa (cap. 12 xbox y pág. 17 negro)
 ☐ Problema de siempre poder descompilar (cap. 13 negro).
 
 Requisitos, planificación y costes:
@@ -27,18 +27,14 @@ Traducciones:
 ☐ Mods (http://es.wikipedia.org/wiki/Mod_%28videojuegos%29)
 ☐ Problema no tan conocido en las empresas.
 ☐ Caso Pokémon en NDS (ver evolución).
-☐ DP: Textos & Scripts
-☐ DP: Imágenes
-☐ HS: Textos & Scripts
-☐ HS: Imágenes
-☐ BW: Textos & Scripts
-☐ BW: Imágenes
-☐ Dash: Textos
+☐ DP: Textos & Imágenes & audio
+☐ HS: Textos & Imágenes & audio
+☐ BW: Textos & Imágenes & audio
 ☐ Dash: Imágenes
-☐ Conquest: Textos
-☐ Conquest: Imágenes
-☐ Ninokuni: Textos & Scripts
-☐ Ninokuni: Imágenes
+☐ Conquest: Textos & Imágenes
+☐ Ninokuni: Textos & Scripts & Imágenes
+☐ Hetalia: Textos
+☐ Hetalia: Imágenes
 ☐ Analizar proyectos abandonados.
 
 Copyright:
@@ -55,6 +51,7 @@ Copyright:
 ☐ Sprite resource web (http://www.spriters-resource.com/)
 ☐ Profundizar en Guitar Hero: On Tours
 ☐ Introducción: Añadir información del cap. 13 negro.
+☐ Separar opiniones con \begin{leftbar}
 
 Multijugador y DLC:
 ☐ Introducir en el tema y su importancia en proteger comunicación.
