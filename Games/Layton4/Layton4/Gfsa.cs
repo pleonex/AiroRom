@@ -25,52 +25,59 @@ using Mono.Addins;
 
 namespace Layton4
 {
-	[Extension]
-	public class Gfsa : Format
-	{
-		const string MagicStamp = "GFSA";
-		const int NumHeaders = 4;
+    [Extension]
+    public class Gfsa : Format
+    {
+        const string MagicStamp = "GFSA";
+        const int NumHeaders = 4;
 
-		public override string FormatName {
-			get { return "Laytn4.Gfsa"; }
-		}
+        public override string FormatName {
+            get { return "Layton4.Gfsa"; }
+        }
 
-		public override void Read(DataStream strIn)
-		{
-			var reader = new DataReader(strIn);
-			if (reader.ReadString(4) != MagicStamp)
-				throw new FormatException();
+        public override void Read(DataStream strIn)
+        {
+            var reader = new DataReader(strIn);
+            if (reader.ReadString(4) != MagicStamp)
+                throw new FormatException("Invalid " + FormatName + " format");
 
-			for (int i = 0; i < NumHeaders; i++) {
-				uint offset = reader.ReadUInt32();
-				uint nextOffset = reader.ReadUInt32(); strIn.Seek(-4, SeekMode.Current);
+            for (int i = 0; i < NumHeaders; i++) {
+                uint offset = reader.ReadUInt32();
 
-				var subStream = new DataStream(strIn, offset, nextOffset - offset);
-				var subFile = new GameFile("Block" + i.ToString() + ".bin", subStream);
-				subFile.SetFormat<GfsaBlock>();
-				subFile.Format.Read();
-				File.AddFile(subFile);
-			}
-		}
+                // Peek next offset to calculate block size
+                uint nextOffset = reader.ReadUInt32(); strIn.Seek(-4, SeekMode.Current);
+                uint size = nextOffset - offset;
 
-		public override void Write(DataStream strOut)
-		{
-			throw new NotImplementedException();
-		}
+                var subStream = new DataStream(strIn, offset, size);
+                var subFile = new GameFile("Block" + i.ToString() + ".bin", subStream);
+                subFile.SetFormat<GfsaBlock>();
+                subFile.Format.Read();
+                this.File.AddFile(subFile);
+            }
+        }
 
-		public override void Import(params DataStream[] strIn)
-		{
-			throw new NotImplementedException();
-		}
+        DataStream GetBlock(DataStream strIn, uint offset, uint size)
+        {
+            return null;
+        }
 
-		public override void Export(params DataStream[] strOut)
-		{
-			throw new NotImplementedException();
-		}
+        public override void Write(DataStream strOut)
+        {
+            throw new NotImplementedException();
+        }
 
-		protected override void Dispose(bool freeManagedResourcesAlso)
-		{
-		}
-	}
+        public override void Import(params DataStream[] strIn)
+        {
+            throw new NotImplementedException();
+        }
+
+        public override void Export(params DataStream[] strOut)
+        {
+            throw new NotImplementedException();
+        }
+
+        protected override void Dispose(bool freeManagedResourcesAlso)
+        {
+        }
+    }
 }
-

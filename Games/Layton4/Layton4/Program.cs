@@ -26,26 +26,60 @@ using Libgame;
 
 namespace Layton4
 {
-	class MainClass
-	{
-		public static void Main(string[] args)
-		{
-			if (args.Length < 1)
-				return;
+    class MainClass
+    {
+        public static void Main(string[] args)
+        {
+            if (args.Length < 1)
+                return;
 
-			string executableDir = args[0];
-			var root = GameFolderFactory.FromPath(executableDir);
-			FileManager.Initialize(root, new FileInfoCollection());
+            string executableDir = args [0];
+            var root = GameFolderFactory.FromPath(executableDir);
+            FileManager.Initialize(root, new FileInfoCollection());
 
-			var container = root.Files["lt4_main_sp.fa"] as GameFile;
-			if (container == null)
-				return;
+            foreach (var file in root.Files) {
+                var container = file as GameFile;
+                if (container == null || !container.Name.EndsWith(".fa"))
+                    continue;
 
-			container.SetFormat<Gfsa>();
-			container.Format.Read();
-			foreach (var block in container.Files.Cast<GameFile>())
-				block.Files.Cast<GameFile>().First()
-					.Stream.WriteTo(Path.Combine(executableDir, block.Name));
-		}
-	}
+                container.SetFormat<Gfsa>();
+            }
+
+            ReadAll(root);
+            ExtractFolder(args[0], root);
+        }
+
+        private static void ReadAll(FileContainer container)
+        {
+            foreach (GameFile subfile in container.Files) {
+                if (subfile.Format == null)
+                    FileManager.AssignBestFormat(subfile);
+
+                if (subfile.Format != null)
+                    subfile.Format.Read();
+
+                if (subfile.Files.Count > 0 || subfile.Folders.Count > 0)
+                    ReadAll(subfile);
+            }
+
+            foreach (GameFolder subfolder in container.Folders)
+                ReadAll(subfolder);
+        }
+
+        private static void ExtractFolder(string outputDir, FileContainer folder)
+        {
+            string folderDir = Path.Combine(outputDir, folder.Name);
+            Directory.CreateDirectory(folderDir);
+
+            foreach (GameFile subfile in folder.Files) {
+                if (subfile.Files.Count > 0 || subfile.Folders.Count > 0)
+                    ExtractFolder(folderDir, subfile);
+                else
+                    subfile.Stream.WriteTo(Path.Combine(folderDir, subfile.Name));
+            }
+
+            foreach (GameFolder subfolder in folder.Folders)
+                ExtractFolder(folderDir, subfolder);
+        }
+    }
 }
