@@ -37,16 +37,18 @@ namespace Layton4
             var root = GameFolderFactory.FromPath(executableDir);
             FileManager.Initialize(root, new FileInfoCollection());
 
+            GameFolder validFiles = new GameFolder("layton");
             foreach (var file in root.Files) {
                 var container = file as GameFile;
                 if (container == null || !container.Name.EndsWith(".fa"))
                     continue;
 
                 container.SetFormat<Gfsa>();
+                validFiles.AddFile(container);
             }
 
-            ReadAll(root);
-            ExtractFolder(args[0], root);
+            ReadAll(validFiles);
+            ExtractFolder(args[0], validFiles);
         }
 
         private static void ReadAll(FileContainer container)
