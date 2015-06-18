@@ -29,7 +29,9 @@ namespace Layton4
     public class Gfsa : Format
     {
         const string MagicStamp = "GFSA";
-        const int NumHeaders = 4;
+        const int NumBlocks = 4;
+
+        GfsaBlock[] blocks = new GfsaBlock[NumBlocks];
 
         public override string FormatName {
             get { return "Layton4.Gfsa"; }
@@ -41,19 +43,24 @@ namespace Layton4
             if (reader.ReadString(4) != MagicStamp)
                 throw new FormatException("Invalid " + FormatName + " format");
 
-            for (int i = 0; i < NumHeaders; i++) {
+            for (int i = 0; i < NumBlocks; i++) {
                 uint offset = reader.ReadUInt32();
 
                 // Peek next offset to calculate block size
                 uint nextOffset = reader.ReadUInt32(); strIn.Seek(-4, SeekMode.Current);
                 uint size = nextOffset - offset;
 
-                var subStream = new DataStream(strIn, offset, size);
-                var subFile = new GameFile("Block" + i.ToString() + ".bin", subStream);
-                subFile.SetFormat<GfsaBlock>();
-                subFile.Format.Read();
-                this.File.AddFile(subFile);
+                blocks[i] = new GfsaBlock();
+                blocks[i].Read(new DataStream(strIn, offset, size));
             }
+
+            // TODO: Precalculate name CRC
+
+            // TODO: For each folder, match with name
+
+            // TODO: Go to FAT from that folder info and read entries
+
+            // TODO: For each entry, match with name and data
         }
 
         DataStream GetBlock(DataStream strIn, uint offset, uint size)
