@@ -81,7 +81,7 @@ Para sortear este problema se hizo uso de los \textit{savestates} del emulador, 
 Gracias a esta característica se puede realizar un guardado justo antes de que el juego guarde un juego de forma que siempre que se use ese \textit{savestate} encontraremos el texto en la misma posición.
 El punto de interrupción hizo parar el emulador justo en las instrucciones máquinas que estaban realizando, en este caso, el descifrado. Este algoritmo se describe a continuación.
 
-El texto se encuentra cifrado usando la operación XOR y mediante una clave que se actualiza después de descifrar cada byte.
+El texto se encuentra cifrado usando la operación XOR y mediante una clave que se actualiza después de descifrar cada byte\footnote{Al no ser una clave constante no se puede obtener esta al ser aplicada sobre zonas con valores a 0 como sí sucede en el caso de la tabla de contenido.}.
 La clave inicial es igual a \verb!clave = (ushort)(0x91BD3 * (i + 1))! donde \verb!i! es el bloque de texto a descifrar.
 Después de aplicar la clave sobre un byte esta se actualiza según \verb!clave = (ushort)(clave + 0x493D)!.
 
@@ -111,10 +111,31 @@ En la tabla~\ref{tab:tr-pearltxt} se especifica el formato de los archivos de te
     \multicolumn{3}{c}{Cabecera}                                        \NN
     \textsf{0x00} & \textsf{0x02} & Número de bloques de texto          \NN
     \textsf{0x02} & \textsf{0x02} & Clave base para descifrar \acs{TOC} \ML
-    \multicolumn{3}{c}{\acl{TOC}\tmark[a]}                               \NN
+    \multicolumn{3}{c}{\acl{TOC}\tmark[a]}                              \NN
     \textsf{0x00} & \textsf{0x04} & Posición del texto\tmark[b]         \NN
     \textsf{0x04} & \textsf{0x08} & Tamaño del texto\tmark[b]           \ML
     \multicolumn{3}{c}{Texto\tmark[b]}                                  \LL
 }
 
 \subsubsection{Imágenes}
+En el caso de la saga de Pokémon las imágenes no contienen frases con texto por lo que en cuanto a una traducción respecta no son necesarias editarlas.
+Sin embargo, dada la popularidad de los \textit{mods} y de la extracción de imágenes en estos juegos se apostó por cifrar un tipo concreto de las mismas.
+Se trata de los \textit{sprites} de los \textit{Pokémons} que aparecen durante las batallas.
+Estos archivos están contenidos en el paquete \textit{poketool/pokegra/pokegra.narc} donde hay seis imágenes por monstruo.
+
+El cifrado se realizó sobre los datos de la imagen, manteniendo las cabeceras del formato de la misma sin cifrar.
+Como consecuencia, las imágenes se podían abrir usando programas estándares pero sin ver nada en concreto.
+% TODO: Hacer programa y descifrar una imagen y poner comparativa
+
+El procedimiento para encontrar el algoritmo de cifrado en este caso es distinto al realizado con texto.
+No se puede partir de datos conocidos como anteriormente se partía de una frase que se veía en la pantalla.
+Sin embargo, dado que las cabeceras de la imagen no están cifradas se pudo buscar sobre el código en ensamblador la función que procesa esta cabecera.
+En concreto se buscó la palabra mágica \textsf{CHAR} que se procesaa para determinar el comienzo de una sección del archivo.
+
+Una vez encontrado la función que lee una imagen, solo habría que acceder a una parte del juego donde se esperaba que se cargase una imagen como durante una batalla y poner un punto de interrupción sobre esta función.
+Tras omitir imágenes que no estaban cifradas\footnote{Dado que una imagen contiene suele tener píxeles cercanos de igual colores, siempre que en los datos se observara patrones se podía determinar que no estaba cifrada.}, se llegó a una que sí lo estaba donde se puso un punto de interrupción.
+
+La siguiente función que leía los datos de dicha imagen era el algoritmo de descifrado. Este algoritmo parte del hecho que todo el bloque de datos de una imagen tendrá el tamaño constante de \textsf{0x1900} bytes.
+Se trata de un cifrado parecido al realizado sobre el texto donde habrá una clave que irá cambiando después de aplicarse sobre cada valor y que se usará para aplicar la operación XOR sobre un dato cifrado.
+En este caso, la clave es de 32 bits y el dato a descifrar de 16 bits y se comencerá desde el final del fichero hasta el principio.
+La clave inicial será el primer valor (últimos dos bytes del fichero) e irá cambiando siguiendo la siguiente operación \verb!clave = (uint)(clave * 0x41C64E6D + 0x6073)!.
