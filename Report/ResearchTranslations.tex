@@ -122,6 +122,7 @@ En la tabla~\ref{tab:tr-pearltxt} se especifica el formato de los archivos de te
 }
 
 \subsubsection{Imágenes}
+\label{sec:tr-pok-pearl-img}
 En el caso de la saga de Pokémon las imágenes no contienen frases con texto por lo que en cuanto a una traducción respecta no son necesarias editarlas.
 Sin embargo, dada la popularidad de los \textit{mods} y de la extracción de imágenes en estos juegos se apostó por cifrar un tipo concreto de las mismas.
 Se trata de los \textit{sprites} de los \textit{Pokémons} que aparecen durante las batallas.
@@ -173,16 +174,40 @@ Esta vez no hubo mucha diferencia entre los lanzamientos de América y Europa lo 
 % GBATEMP: https://gbatemp.net/threads/magniuss-pokemon-soul-silver-translation.179686
 
 \subsubsection{Archivos}
+La primera gran diferencia en esta generación llega con el ofuscado de nombres de archivos y directorios. Como se puede apreciar en la figura~\ref{fig:tr-heartfiles} todos los archivos principales del juego están nombrados con números y clasificados en carpetas númericas también.
+Además, el contenido de estas carpetas no relaciona a los archivos entre sí generando una organización aleatoria.
+En total hay 275 archivos que a su vez son contenedores de subarchivos sin nombre.
+Estos contenedores pueden llegar a tener más de 1000 archivos en su interior pero si se garantiza que el contenido de estos está relacionado entre si correspondiendo a las imágenes a las características de \textit{Pokémon} o las imágenes de un menú concreto.
 
+\includefigure{fig:tr-heartfiles}%
+{Sistema de ficheros ofuscado en Pokémon HeartGold}%
+{imgs/TR-HeartFiles.png}
+
+Mediante depuración del código ensamblador se pudo comprobar la implementación del acceso a estos archivos.
+Todo se realiza llamando a varias funciones de similar cometido cuyo primer parámetro es un ID que identifica al archivo y como segundo parámetro el sub-archivos dentro del contenedor.
+Este ID es lineal y si se descompone en base diez se puede calcular la ruta absoluta.
+De esta forma el ID \textsf{0x1B} (27) corresponde a \verb!27 = 0*10 + 2*10 + 7! lo que significa que estaría ubicado en \textit{a/0/2/7}.
+A la hora de implementar este mecanismo durante el desarrollo del videojuego se usuaría un archivo de cabeceras similar al siguiente.
+
+\begin{verbatim}
+file_paths.h
+#define MESSAGE_FILE_ID 0x1B
+#define POKEMON_IMAGES_FILE_ID 0x1C
+\end{verbatim}
+
+De esta manera, en el proceso de desarrollo sería fácil y sin ofuscar su propio código el indicar qué fichero cargar usando las constantes definidas.
+Este método es sencillo de implementar y dificulta la tarea de edición del juego pues entre los 275 archivos disponibles, binarios, sin estructuras de datos conocidas, habría que averiguar qué hace cada uno sin tener una pista previa como pasaba en ediciones anteriores donde el nombre era descriptivo del contenido.
 
 \subsubsection{Textos}
 Los textos de esta generación vienen igualmente cifrados.
 Esto se pudo comprobar al realizar de nuevo una búsqueda de palabras de los primeros diálogos y no tener resultados ni en el archivo binario del juego ni sobre la memoria RAM.
 
-Tras repetir el proceso descrito en la sección~\ref{sec:tr-pok-pearl-text} de la generación anterior, se comprobó que tanto el formato del archivo como el algoritmo de cifrado y claves son exactamente las mismas a las descritas ahí.
-En esta nueva generación no se apostó por cambiar el cifrado de textos y delegar toda la responsabilidad de dificultar la tarea de edición en el ofuscamiento de nombres de ficheros.
+Tras repetir el proceso descrito en la sección~\ref{sec:tr-pok-pearl-text} de textos de la generación anterior, se comprobó que tanto el formato del archivo como el algoritmo de cifrado y claves son exactamente las mismas a las descritas ahí. Además el formato de las fuentes es también el mismo.
+
+En esta nueva generación no se apostó por cambiar el cifrado de textos y delegar toda la responsabilidad de dificultar la tarea de edición en el ofuscamiento de nombres de ficheros. El fichero está localizado en \textit{a/0/2/7}.
 
 \subsubsection{Imágenes}
+Al igual que sucede con los textos, tras repetir los pasos de la sección~\ref{sec:tr-pok-pearl-img} de imágenes se descubrió que se utiliza el mismo algoritmo de cifrado con las mismas claves. Se encontró sin embargo, una diferencia en la implementanción pues en este caso se descifra empezando por el comienzo de los datos en lugar de por el final.
 
 \subsubsection{Conclusión}
 
@@ -190,12 +215,12 @@ En esta nueva generación no se apostó por cambiar el cifrado de textos y delegar
 Pros & Contras \\
 % Pros
 \begin{itemize}
-\item
+\item Los archivos están ofucados por nombre y directorio.
 \end{itemize} &
 
 % Contras
 \begin{itemize}
-\item
+\item Se mantiene los mismos algoritmos y claves que en la generación anterior por lo que una vez encontrado los archivos se pueden reutilizar las mismas herramientas.
 \end{itemize} \\
 \end{tabular}
 
