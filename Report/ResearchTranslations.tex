@@ -29,6 +29,7 @@ Ejemplo son ficheros como \textit{msgdata/msg.narc} con los mensajes o textos de
 {imgs/TR-PearlFiles.png}
 
 \subsubsection{Textos}
+\label{sec:tr-pok-pearl-text}
 Centrándose en textos del juego se comprueba que están cifrados.
 Tras una búsqueda de las frases de diálogos iniciales sobre todo el archivo binario del juego no se encuentran resultados.
 Se probó en las codificaciones más frecuentes de esta consola como son ASCII y UNICODE sin resultado.
@@ -56,7 +57,7 @@ En la tabla~\ref{tab:tr-pearlfont} se especifica el formato usado en este juego 
     Posición      & Tamaño        & Descripción                         \ML
     \multicolumn{3}{c}{Cabecera}                                        \NN
     \textsf{0x00} & \textsf{0x04} & Puntero a la sección de datos       \NN
-    \textsf{0x04} & \textsf{0x04} & Puntero a la sección VWT            \NN
+    \textsf{0x04} & \textsf{0x04} & Puntero a la sección \acs{VWT}      \NN
     \textsf{0x08} & \textsf{0x04} & Número de caracteres                \NN
     \textsf{0x0C} & \textsf{0x01} & Ancho de un caracter                \NN
     \textsf{0x0D} & \textsf{0x01} & Alto de un caracter                 \NN
@@ -66,6 +67,54 @@ En la tabla~\ref{tab:tr-pearlfont} se especifica el formato usado en este juego 
     \multicolumn{3}{c}{\ac{VWT}\tmark[b]}                               \LL
 }
 
+El segundo procedimiento posible es el de desarrollar un programa de búsqueda diferencial.
+Con motivo de este trabajo en el capítulo~\ref{sec:requirements} se explica el programa \textit{RelativeSearch} que se llevó a cabo.
+Este tipo de \textit{software} se puede usar siempre y cuando el orden de los caracteres de un mismo grupo (por ejemplo letras minúsculas) corresponda a estándares como ASCII.
+Si se hubiese seguido un orden aleatorio en la codificación propietaria este no serviría quedando la primera opción como única alternativa.
 
+Tras usar cualquiera de los dos procedimientos anteriormente descritos, se puedo encontrar una coincidencia en la memoria RAM del diálogo.
+El siguiente paso consistió en depurar el juego para hallar el algoritmo de descifrado o descomprensión de textos.
+Para ello usando los programas descritos en el capítulo~\ref{sec:requirements} de depuración, se puso un punto de interrupción en dicha posición.
+
+Cabe destacar que esta posición es dinámica por lo que cambia cada vez que se inicia el juego pues depende de muchas variables.
+Para sortear este problema se hizo uso de los \textit{savestates} del emulador, es decir guardados de memoria del juego que permiten ir a cualquier momento de una ejecución.
+Gracias a esta característica se puede realizar un guardado justo antes de que el juego guarde un juego de forma que siempre que se use ese \textit{savestate} encontraremos el texto en la misma posición.
+El punto de interrupción hizo parar el emulador justo en las instrucciones máquinas que estaban realizando, en este caso, el descifrado. Este algoritmo se describe a continuación.
+
+El texto se encuentra cifrado usando la operación XOR y mediante una clave que se actualiza después de descifrar cada byte.
+La clave inicial es igual a \verb!clave = (ushort)(0x91BD3 * (i + 1))! donde \verb!i! es el bloque de texto a descifrar.
+Después de aplicar la clave sobre un byte esta se actualiza según \verb!clave = (ushort)(clave + 0x493D)!.
+
+El cifrado no es exclusivo del texto pues la tabla de contenido con las posiciones y tamaños de cada diálogo se encuentra cifrado también.
+La clave no coincide con la del texto y se forma de la siguiente manera: \verb!clave = (ushort)(clave_base * 0x2FD * (i + 1))!.
+En este caso, se hace uso de una clave base que se encuentra disponible en la cabecera del fichero y de nuevo con número de entrada a descifrar (\verb!i!).
+Dado que el tamaño de estos campos cifrados es de 32 bits y la clave de 16 bits, se concatena la clave dos veces formando el valor de 32 bits necesario para aplicar la operación XOR.
+
+Sin embargo, esta parte del fichero a pesar de estar cifrado presenta un fallo de seguridad.
+Como se ha comentado los valores cifrados de posición y tamaño son de 32 bits (4 bytes) pero en la mayoría de los casos solo se usan los dos primeros bytes pues tamaño del fichero de texto no supera los \verb!2^16 = 65535 bytes!.
+Debido a la concateniación de la clave y a que los dos últimos bytes son 0, al cifrar estos dos bytes se estuvo guardando la clave en texto plano.
+Es decir, se demuestra que \verb!a XOR 0 = a! siendo en este caso \verb!a! la clave para cifrar estas entradas y el valor guardado en el fichero en la mayoría de los casos.
+
+En la tabla~\ref{tab:tr-pearltxt} se especifica el formato de los archivos de texto.
+
+\ctable[
+    mincapwidth = 110 mm,
+    footerwidth,
+    caption = Especificación del formato de texto en Pokémon Perla,
+    label   = tab:tr-pearltxt,
+    pos     = h,
+]{ccl}{
+    \tnote[a]{Se especifica solo la primera entrada.}
+    \tnote[b]{Campo cifrado descrito en la sección~\ref{sec:tr-pok-pearl-text}.}
+}{                                                                      \FL
+    Posición      & Tamaño        & Descripción                         \ML
+    \multicolumn{3}{c}{Cabecera}                                        \NN
+    \textsf{0x00} & \textsf{0x02} & Número de bloques de texto          \NN
+    \textsf{0x02} & \textsf{0x02} & Clave base para descifrar \acs{TOC} \ML
+    \multicolumn{3}{c}{\acl{TOC}\tmark[a]}                               \NN
+    \textsf{0x00} & \textsf{0x04} & Posición del texto\tmark[b]         \NN
+    \textsf{0x04} & \textsf{0x08} & Tamaño del texto\tmark[b]           \ML
+    \multicolumn{3}{c}{Texto\tmark[b]}                                  \LL
+}
 
 \subsubsection{Imágenes}
