@@ -6,11 +6,11 @@
 \chapter{Contenido con derechos de autor}
 
 A día de hoy una de las principales preocupaciones de la industria respecto a la difusión de su obra se centra en los derechos de autor.
-Esto es especialmente notable en el mundo de los videojuegos acosado por una piratería continua que causa pérdidas millonarias de dinero\footnote{\url{http://drm.web.unc.edu/games}}.
+Esto es especialmente notable en el mundo de los videojuegos acosado por una piratería continua que causa pérdidas millonarias de dinero\cite{DRM-Game-Carolina}.
 De este contexto nace la idea del \acs{DRM}.
 Se trata en un mecanismo con el único fin de imposibilitar la distribución no autorizada de contenido.
-Existe mecanismos desde los más sencillos y antiguos como son las claves que vienen impresas en un CD a los más nuevos que incluyen el cifrado del videojuego con datos personales de la cuenta del usuario\footnote{\url{http://www.darthnull.org/2014/10/06/ios-encryption}} o una conexión necesaria a los servidores de las compañía.
-Las características comunes de estas técnicas se pueden resumir en los siguientes puntos\footnote{\url{http://es.wikipedia.org/wiki/Gestión_digital_de_derechos}}.
+Existe mecanismos desde los más sencillos y antiguos como son las claves que vienen impresas en un CD a los más nuevos que incluyen el cifrado del videojuego con datos personales de la cuenta del usuario\cite{iOS-Encryption} o una conexión necesaria a los servidores de las compañía.
+Las características comunes de estas técnicas se pueden resumir en los siguientes puntos\cite{Wiki-DRM}.
 
 \begin{itemize}
     \item Detectar quién accede a cada obra, cuándo y bajo qué condiciones.
@@ -30,12 +30,12 @@ Aun encontrando un algoritmo eficiente en términos de protección y sin sobrecarg
 Este consiste en reconvertir un medio digital en analógico, perdiendo los mecanismos DRM.
 Por ejemplo: grabar música con un micrófono que se está reproduciendo, hacer una captura de pantalla a una imagen, grabar la pantalla o copiar a mano o incluso escanear un libro.
 
-Además, se da el problema de que el contenido podría quedar ligado al dispositivo de una compañía, como el caso de los iPod donde solo se admitía música con el mecanismo DRM de Apple\footnote{\url{http://arstechnica.com/tech-policy/2014/10/apple-will-face-350m-trial-over-ipod-drm/}}.
+Además, se da el problema de que el contenido podría quedar ligado al dispositivo de una compañía, como el caso de los iPod donde solo se admitía música con el mecanismo DRM de Apple\cite{Apple-DRM}.
 
 Por motivos como estos y por todas las libertades de las que se le priva al usuario al aplicar este mecanismo existen números detractores.
-Ejemplos son la \acl{EFF} o incluso desarrolladoras famosas como \textit{CD Projekt Red}\footnote{\url{http://www.elotrolado.net/noticia_cd-projekt-red-sobre-el-drm-no-queremos-asaltar-a-nadie_25083}}.
+Ejemplos son la \acl{EFF} o incluso desarrolladoras famosas como \textit{CD Projekt Red}\cite{EOL-Projekt}.
 Numerosos problemas se han dado en el mundo de los videojuegos que han llevado a esta situación de división.
-Los más notables se dan en consolas como \acl{PS3} y XBox donde para algunos juegos es necesaria una conexión con un servidor siempre que se quiere comenzar un juego (denominados \url{https://en.wikipedia.org/wiki/Always-on_DRM}{Always-on DRM}).
+Los más notables se dan en consolas como \acl{PS3} y XBox donde para algunos juegos es necesaria una conexión con un servidor siempre que se quiere comenzar un juego (denominados \textit{Always-on DRM}\cite{Wiki-AlwaysOn}).
 Esto priva al usuario de la posibilidad de jugar sin tener una conexión a Internet (casos se irse de vacaciones) o de casos donde se caen los servidores de la compañía.
 
 Se trata de un bucle, pues al aumentar la piratería se crean medidas más restrictivas como quitar la posibilidad de comprar juegos de segunda mano en Play Station 4 o Xbox One, lo que desagrada al usuario e intenta buscar vías más asequibles que acaban fomentando la piratería.
@@ -61,7 +61,7 @@ El libro digital se encuentra codificado en el archivo \textit{hd05\_es.sdat} de
 Se trata de un fichero que contiene archivos comprimidos.
 La compresión en este caso fue obvia pues en la posición \textsf{0x08} se encuentra en ASCII la cadena de caracteres \textsf{zlib} (figura~\ref{fig:cr-psar}).
 Además el fichero no presenta dificultad en su descifrado pues se basa como en la mayoría de su tipo en incluir después de la cabecera todas las posiciones y tamaños de los archivos que incluye (tabla~\ref{tab:cr-psar}).
-En el \href{https://github.com/pleonex/Ninokuni/tree/master/Programs/PS3/NinoDecompiler}{repositorio} de este trabajo se incluye un programa desarrollado para su descompresión.
+En el repositorio\footnote{\url{https://github.com/pleonex/Ninokuni/tree/master/Programs/PS3/NinoDecompiler}} de este trabajo se incluye un programa desarrollado para su descompresión.
 
 \ctable[
     caption = Especificación de formato PSAR,
@@ -154,7 +154,7 @@ Tras este análisis, desde el primer fichero directamente extraído de la carpeta 
 Incluso los formatos de las propias imágenes son estándar.
 
 Cabe destacar también, que la \acs{PS3} provee de mecanismos nativos para cifrar archivos que sí se usa para proteger el resto de datos del juego como imágenes y textos (archivo \textit{hs06\_es.adat.sdat}).
-Este formatos con extensión \textsf{sdat} y cabecera \textsf{NPD} usa las claves internas y mecanismos internos de cifrado de la consola que asegura su confidencialidad\footnote{A día de hoy ya se ha podido romper este mecanismo:  \href{https://github.com/Hykem/make_npdata}{make\_npdata}.}.
+Este formatos con extensión \textsf{sdat} y cabecera \textsf{NPD} usa las claves internas y mecanismos internos de cifrado de la consola que asegura su confidencialidad\footnote{A día de hoy ya se ha podido romper este mecanismo \cite{GH-npdata}.}.
 
 \subsection{100 Classic Book Collection}
 El segundo juego que se ha analizado para comprobar su seguridad en cuanto a libros electrónicos ha sido \textit{100 Classic Book Collection}.
@@ -190,7 +190,7 @@ Si bien es cierto que todas estas obras son clásicas, sin derechos de autor a dí
 
 \section{Bandas sonoras}
 Las música de los videojuegos es una de sus partes más importantes.
-De ahí que se llegue a vender de forma a parte siendo este el objetivo de muchas compañías\footnote{\href{http://www.develop-online.net/news/we-are-not-evil-trolls-indmusic-responds-to-youtube-copyright-anger/0187578}{Incluso vídeos de partidas de videojuegos pueden ser censurados en Youtube por derechos de autor.}}.
+De ahí que se llegue a vender de forma a parte siendo este el objetivo de muchas compañías\footnote{Incluso vídeos de partidas de videojuegos pueden ser censurados en Youtube por derechos de autor\cite{YT-Gameplay}.}.
 Además existe el género \textit{musical} en el cual canciones recientes y con derechos de autor se pueden incluir dentro del juego.
 
 La discusión de este tipo de juegos caería sobre si al pagar el juego se está pagando también las canciones.
@@ -223,7 +223,7 @@ Se caracterizan por incluir una pieza de \textit{hardware} extra e imprescindibl
 Este aparato tiene los cuatro botones que la guitarra simulada que se conectan en el segundo \textit{slot} de la consola.
 
 Gracias a incluir \textit{hardware} adicional hace que no sea posible piratear el juego~(figura \ref{fig:cr-guitarGrip}), pues no había forma de jugar sin esta
-\footnote{Más tarde se descubrió un \href{https://gbatemp.net/threads/how-to-change-buttons-on-guitar-hero-on-tour-hack.275789/\#post-3411881}{parche} para poder jugar usando los botones de la consola y no necesitar \textit{Guitar Grip}.}.
+\footnote{Más tarde se descubrió un parche\cite{GTemp-GHhack} para poder jugar usando los botones de la consola y no necesitar \textit{Guitar Grip}.}.
 
 \includefigure{fig:cr-guitarGrip}%
 {\textit{Guitar Grip} necesario para jugar a la saga \textit{Guitar Hero: On Tour}.}%
@@ -233,14 +233,14 @@ Analizando el primer juego de la saga, se puede ver que todos los archivos están
 Sin embargo, el archivo que contiene todos los datos está cifrado.
 El código ensamblador con el algoritmo de descifrado cuenta con alrededor de 1900 líneas de instrucciones que hacen muy difícil su comprensión y que, como se comentó en el segundo capítulo, hace que el esfuerzo valga más que el contenido.
 
-Al ser un juego famoso, ha habido investigaciones sobre el formato de los ficheros. Destaca la siguiente \href{http://www.scorehero.com/forum/viewtopic.php?t=67124}{entrada} de foro donde se describe como extraer las canciones. La estructura de este formato se describe en la tabla~\ref{tab:cr-guitarHero}.
+Al ser un juego famoso, ha habido investigaciones sobre el formato de los ficheros por lo que el procedimiento de extracción de las canciones está documentado\cite{SH-GH}. La estructura de este formato se describe en la tabla~\ref{tab:cr-guitarHero}.
 
 \ctable[
     caption = Especificación del formato de \textit{Guitar Hero: On Tour},
     label   = tab:cr-guitarHero,
     pos     = h
 ]{ccl}{
-    \tnote[a]{Información extraída de \href{http://slowhero.moto-coda.org/tech/ungob.pl}{ungob.pl} y corroborada.}
+    \tnote[a]{Información extraída de ungob.pl\cite{Ungob} y corroborada.}
     \tnote[b]{Los datos del fichero están codificados en \textit{big-endian}.}
     \tnote[c]{Se describe la primera entrada.}
     \tnote[d]{Si es el último bloque el valor será \textsc{0x7FFF}.}
@@ -269,7 +269,7 @@ La primera edición del juego provee de buenos mecanismos frente tanto a la distr
 Sin embargo, se encuentra un descuido en las siguientes dos ediciones del juego.
 Los archivos no llegaron a ser empaquetados en formato \textsc{GFC} + \textsc{GOB} ni protegidos de ninguna manera.
 Se haya dentro del juego las carpetas \textit{StrmFIGS} y \textit{TracksFIGS} (nótese la terminación \textit{FIGS} usada anteriormente para nombrar al archivo \textsc{GOB}).
-Dentro se puede encontrar las canciones en formato \textsc{Vorbis OGG} estándar\footnote{Datos obtenido de la siguiente \href{http://forum.xentax.com/viewtopic.php?f=10&t=3092}{entrada} de foro}.
+Dentro se puede encontrar las canciones en formato \textsc{Vorbis OGG} estándar\cite{Xentax-HWAS}.
 En concreto, por facilidades técnicas se han separado cada canción en tres archivos, uno con la base de guitarra, otra con la base de batería y otra con la voz.
 Las dos primeras están codificadas en \textsc{OGG} y la tercera en \textsc{HWAS}.
 Este último formato se trata de \textsc{IMA-ADPCM - Vorbis VOX} con una cabecera de 512 bytes descrita en la tabla~\ref{tab:cr-vox}.
@@ -312,11 +312,11 @@ Esta última, se trata de una variante de \acs{IMA-ADPCM} con algoritmo predictiv
 
 Esto permitió por ejemplo en el caso de \textit{Ni no kuni} introducir en el juego una banda sonora grabada por la orquesta de Tokio.
 Además, al ser propietario y único para estos juegos tanto el formato de archivo como de codificación de las muestras, dificultó la tarea de extracción y hubieron de pasar varios años hasta que se investigó.
-En este \href{https://github.com/pleonex/SADL-Audio-format}{repositorio} se ha investigado y desarrollado un programa para convertir este formato de audio.
+La codificación de este formato se ha investigado y documentado en repositorios de GitHub\footnote{\url{https://github.com/pleonex/SADL-Audio-format}}.
 
-Al proteger los archivos e imposibilitar su extracción, se permite abrir el mercado ante la posibilidad de vender la banda sonora de forma externa como pasó con este juego\footnote{\href{http://www.play-asia.com/ni-no-kuni-shikkoku-no-madoushi-original-soundtrack/13/704299}{Tienda virtual} donde se podía comprar el CD de audio.}.
+Al proteger los archivos e imposibilitar su extracción, se permite abrir el mercado ante la posibilidad de vender la banda sonora de forma externa como pasó con este juego\cite{PlayAsia-NinokuniDSSound}.
 
-Caso distinto es la versión para \acl{PS3}\footnote{Esta banda sonora también se \href{http://www.amazon.com/Ni-Kuni-Wrath-Original-Soundtrack/dp/B00DRS6UKQ}{vendió} aparte.} de este juego dado que el formato de los archivos es estándar y se puede reproducir con programas como \href{http://www.videolan.org/vlc/}{VLC}.
+Caso distinto es la versión para \acl{PS3}\footnote{Esta banda sonora también se vendió aparte\cite{Amazon-NinokuniPS3Sound}.} de este juego dado que el formato de los archivos es estándar y se puede reproducir con programas como \url{http://www.videolan.org/vlc/}{VLC}.
 La protección en este juego se centra en el empaquetado de todos los archivos (excepto el libro electrónico) que como se describió en la primera sección viene protegida con una clave propia de la consola.
 
 \subsection{Duet}
@@ -324,7 +324,7 @@ En último lugar se describirá el videojuego \textit{Duet}.
 Desarrollado por \textit{Kumobius} para las plataformas Android y iOS en 2013.
 La aplicación es de pago (entorno a 4?) pero en periodos de oferta está disponible gratuitamente.
 
-La banda sonora fue compuesta por Tim Shiel y puede comprarse en \href{https://itunes.apple.com/us/album/duet/id721804015}{iTunes} por \$4.99.
+La banda sonora fue compuesta por Tim Shiel y puede comprarse en iTunes\footnote{\url{https://itunes.apple.com/us/album/duet/id721804015}} por \$4.99.
 Sin embargo, al igual que pasó con los juegos anteriormente descritos, la seguridad ante una posible extracción se dejó en la capa del binario del juego.
 En este caso, si se cuenta con un móvil con acceso al sistema de archivos (\textit{jailbreak} en el caso de iOS) y se accede a la carpeta de la aplicación se puede encontrar toda la banda sonara en formato \textsc{WAV}.
 
@@ -340,7 +340,7 @@ Si bien de nuevo está presente el problema del agujero analógico, en algunos cas
 En esta consola, la protección de muchos archivos se confió en la imposibilidad de descifrar archivos con una clave que sólo se conocía por la consola como se discutió con los libros electrónicos.
 
 El formato estándar tiene extensión \textsc{pam} y no es más que una codificación \textsc{MPEG} con una cabecera de 1000 bytes prescindible para su decodificación.
-En este \href{https://github.com/pleonex/Ninokuni/tree/master/Programs/PS3/pam2mpg}{repositorio} se desarrolló un programa que convierte los archivos a formato \textsc{MPEG}.
+En el repositorio\footnote{ \url{https://github.com/pleonex/Ninokuni/tree/master/Programs/PS3/pam2mpg}{repositorio}} se adjunta un programa que convierte los archivos a formato \textsc{MPEG}.
 
 \subsection{\acl{NDS}}
 Caso distinto es el de esta consola.
@@ -349,4 +349,4 @@ La mayoría de juegos usa una codificación propietaria proporcionada por Nintendo
 
 A día de hoy nadie ha sido capaz de estudiar la codificación debido a la complejidad de la misma.
 Al estar desarrollada explícitamente para la consola y basarse en piezas específicas de \textit{hardware}, se requiere un tiempo y conocimientos que superan el valor de la misma.
-La alternativa a la hora de extraer recursos de este calibre es grabar la pantalla mientras se reproduce el juego en un emulador\footnote{El emulador \href{http://desmume.org/}{DeSmuME} tiene esta funcionalidad implementada.}.
+La alternativa a la hora de extraer recursos de este calibre es grabar la pantalla mientras se reproduce el juego en un emulador\footnote{El emulador DeSmuME tiene esta funcionalidad implementada.}.
