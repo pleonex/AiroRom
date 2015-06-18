@@ -21,20 +21,21 @@ Estado del arte:
 Requisitos, planificación y costes:
 ☐ Objetivos específicos y tareas para llevarlos a cabo. Repo y wiki.
 ☐ Planificación.
-☐ Recursos y costes.
+☐ Recursos y costes (desmume).
+☐ Explicar RelativeSearch.
 
 Traducciones:
 ☐ Mods (http://es.wikipedia.org/wiki/Mod_%28videojuegos%29)
 ☐ Problema no tan conocido en las empresas.
 ☐ Caso Pokémon en NDS (ver evolución).
-☐ DP: Textos & Imágenes & audio
-☐ HS: Textos & Imágenes & audio
-☐ BW: Textos & Imágenes & audio
-☐ Dash: Imágenes
+✔ DP: Textos & Imágenes @done(2015-06-18 04:02)
+☐ HS: Textos & Imágenes & archivos
+☐ BW: Textos & Imágenes & archivos
+☐ BW: Protección de overlays con HMAC
 ☐ Conquest: Textos & Imágenes
 ☐ Ninokuni: Textos & Scripts & Imágenes
-☐ Hetalia: Textos
-☐ Hetalia: Imágenes
+☐ Ninokuni: Integridad en partidas para evitar modificaciones
+☐ Hetalia: Textos & Imágenes
 ☐ Analizar proyectos abandonados.
 
 Copyright:
@@ -51,7 +52,9 @@ Copyright:
 ☐ Sprite resource web (http://www.spriters-resource.com/)
 ☐ Profundizar en Guitar Hero: On Tours
 ☐ Introducción: Añadir información del cap. 13 negro.
-☐ Separar opiniones con \begin{leftbar}
+☐ Añadir conclusiones (pros y contras) a los juegos.
+☐ Añadir propuestas a los juegos.
+☐ Revisar footnotes.
 
 Multijugador y DLC:
 ☐ Introducir en el tema y su importancia en proteger comunicación.
@@ -73,7 +76,8 @@ Resultados:
 ☐ Encriptar ficheros usando nombre del fichero.
 ☐ Ocultar el nombre de los ficheros con CRC32 por rapidez (Ninokuni).
 ☐ Compresión en Layton 4
+☐ Explicar algoritmo pensado -- Contenedor + Identificador de archivo almacenador en código fuente escrito mediante #define de preprocesador + Acceso a subarchivos por transformación de código (CRC32) + Cifrado de archivos usando ese código.
 
 Conclusiones:
 ☐ Conclusiones.
-☐ Trabajo futuro.
+☐ Trabajo futuro (pokemon 2, seguridad en consolas, integridad en saves)
