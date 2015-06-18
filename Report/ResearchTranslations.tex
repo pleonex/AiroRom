@@ -139,3 +139,21 @@ La siguiente función que leía los datos de dicha imagen era el algoritmo de desc
 Se trata de un cifrado parecido al realizado sobre el texto donde habrá una clave que irá cambiando después de aplicarse sobre cada valor y que se usará para aplicar la operación XOR sobre un dato cifrado.
 En este caso, la clave es de 32 bits y el dato a descifrar de 16 bits y se comencerá desde el final del fichero hasta el principio.
 La clave inicial será el primer valor (últimos dos bytes del fichero) e irá cambiando siguiendo la siguiente operación \verb!clave = (uint)(clave * 0x41C64E6D + 0x6073)!.
+
+\subsubsection{Conclusión}
+
+\begin{tabular}{p{0.4\textwidth}p{0.5\textwidth}}
+Pros & Contras \\
+% Pros
+\begin{itemize}
+\item Los textos usando una codificación no estándar.
+\item Los textos están cifrados con una clave no estática.
+\item Las imágenes están cifradas con un clave no estática.
+\end{itemize} &
+
+% Contras
+\begin{itemize}
+\item Los archivos y carpetas tienen nombres descriptivos.
+\item Hay un fallo de seguridad en el cifrado de la tabla de contenido de los textos por el que se puede averiguar la clave.
+\end{itemize} \\
+\end{tabular}
