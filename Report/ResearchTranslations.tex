@@ -174,13 +174,14 @@ Esta vez no hubo mucha diferencia entre los lanzamientos de América y Europa lo 
 % GBATEMP: https://gbatemp.net/threads/magniuss-pokemon-soul-silver-translation.179686
 
 \subsubsection{Archivos}
+\label{sec:tr-pok-heart-file}
 La primera gran diferencia en esta generación llega con el ofuscado de nombres de archivos y directorios. Como se puede apreciar en la figura~\ref{fig:tr-heartfiles} todos los archivos principales del juego están nombrados con números y clasificados en carpetas númericas también.
 Además, el contenido de estas carpetas no relaciona a los archivos entre sí generando una organización aleatoria.
 En total hay 275 archivos que a su vez son contenedores de subarchivos sin nombre.
 Estos contenedores pueden llegar a tener más de 1000 archivos en su interior pero si se garantiza que el contenido de estos está relacionado entre si correspondiendo a las imágenes a las características de \textit{Pokémon} o las imágenes de un menú concreto.
 
 \includefigure{fig:tr-heartfiles}%
-{Sistema de ficheros ofuscado en Pokémon HeartGold}%
+{Carpetas y ficheros ofuscados en Pokémon HeartGold}%
 {imgs/TR-HeartFiles.png}
 
 Mediante depuración del código ensamblador se pudo comprobar la implementación del acceso a estos archivos.
@@ -232,8 +233,65 @@ Pros & Contras \\
 % PP: http://projectpokemon.org/forums/showthread.php?11746-Pok%E9mon-Black-and-White-Translation-Project-v3-%28Project-is-complete!%29
 
 \subsubsection{Archivos}
+En la sexta generación decidieron optar de nuevo por ofuscar los nombres de las carpetas y archivos.
+En este caso, se dio un paso más y se hizo sobre todos los archivos.
+Sin bien, en el caso de \textit{Pokémon HeartGold y SoulSilver} fueron solo los archivos principales los ofuscados, en esta edición los únicos que no se procesaron fueron los de sonido y demo como se aprecia en la figura~\ref{fig:tr-blackheartfiles}.
+
+\includefigure{fig:tr-blackheartfiles}%
+{Comparación de carpetas entre Pokémon Blanco (izq.) y Pokémon HeartGold (der.)}
+{imgs/TR-BlackHeartFiles.png}
+
+A pesar de usar internamente la misma forma de acceso a como se describió en el apartado de archivos de la sección~\ref{sec:tr-pok-heart-file}, los identificadores y por tanto localización de estos cambió.
+Pasando de esta forma el archivo con los textos del juego a estar en \textit{a/0/0/2} en lugar de \textit{a/0/2/7} como sucedía en la edición anterior.
 
 \subsubsection{Textos}
+\label{sec:tr-pok-black-text}
+En el apartado de protección a los textos, en las dos generaciones anteriores se utilizó un mismo algoritmo basado en un clave dinámica que se aplicaba con la operación XOR.
+En esta generación la filosofía del algoritmo se mantiene cambiando no obstante la forma de generación y actualización de la clave.
+Esta se pudo obtener tras realizar el procedimiento descrito en el apartado textos de la sección~\ref{sec:tr-pok-pearl-text}.
+
+La principal diferencia tras aplicar el método de investigación de cifrado fue ver que no se usaba una codificación propia si no UTF-16.
+Esto facilitó la tarea, pues ya no es necesaria una búsqueda diferencial en la memoria RAM y por tanto crear \textit{software} adicional para investigar.
+Se trata por tanto de la eliminación de un mecanismo fuerte a la hora de proteger datos que posiblemente estaba realizando en ediciones anteriores de casualidad.
+
+La clave inicial usada para el texto se genera usando el número de bloque como variable, de forma que cada bloque comienza con una clave diferente. La operación es \verb!clave = (i + 3) * 0x2983!.
+Tras aplicar esta clave sobre un valor de 16 bits cifrado (dos bytes), se actualiza desplazando los tres bits más significados a la posición menos significativa.
+Esto se puede conseguir aplicando la siguiente serie de operaciones.
+
+\begin{verbatim}
+temp  = clave & 0x1FFF;             // Elimina los bits más significativos
+clave = (temp << 3) | (clave >> 13) // y los añade al principio.
+\end{verbatim}
+
+Al desplazarse un número impar de veces, cada bit pasará de forma lineal sobre cada posición de la clave obteniéndose el máximo de permutaciones para una clave de 16 bits, es decir se usará a la hora de cifrar y descifrar 16 claves diferentes.
+
+La estructura de datos se especifica en la tabla~\ref{tab:tr-blacktxt} donde se puede ver que la sección con la tabla de contenido no está cifrada a diferencia de cómo pasaba en ediciones anteriores.
+
+\ctable[
+    mincapwidth = 110 mm,
+    footerwidth,
+    caption = Especificación del formato de texto en Pokémon Blanco,
+    label   = tab:tr-blacktxt,
+    pos     = h,
+]{ccl}{
+    \tnote[a]{Se especifica solo la primera entrada.}
+    \tnote[b]{Cada caracter es un valor de 16 bits.}
+    \tnote[c]{Campo cifrado descrito en la sección~\ref{sec:tr-pok-black-text}.}
+}{                                                                          \FL
+    Posición      & Tamaño        & Descripción                             \ML
+    \multicolumn{3}{c}{Cabecera}                                            \NN
+    \textsf{0x00} & \textsf{0x02} & Constante: \textsf{0x01}                \NN
+    \textsf{0x02} & \textsf{0x02} & Número de bloques de texto              \NN
+    \textsf{0x04} & \textsf{0x04} & Tamaño de la sección de datos           \NN
+    \textsf{0x08} & \textsf{0x04} & Constante: \textsf{0x00}                \NN
+    \textsf{0x0C} & \textsf{0x04} & Tamaño de la cabecera                   \ML
+    \multicolumn{3}{c}{\acl{Datos}}                                         \NN
+    \textsf{0x00} & \textsf{0x04} & Tamaño de la sección                    \NN
+    \textsf{0x04} & \textsf{0x04} & Posición relativa a la sección\tmark[a] \NN
+    \textsf{0x06} & \textsf{0x02} & Número de caracteres\tmark[a]\tmark[b]  \NN
+    \textsf{0x08} & \textsf{0x02} & Desconocido\tmark[a]                    \ML
+    \multicolumn{3}{c}{Texto\tmark[c]}                                      \LL
+}
 
 \subsubsection{Imágenes}
 
