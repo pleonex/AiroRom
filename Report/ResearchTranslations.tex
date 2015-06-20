@@ -294,6 +294,17 @@ La estructura de datos se especifica en la tabla~\ref{tab:tr-blacktxt} donde se 
 }
 
 \subsubsection{Imágenes}
+Las imágenes a diferencia de las pasadas generaciones no se cifraron.
+En cambio, no se utiliza un formato estándar de codificación.
+Si bien parte de la cabecera para las paletas y datos de imagen si se reutiliza, existe un conjunto de formatos extras únicos en este juego con la información necesaria para recomponer la imagen (figura~\ref{fig:tr-blackimg}).
+
+\includefigure{fig:tr-blackimg}%
+{Imágenes sin cifrar en Pokémon Negro.}%
+{imgs/TR-BlackImg.png}
+
+Esta forma de codificación, aunque pudiendo no ser específica para protegerlas ante modificaciones si no un requisito para animaciones, es más fuerte.
+De esta forma los programas de ediciones genéricas creados para juegos de \acl{Nintendo DS} ya no son útiles y se necesita nuevos y específicos.
+Esta tarea requiere de investigación de formatos y de programación, algo que toma más esfuerzo y tiempo que crear un decodificador como pasaba en las generaciones anteriores.
 
 \subsubsection{Archivos ejecutables}
 
