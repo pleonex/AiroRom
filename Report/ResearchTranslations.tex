@@ -285,7 +285,7 @@ La estructura de datos se especifica en la tabla~\ref{tab:tr-blacktxt} donde se 
     \textsf{0x04} & \textsf{0x04} & Tamaño de la sección de datos           \NN
     \textsf{0x08} & \textsf{0x04} & Constante: \textsf{0x00}                \NN
     \textsf{0x0C} & \textsf{0x04} & Tamaño de la cabecera                   \ML
-    \multicolumn{3}{c}{\acl{Datos}}                                         \NN
+    \multicolumn{3}{c}{Datos}                                         \NN
     \textsf{0x00} & \textsf{0x04} & Tamaño de la sección                    \NN
     \textsf{0x04} & \textsf{0x04} & Posición relativa a la sección\tmark[a] \NN
     \textsf{0x06} & \textsf{0x02} & Número de caracteres\tmark[a]\tmark[b]  \NN
@@ -296,17 +296,17 @@ La estructura de datos se especifica en la tabla~\ref{tab:tr-blacktxt} donde se 
 \subsubsection{Imágenes}
 Las imágenes a diferencia de las pasadas generaciones no se cifraron.
 En cambio, no se utiliza un formato estándar de codificación.
-Si bien parte de la cabecera para las paletas y datos de imagen si se reutiliza, existe un conjunto de formatos extras únicos en este juego con la información necesaria para recomponer la imagen (figura~\ref{fig:tr-blackimg}).
+Si bien el formato para las paletas y datos de imagen si se reutiliza y sigue siendo estándar, existe un ficheros extras con una especificación nueva en este juego con la información necesaria para recomponer la imagen (figura~\ref{fig:tr-blackimg}).
 
 \includefigure{fig:tr-blackimg}%
 {Imágenes sin cifrar en Pokémon Negro.}%
 {imgs/TR-BlackImg.png}
 
 Esta forma de codificación, aunque pudiendo no ser específica para protegerlas ante modificaciones si no un requisito para animaciones, es más fuerte.
-De esta forma los programas de ediciones genéricas creados para juegos de \acl{Nintendo DS} ya no son útiles y se necesita nuevos y específicos.
+De esta forma los programas de ediciones genéricas creados para juegos de \acl{NDS} ya no son útiles y se necesita nuevos y específicos.
 Esta tarea requiere de investigación de formatos y de programación, algo que toma más esfuerzo y tiempo que crear un decodificador como pasaba en las generaciones anteriores.
 
-\subsubsection{Archivos ejecutables}
+A pesar de ello, esta reconstrucción y edición de la imagen se podría llegar a cabo manualmente ya que el formato de los ficheros principales: paleta y datos de imagen, sigue siendo el estándar para juegos de la \acl{NDS}.
 
 \subsubsection{Conclusión}
 
@@ -314,14 +314,23 @@ Esta tarea requiere de investigación de formatos y de programación, algo que tom
 Pros & Contras \\
 % Pros
 \begin{itemize}
-\item
+\item Los nombres de las carpetas y archivos están ofuscados.
+\item Los textos están cifrados con un nuevo algoritmo y clave.
+\item Las imágenes usan archivos extras con especificaciones nuevas para recomponerlas por lo que \textit{software} nuevo sería necesario.
 \end{itemize} &
 
 % Contras
 \begin{itemize}
-\item
+\item Los textos no usan una codificación propia.
+\item Las imágenes no está cifradas.
+\item Las imágenes usando el formato estándar para los archivos principales.
 \end{itemize} \\
 \end{tabular}
+
+\underline{Propuesta:} Usar una codificación propia, de 16 bits, en lugar de una estándar pues dificulta la búsqueda del algoritmo de cifrado.
+Al igual que en la propuesta de generaciones anteriores, desordenar los caracteres en la codificación.
+Cifrar las imágenes es un buen mecanismo ya que requiere \textit{software} y trabajo adicional.
+Además, cambiando el formato de todas las imágenes haría que programas genéricos no fueran útiles.
 
 \subsection{Pokémon Conquest}
 

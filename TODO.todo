@@ -30,7 +30,6 @@ Traducciones:
 ✔ DP: Textos & Imágenes @done(2015-06-18 04:02)
 ✔ HS: Textos & Imágenes & archivos @done(2015-06-18 05:31)
 ✔ BW: Textos & Imágenes & archivos @done(2015-06-20 16:42)
-☐ BW: Protección de overlays con HMAC
 ☐ Conquest: Textos & Imágenes
 ☐ Ninokuni: Textos & Scripts & Imágenes
 ☐ Ninokuni: Integridad en partidas para evitar modificaciones
@@ -62,6 +61,7 @@ Multijugador y DLC:
 ☐ Antiguo fallo de seguridad en Clash of Clans, Wally y Duet
 ☐ Fallo en Preguntados.
 ☐ Seguridad en Ninokuni.
+☐ BW: Protección de overlays con HMAC
 
 Juegos famosos:
 ☐ New Super Mario Bros
