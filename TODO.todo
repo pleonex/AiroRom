@@ -30,8 +30,8 @@ Traducciones:
 ✔ DP: Textos & Imágenes @done(2015-06-18 04:02)
 ✔ HS: Textos & Imágenes & archivos @done(2015-06-18 05:31)
 ✔ BW: Textos & Imágenes & archivos @done(2015-06-20 16:42)
-☐ Conquest: Textos & Imágenes
-☐ Ninokuni: Textos & Scripts & Imágenes
+✔ Conquest: Textos & Imágenes @done(2015-06-21 21:37)
+✔ Ninokuni: Textos & Scripts & Imágenes @done(2015-06-21 21:37)
 ☐ Ninokuni: Integridad en partidas para evitar modificaciones
 ✘ Hetalia: Textos & Imágenes @cancelled(2015-06-18 05:18)
 ☐ Analizar proyectos abandonados.
@@ -51,7 +51,6 @@ Copyright:
 ☐ Profundizar en Guitar Hero: On Tours
 ☐ Introducción: Añadir información del cap. 13 negro.
 ☐ Añadir conclusiones (pros y contras) a los juegos.
-☐ Añadir propuestas a los juegos.
 ✔ Revisar footnotes. @done(2015-06-19 01:51)
 
 Multijugador y DLC:
@@ -76,6 +75,9 @@ Resultados:
 ☐ Ocultar el nombre de los ficheros con CRC32 por rapidez (Ninokuni).
 ☐ Compresión en Layton 4
 ☐ Explicar algoritmo pensado -- Contenedor + Identificador de archivo almacenador en código fuente escrito mediante #define de preprocesador + Acceso a subarchivos por transformación de código (CRC32) + Cifrado de archivos usando ese código.
+☐ No se puede parar solo retrasar hasta la llegada de la traducción.
+☐ Hasta qué punto el esfuerzo vale el producto.
+☐ Cifrado no simétrico sin poder alterar el código.
 
 Conclusiones:
 ☐ Conclusiones.

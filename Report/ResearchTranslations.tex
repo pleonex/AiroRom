@@ -350,6 +350,7 @@ En este juego no se han ofuscado los archivos y carpetas.
 Todo está bien organizado y con nombres descriptivos.
 
 \subsubsection{Textos}
+\label{sec:tr-pok-conquest-text}
 Los textos sí han cifrado y codificado con una protección mayor que en otras generaciones.
 Para encontrar se buscó en primer lugar sobre la memoria RAM repitiendo el proceso explicado en el apartado textos de la sección~\ref{sec:tr-pok-pearl-text}.
 Dado que se usa la codificación estándar SJIS se pudo encontrar directamente.
@@ -364,13 +365,29 @@ Destaca esta codificación pues no es sencilla de implementar y requiere mucho es
 Antes de esta parte de codificación, el texto se descifra.
 El cifrado se basa en aplicar la clave ``\textsf{MsgLinker Ver1.00}'' sobre cada byte de texto.
 A continuación se muestra la implementación en C\# para el cifrado y descifrado\footnote{\url{http://subirelcodigo}}.
-El formato del fichero se especifica en la tabla TODO.
+El formato del fichero se especifica en la tabla~\ref{tab:tr-conquesttxt}.
 
 \begin{verbatim}
 string key = "MsgLinker Ver1.00";
 for (int i = 0; i < data.Length; i++)
     data[i] ^= key[i % key.Length];
 \end{verbatim}
+
+\ctable[
+    caption = Especificación del formato de texto en Pokémon Conquest,
+    label   = tab:tr-conquesttxt,
+    pos     = h,
+]{ccl}{
+    \tnote[a]{Se especifica solo la primera entrada.}
+    \tnote[b]{Existen 33 bloques.}
+    \tnote[c]{Campo cifrado descrito en la sección~\ref{sec:tr-pok-conquest-text}.}
+}{                                                                          \FL
+    Posición      & Tamaño        & Descripción                             \ML
+    \multicolumn{3}{c}{\acl{TOC}\tmark[a]\tmark[b]}          \NN
+    \textsf{0x00} & \textsf{0x04} & Posición del bloque                     \NN
+    \textsf{0x04} & \textsf{0x04} & Tamaño del bloque                       \ML
+    \multicolumn{3}{c}{Bloques\tmark[c]}                                    \LL
+}
 
 \subsubsection{Imágenes}
 Tanto los fondos como los \textit{sprites} del juego no vienen cifrados.
@@ -399,8 +416,32 @@ Pros & Contras \\
 Faltaría respecto a la otra línea de juegos ofuscar archivos y carpetas y cifrar imágenes y usar una codificación final no estándar.
 Además a este respecto habría que cifrar la fuente y desordenar los caracteres.
 
-\section{Ni no kuni y el Mago de las Tinieblas}
+\section{Ninokuni y el Mago de las Tinieblas}
 
+% TODO: Intro
+
+\subsubsection{Archivos}
+Los archivos y carpetas no están ofuscadas y está todo bien organizado y clasificado.
+
+\subsubsection{Textos}
+En cuanto al apartado de textos hay que distiguir de dos tipos: \textit{scripts} y nombres y descripciones.
+Empezando por el último, este tipo de textos se encuentran en archivos que contienen las características de personajes, objetos y ataques y no solo el texto.
+Con el objetivo de editar los parámetros que definen sus características y hacer una versión modificada del mismo con mayor, menor o una jugabilidad distinta estos ficheros se cifraron.
+El cifrado es muy básico y pero eficaz ante personas que no entienden.
+En la figura~\ref{fig:tr-nino-minitext} se puede ver como se repite el byte \textsf{0xFF} con frecuencia.
+Esto da una pista del tipo de cifrado empleado pues probando a realizar una operación \textsf{XOR 0xFF} o lo que es lo mismo \textsf{NOT} se puede ver como todo queda descifrado.
+
+\includefigure{fig:tr-nino-minitext}%
+{Archivo cifrado (arr.) y descifrado (ab.) de Ninokuni y el Mago de las Tinieblas}%
+{imgs/TR-NinoMiniText.png}
+
+Respecto a los \textit{scripts} debido a sus requisitos técnicos para ejecutar todo tipo de comandos son complejos de investigar.
+A día de hoy solo existe un \textit{software} no público desarrollado para la traducción al español que solo es capaz de editar los textos de los diálogos.
+El formato está basado en parámetros a nivel de bits lo que hace inviable investigar el formato sin mirar las instrucciones máquinas del juego que lo procesan.
+
+\subsubsection{Imágenes}
+Las imágenes no están cifradas pero los archivos asociados a una imagen están comprimidos en un nuevo formato.
+Son fáciles de extraer pero requiere nuevo \textit{software}\footnote{\url{https://github.com/pleonex/ninoimager}}.
 
 \subsubsection{Conclusión}
 
@@ -408,13 +449,18 @@ Además a este respecto habría que cifrar la fuente y desordenar los caracteres.
 Pros & Contras \\
 % Pros
 \begin{itemize}
-\item
+    \item Formato complejo en los \textit{scripts}.
+    \item Cifrado básico en algunos archivos de texto.
 \end{itemize} &
 
 % Contras
 \begin{itemize}
-\item
+    \item En general no están cifrado los archivos de texto.
+    \item Las imágenes no están cifradas.
+
 \end{itemize} \\
 \end{tabular}
+
+\underline{Propuestas:} Aplicar mecanismos de protección sobre textos e imágenes e utilizar una codificación de texto propia.
 
 \section{Proyectos abandonados}
