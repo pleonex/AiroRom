@@ -346,10 +346,35 @@ Además, cambiando el formato de todas las imágenes haría que programas genéricos
 % PC: http://pokecheats.net/forum/showthread.php?13925-Translation-project-for-Pok%C3%A9mon-Nobunaga-s-Ambition&s=722c3c7d8b0c4df38ba6b023bc4fe633
 
 \subsubsection{Archivos}
+En este juego no se han ofuscado los archivos y carpetas.
+Todo está bien organizado y con nombres descriptivos.
 
 \subsubsection{Textos}
+Los textos sí han cifrado y codificado con una protección mayor que en otras generaciones.
+Para encontrar se buscó en primer lugar sobre la memoria RAM repitiendo el proceso explicado en el apartado textos de la sección~\ref{sec:tr-pok-pearl-text}.
+Dado que se usa la codificación estándar SJIS se pudo encontrar directamente.
+
+Una vez puesto el punto de interrupción se dio con el algoritmo que descodifica estos caracteres.
+Con el objetivo de ahorra espacio y ofuscar el texto los archivos de textos tienen una codificación especial basada en caracteres de control y optimizada para caracteres japoneses.
+Su sistema se basa en especificar solo un byte por caracter japonés en lugar de dos como dice SJIS.
+El segundo caracter restante al estar comprendido entre \textsf{0x81-0x83} y es igual entre caracteres cercanos, se va predice mediante unos códigos de control.
+Esta codificación está implementada en ambos sentidos en el proyecto AmbitionText\footnote{\url{http://subirelcodigo}}.
+Destaca esta codificación pues no es sencilla de implementar y requiere mucho esfuerzo de creación de una herramienta que permita trabajar con ella.
+
+Antes de esta parte de codificación, el texto se descifra.
+El cifrado se basa en aplicar la clave ``\textsf{MsgLinker Ver1.00}'' sobre cada byte de texto.
+A continuación se muestra la implementación en C\# para el cifrado y descifrado\footnote{\url{http://subirelcodigo}}.
+El formato del fichero se especifica en la tabla TODO.
+
+\begin{verbatim}
+string key = "MsgLinker Ver1.00";
+for (int i = 0; i < data.Length; i++)
+    data[i] ^= key[i % key.Length];
+\end{verbatim}
 
 \subsubsection{Imágenes}
+Tanto los fondos como los \textit{sprites} del juego no vienen cifrados.
+Sin embargo se usan formatos de ficheros nuevos, con codificaciones nuevas que supusieron un trabajo extra de creación de \textit{software}\footnote{\url{https://github.com/pleonex/tinke/tree/master/Plugins/PSL}}.
 
 \subsubsection{Conclusión}
 
@@ -357,14 +382,22 @@ Además, cambiando el formato de todas las imágenes haría que programas genéricos
 Pros & Contras \\
 % Pros
 \begin{itemize}
-\item
+    \item Los textos vienen cifrados y codificados.
+    \item La codificación es única para este juego.
+    \item Nuevos formatos de imágenes que requieren nuevos programas.
 \end{itemize} &
 
 % Contras
 \begin{itemize}
-\item
+    \item Los archivos y carpetas no están ofuscados.
+    \item Se usa una codificación final estándar.
+    \item Las imágenes no están cifradas.
 \end{itemize} \\
 \end{tabular}
+
+\underline{Propuesta:} En general los mecanismos de protección son lo suficiente fuertes.
+Faltaría respecto a la otra línea de juegos ofuscar archivos y carpetas y cifrar imágenes y usar una codificación final no estándar.
+Además a este respecto habría que cifrar la fuente y desordenar los caracteres.
 
 \section{Ni no kuni y el Mago de las Tinieblas}
 
