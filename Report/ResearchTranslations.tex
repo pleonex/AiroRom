@@ -443,6 +443,25 @@ El formato está basado en parámetros a nivel de bits lo que hace inviable invest
 Las imágenes no están cifradas pero los archivos asociados a una imagen están comprimidos en un nuevo formato.
 Son fáciles de extraer pero requiere nuevo \textit{software}\footnote{\url{https://github.com/pleonex/ninoimager}}.
 
+\subsubsection{Integridad en archivos de guardado}
+En este videojuego se ha estudiado adicionalmente los mecanismos de protección en el archivo con los datos de guardado.
+Se trata de un fichero que en los cartuchos originales no se puede editar sin poseer \textit{hardware} adicional pero que en una \textit{flashcard} se trata de un fichero común, en este caso de 64 KB, y que por tanto es accesible y fácil de editar de forma no autorizada.
+
+Para evitar esto mismo, en lugar de cifrar se ha apostado por implementar un algoritmo de integridad.
+Para encontrarlo se buscó en la memoria RAM extraída con el emulador DeSmuME, los datos de este archivo.
+Una vez localizada la parte de la memoria que contiene el archivo, se puso un punto de interrupción en los primeros bytes para conocer qué operaciones se realizan sobre los mismos.
+
+En primer lugar se comprueba que el primer valor de 16 bits sea \textsf{0x0028} y que los últimos ocho bytes sean en hexadecimal \textsf{0B 3F A5 84 EC 32 9A 7D}.
+A continuación sobre el resto de los datos, desde la posición \textsf{0x0002} hasta \textsf{0xFFE4} se calcula un hash usando el algoritmo SHA-1.
+Para añadir seguridad e imposibilitar la edición sin conocer todos los detalles de la implementación, lo requiere mirar estas instrucciones máquinas, en la posición \textsf{0xC5EC} durante el cálculo del hash se escriben los bytes en hexadecimal \textsf{6E 6B 6E 6E} (en ASCII y \textit{low-endian} equivalen a las consonantes del nombre del juego `\textit{nnkn}').
+Se trata de una clave que sin conocer ni su valor ni su posición sería imposible calcular un código SHA-1 válido.
+Este hash se guarda en la posición \textsf{0xFFE4} del archivo de guardado y durante el inicio del juego se comprueba.
+En caso de no ser válido el mensaje muestra un mensaje de error y borra todos los datos de la partida.
+
+\includefigure{fig:tr-ninosaveinvalid}%
+{Mensaje de error al detectar una partida modificada (izq.) y advertencia (der.).}%
+{imgs/TR-NinoSaveInvalid.png}
+
 \subsubsection{Conclusión}
 
 \begin{tabular}{p{0.4\textwidth}p{0.5\textwidth}}
@@ -451,13 +470,13 @@ Pros & Contras \\
 \begin{itemize}
     \item Formato complejo en los \textit{scripts}.
     \item Cifrado básico en algunos archivos de texto.
+    \item Mecanismo de integrida en el archivo de guardado.
 \end{itemize} &
 
 % Contras
 \begin{itemize}
-    \item En general no están cifrado los archivos de texto.
+    \item En general los archivos no están cifrados los archivos de texto.
     \item Las imágenes no están cifradas.
-
 \end{itemize} \\
 \end{tabular}
 
