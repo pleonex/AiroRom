@@ -27,6 +27,7 @@ Requisitos, planificación y costes:
 Traducciones:
 ☐ Mods (http://es.wikipedia.org/wiki/Mod_%28videojuegos%29)
 ☐ Problema no tan conocido en las empresas.
+☐ Introducción de juegos.
 ✔ DP: Textos & Imágenes @done(2015-06-18 04:02)
 ✔ HS: Textos & Imágenes & archivos @done(2015-06-18 05:31)
 ✔ BW: Textos & Imágenes & archivos @done(2015-06-20 16:42)
@@ -78,6 +79,12 @@ Resultados:
 ☐ No se puede parar solo retrasar hasta la llegada de la traducción.
 ☐ Hasta qué punto el esfuerzo vale el producto.
 ☐ Cifrado no simétrico sin poder alterar el código.
+☐ Desordenar caracteres fuente para no realizar búsqueda diferencial.
+☐ Cifrar fuente pues es un punto de entrada.
+☐ No utilizar formato estándar como en las imágenes (más complicado software de procesado que de descifrado).
+☐ No reutilizar algoritmos y menos aún claves de cifrado entre juegos.
+☐ Codificación propia y de 16 bits mejor.
+☐ Ofuscar archivos y carpetas.
 
 Conclusiones:
 ☐ Conclusiones.
