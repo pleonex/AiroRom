@@ -154,7 +154,7 @@ Tras este análisis, desde el primer fichero directamente extraído de la carpeta 
 Incluso los formatos de las propias imágenes son estándar.
 
 Cabe destacar también, que la \acs{PS3} provee de mecanismos nativos para cifrar archivos que sí se usa para proteger el resto de datos del juego como imágenes y textos (archivo \textit{hs06\_es.adat.sdat}).
-Este formatos con extensión \textsf{sdat} y cabecera \textsf{NPD} usa las claves internas y mecanismos internos de cifrado de la consola que asegura su confidencialidad\footnote{A día de hoy ya se ha podido romper este mecanismo \cite{GH-npdata}.}.
+Este formatos con extensión \textsf{sdat} y cabecera \textsf{NPD} usa las claves internas y mecanismos internos de cifrado de la consola que asegura su confidencialidad\footnote{A día de hoy ya se ha podido romper este mecanismo~\cite{GH-npdata}.}.
 
 \subsection{100 Classic Book Collection}
 El segundo juego que se ha analizado para comprobar su seguridad en cuanto a libros electrónicos ha sido \textit{100 Classic Book Collection}.
@@ -222,7 +222,7 @@ Son juegos musicales donde el jugador simula estar tocando una guitarra a la vez
 Se caracterizan por incluir una pieza de \textit{hardware} extra e imprescindible para el juego denominado \textit{Guitar Grip}.
 Este aparato tiene los cuatro botones que la guitarra simulada que se conectan en el segundo \textit{slot} de la consola.
 
-Gracias a incluir \textit{hardware} adicional hace que no sea posible piratear el juego~(figura \ref{fig:cr-guitarGrip}), pues no había forma de jugar sin esta
+Gracias a incluir \textit{hardware} adicional hace que no sea posible piratear el juego~(figura~\ref{fig:cr-guitarGrip}), pues no había forma de jugar sin esta
 \footnote{Más tarde se descubrió un parche\cite{GTemp-GHhack} para poder jugar usando los botones de la consola y no necesitar \textit{Guitar Grip}.}.
 
 \includefigure{fig:cr-guitarGrip}%
@@ -272,7 +272,7 @@ Se haya dentro del juego las carpetas \textit{StrmFIGS} y \textit{TracksFIGS} (n
 Dentro se puede encontrar las canciones en formato \textsc{Vorbis OGG} estándar\cite{Xentax-HWAS}.
 En concreto, por facilidades técnicas se han separado cada canción en tres archivos, uno con la base de guitarra, otra con la base de batería y otra con la voz.
 Las dos primeras están codificadas en \textsc{OGG} y la tercera en \textsc{HWAS}.
-Este último formato se trata de \textsc{IMA-ADPCM - Vorbis VOX} con una cabecera de 512 bytes descrita en la tabla~\ref{tab:cr-vox}.
+Este último formato se trata de \textsc{IMA-ADPCM-Vorbis VOX} con una cabecera de 512 bytes descrita en la tabla~\ref{tab:cr-vox}.
 Mezclando las tres pistas se obtiene una versión casi perfecta del audio original.
 
 \ctable[
