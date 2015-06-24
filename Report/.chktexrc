@@ -16,6 +16,9 @@ CmdLine
   # Disable intersence space since it does not detect good with acros
   -n13
 
+  # Disable warning about dash length since it's difference in Spanish
+  -n8
+
   # Forget to add spaces before cite or figure should be error
   -e2
 }
