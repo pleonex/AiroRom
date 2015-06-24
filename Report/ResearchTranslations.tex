@@ -7,9 +7,9 @@
 \label{sec:translations}
 La primera sección de este trabajo abarcará el caso de las traducciones no oficiales, también conocidas como \textit{fan-traducciones}~\cite{Wiki-Trans}. Se trata de localizaciones a un idioma determinado realizadas de forma altruista por usuarios que quieren ver y compartir un juego determinado en su idioma. Existen numerosos casos como los tratados en la siguientes secciones con la saga \textit{Pokémon} y la versión para \acl{NDS} de \textit{Ninokuni}.
 
-A pesar de no ser totalmente legal realizar este tipo de trabajos, desde el inicio de las videoconsolas cuando este movimiento comenzó hasta el año pasado no hubo ningún tipo de reclamación o pronunciamiento por parte de las compañías. Esto se debe a que estos juegos traducidos no iban a salir al mercado seguramente por motivos económicos por lo que una traducción solo haría conocer a ese juego y compañía en más lugares. La excepción más notable a este caso se produce en los juegos de \textit{Pokémon} que como se comentará más adelante, a pesar de que desde su lanzamiento en Japón el juego suele tener una fecha confirmada de salida en el resto de paises, muchas páginas y comunidades, a veces de forma altruista y otra para ganar visitas, deciden traducir parcialmente el juego antes de que llegue oficialmente. Aislando este hecho que solo se conoce en esta saga, existen muchos casos donde cuando se confirma una fecha oficial por respeto a la compañía se para la traducción como se verá en la última sección de este capítulo.
+A pesar de no ser totalmente legal realizar este tipo de trabajos, desde el inicio de las videoconsolas cuando este movimiento comenzó hasta el año pasado no hubo ningún tipo de reclamación o pronunciamiento por parte de las compañías. Esto se debe a que estos juegos traducidos no iban a salir al mercado seguramente por motivos económicos por lo que una traducción solo haría conocer a ese juego y compañía en más lugares. La excepción más notable a este caso se produce en los juegos de \textit{Pokémon} que como se comentará más adelante, a pesar de que desde su lanzamiento en Japón el juego suele tener una fecha confirmada de salida en el resto de países, muchas páginas y comunidades, a veces de forma altruista y otra para ganar visitas, deciden traducir parcialmente el juego antes de que llegue oficialmente. Aislando este hecho que solo se conoce en esta saga, existen muchos casos donde cuando se confirma una fecha oficial por respeto a la compañía se para la traducción como se verá en la última sección de este capítulo.
 
-Recienmente este año se ha dado el caso de la compaía \textit{Square Enix} que por `motivos de mercado' enviaron cartas de \textit{cese y desista} sobre dos traducciones no oficiales: \textit{Final Fantasy Type-0}~\cite{VG247-FF0} para \acl{PSP} y \textit{Dragon Quest VII}~\cite{Reddit-DQ7} para \acl{N3DS}. En ambos casos, los grupos de traducción en cuanto lo recibieron pararon la traducción. Los motivos principales es que esta empresa en el primer caso ya había confirmado la salida del juego pero para otra consola (\acl{PS4}) y en el segundo seguramente por una confirmación que se hará recientemente. Cabe destacar que ambos grupos pararon su actividad al recibir la noticia, aunque el primero continuó una vez salida la traducción oficial ya que estaban trabajando sobre otra plataforma.
+Recientemente este año se ha dado el caso de la compañía \textit{Square Enix} que por `motivos de mercado' enviaron cartas de \textit{cese y desista} sobre dos traducciones no oficiales: \textit{Final Fantasy Type-0}~\cite{VG247-FF0} para \acl{PSP} y \textit{Dragon Quest VII}~\cite{Reddit-DQ7} para \acl{N3DS}. En ambos casos, los grupos de traducción en cuanto lo recibieron pararon la traducción. Los motivos principales es que esta empresa en el primer caso ya había confirmado la salida del juego pero para otra consola (\acl{PS4}) y en el segundo seguramente por una confirmación que se hará recientemente. Cabe destacar que ambos grupos pararon su actividad al recibir la noticia, aunque el primero continuó una vez salida la traducción oficial ya que estaban trabajando sobre otra plataforma.
 
 Relacionado con las traducciones se encuentran los \textit{mods}~\cite{Wiki-Mods}, es decir modificaciones sobre un videojuego con el objetivo de crear uno totalmente diferente. Usando el motor del juego actual, los usuarios modifican los archivos cambiando la historia, las imágenes, sonidos y \textit{scripts} para crear versiones alternativas. Existen comunidades dedicadas exclusivamente a este motivo como es \textit{Whack a Hack!}\footnote{\url{http://wahackpokemon.com/es}} para la saga \textit{Pokémon}.
 
@@ -76,7 +76,7 @@ En la tabla~\ref{tab:tr-pearlfont} se especifica el formato usado en este juego 
     pos     = h
 ]{ccl}{
     \tnote[a]{Los caracteres están codificados por \textit{tiles} de 8$\times$x8 píxeles en formato horizontal.}
-    \tnote[b]{Cada byte indica el ancho del caracter.}
+    \tnote[b]{Cada byte indica el ancho del carácter.}
 }{                                                                      \FL
     Posición      & Tamaño        & Descripción                         \ML
     \multicolumn{3}{c}{Cabecera}                                        \NN
@@ -93,7 +93,7 @@ En la tabla~\ref{tab:tr-pearlfont} se especifica el formato usado en este juego 
 
 El segundo procedimiento posible es el de desarrollar un programa de búsqueda diferencial. Con motivo de este trabajo en el capítulo~\ref{sec:requirements} se explica el programa \textit{RelativeSearch} que se llevó a cabo. Este tipo de \textit{software} se puede usar siempre y cuando el orden de los caracteres de un mismo grupo (por ejemplo letras minúsculas) corresponda a estándares como ASCII. Si se hubiese seguido un orden aleatorio en la codificación propietaria este no serviría quedando la primera opción como única alternativa.
 
-Tras usar cualquiera de los dos procedimientos anteriormente descritos, se puedo encontrar una coincidencia en la memoria RAM del diálogo. El siguiente paso consistió en depurar el juego para hallar el algoritmo de descifrado o descomprensión de textos. Para ello usando los programas descritos en el capítulo~\ref{sec:requirements} de depuración, se puso un punto de interrupción en dicha posición.
+Tras usar cualquiera de los dos procedimientos anteriormente descritos, se puedo encontrar una coincidencia en la memoria RAM del diálogo. El siguiente paso consistió en depurar el juego para hallar el algoritmo de descifrado o descompresión de textos. Para ello usando los programas descritos en el capítulo~\ref{sec:requirements} de depuración, se puso un punto de interrupción en dicha posición.
 
 Cabe destacar que esta posición es dinámica por lo que cambia cada vez que se inicia el juego pues depende de muchas variables. Para sortear este problema se hizo uso de los \textit{savestates} del emulador, es decir guardados de memoria del juego que permiten ir a cualquier momento de una ejecución. Gracias a esta característica se puede realizar un guardado justo antes de que el juego guarde un juego de forma que siempre que se use ese \textit{savestate} encontraremos el texto en la misma posición. El punto de interrupción hizo parar el emulador justo en las instrucciones máquinas que estaban realizando, en este caso, el descifrado. Este algoritmo se describe a continuación.
 
@@ -101,7 +101,7 @@ El texto se encuentra cifrado usando la operación XOR y mediante una clave que s
 
 El cifrado no es exclusivo del texto pues la tabla de contenido con las posiciones y tamaños de cada diálogo se encuentra cifrado también. La clave no coincide con la del texto y se forma de la siguiente manera: \verb!clave = (ushort)(clave_base * 0x2FD * (i + 1))!. En este caso, se hace uso de una clave base que se encuentra disponible en la cabecera del fichero y de nuevo con número de entrada a descifrar (\verb!i!). Dado que el tamaño de estos campos cifrados es de 32 bits y la clave de 16 bits, se concatena la clave dos veces formando el valor de 32 bits necesario para aplicar la operación XOR. % chktex 13
 
-Sin embargo, esta parte del fichero a pesar de estar cifrado presenta un fallo de seguridad. Como se ha comentado los valores cifrados de posición y tamaño son de 32 bits (4 bytes) pero en la mayoría de los casos solo se usan los dos primeros bytes pues tamaño del fichero de texto no supera los \verb!2^16 = 65535 bytes!. Debido a la concateniación de la clave y a que los dos últimos bytes son 0, al cifrar estos dos bytes se estuvo guardando la clave en texto plano.
+Sin embargo, esta parte del fichero a pesar de estar cifrado presenta un fallo de seguridad. Como se ha comentado los valores cifrados de posición y tamaño son de 32 bits (4 bytes) pero en la mayoría de los casos solo se usan los dos primeros bytes pues tamaño del fichero de texto no supera los \verb!2^16 = 65535 bytes!. Debido a la concatenación de la clave y a que los dos últimos bytes son 0, al cifrar estos dos bytes se estuvo guardando la clave en texto plano.
 Es decir, se demuestra que \verb!a XOR 0 = a! siendo en este caso \verb!a! la clave para cifrar estas entradas y el valor guardado en el fichero en la mayoría de los casos.
 
 En la tabla~\ref{tab:tr-pearltxt} se especifica el formato de los archivos de texto.
@@ -119,7 +119,7 @@ En la tabla~\ref{tab:tr-pearltxt} se especifica el formato de los archivos de te
     Posición      & Tamaño        & Descripción                         \ML
     \multicolumn{3}{c}{Cabecera}                                        \NN
     \textsf{0x00} & \textsf{0x02} & Número de bloques de texto          \NN
-    \textsf{0x02} & \textsf{0x02} & Clave base para descifrar \acs{TOC} \ML
+    \textsf{0x02} & \textsf{0x02} & Clave base para descifrar \acs{TIC} \ML
     \multicolumn{3}{c}{\acl{TOC}\tmark[a]}                              \NN
     \textsf{0x00} & \textsf{0x04} & Posición del texto\tmark[b]         \NN
     \textsf{0x04} & \textsf{0x08} & Tamaño del texto\tmark[b]           \ML
@@ -140,7 +140,7 @@ Como consecuencia, las imágenes se podían abrir usando programas estándares pero
 El procedimiento para encontrar el algoritmo de cifrado en este caso es distinto al realizado con texto.
 No se puede partir de datos conocidos como anteriormente se partía de una frase que se veía en la pantalla.
 Sin embargo, dado que las cabeceras de la imagen no están cifradas se pudo buscar sobre el código en ensamblador la función que procesa esta cabecera.
-En concreto se buscó la palabra mágica \textsf{CHAR} que se procesaa para determinar el comienzo de una sección del archivo.
+En concreto se buscó la palabra mágica \textsf{CHAR} que se procesa para determinar el comienzo de una sección del archivo.
 
 Una vez encontrado la función que lee una imagen, solo habría que acceder a una parte del juego donde se esperaba que se cargase una imagen como durante una batalla y poner un punto de interrupción sobre esta función.
 Tras omitir imágenes que no estaban cifradas\footnote{Dado que una imagen contiene suele tener píxeles cercanos de igual colores, siempre que en los datos se observara patrones se podía determinar que no estaba cifrada.}, se llegó a una que sí lo estaba donde se puso un punto de interrupción.
@@ -177,7 +177,7 @@ Sin embargo, sí hubo traducciones que partieron del japonés y que se quedaron en
 
 \subsubsection{Archivos}
 \label{sec:tr-pok-heart-file}
-La primera gran diferencia en esta generación llega con el ofuscado de nombres de archivos y directorios. Como se puede apreciar en la figura~\ref{fig:tr-heartfiles} todos los archivos principales del juego están nombrados con números y clasificados en carpetas númericas también.
+La primera gran diferencia en esta generación llega con el ofuscado de nombres de archivos y directorios. Como se puede apreciar en la figura~\ref{fig:tr-heartfiles} todos los archivos principales del juego están nombrados con números y clasificados en carpetas numéricas también.
 Además, el contenido de estas carpetas no relaciona a los archivos entre sí generando una organización aleatoria.
 En total hay 275 archivos que a su vez son contenedores de subarchivos sin nombre.
 Estos contenedores pueden llegar a tener más de 1000 archivos en su interior pero si se garantiza que el contenido de estos está relacionado entre si correspondiendo a las imágenes a las características de \textit{Pokémon} o las imágenes de un menú concreto.
@@ -210,7 +210,7 @@ Tras repetir el proceso descrito en la sección~\ref{sec:tr-pok-pearl-text} de te
 En esta nueva generación no se apostó por cambiar el cifrado de textos y delegar toda la responsabilidad de dificultar la tarea de edición en el ofuscamiento de nombres de ficheros. El fichero está localizado en \textit{a/0/2/7}.
 
 \subsubsection{Imágenes}
-Al igual que sucede con los textos, tras repetir los pasos de la sección~\ref{sec:tr-pok-pearl-img} de imágenes se descubrió que se utiliza el mismo algoritmo de cifrado con las mismas claves. Se encontró sin embargo, una diferencia en la implementanción pues en este caso se descifra empezando por el comienzo de los datos en lugar de por el final.
+Al igual que sucede con los textos, tras repetir los pasos de la sección~\ref{sec:tr-pok-pearl-img} de imágenes se descubrió que se utiliza el mismo algoritmo de cifrado con las mismas claves. Se encontró sin embargo, una diferencia en la implementación pues en este caso se descifra empezando por el comienzo de los datos en lugar de por el final.
 
 \subsubsection{Conclusión}
 
@@ -218,7 +218,7 @@ Al igual que sucede con los textos, tras repetir los pasos de la sección~\ref{se
 Pros & Contras \\
 % Pros
 \begin{itemize}
-\item Los archivos están ofucados por nombre y directorio.
+\item Los archivos están ofuscados por nombre y directorio.
 \end{itemize} &
 
 % Contras
@@ -279,7 +279,7 @@ La estructura de datos se especifica en la tabla~\ref{tab:tr-blacktxt} donde se 
     pos     = h,
 ]{ccl}{
     \tnote[a]{Se especifica solo la primera entrada.}
-    \tnote[b]{Cada caracter es un valor de 16 bits.}
+    \tnote[b]{Cada carácter es un valor de 16 bits.}
     \tnote[c]{Campo cifrado descrito en la sección~\ref{sec:tr-pok-black-text}.}
 }{                                                                          \FL
     Posición      & Tamaño        & Descripción                             \ML
@@ -351,8 +351,8 @@ Dado que se usa la codificación estándar SJIS se pudo encontrar directamente.
 
 Una vez puesto el punto de interrupción se dio con el algoritmo que descodifica estos caracteres.
 Con el objetivo de ahorra espacio y ofuscar el texto los archivos de textos tienen una codificación especial basada en caracteres de control y optimizada para caracteres japoneses.
-Su sistema se basa en especificar solo un byte por caracter japonés en lugar de dos como dice SJIS.
-El segundo caracter restante al estar comprendido entre \textsf{0x81--0x83} y es igual entre caracteres cercanos, se va predice mediante unos códigos de control.
+Su sistema se basa en especificar solo un byte por carácter japonés en lugar de dos como dice SJIS.
+El segundo carácter restante al estar comprendido entre \textsf{0x81--0x83} y es igual entre caracteres cercanos, se va predice mediante unos códigos de control.
 Esta codificación está implementada en ambos sentidos en el proyecto AmbitionText\footnote{\url{http://subirelcodigo}}.
 Destaca esta codificación pues no es sencilla de implementar y requiere mucho esfuerzo de creación de una herramienta que permita trabajar con ella.
 
@@ -424,7 +424,7 @@ Además de como se explicará el archivo de guardado también presenta un algoritmo
 Los archivos y carpetas no están ofuscadas y está todo bien organizado y clasificado.
 
 \subsubsection{Textos}
-En cuanto al apartado de textos hay que distiguir de dos tipos: \textit{scripts} y nombres y descripciones.
+En cuanto al apartado de textos hay que distinguir de dos tipos: \textit{scripts} y nombres y descripciones.
 Empezando por el último, este tipo de textos se encuentran en archivos que contienen las características de personajes, objetos y ataques y no solo el texto.
 Con el objetivo de editar los parámetros que definen sus características y hacer una versión modificada del mismo con mayor, menor o una jugabilidad distinta estos ficheros se cifraron.
 El cifrado es muy básico y pero eficaz ante personas que no entienden.
@@ -470,7 +470,7 @@ Pros & Contras \\
 \begin{itemize}
     \item Formato complejo en los \textit{scripts}.
     \item Cifrado básico en algunos archivos de texto.
-    \item Mecanismo de integrida en el archivo de guardado.
+    \item Mecanismo de integridad en el archivo de guardado.
 \end{itemize} &
 
 % Contras
