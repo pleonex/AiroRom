@@ -9,13 +9,17 @@ A día de hoy una de las principales preocupaciones de la industria respecto a la
 Esto es especialmente notable en el mundo de los videojuegos acosado por una piratería continua que causa pérdidas millonarias de dinero\cite{DRM-Game-Carolina}.
 De este contexto nace la idea del \acs{DRM}.
 Se trata en un mecanismo con el único fin de imposibilitar la distribución no autorizada de contenido.
-Existe mecanismos desde los más sencillos y antiguos como son las claves que vienen impresas en un CD a los más nuevos que incluyen el cifrado del videojuego con datos personales de la cuenta del usuario\cite{iOS-Encryption} o una conexión necesaria a los servidores de las compañía.
-Las características comunes de estas técnicas se pueden resumir en los siguientes puntos\cite{Wiki-DRM}.
+%todo: \cite{iOS-Encryption} o una conexión necesaria a los servidores de las compañía.
+Las características comunes de estas técnicas se pueden resumir en\cite{Wiki-DRM} detectar quién accede a cada obra, cuándo y bajo qué condiciones, autorizar o denegar de manera inapelable el acceso a la obra y autorizar el acceso bajo condiciones restrictivas. En cuanto a tipos los más comunes son~\cite{DRM-Game-Carolina}:
 
 \begin{itemize}
-    \item Detectar quién accede a cada obra, cuándo y bajo qué condiciones.
-    \item Autorizar o denegar de manera inapelable el acceso a la obra.
-    \item Autorizar el acceso bajo condiciones restrictivas.
+\item Claves en CD. Se imprimía en la superficie del CD una clave que se pedía durante la instalación. El punto negativo era que si se perdía esta clave el usuario legítimo ya no podía acceder y que con una simple búsqueda en Internet se podía obtener.
+
+\item Límite de instalaciones. Uno de los siguientes métodos fue controlar el número de instalaciones. Para ello, el producto se tenía que activar realizando una conexión con los servidores de la compañía. Sin embargo esto requiere que el usuario tenga acceso a Internet, que los servidores estén activos y limita el número de dispositivos del usuarios y habría que tener en cuenta si el usuario quiere renovar su equipo o formatearlo.
+
+\item Conexión permanente. Este método requiere una conexión en cada inicio del juego con los servidores de la compañia e incluso en algunos casos durante toda la partida. Este método ha sido polémico ya que ahora el usuario no puede jugar sin conexión a Internet (como puede ser cuando se mueve por vacaciones o durante un viaje) y porque los servidores tienen que estar activos todo el tiempo donde ya ha habido problemas por la caída de los mismos~\cite{GameSpot-UbiDRM}.
+
+\item Cifrado con datos personales. Consiste en cifrar la aplicación usando claves asimétricas~\cite{iOS-Encryption}. Como contrapartida, si el usuario pierde su clave privada y el acceso a ella no podría volver a ejecutar ninguna aplicación.
 \end{itemize}
 
 Estos mecanismos a nivel general se basan en \textit{software} siendo lo frecuente el cifrado de contenido de forma que solo las \emph{aplicaciones autorizadas} tienen las claves y algoritmos necesarios para acceder a él.
@@ -24,11 +28,12 @@ En otros casos, es el propio sistema operativo quien se encarga de esta tarea, e
 El principal problema es la posibilidad de aplicar métodos de \emph{ingeniería inversa} sobre el \textit{software} autorizado.
 Una vez conocido cómo una aplicación accede al contenido protegido, nada imposibilitar crear una versión que también lo permita.
 De aquí vienen la necesidad de trabajar sobre entornos cerrados cada vez más frecuentes en videoconsolas y móviles.
-Una alternativa sería implementar el algoritmo en \textit{hardware}.
+Una alternativa sería implementar el algoritmo en \textit{hardware} como es el caso de la \acl{N3DS}.
 
 Aun encontrando un algoritmo eficiente en términos de protección y sin sobrecarga a la hora de procesado, una vulnerabilidad inevitable es el denominado \textit{agujero analógico}.
 Este consiste en reconvertir un medio digital en analógico, perdiendo los mecanismos DRM.
 Por ejemplo: grabar música con un micrófono que se está reproduciendo, hacer una captura de pantalla a una imagen, grabar la pantalla o copiar a mano o incluso escanear un libro.
+Este tipo de procedimiento es el que emplea la mayoría de usuarios cuando quieren extraer contenido multimedia de un juego y compartirlo en páginas como \textit{Spriter Resource}\footnote{\url{http://www.spriters-resource.com/}}.
 
 Además, se da el problema de que el contenido podría quedar ligado al dispositivo de una compañía, como el caso de los iPod donde solo se admitía música con el mecanismo DRM de Apple\cite{Apple-DRM}.
 
@@ -38,12 +43,10 @@ Numerosos problemas se han dado en el mundo de los videojuegos que han llevado a
 Los más notables se dan en consolas como \acl{PS3} y XBox donde para algunos juegos es necesaria una conexión con un servidor siempre que se quiere comenzar un juego (denominados \textit{Always-on DRM}\cite{Wiki-AlwaysOn}).
 Esto priva al usuario de la posibilidad de jugar sin tener una conexión a Internet (casos se irse de vacaciones) o de casos donde se caen los servidores de la compañía.
 
-Se trata de un bucle, pues al aumentar la piratería se crean medidas más restrictivas como quitar la posibilidad de comprar juegos de segunda mano en Play Station 4 o Xbox One, lo que desagrada al usuario e intenta buscar vías más asequibles que acaban fomentando la piratería.
-
 En las siguientes secciones se analizará mecanismos de seguridad que diferentes juegos aplican sobre materiales con derechos de autor.
 Se analizará en primer lugar dos videojuegos que incluyen uno o más libros electrónicos y a continuación otros que incluyen canciones.
 El resultado en todos estos casos ha sido la carencia de cualquier mecanismo a la hora de proteger los contenidos, excepto en el material en formato de vídeo descrito en la última sección.
-También destaca la distribución de material adicional e imprescindible para el juego como el caso de un libro físico en \textit{Ni no kuni} para \acl{NDS} o \textit{hardware} en la saga \textit{Guitar Hero: On Tour}.
+También destaca la distribución de material adicional e imprescindible para el juego como el caso de un libro físico en \textit{Ninokuni} para \acl{NDS} o \textit{hardware} en la saga \textit{Guitar Hero: On Tour}.
 
 \section{Libros electrónicos}
 \subsection{Ninokuni y la Ira de la Bruja Blanca}
