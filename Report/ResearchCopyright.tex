@@ -234,7 +234,7 @@ Gracias a incluir \textit{hardware} adicional hace que no sea posible piratear e
 
 Analizando el primer juego de la saga, se puede ver que todos los archivos están contenidos en los ficheros \textit{mainFIGS.gfc} y \textit{mainFIGS.gob}. Si bien la estructura del primer fichero parece sencilla: 4 bytes con el tamaño y otros 4 bytes con la posición del fichero.
 Sin embargo, el archivo que contiene todos los datos está cifrado.
-El código ensamblador con el algoritmo de descifrado cuenta con alrededor de 1900 líneas de instrucciones que hacen muy difícil su comprensión y que, como se comentó en el segundo capítulo, hace que el esfuerzo valga más que el contenido.
+El código ensamblador con el algoritmo de descifrado cuenta con alrededor de 1900 líneas de instrucciones que hacen muy difícil su comprensión y que, como se comentó en el segundo capítulo, hace que el esfuerzo valga más que el contenido. En concreto, tras tardar entorno a 4 horas en analizar las primeras 200 instrucciones se desistió de la tarea. Más adelante, se pudo encontrar información al respecto del algoritmo, tratándose simplemente de una implementación de \textsf{zlib}~\cite{Ungob}.
 
 Al ser un juego famoso, ha habido investigaciones sobre el formato de los ficheros por lo que el procedimiento de extracción de las canciones está documentado\cite{SH-GH}. La estructura de este formato se describe en la tabla~\ref{tab:cr-guitarHero}.
 
@@ -243,7 +243,7 @@ Al ser un juego famoso, ha habido investigaciones sobre el formato de los ficher
     label   = tab:cr-guitarHero,
     pos     = h
 ]{ccl}{
-    \tnote[a]{Información extraída de ungob.pl\cite{Ungob} y corroborada.}
+    \tnote[a]{Información extraída de ungob.pl~\cite{Ungob} y corroborada.}
     \tnote[b]{Los datos del fichero están codificados en \textit{big-endian}.}
     \tnote[c]{Se describe la primera entrada.}
     \tnote[d]{Si es el último bloque el valor será \textsc{0x7FFF}.}
@@ -267,7 +267,7 @@ Al ser un juego famoso, ha habido investigaciones sobre el formato de los ficher
     \textsc{0x08} & \textsc{0x04} & Posición del primer bloque              \LL
 }
 
-La primera edición del juego provee de buenos mecanismos frente tanto a la distribución ilícita del juego mediante \textit{hardware} adicional como de extracción de canciones mediante un algoritmo muy largo de descifrar.
+Tras descomprimir este fichero se pueden ver diferentes carpetas y archivos con nombres descriptivos de su contenido. Estas carpetas coinciden en nombre y formato de ficheros con las siguientes versiones del juego que se describen a continuación. Por tanto, esta primera edición del juego provee de buenos mecanismos frente tanto a la distribución ilícita por la necesidad de  \textit{hardware} adicional además de la extracción de canciones mediante un algoritmo largo y complejo de descifrar.
 
 Sin embargo, se encuentra un descuido en las siguientes dos ediciones del juego.
 Los archivos no llegaron a ser empaquetados en formato \textsc{GFC} + \textsc{GOB} ni protegidos de ninguna manera.
@@ -308,12 +308,12 @@ Mezclando estas tres pistas se obtiene la canción original sin pérdidas.
 
 \subsection{Level-5}
 El estudio \textit{Level-5} se centra en el desarrollo de juegos para la \textit{Nintendo DS}.
-Cabe destacarlo como objeto de estudio pues la banda sonora de juegos tan famosos como \textit{El Profesor Layton}, \textit{Inazuma Eleven} o \textit{Ni no kuni} ha estado codificada en un formato propietario y exclusivo.
+Cabe destacarlo como objeto de estudio pues la banda sonora de juegos tan famosos como \textit{El Profesor Layton}, \textit{Inazuma Eleven} o \textit{Ninokuni} ha estado codificada en un formato propietario y exclusivo.
 
 El formato \textsc{SADL} es un contenedor que admite las codificaciones \acs{IMA-ADPCM} y una desarrollada por el estudio \textit{Procyon}.
 Esta última, se trata de una variante de \acs{IMA-ADPCM} con algoritmo predictivo lo que ofrece gran compresión sin pérdida de calidad apenas.
 
-Esto permitió por ejemplo en el caso de \textit{Ni no kuni} introducir en el juego una banda sonora grabada por la orquesta de Tokio.
+Esto permitió por ejemplo en el caso de \textit{Ninokuni} introducir en el juego una banda sonora grabada por la orquesta de Tokio.
 Además, al ser propietario y único para estos juegos tanto el formato de archivo como de codificación de las muestras, dificultó la tarea de extracción y hubieron de pasar varios años hasta que se investigó.
 La codificación de este formato se ha investigado y documentado en repositorios de GitHub\footnote{\url{https://github.com/pleonex/SADL-Audio-format}}.
 
@@ -335,7 +335,7 @@ En este caso, si se cuenta con un móvil con acceso al sistema de archivos (\text
 Hoy en día y cada vez más, las videoconsolas tienen más potencia y resolución.
 Tal punto es, que muchas de ellas son más potentes que los computadores de la época.
 Esto ha permitido introducir escenas tanto generadas por ordenador como de anime en los videojuegos.
-Muchas de ellas se han llegado a considerar películas participando grandes estudios de animación como el caso de \textit{Studio Ghibli} en \textit{Ni no kuni}.
+Muchas de ellas se han llegado a considerar películas participando grandes estudios de animación como el caso de \textit{Studio Ghibli} en \textit{Ninokuni}.
 
 Si bien de nuevo está presente el problema del agujero analógico, en algunos casos se ha aprovechado la creación de una codificación propia para la consola para proteger estos contenidos.
 
