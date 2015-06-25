@@ -5,9 +5,35 @@
 
 \chapter{Multijugador y contenido descargable}
 
+
+\section{Multijugador}
+
+\subsection{Conexión segura en servidores de Nintendo}
+
+\subsection{Preguntados}
+
 \section{Contenido descargable}
 
-\subsection{100 Classic Books}
+\subsection{100 Classic Books Collection}
+\textit{100 Classic Books Collection} se trata de un juego que como se analizó en la sección~\ref{sec:cr-100-books} ofrece al usuario un lector de libros electrónicos. En esta sección se pudo observa como los ficheros no vienen protegidos de ninguna manera a parte de usar un formato diferente.
+
+Este juego provee además de una opción de comunicación inalámbrica para descargar alrededor de 20 nuevos libros. Estos se almacenarían en el archivo de guardado del usuario. Tras analizar las comunicaciones usando la versión modificada de \textit{DeSmuME} anteriormente descrita se pudo observar que estos ficheros descargados tampoco estaban cifrados, teniendo el mismo formato que aquellos que se encuentran dentro del juego. % TODO: Verificar
+
+A pesar de que todavía no se conoce públicamente de usuarios que hayan modificado o explotado este juego, el almacenar contenido no cifrado, sin mecanismos de integridad, dentro del archivo de la partida del usuario abre las puertas para tanto la extracción como editado (poder leer libros externos). Cabe recalcar que modificar una partida no es solo posible utilizando tarjetas \textit{flashcard} si no también directamente sobre el cartucho original usando \textit{hardware} extra.
+
+Además, reproducir contenido desde un archivo de guardado y más teniendo en cuenta que este se añade mediante descarga externa es una vulnerabilidad en cuenta a la posibilidad de ejecutar código malicioso. Si se diese el caso de encontrar un fallo de seguridad en el código como puede ser un desbordamiento de buffer al insertar un texto muy largo, se podría ejecutar código no autorizado.
+
+\subsubsection{Conclusión}
+\begin{tabular}{p{0.4\textwidth}p{0.5\textwidth}}
+Puntos fuertes & Puntos débiles \\
+\begin{itemize}
+\item Las comunicaciones inalámbricas nativamente van cifradas con HTTPS por lo que no se podría realizar un ataque de \textit{man-in-the-middle}.
+\end{itemize} &
+
+\begin{itemize}
+\item Los archivos no van cifrados ni incorporan algún mecanismo de integridad que asegure que el contenido es el que proporcionado por el desarrollador.
+\end{itemize} \\
+\end{tabular}
 
 \subsection{Ninokuni y El Mago de las Tinieblas}
 
@@ -39,9 +65,3 @@ Evitar codigo no seguro cambiado en un man-in-the-middle para hackear la DSi.
 El arm9 se firma durante el envio pero los datos no.
 %http://problemkaputt.de/gbatek.htm#dswifimultiboot
 Una vez que se ha ejecutado un juego desde una flashcard, el arm9 se puede editar pues el RSA se genera al vuelo sobre lo que hay y habria que cambiar el código de los overlays guardado en el arm9 o deshabilitar el flag de la tabla de overlays.
-
-\section{Multijugador}
-
-\subsection{Conexión segura en servidores de Nintendo}
-
-\subsection{Preguntados}
