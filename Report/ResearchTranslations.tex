@@ -11,13 +11,13 @@ Las traducciones no oficiales, conocidas informalmente como  \textit{fan-traducc
 Su objetivo es traducir un videojuego y compartirlo de forma altruista.
 La distribución se hace comúnmente en foros dedicados y mediante \textit{parches}, es decir, archivos binarios que contienen solo las modificaciones realizadas y en principio, no contenido con derechos de autor.
 Este capítulo se ha centrado en los resultados obtenidos al analizar juegos principalmente de la consola \acl{NDS}.
-La selección se ha realizado en base a sagas que han tenenido más traducciones no oficiales (\textit{Pokémon}), juegos con proyectos largos de traducción (\textit{Ninokuni}) y aquellos en los que se han visto solicitudes o intentos  (\textit{London Life} y demás).
+La selección se ha realizado en base a sagas que han tenido más traducciones no oficiales (\textit{Pokémon}), juegos con proyectos largos de traducción (\textit{Ninokuni}) y aquellos en los que se han visto solicitudes o intentos  (\textit{London Life} y demás).
 
 Este tipo de trabajos se remontan al origen de los ordenadores cuando, en 1993 se forma el primer grupo de traducción llamado Oasis para MSX~\cite{HarCod-RH}.
-A partir de entonces, numeros proyectos han surgido con dos páginas webs como referencia: GbaTemp.net\footnote{\url{http://gbatemp.net/}} y ROMHacking.net\footnote{\url{http://www.romhacking.net/}}.
+A partir de entonces, numerosos proyectos han surgido con dos páginas webs como referencia: GbaTemp.net\footnote{\url{http://gbatemp.net/}} y ROMHacking.net\footnote{\url{http://www.romhacking.net/}}.
 El motivo para iniciar un proyecto es la confirmación por parte de una empresa de que no se llevaría a cabo la traducción del juego.
 Como se explica en el último apartado, a pesar de ello han existido casos en los que la traducción se ha iniciado antes de dicha confirmación y tras producirse esta, esos proyectos se detuvieron.
-No ha sucedido así con todos los juegos, pues en la saga de \textit{Pokémon}, han existido traducciones parciales antes de la oficial, perjudicando las ventas de la compañía, pues los usuarios prefierer obtener una copia no lícita del juego antes de esperar a la salida oficial.
+No ha sucedido así con todos los juegos, pues en la saga de \textit{Pokémon}, han existido traducciones parciales antes de la oficial, perjudicando las ventas de la compañía, pues los usuarios prefieren obtener una copia no lícita del juego antes de esperar a la salida oficial.
 Es en estos juegos donde, como se ha analizado en la siguiente sección, se observa una evolución de mecanismos para evitar y retrasar estos trabajos.
 
 Estos hechos se han visto reflejados recientemente en dos cartas de \textit{cese y desista} enviadas por la empresa \textit{Square Enix} a los grupos de traducción de \textit{Final Fantasy Type-0}~\cite{VG247-FF0} para \ac{PSP} y \textit{Dragon Quest VII}~\cite{Reddit-DQ7} para \acl{N3DS}.
@@ -53,7 +53,7 @@ Es por ello que son estos los archivos más protegidos con cifrados u ofuscado de
 Cuando mayor sea la protección menos usuarios tendrán las capacidades y más esfuerzo requerirá.
 De nuevo se trata el problema descrito en el segundo capítulo donde se valora si es el esfuerzo necesario compensa el resultado final.
 
-El único tipo de fichero que se ha podido comprobar que en ningún caso llega a ser protegido son es la música y efectos de sonido del juego, estando en un formato estándar con extensión \textsf{.sdat} en la carpeta raíz del juego.
+El único tipo de fichero que se ha podido comprobar que en ningún caso llega a ser protegido son es la música y efectos de sonido del juego, estando en un formato estándar con extensión \texttt{.sdat} en la carpeta raíz del juego.
 
 \subsection{Pokémon Perla y Diamante}
 El par de juegos \textit{Pokémon Diamante y Perla} corresponden a la cuarta generación de saga y a la primera que salió para \acl{NDS}.
@@ -65,9 +65,7 @@ Se trata del primera generación de juegos que llegan a esta consola donde como c
 En estos tres juegos, los archivos dentro del juego tienen nombres explicativos sobre su contenido (figura~\ref{fig:tr-pearlfiles}).
 Ejemplo son ficheros como \textit{msgdata/msg.narc} con los mensajes o textos del juego, \textit{itemtool/itemdata/item\_icon.narc} con las imágenes de los objetos o \textit{graphic/font.narc} con las tipografías del juego.
 
-\includefigure{fig:tr-pearlfiles}%
-{Sistema de ficheros en Pokémon Perla visto con Tinke}%
-{imgs/TR-PearlFiles.png}
+\includefigure{fig:tr-pearlfiles}{Sistema de ficheros en Pokémon Perla visto con Tinke}{imgs/TR-PearlFiles.png}
 
 \subsubsection{Textos}
 \label{sec:tr-pok-pearl-text}
@@ -92,18 +90,18 @@ En la tabla~\ref{tab:tr-pearlfont} se especifica el formato usado en este juego 
     label   = tab:tr-pearlfont,
     pos     = h
 ]{ccl}{
-    \tnote[a]{Los caracteres están codificados por \textit{tiles} de 8$\times$x8 píxeles en formato horizontal.}
+    \tnote[a]{Los caracteres están codificados por \textit{tiles} de 8$\times$8 píxeles en formato horizontal.}
     \tnote[b]{Cada byte indica el ancho del carácter.}
 }{                                                                      \FL
     Posición      & Tamaño        & Descripción                         \ML
     \multicolumn{3}{c}{Cabecera}                                        \NN
-    \textsf{0x00} & \textsf{0x04} & Puntero a la sección de datos       \NN
-    \textsf{0x04} & \textsf{0x04} & Puntero a la sección \acs{VWT}      \NN
-    \textsf{0x08} & \textsf{0x04} & Número de caracteres                \NN
-    \textsf{0x0C} & \textsf{0x01} & Ancho de un caracter                \NN
-    \textsf{0x0D} & \textsf{0x01} & Alto de un caracter                 \NN
-    \textsf{0x0E} & \textsf{0x01} & BPP                                 \NN
-    \textsf{0x0F} & \textsf{0x01} & BPP                                 \ML
+    \texttt{0x00} & \texttt{0x04} & Puntero a la sección de datos       \NN
+    \texttt{0x04} & \texttt{0x04} & Puntero a la sección \acs{VWT}      \NN
+    \texttt{0x08} & \texttt{0x04} & Número de caracteres                \NN
+    \texttt{0x0C} & \texttt{0x01} & Ancho de un caracter                \NN
+    \texttt{0x0D} & \texttt{0x01} & Alto de un caracter                 \NN
+    \texttt{0x0E} & \texttt{0x01} & BPP                                 \NN
+    \texttt{0x0F} & \texttt{0x01} & BPP                                 \ML
     \multicolumn{3}{c}{Datos de la fuente\tmark[a]}                     \ML
     \multicolumn{3}{c}{\ac{VWT}\tmark[b]}                               \LL
 }
@@ -114,12 +112,12 @@ Tras usar cualquiera de los dos procedimientos anteriormente descritos, se puedo
 
 Cabe destacar que esta posición es dinámica por lo que cambia cada vez que se inicia el juego pues depende de muchas variables. Para sortear este problema se hizo uso de los \textit{savestates} del emulador, es decir guardados de memoria del juego que permiten ir a cualquier momento de una ejecución. Gracias a esta característica se puede realizar un guardado justo antes de que el juego guarde un juego de forma que siempre que se use ese \textit{savestate} encontraremos el texto en la misma posición. El punto de interrupción hizo parar el emulador justo en las instrucciones máquinas que estaban realizando, en este caso, el descifrado. Este algoritmo se describe a continuación.
 
-El texto se encuentra cifrado usando la operación XOR y mediante una clave que se actualiza después de descifrar cada byte\footnote{Al no ser una clave constante no se puede obtener esta al ser aplicada sobre zonas con valores a 0 como sí sucede en el caso de la tabla de contenido.}. La clave inicial es igual a \verb!clave = (ushort)(0x91BD3 * (i + 1))! donde \verb!i! es el bloque de texto a descifrar. Después de aplicar la clave sobre un byte esta se actualiza según \verb!clave = (ushort)(clave + 0x493D)!.
+El texto se encuentra cifrado usando la operación XOR y mediante una clave que se actualiza después de descifrar cada byte\footnote{Al no ser una clave constante no se puede obtener esta al ser aplicada sobre zonas con valores a 0 como sí sucede en el caso de la tabla de contenido.}. La clave inicial es igual a \texttt{clave = (ushort)(0x91BD3 * (i + 1))} donde \texttt{i} es el bloque de texto a descifrar. Después de aplicar la clave sobre un byte esta se actualiza según \texttt{clave = (ushort)(clave + 0x493D)}.
 
-El cifrado no es exclusivo del texto pues la tabla de contenido con las posiciones y tamaños de cada diálogo se encuentra cifrado también. La clave no coincide con la del texto y se forma de la siguiente manera: \verb!clave = (ushort)(clave_base * 0x2FD * (i + 1))!. En este caso, se hace uso de una clave base que se encuentra disponible en la cabecera del fichero y de nuevo con número de entrada a descifrar (\verb!i!). Dado que el tamaño de estos campos cifrados es de 32 bits y la clave de 16 bits, se concatena la clave dos veces formando el valor de 32 bits necesario para aplicar la operación XOR. % chktex 13
+El cifrado no es exclusivo del texto pues la tabla de contenido con las posiciones y tamaños de cada diálogo se encuentra cifrado también. La clave no coincide con la del texto y se forma de la siguiente manera: \texttt{clave = (ushort)(clave_base * 0x2FD * (i + 1))}. En este caso, se hace uso de una clave base que se encuentra disponible en la cabecera del fichero y de nuevo con número de entrada a descifrar (\texttt{i}). Dado que el tamaño de estos campos cifrados es de 32 bits y la clave de 16 bits, se concatena la clave dos veces formando el valor de 32 bits necesario para aplicar la operación XOR. % chktex 13
 
-Sin embargo, esta parte del fichero a pesar de estar cifrado presenta un fallo de seguridad. Como se ha comentado los valores cifrados de posición y tamaño son de 32 bits (4 bytes) pero en la mayoría de los casos solo se usan los dos primeros bytes pues tamaño del fichero de texto no supera los \verb!2^16 = 65535 bytes!. Debido a la concatenación de la clave y a que los dos últimos bytes son 0, al cifrar estos dos bytes se estuvo guardando la clave en texto plano.
-Es decir, se demuestra que \verb!a XOR 0 = a! siendo en este caso \verb!a! la clave para cifrar estas entradas y el valor guardado en el fichero en la mayoría de los casos.
+Sin embargo, esta parte del fichero a pesar de estar cifrado presenta un fallo de seguridad. Como se ha comentado los valores cifrados de posición y tamaño son de 32 bits (4 bytes) pero en la mayoría de los casos solo se usan los dos primeros bytes pues tamaño del fichero de texto no supera los \texttt{2^16 = 65535 bytes}. Debido a la concatenación de la clave y a que los dos últimos bytes son 0, al cifrar estos dos bytes se estuvo guardando la clave en texto plano.
+Es decir, se demuestra que \texttt{a XOR 0 = a} siendo en este caso \texttt{a} la clave para cifrar estas entradas y el valor guardado en el fichero en la mayoría de los casos.
 
 En la tabla~\ref{tab:tr-pearltxt} se especifica el formato de los archivos de texto.
 
@@ -135,11 +133,11 @@ En la tabla~\ref{tab:tr-pearltxt} se especifica el formato de los archivos de te
 }{                                                                      \FL
     Posición      & Tamaño        & Descripción                         \ML
     \multicolumn{3}{c}{Cabecera}                                        \NN
-    \textsf{0x00} & \textsf{0x02} & Número de bloques de texto          \NN
-    \textsf{0x02} & \textsf{0x02} & Clave base para descifrar \acs{TIC} \ML
+    \texttt{0x00} & \texttt{0x02} & Número de bloques de texto          \NN
+    \texttt{0x02} & \texttt{0x02} & Clave base para descifrar \acs{TIC} \ML
     \multicolumn{3}{c}{\acl{TOC}\tmark[a]}                              \NN
-    \textsf{0x00} & \textsf{0x04} & Posición del texto\tmark[b]         \NN
-    \textsf{0x04} & \textsf{0x08} & Tamaño del texto\tmark[b]           \ML
+    \texttt{0x00} & \texttt{0x04} & Posición del texto\tmark[b]         \NN
+    \texttt{0x04} & \texttt{0x08} & Tamaño del texto\tmark[b]           \ML
     \multicolumn{3}{c}{Texto\tmark[b]}                                  \LL
 }
 
@@ -157,15 +155,15 @@ Como consecuencia, las imágenes se podían abrir usando programas estándares pero
 El procedimiento para encontrar el algoritmo de cifrado en este caso es distinto al realizado con texto.
 No se puede partir de datos conocidos como anteriormente se partía de una frase que se veía en la pantalla.
 Sin embargo, dado que las cabeceras de la imagen no están cifradas se pudo buscar sobre el código en ensamblador la función que procesa esta cabecera.
-En concreto se buscó la palabra mágica \textsf{CHAR} que se procesa para determinar el comienzo de una sección del archivo.
+En concreto se buscó la palabra mágica \texttt{CHAR} que se procesa para determinar el comienzo de una sección del archivo.
 
 Una vez encontrado la función que lee una imagen, solo habría que acceder a una parte del juego donde se esperaba que se cargase una imagen como durante una batalla y poner un punto de interrupción sobre esta función.
 Tras omitir imágenes que no estaban cifradas\footnote{Dado que una imagen contiene suele tener píxeles cercanos de igual colores, siempre que en los datos se observara patrones se podía determinar que no estaba cifrada.}, se llegó a una que sí lo estaba donde se puso un punto de interrupción.
 
-La siguiente función que leía los datos de dicha imagen era el algoritmo de descifrado. Este algoritmo parte del hecho que todo el bloque de datos de una imagen tendrá el tamaño constante de \textsf{0x1900} bytes.
+La siguiente función que leía los datos de dicha imagen era el algoritmo de descifrado. Este algoritmo parte del hecho que todo el bloque de datos de una imagen tendrá el tamaño constante de \texttt{0x1900} bytes.
 Se trata de un cifrado parecido al realizado sobre el texto donde habrá una clave que irá cambiando después de aplicarse sobre cada valor y que se usará para aplicar la operación XOR sobre un dato cifrado.
 En este caso, la clave es de 32 bits y el dato a descifrar de 16 bits y se comencerá desde el final del fichero hasta el principio.
-La clave inicial será el primer valor (últimos dos bytes del fichero) e irá cambiando siguiendo la siguiente operación \verb!clave = (uint)(clave * 0x41C64E6D + 0x6073)!.
+La clave inicial será el primer valor (últimos dos bytes del fichero) e irá cambiando siguiendo la siguiente operación \texttt{clave = (uint)(clave * 0x41C64E6D + 0x6073)}.
 
 \subsubsection{Conclusión}
 
@@ -199,14 +197,12 @@ Además, el contenido de estas carpetas no relaciona a los archivos entre sí gene
 En total hay 275 archivos que a su vez son contenedores de subarchivos sin nombre.
 Estos contenedores pueden llegar a tener más de 1000 archivos en su interior pero si se garantiza que el contenido de estos está relacionado entre si correspondiendo a las imágenes a las características de \textit{Pokémon} o las imágenes de un menú concreto.
 
-\includefigure{fig:tr-heartfiles}%
-{Carpetas y ficheros ofuscados en Pokémon HeartGold}%
-{imgs/TR-HeartFiles.png}
+\includefigure{fig:tr-heartfiles}{Carpetas y ficheros ofuscados en Pokémon HeartGold}{imgs/TR-HeartFiles.png}
 
 Mediante depuración del código ensamblador se pudo comprobar la implementación del acceso a estos archivos.
 Todo se realiza llamando a varias funciones de similar cometido cuyo primer parámetro es un ID que identifica al archivo y como segundo parámetro el sub-archivos dentro del contenedor.
 Este ID es lineal y si se descompone en base diez se puede calcular la ruta absoluta.
-De esta forma el ID \textsf{0x1B} (27) corresponde a \verb!27 = 0*10 + 2*10 + 7! lo que significa que estaría ubicado en \textit{a/0/2/7}.
+De esta forma el ID \texttt{0x1B} (27) corresponde a \texttt{27 = 0*10 + 2*10 + 7} lo que significa que estaría ubicado en \textit{a/0/2/7}.
 A la hora de implementar este mecanismo durante el desarrollo del videojuego se usuaría un archivo de cabeceras similar al siguiente.
 
 \begin{verbatim}
@@ -259,9 +255,7 @@ En la sexta generación decidieron optar de nuevo por ofuscar los nombres de las 
 En este caso, se dio un paso más y se hizo sobre todos los archivos.
 Sin bien, en el caso de \textit{Pokémon HeartGold y SoulSilver} fueron solo los archivos principales los ofuscados, en esta edición los únicos que no se procesaron fueron los de sonido y demo como se aprecia en la figura~\ref{fig:tr-blackheartfiles}.
 
-\includefigure{fig:tr-blackheartfiles}%
-{Comparación de carpetas entre Pokémon Blanco (izq.) y Pokémon HeartGold (der.)}
-{imgs/TR-BlackHeartFiles.png}
+\includefigure{fig:tr-blackheartfiles}{Comparación de carpetas entre Pokémon Blanco (izq.) y Pokémon HeartGold (der.)}{imgs/TR-BlackHeartFiles.png}
 
 A pesar de usar internamente la misma forma de acceso a como se describió en el apartado de archivos de la sección~\ref{sec:tr-pok-heart-file}, los identificadores y por tanto localización de estos cambió.
 Pasando de esta forma el archivo con los textos del juego a estar en \textit{a/0/0/2} en lugar de \textit{a/0/2/7} como sucedía en la edición anterior.
@@ -275,7 +269,7 @@ La principal diferencia tras aplicar el método de investigación de cifrado fue v
 Esto facilitó la tarea, pues ya no es necesaria una búsqueda diferencial en la memoria RAM y por tanto crear \textit{software} adicional para investigar.
 Se trata por tanto de la eliminación de un mecanismo fuerte a la hora de proteger datos que posiblemente estaba realizando en ediciones anteriores de casualidad.
 
-La clave inicial usada para el texto se genera usando el número de bloque como variable, de forma que cada bloque comienza con una clave diferente. La operación es \verb!clave = (i + 3) * 0x2983!.
+La clave inicial usada para el texto se genera usando el número de bloque como variable, de forma que cada bloque comienza con una clave diferente. La operación es \texttt{clave = (i + 3) * 0x2983}.
 Tras aplicar esta clave sobre un valor de 16 bits cifrado (dos bytes), se actualiza desplazando los tres bits más significados a la posición menos significativa.
 Esto se puede conseguir aplicando la siguiente serie de operaciones.
 
@@ -301,16 +295,16 @@ La estructura de datos se especifica en la tabla~\ref{tab:tr-blacktxt} donde se 
 }{                                                                          \FL
     Posición      & Tamaño        & Descripción                             \ML
     \multicolumn{3}{c}{Cabecera}                                            \NN
-    \textsf{0x00} & \textsf{0x02} & Constante: \textsf{0x01}                \NN
-    \textsf{0x02} & \textsf{0x02} & Número de bloques de texto              \NN
-    \textsf{0x04} & \textsf{0x04} & Tamaño de la sección de datos           \NN
-    \textsf{0x08} & \textsf{0x04} & Constante: \textsf{0x00}                \NN
-    \textsf{0x0C} & \textsf{0x04} & Tamaño de la cabecera                   \ML
-    \multicolumn{3}{c}{Datos}                                         \NN
-    \textsf{0x00} & \textsf{0x04} & Tamaño de la sección                    \NN
-    \textsf{0x04} & \textsf{0x04} & Posición relativa a la sección\tmark[a] \NN
-    \textsf{0x06} & \textsf{0x02} & Número de caracteres\tmark[a]\tmark[b]  \NN
-    \textsf{0x08} & \textsf{0x02} & Desconocido\tmark[a]                    \ML
+    \texttt{0x00} & \texttt{0x02} & Constante: \texttt{0x01}                \NN
+    \texttt{0x02} & \texttt{0x02} & Número de bloques de texto              \NN
+    \texttt{0x04} & \texttt{0x04} & Tamaño de la sección de datos           \NN
+    \texttt{0x08} & \texttt{0x04} & Constante: \texttt{0x00}                \NN
+    \texttt{0x0C} & \texttt{0x04} & Tamaño de la cabecera                   \ML
+    \multicolumn{3}{c}{Datos}                                               \NN
+    \texttt{0x00} & \texttt{0x04} & Tamaño de la sección                    \NN
+    \texttt{0x04} & \texttt{0x04} & Posición relativa a la sección\tmark[a] \NN
+    \texttt{0x06} & \texttt{0x02} & Número de caracteres\tmark[a]\tmark[b]  \NN
+    \texttt{0x08} & \texttt{0x02} & Desconocido\tmark[a]                    \ML
     \multicolumn{3}{c}{Texto\tmark[c]}                                      \LL
 }
 
@@ -319,9 +313,7 @@ Las imágenes a diferencia de las pasadas generaciones no se cifraron.
 En cambio, no se utiliza un formato estándar de codificación.
 Si bien el formato para las paletas y datos de imagen si se reutiliza y sigue siendo estándar, existe un ficheros extras con una especificación nueva en este juego con la información necesaria para recomponer la imagen (figura~\ref{fig:tr-blackimg}).
 
-\includefigure{fig:tr-blackimg}%
-{Imágenes sin cifrar en Pokémon Negro.}%
-{imgs/TR-BlackImg.png}
+\includefigure{fig:tr-blackimg}{Imágenes sin cifrar en Pokémon Negro.}{imgs/TR-BlackImg.png}
 
 Esta forma de codificación, aunque pudiendo no ser específica para protegerlas ante modificaciones si no un requisito para animaciones, es más fuerte.
 De esta forma los programas de ediciones genéricas creados para juegos de \acl{NDS} ya no son útiles y se necesita nuevos y específicos.
@@ -369,12 +361,12 @@ Dado que se usa la codificación estándar SJIS se pudo encontrar directamente.
 Una vez puesto el punto de interrupción se dio con el algoritmo que descodifica estos caracteres.
 Con el objetivo de ahorra espacio y ofuscar el texto los archivos de textos tienen una codificación especial basada en caracteres de control y optimizada para caracteres japoneses.
 Su sistema se basa en especificar solo un byte por carácter japonés en lugar de dos como dice SJIS.
-El segundo carácter restante al estar comprendido entre \textsf{0x81--0x83} y es igual entre caracteres cercanos, se va predice mediante unos códigos de control.
+El segundo carácter restante al estar comprendido entre \texttt{0x81--0x83} y es igual entre caracteres cercanos, se va predice mediante unos códigos de control.
 Esta codificación está implementada en ambos sentidos en el proyecto AmbitionText\footnote{\url{http://subirelcodigo}}.
 Destaca esta codificación pues no es sencilla de implementar y requiere mucho esfuerzo de creación de una herramienta que permita trabajar con ella.
 
 Antes de esta parte de codificación, el texto se descifra.
-El cifrado se basa en aplicar la clave ``\textsf{MsgLinker Ver1.00}'' sobre cada byte de texto.
+El cifrado se basa en aplicar la clave ``\texttt{MsgLinker Ver1.00}'' sobre cada byte de texto.
 A continuación se muestra la implementación en C\# para el cifrado y descifrado\footnote{\url{http://subirelcodigo}}.
 El formato del fichero se especifica en la tabla~\ref{tab:tr-conquesttxt}.
 
@@ -395,8 +387,8 @@ for (int i = 0; i < data.Length; i++)
 }{                                                                          \FL
     Posición      & Tamaño        & Descripción                             \ML
     \multicolumn{3}{c}{\acl{TOC}\tmark[a]\tmark[b]}                         \NN
-    \textsf{0x00} & \textsf{0x04} & Posición del bloque                     \NN
-    \textsf{0x04} & \textsf{0x04} & Tamaño del bloque                       \ML
+    \texttt{0x00} & \texttt{0x04} & Posición del bloque                     \NN
+    \texttt{0x04} & \texttt{0x04} & Tamaño del bloque                       \ML
     \multicolumn{3}{c}{Bloques\tmark[c]}                                    \LL
 }
 
@@ -445,12 +437,10 @@ En cuanto al apartado de textos hay que distinguir de dos tipos: \textit{scripts
 Empezando por el último, este tipo de textos se encuentran en archivos que contienen las características de personajes, objetos y ataques y no solo el texto.
 Con el objetivo de editar los parámetros que definen sus características y hacer una versión modificada del mismo con mayor, menor o una jugabilidad distinta estos ficheros se cifraron.
 El cifrado es muy básico y pero eficaz ante personas que no entienden.
-En la figura~\ref{fig:tr-nino-minitext} se puede ver como se repite el byte \textsf{0xFF} con frecuencia.
-Esto da una pista del tipo de cifrado empleado pues probando a realizar una operación \textsf{XOR 0xFF} o lo que es lo mismo \textsf{NOT} se puede ver como todo queda descifrado.
+En la figura~\ref{fig:tr-nino-minitext} se puede ver como se repite el byte \texttt{0xFF} con frecuencia.
+Esto da una pista del tipo de cifrado empleado pues probando a realizar una operación \texttt{XOR 0xFF} o lo que es lo mismo \texttt{NOT} se puede ver como todo queda descifrado.
 
-\includefigure{fig:tr-nino-minitext}%
-{Archivo cifrado (arr.) y descifrado (ab.) de Ninokuni y el Mago de las Tinieblas}%
-{imgs/TR-NinoMiniText.png}
+\includefigure{fig:tr-nino-minitext}{Archivo cifrado (arr.) y descifrado (ab.) de Ninokuni y el Mago de las Tinieblas}{imgs/TR-NinoMiniText.png}
 
 Respecto a los \textit{scripts} debido a sus requisitos técnicos para ejecutar todo tipo de comandos son complejos de investigar.
 A día de hoy solo existe un \textit{software} no público desarrollado para la traducción al español que solo es capaz de editar los textos de los diálogos.
@@ -468,16 +458,14 @@ Para evitar esto mismo, en lugar de cifrar se ha apostado por implementar un alg
 Para encontrarlo se buscó en la memoria RAM extraída con el emulador DeSmuME, los datos de este archivo.
 Una vez localizada la parte de la memoria que contiene el archivo, se puso un punto de interrupción en los primeros bytes para conocer qué operaciones se realizan sobre los mismos.
 
-En primer lugar se comprueba que el primer valor de 16 bits sea \textsf{0x0028} y que los últimos ocho bytes sean en hexadecimal \textsf{0B 3F A5 84 EC 32 9A 7D}.
-A continuación sobre el resto de los datos, desde la posición \textsf{0x0002} hasta \textsf{0xFFE4} se calcula un hash usando el algoritmo SHA-1.
-Para añadir seguridad e imposibilitar la edición sin conocer todos los detalles de la implementación, lo requiere mirar estas instrucciones máquinas, en la posición \textsf{0xC5EC} durante el cálculo del hash se escriben los bytes en hexadecimal \textsf{6E 6B 6E 6E} (en ASCII y \textit{low-endian} equivalen a las consonantes del nombre del juego `\textit{nnkn}').
+En primer lugar se comprueba que el primer valor de 16 bits sea \texttt{0x0028} y que los últimos ocho bytes sean en hexadecimal \texttt{0B 3F A5 84 EC 32 9A 7D}.
+A continuación sobre el resto de los datos, desde la posición \texttt{0x0002} hasta \texttt{0xFFE4} se calcula un hash usando el algoritmo SHA-1.
+Para añadir seguridad e imposibilitar la edición sin conocer todos los detalles de la implementación, lo requiere mirar estas instrucciones máquinas, en la posición \texttt{0xC5EC} durante el cálculo del hash se escriben los bytes en hexadecimal \texttt{6E 6B 6E 6E} (en ASCII y \textit{low-endian} equivalen a las consonantes del nombre del juego `\textit{nnkn}').
 Se trata de una clave que sin conocer ni su valor ni su posición sería imposible calcular un código SHA-1 válido.
-Este hash se guarda en la posición \textsf{0xFFE4} del archivo de guardado y durante el inicio del juego se comprueba.
+Este hash se guarda en la posición \texttt{0xFFE4} del archivo de guardado y durante el inicio del juego se comprueba.
 En caso de no ser válido el mensaje muestra un mensaje de error y borra todos los datos de la partida.
 
-\includefigure{fig:tr-ninosaveinvalid}%
-{Mensaje de error al detectar una partida modificada (izq.) y advertencia (der.).}%
-{imgs/TR-NinoSaveInvalid.png}
+\includefigure{fig:tr-ninosaveinvalid}{Mensaje de error al detectar una partida modificada (izq.) y advertencia (der.).}{imgs/TR-NinoSaveInvalid.png}
 
 \subsubsection{Conclusión}
 
