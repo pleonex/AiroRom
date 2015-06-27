@@ -23,6 +23,7 @@ Requisitos, planificación y costes:
 ☐ Planificación.
 ☐ Recursos y costes (desmume).
 ☐ Explicar RelativeSearch.
+☐ Explicar métodos y procedimientos.
 
 Traducciones:
 ✔ Mods (http://es.wikipedia.org/wiki/Mod_%28videojuegos%29) @done(2015-06-24 02:46)
@@ -37,12 +38,14 @@ Traducciones:
 ✔ Ninokuni: Integridad en partidas para evitar modificaciones @done(2015-06-22 21:20)
 ✘ Hetalia: Textos & Imágenes @cancelled(2015-06-18 05:18)
 ✔ Analizar proyectos abandonados. @done(2015-06-21 23:39)
+☐ Compresión en Layton 4
 ☐ London Life
 ☐ Trauma Center
 ☐ Boku
 ☐ Brave Fencer
 ☐ Last Window
 ☐ Gakuen Hetalia
+☐ Reescribir
 
 Copyright:
 ✔ Introducción @done(2015-06-16 01:14)
@@ -85,7 +88,6 @@ Resultados:
 ☐ Recomendar soluciones.
 ☐ Encriptar ficheros usando nombre del fichero.
 ☐ Ocultar el nombre de los ficheros con CRC32 por rapidez (Ninokuni).
-☐ Compresión en Layton 4
 ☐ Explicar algoritmo pensado -- Contenedor + Identificador de archivo almacenador en código fuente escrito mediante #define de preprocesador + Acceso a subarchivos por transformación de código (CRC32) + Cifrado de archivos usando ese código.
 ☐ No se puede parar solo retrasar hasta la llegada de la traducción.
 ☐ Hasta qué punto el esfuerzo vale el producto.

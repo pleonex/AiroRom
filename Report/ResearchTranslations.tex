@@ -33,37 +33,35 @@ Esto no evita en su totalidad la edición pues, teniendo acceso al código máquina
 Sin embargo, sí puede retrasar o al menos imposibilitar para aquellas personas que no tengan los conocimientos técnicos necesarios.
 
 \section{Saga Pokémon en \acl{NDS}}
-\textit{Pokémon} es una serie de juegos desarrollados por la compañía \textit{Game Freak} desde el año 1993 para las consolas de Nintendo.
-Esta saga de juegos se divide en las denominadas `generaciones' que engloban por lo general al menos tres juegos. Sus características es un mismo mapa, con una historia casi idéntica y un conjunto de \textit{Pokémon} común para conseguir.
-Esta ha sido una de las franquicias más exitosas a nivel mundial y cuenta con una serie de animación, películas y miles de seguidores.
+\textit{Pokémon} es una serie de juegos desarrollados por \textit{Game Freak} desde 1993 para las consolas de Nintendo.
+La saga se divide en denominadas `generaciones' que engloban al menos tres juegos.
+Ha sido una de las franquicias más exitosas a nivel mundial~\cite{GamSpo-GF} y cuenta con una serie de animación y películas entre otros.
 
-A causa de su fama, existe siempre un gran número de usuarios que no pueden esperar a que salga en su país para poder jugarlo.
-Este es el problema que se deriva de que los juegos se suelan lanzar primero en Japón, entorno seis meses más tarde en América y pocos meses después en Europa.
-Los usuarios ven que su única posibilidad de jugar al juego, a pesar de contar con fechas de localización confirmadas y exactas, en obtener una copia ilegítima del juego en un idioma que en la mayoría de los casos desconocen (japonés).
+A causa de la fama de los juegos y la falta de paciencia de los seguidores, se desarrollan traducciones parciales del juego.
+Estos proyectos, comenzados pocas horas después del primer lanzamiento en Japón, pretenden ofrecer una versión parcialmente traducida en semanas, adelantándose a los lanzamientos oficiales.
+Este es el caso de comunidades como PokéCheats.net\footnote{\url{http://pokecheats.net/tools/translations.php}} o ProjectPokemon.org\footnote{\url{http://projectpokemon.org/}}.
 
-Aprovechando esta demanda, en esos meses de intervalos entre fechas de lanzamiento en diversos países surgen páginas webs cuyo objetivo es promocionarse y ganar usuarios lanzando una traducción no-oficial y parcial del juego.
-Este es el caso de páginas que se promocionan con (traducido del inglés\footnote{\url{http://pokecheats.net/tools/translations.php}})
-\textquote{PokéCheats.net está comenzando a posicionarse en traducciones anticipadas de juegos de Pokémon de Nintendo que están saliendo este año. Nuestro objetivo es el de darte una traducción de los juegos japoneses en tu idioma, para que puedas comenzar a jugar los próximos títulos.}.
-En otras ocasiones es gente desinteresada que quiere ayudar a que otras personas disfruten el título.
+Es por estos motivos, que \textit{Game Freak} desde el primer juego de \acl{NDS} incluyó métodos de ofuscación, con el objeto de no solo evitar traducciones, si no también los \textit{mods}.
+Dado que no se puede evitar conocer qué algoritmos protegen a los archivos ya que se puede mirar qué instrucciones máquinas ejecuta la consola para realiza esa misma tarea, el objetivo es retrasar y dificultar, para que se requieren conocimientos técnicos y esfuerzo para realizar dicha tarea.
 
-En ambos casos, este tipo de traducciones como se comentó en la traducción perjudica a la compañía y es esta la mediante los mecanismos descritos a continuación intenta poner trabas para al menos retrasar estas traducciones y dar tiempo a que salgan las oficiales.
+Los textos que aparecen en diálogos y menús, al igual que las imágenes principales de \textit{Pokémons}, son el primer objetivo a la hora de realizar una traducción o edición.
+Estos han sido el objeto de estudio y donde se han encontrado los algoritmos de protección que se analizarán en los siguientes subapartados.
+Además se ha podido comprobar una evolución de estas técnicas a lo largo de las generaciones.
 
-Los textos que aparecen en diálogos y menús, al igual que aquellos nombres para denominar a \textit{Pokémons} y ataques son el primer objetivo a la hora de realizar una traducción o edición.
-Es por ello que son estos los archivos más protegidos con cifrados u ofuscado de nombre como se verá.
-Cuando mayor sea la protección menos usuarios tendrán las capacidades y más esfuerzo requerirá.
-De nuevo se trata el problema descrito en el segundo capítulo donde se valora si es el esfuerzo necesario compensa el resultado final.
-
-El único tipo de fichero que se ha podido comprobar que en ningún caso llega a ser protegido son es la música y efectos de sonido del juego, estando en un formato estándar con extensión \texttt{.sdat} en la carpeta raíz del juego.
+Los sonidos y música han sido los únicos archivos que no han estado protegidos.
+Se encuentran en un formato y codificación estándar con extensión \texttt{sdat} en la carpeta raíz del juego.
 
 \subsection{Pokémon Perla y Diamante}
-El par de juegos \textit{Pokémon Diamante y Perla} corresponden a la cuarta generación de saga y a la primera que salió para \acl{NDS}.
-El primer país en recibirlos fue Japón a finales de septiembre de 2006 y como es frecuente mucho después llegó al resto del mundo.
-Concretamente pasaron siete meses hasta la llegada a Estados Unidos y tres meses más hasta la llegada a Europa.
+Los juegos \textit{Pokémon Diamante y Perla} corresponden a la cuarta generación de saga y a la primera que salió para \acl{NDS}.
+Primero llegó a Japón en septiembre de 2006, siete meses después a los Estados Unidos y tres meses más a Europa.
 
 \subsubsection{Archivos}
-Se trata del primera generación de juegos que llegan a esta consola donde como característica importante respecto a su antecesora (\acl{GBA}) es la introducción del sistema de ficheros.
-En estos tres juegos, los archivos dentro del juego tienen nombres explicativos sobre su contenido (figura~\ref{fig:tr-pearlfiles}).
-Ejemplo son ficheros como \textit{msgdata/msg.narc} con los mensajes o textos del juego, \textit{itemtool/itemdata/item\_icon.narc} con las imágenes de los objetos o \textit{graphic/font.narc} con las tipografías del juego.
+Una de las características de la \acl{NDS} respecto a su antecesora (\acl{GBA}) es la introducción del sistema de ficheros.
+Dentro los juegos existe una sección para indicar cómo dividir los datos del juego en ficheros y a su vez estos en carpetas con nombres.
+Esto ha facilitado la tarea de investigación ya que en la mayoría de los juegos, los archivos tienen nombres descriptivos sobre su contenido.
+
+Es el caso de esta generación, donde como se ha visto (figura~\ref{fig:tr-pearlfiles}) la jerarquía de carpetas y aun más el nombre de los archivos ofrecen claras pistas de su contenido.
+Por ejemplo, en \texttt{msgdata/msg.narc} se ha encontrado los textos del juego, en \texttt{itemtool/itemdata/item\_icon.narc} las imágenes de los objetos y en \texttt{graphic/font.narc} las tipografías del juego.
 
 \includefigure{fig:tr-pearlfiles}{Sistema de ficheros en Pokémon Perla visto con Tinke}{imgs/TR-PearlFiles.png}
 
