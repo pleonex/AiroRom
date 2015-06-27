@@ -44,4 +44,9 @@
     \end{figure}
 }
 
+% Make long acronym form in italics
+% http://tex.stackexchange.com/questions/84974/can-the-acronym-package-be-told-to-use-a-certain-style
+\renewcommand*{\acffont}[1]{\textit{#1}}
+\renewcommand*{\acfsfont}[1]{\textnormal{#1}}
+
 \endinput
