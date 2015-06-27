@@ -28,3 +28,10 @@ CmdLine
   # Only found a }
   -e10
 }
+
+# Warn about wrong commands
+UserWarn
+{
+    # I don't know I always write this instead of footnote
+    footenote
+}
