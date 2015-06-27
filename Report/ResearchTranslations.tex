@@ -32,7 +32,8 @@ Los mecanismos que se van a comentar a continuación, muestran como son los archi
 Esto no evita en su totalidad la edición pues, teniendo acceso al código máquina que ejecuta la consola, se puede mirar cómo accede a los ficheros.
 Sin embargo, sí puede retrasar o al menos imposibilitar para aquellas personas que no tengan los conocimientos técnicos necesarios.
 
-\section{Saga Pokémon en \acl{NDS}}
+\section{Saga Pokémon en Nintendo DS}
+\label{sec:tr-pok}
 \textit{Pokémon} es una serie de juegos desarrollados por \textit{Game Freak} desde 1993 para las consolas de Nintendo.
 La saga se divide en denominadas `generaciones' que engloban al menos tres juegos.
 Ha sido una de las franquicias más exitosas a nivel mundial~\cite{GamSpo-GF} y cuenta con una serie de animación y películas entre otros.
@@ -52,10 +53,12 @@ Los sonidos y música han sido los únicos archivos que no han estado protegidos.
 Se encuentran en un formato y codificación estándar con extensión \texttt{sdat} en la carpeta raíz del juego.
 
 \subsection{Pokémon Perla y Diamante}
+\label{sec:tr-pok-pearl}
 Los juegos \textit{Pokémon Diamante y Perla} corresponden a la cuarta generación de saga y a la primera que salió para \acl{NDS}.
 Primero llegó a Japón en septiembre de 2006, siete meses después a los Estados Unidos y tres meses más a Europa.
 
 \subsubsection{Archivos}
+\label{sec:tr-pok-pearl-file}
 Una de las características de la \acl{NDS} respecto a su antecesora (\acl{GBA}) es la introducción del sistema de ficheros.
 Dentro los juegos existe una sección para indicar cómo dividir los datos del juego en ficheros y a su vez estos en carpetas con nombres.
 Esto ha facilitado la tarea de investigación ya que en la mayoría de los juegos, los archivos tienen nombres descriptivos sobre su contenido.
@@ -67,19 +70,9 @@ Por ejemplo, en \texttt{msgdata/msg.narc} se ha encontrado los textos del juego,
 
 \subsubsection{Textos}
 \label{sec:tr-pok-pearl-text}
-Centrándose en textos del juego se comprueba que están cifrados.
-Tras una búsqueda de las frases de diálogos iniciales sobre todo el archivo binario del juego no se encuentran resultados.
-Se probó en las codificaciones más frecuentes de esta consola como son ASCII y UNICODE sin resultado.
-Esto indica que bien el archivo que contiene los textos está comprimido o cifrado.
 
-El siguiente procedimiento fue extraer la memoria RAM del juego justo en el momento de mostrar ese diálogo, pues debería estar almacenada esa frase para poder ser mostrada en pantalla.
-Esto se puede realizar gracias al emulador DeSmuME mencionado en el capítulo~\ref{sec:requirements}.
-Una vez extraído el archivo binario con la memoria RAM, mediante visores hexadecimales se buscó la frase que aparecía en pantalla usando las codificaciones estándar y sin obtener resultado de nuevo.
-Dado que la frase ha de estar en la memoria RAM, el problema era por tanto que no estaba usando una codificación estándar.
-Existen dos procedimientos básicos para realizar una búsqueda en estos casos.
-
-El primero consiste en buscar el archivo con la tipografía del juego, pues la codificación será la misma que el orden con el que aparecen los caracteres en ella.
-En la tabla~\ref{tab:tr-pearlfont} se especifica el formato usado en este juego para estos archivos.
+Los textos se ha encontrado que estaban cifrados tras aplicar ambos procedimientos descritos en metodología de la sección~\ref{sec:met-search-tex}.
+Respecto al primero, una búsqueda de la fuente para determinar la codificación, en la tabla~\ref{tab:tr-pearlfont} se especifica el formato de las tipografías.
 % TODO: Crear plugin de Tinke para exportarla.
 % TODO: Añadir imagen de la tipografía extraída.
 
@@ -104,15 +97,11 @@ En la tabla~\ref{tab:tr-pearlfont} se especifica el formato usado en este juego 
     \multicolumn{3}{c}{\ac{VWT}\tmark[b]}                               \LL
 }
 
-El segundo procedimiento posible es el de desarrollar un programa de búsqueda diferencial. Con motivo de este trabajo en el capítulo~\ref{sec:requirements} se explica el programa \textit{RelativeSearch} que se llevó a cabo. Este tipo de \textit{software} se puede usar siempre y cuando el orden de los caracteres de un mismo grupo (por ejemplo letras minúsculas) corresponda a estándares como ASCII. Si se hubiese seguido un orden aleatorio en la codificación propietaria este no serviría quedando la primera opción como única alternativa.
+El texto se encuentra cifrado con la operación \texttt{XOR} y mediante una clave que se actualiza después de descifrar cada byte, evitándose por tanto el fallo descrito en la sección~\ref{sec:met-xor-key}.
+La clave inicial es igual a \verb!clave = (ushort)(0x91BD3 * (i + 1))! donde \verb!i! es el bloque de texto a descifrar.
+Después de aplicar la clave se actualiza según \verb!clave = (ushort)(clave + 0x493D)!.
 
-Tras usar cualquiera de los dos procedimientos anteriormente descritos, se puedo encontrar una coincidencia en la memoria RAM del diálogo. El siguiente paso consistió en depurar el juego para hallar el algoritmo de descifrado o descompresión de textos. Para ello usando los programas descritos en el capítulo~\ref{sec:requirements} de depuración, se puso un punto de interrupción en dicha posición.
-
-Cabe destacar que esta posición es dinámica por lo que cambia cada vez que se inicia el juego pues depende de muchas variables. Para sortear este problema se hizo uso de los \textit{savestates} del emulador, es decir guardados de memoria del juego que permiten ir a cualquier momento de una ejecución. Gracias a esta característica se puede realizar un guardado justo antes de que el juego guarde un juego de forma que siempre que se use ese \textit{savestate} encontraremos el texto en la misma posición. El punto de interrupción hizo parar el emulador justo en las instrucciones máquinas que estaban realizando, en este caso, el descifrado. Este algoritmo se describe a continuación.
-
-El texto se encuentra cifrado usando la operación XOR y mediante una clave que se actualiza después de descifrar cada byte\footnote{Al no ser una clave constante no se puede obtener esta al ser aplicada sobre zonas con valores a 0 como sí sucede en el caso de la tabla de contenido.}. La clave inicial es igual a \verb!clave = (ushort)(0x91BD3 * (i + 1))! donde \verb!i! es el bloque de texto a descifrar. Después de aplicar la clave sobre un byte esta se actualiza según \verb!clave = (ushort)(clave + 0x493D)!.
-
-El cifrado no es exclusivo del texto pues la tabla de contenido con las posiciones y tamaños de cada diálogo se encuentra cifrado también. La clave no coincide con la del texto y se forma de la siguiente manera: \verb!clave = (ushort)(clave_base * 0x2FD * (i + 1))!. En este caso, se hace uso de una clave base que se encuentra disponible en la cabecera del fichero y de nuevo con número de entrada a descifrar (\verb!i!). Dado que el tamaño de estos campos cifrados es de 32 bits y la clave de 16 bits, se concatena la clave dos veces formando el valor de 32 bits necesario para aplicar la operación XOR. % chktex 13
+El cifrado se ha aplicado también sobre la tabla de contenidos pero con las posiciones y tamaños de cada diálogo se encuentra cifrado también. La clave no coincide con la del texto y se forma de la siguiente manera: \verb!clave = (ushort)(clave_base * 0x2FD * (i + 1))!. En este caso, se hace uso de una clave base que se encuentra disponible en la cabecera del fichero y de nuevo con número de entrada a descifrar (\verb!i!). Dado que el tamaño de estos campos cifrados es de 32 bits y la clave de 16 bits, se concatena la clave dos veces formando el valor de 32 bits necesario para aplicar la operación XOR.
 
 Sin embargo, esta parte del fichero a pesar de estar cifrado presenta un fallo de seguridad. Como se ha comentado los valores cifrados de posición y tamaño son de 32 bits (4 bytes) pero en la mayoría de los casos solo se usan los dos primeros bytes pues tamaño del fichero de texto no supera los \verb!2^16 = 65535 bytes!. Debido a la concatenación de la clave y a que los dos últimos bytes son 0, al cifrar estos dos bytes se estuvo guardando la clave en texto plano.
 Es decir, se demuestra que \verb!a XOR 0 = a! siendo en este caso \verb!a! la clave para cifrar estas entradas y el valor guardado en el fichero en la mayoría de los casos.
