@@ -16,3 +16,6 @@
 [submodule "Games/ninokuni"]
 	path = Games/ninokuni
 	url = https://github.com/pleonex/ninokuni
+[submodule "Games/Pokemon-Conquest"]
+	path = Games/Pokemon-Conquest
+	url = https://github.com/pleonex/Pokemon-Conquest-Tools
