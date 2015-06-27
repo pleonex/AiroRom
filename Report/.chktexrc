@@ -27,6 +27,9 @@ CmdLine
 
   # Only found a }
   -e10
+
+  # No match for{
+  -e15
 }
 
 # Warn about wrong commands
