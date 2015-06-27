@@ -9,7 +9,7 @@
 
 Las traducciones no oficiales, conocidas informalmente como  \textit{fan-traducciones}~\cite{Wiki-Trans}, son trabajos realizados por personas externas a la compañía desarrolladora.
 Su objetivo es traducir un videojuego y compartirlo de forma altruista.
-La distribución se hace comúnmente en foros dedicados y mediante \textit{parches}, es decir, archivos binarios que contienen solo las modificaciones realizadas y en principio, no contenido con derechos de autor.
+La distribución se hace comúnmente en foros dedicados y mediante \textit{parches}, es decir, archivos binarios que contienen solo las modificaciones realizadas y, en principio, no contenido con derechos de autor.
 Este capítulo se ha centrado en los resultados obtenidos al analizar juegos principalmente de la consola \acl{NDS}.
 La selección se ha realizado en base a sagas que han tenido más traducciones no oficiales (\textit{Pokémon}), juegos con proyectos largos de traducción (\textit{Ninokuni}) y aquellos en los que se han visto solicitudes o intentos  (\textit{London Life} y demás).
 
@@ -321,40 +321,36 @@ Puntos fuertes & Puntos débiles \\
 
 \subsection{Pokémon Conquest}
 \textit{Pokémon Conquest} es un juego desarrollado por \textit{Tecmo Koei} y publicado en el año 2012 para la consola \acl{NDS}.
-Este juego dista de la mecánica de la saga principal pues se trata de un género de combates por turnos y estrategia en lugar de RPG.
+Este juego dista de la mecánica de la saga principal pues se trata de un género de combates por turnos y estrategia en lugar de \ac{RPG}.
 
-Aunque hubo una diferencia de tres o cuatro meses entre la salida en Japón y Estados Unidos, la compañía no confirmó de inmediato las fechas.
+Aunque hubo una diferencia de tres meses entre la salida en Japón y Estados Unidos, la compañía no confirmó de inmediato las fechas.
 A consecuencia, se formó un grupo de traducción no oficial\footnote{Foro donde se desarrolló el proyecto.
 
 \url{http://pokecheats.net/forum/showthread.php?13925-Translation-project-for-Pokémon-Nobunaga-s-Ambition}} que llegó a casi completarse.
-Además surgieron a partir de esta varias a otros idiomas como italiano y alemán.
 
 \subsubsection{Archivos}
-En este juego no se han ofuscado los archivos y carpetas.
-Todo está bien organizado y con nombres descriptivos.
+En este juego no se han ofuscado los archivos y carpetas, tienen nombres descriptivos de su contenido.
 
 \subsubsection{Textos}
 \label{sec:tr-pok-conquest-text}
-Los textos sí han cifrado y codificado con una protección mayor que en otras generaciones.
-Para encontrar se buscó en primer lugar sobre la memoria RAM repitiendo el proceso explicado en el apartado textos de la sección~\ref{sec:tr-pok-pearl-text}.
-Dado que se usa la codificación estándar SJIS se pudo encontrar directamente.
+Después de aplicar la mecánica descrita en la sección~\ref{sec:mec-search-text} se ha encontrado que los textos están cifrados y codificados.
 
-Una vez puesto el punto de interrupción se dio con el algoritmo que descodifica estos caracteres.
+La codificación se usa
 Con el objetivo de ahorra espacio y ofuscar el texto los archivos de textos tienen una codificación especial basada en caracteres de control y optimizada para caracteres japoneses.
 Su sistema se basa en especificar solo un byte por carácter japonés en lugar de dos como dice SJIS.
 El segundo carácter restante al estar comprendido entre \texttt{0x81--0x83} y es igual entre caracteres cercanos, se va predice mediante unos códigos de control.
-Esta codificación está implementada en ambos sentidos en el proyecto AmbitionText\footnote{\url{http://subirelcodigo}}.
+Esta codificación está implementada en ambos sentidos en el proyecto AmbitionText\footnote{\url{https://github.com/pleonex/Pokemon-Conquest-Tools/AmbitionText}}.
 Destaca esta codificación pues no es sencilla de implementar y requiere mucho esfuerzo de creación de una herramienta que permita trabajar con ella.
 
 Antes de esta parte de codificación, el texto se descifra.
 El cifrado se basa en aplicar la clave ``\texttt{MsgLinker Ver1.00}'' sobre cada byte de texto.
-A continuación se muestra la implementación en C\# para el cifrado y descifrado\footnote{\url{http://subirelcodigo}}.
+A continuación se muestra la implementación en C\# para el cifrado y descifrado\footnote{\url{https://github.com/pleonex/Pokemon-Conquest-Tools/Decrypted}}.
 El formato del fichero se especifica en la tabla~\ref{tab:tr-conquesttxt}.
 
 \begin{verbatim}
-string key = "MsgLinker Ver1.00";
+const string Key = "MsgLinker Ver1.00";
 for (int i = 0; i < data.Length; i++)
-    data[i] ^= key[i % key.Length];
+    data[i] ^= (byte)Key[i % Key.Length];
 \end{verbatim}
 
 \ctable[
@@ -473,7 +469,7 @@ El estudio se ha centrado en juegos para la \acl{NDS} a partir de~\cite{GTemp-Ab
 El objetivo será el de mostrar las causas más frecuentes que como se verá en la mayoría de los casos fue por la confirmación de una localización al idioma de la traducción.
 
 \subsubsection{Ausencia de \textit{software} de edición}
-Surgidos por la falta de personal con conocimientos técnicos y de programación que puedan crear los programas necesarios de edición.
+Surgidos por la falta de gente con conocimientos técnicos que puedan crear los programas necesarios de edición.
 \begin{itemize}
 \item WWII-Tank Battles (\acs{PS2}): Ausencia de descompresor de archivos.
 \item Chi's Sweet Home: Chi ga Ouchi ni Yatte Kita! (\acs{NDS}): Ausencia de importador de imágenes.
@@ -482,18 +478,18 @@ Surgidos por la falta de personal con conocimientos técnicos y de programación q
 \item Custom Beat Battle Draglade 2 (\acs{NDS}): Ausencia de editor de textos.
 \item Mobile Suit Gundam 00 (\acs{NDS}): Ausencia de editor de textos.
 \item Super Robot Taisen OG Saga: Mugen No Frontier (\acs{NDS}): Ausencia de editor de textos.
-\item Mysterious Dungeon: Shiren the Wanderer 2 (\acs{NDS}): Ausencia de editor de textos y de modificaciones técnicas necesarias sobre el juego.
+\item Mysterious Dungeon: Shiren the Wanderer 2 (\acs{NDS}): Ausencia de editor de textos y de modificaciones técnicas necesarias.
 \end{itemize}
 
 \subsubsection{Problemas técnicos tras editar el juego}
-Problemas surgidos durante la traducción que no se solucionaron debido a falta de conocimientos o abandono de soporte de quienes crearon las herramientas.
+Problemas surgidos durante la traducción que no se llegaron a solucionar debido a falta de conocimientos o abandono de quienes crearon las herramientas.
 \begin{itemize}
 \item Dai Kaijuu Monogatari (\acs{PSX}): Los programas usados para editar los textos causan bloqueos en el juego.
-\item Resident Evil 2 (\acs{DC} y \acs{GC}): El compresor de archivos creado no funcionaba con todos.
+\item Resident Evil 2 (\acs{DC} y \acs{GC}): El compresor no funcionaba con todos los archivos.
 \end{itemize}
 
 \subsubsection{Abandono personal}
-Causado en su mayoría por una falta de motivación y tiempo del equipo que lo llevaba a cabo.
+Abandonos del grupo del proyecto por causas personales, falta de motivación y de tiempo.
 \begin{itemize}
 \item Professor Layton: London Life (\acs{NDS}).
 \item Cross Treasures (\acs{NDS}).
@@ -515,8 +511,5 @@ Abandonos de proyectos por la llegada o confirmación de una traducción oficial.
 \item Nostalgia (\acs{NDS}).
 \end{itemize}
 
-Se puede ver que el problema más común está la falta de programas de edición de juegos concretos.
-Para poder llevar a cabo esto hace falta unos conocimientos técnicos tanto de \textit{software} como de \textit{hardware} y de una larga experiencia.
-Es por esto que a la hora de empezar un proyecto la parte técnica suele ser la más complicada de resolver y que en muchos casos nunca se llega a resolver del todo.
-
-La segunda causa más frecuente es la confirmación de la llegada de una localización, suficiente motivo para parar el proyecto y no dañar los intereses de mercado de una empresa.
+El principal motivo de abandono es la ausencia de personas con conocimientos y dedicación para crear el \textit{software} de edición necesario.
+La segunda causa más frecuente es la confirmación de la llegada de una localización, para no realizar un mismo trabajo dos veces y no dañar los intereses de mercado de la empresa.
