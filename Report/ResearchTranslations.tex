@@ -71,12 +71,14 @@ Por ejemplo, en \texttt{msgdata/msg.narc} se ha encontrado los textos del juego,
 \subsubsection{Textos}
 \label{sec:tr-pok-pearl-text}
 
-Los textos se ha encontrado que estaban cifrados tras aplicar ambos procedimientos descritos en metodología de la sección~\ref{sec:met-search-tex}.
-Respecto al primero, una búsqueda de la fuente para determinar la codificación, en la tabla~\ref{tab:tr-pearlfont} se especifica el formato de las tipografías.
+Respecto a los textos, tras aplicar la metodología de la sección~\ref{sec:met-search-tex} se ha visto que estaban cifrados, además de usar una codificación no estándar que dificultó la investigación.
+Para usar el primer método descrito, se ha buscado y estudiado la fuente del juego para determinar la codificación, se muestra en la tabla~\ref{tab:tr-pearlfont}.
 % TODO: Crear plugin de Tinke para exportarla.
 % TODO: Añadir imagen de la tipografía extraída.
 
 \ctable[
+    mincapwidth = 110 mm,
+    footerwidth,
     caption = Especificación de tipografías en Pokémon Perla,
     label   = tab:tr-pearlfont,
     pos     = h
@@ -97,14 +99,20 @@ Respecto al primero, una búsqueda de la fuente para determinar la codificación, 
     \multicolumn{3}{c}{\ac{VWT}\tmark[b]}                               \LL
 }
 
-El texto se encuentra cifrado con la operación \texttt{XOR} y mediante una clave que se actualiza después de descifrar cada byte, evitándose por tanto el fallo descrito en la sección~\ref{sec:met-xor-key}.
+El algoritmo es un cifrado con operación \texttt{XOR} y clave dinámica aplicado sobre cada byte individualmente.
 La clave inicial es igual a \verb!clave = (ushort)(0x91BD3 * (i + 1))! donde \verb!i! es el bloque de texto a descifrar.
-Después de aplicar la clave se actualiza según \verb!clave = (ushort)(clave + 0x493D)!.
+Después de descifrar un byte se actualiza según \verb!clave = (ushort)(clave + 0x493D)!.
 
-El cifrado se ha aplicado también sobre la tabla de contenidos pero con las posiciones y tamaños de cada diálogo se encuentra cifrado también. La clave no coincide con la del texto y se forma de la siguiente manera: \verb!clave = (ushort)(clave_base * 0x2FD * (i + 1))!. En este caso, se hace uso de una clave base que se encuentra disponible en la cabecera del fichero y de nuevo con número de entrada a descifrar (\verb!i!). Dado que el tamaño de estos campos cifrados es de 32 bits y la clave de 16 bits, se concatena la clave dos veces formando el valor de 32 bits necesario para aplicar la operación XOR.
+El cifrado se ha aplicado también sobre los campos de la tabla de contenidos (ver tabla~\ref{tab:tr-pearltxt}).
+Se usa la misma clave de 16 bits, concatenada dos veces, para aplicarla sobre los valores de 32 bits \textit{posición} y \textit{tamaño} de una misma entrada.
+Se inicializa con: \verb!clave = (ushort)(clave_base * 0x2FD * (i + 1))! donde \verb!i! es el número de la entrada a descifrar.
+Como se ve, se hace uso de una \textit{clave base} que se encuentra disponible en la cabecera del fichero.
 
-Sin embargo, esta parte del fichero a pesar de estar cifrado presenta un fallo de seguridad. Como se ha comentado los valores cifrados de posición y tamaño son de 32 bits (4 bytes) pero en la mayoría de los casos solo se usan los dos primeros bytes pues tamaño del fichero de texto no supera los \verb!2^16 = 65535 bytes!. Debido a la concatenación de la clave y a que los dos últimos bytes son 0, al cifrar estos dos bytes se estuvo guardando la clave en texto plano.
-Es decir, se demuestra que \verb!a XOR 0 = a! siendo en este caso \verb!a! la clave para cifrar estas entradas y el valor guardado en el fichero en la mayoría de los casos.
+Sin embargo, esta parte del fichero presenta un fallo de seguridad pues se está guardando la clave en texto plano.
+Como se ha comentado los valores cifrados son de 32 bits (4 bytes) pero en el caso del campo \textit{posición}, en la mayoría de las veces \textbf{solo se usan los dos primeros bytes} pues, como el tamaño del fichero de texto no supera los \verb!2^16 = 65535 bytes!, no hace falta posiciones más grande de estas.
+Esto ocurre también sobre el campo \textit{tamaño} donde se aplica la misma clave, ya que \textbf{en pocas ocasiones un diálogo ocupará más de 65 KB.}
+Debido a que la clave se concatena para descifrar el valor de 32 bits, se está aplicando sobre bytes con valor 0, quedando la clave almacenada en texto plano.
+\verb!valor_cifrado = (00 00 AB CD) XOR (XW YZ XW YZ) = (XW YZ EF GH)! siendo \verb!00 00 AB CD! el campo descifrado y \verb!XW YZ! la clave.
 
 En la tabla~\ref{tab:tr-pearltxt} se especifica el formato de los archivos de texto.
 
@@ -130,27 +138,18 @@ En la tabla~\ref{tab:tr-pearltxt} se especifica el formato de los archivos de te
 
 \subsubsection{Imágenes}
 \label{sec:tr-pok-pearl-img}
-En el caso de la saga de Pokémon las imágenes no contienen frases con texto por lo que en cuanto a una traducción respecta no son necesarias editarlas.
-Sin embargo, dada la popularidad de los \textit{mods} y de la extracción de imágenes en estos juegos se apostó por cifrar un tipo concreto de las mismas.
-Se trata de los \textit{sprites} de los \textit{Pokémons} que aparecen durante las batallas.
-Estos archivos están contenidos en el paquete \textit{poketool/pokegra/pokegra.narc} donde hay seis imágenes por monstruo.
+En este juego las imágenes no contienen texto por lo que no son necesarias editarlas en una traducción.
+Sin embargo, si son objetivo de los \textit{mods} y de extraerlas para compartirlas.
+Es por ello que se ha podido ver como las imágenes del archivo \texttt{poketool/pokegra/pokegra.narc}, que contiene seis \textit{sprites} por \textit{Pokémon} usados durantes las batalla, están cifradas.
 
-El cifrado se realizó sobre los datos de la imagen, manteniendo las cabeceras del formato de la misma sin cifrar.
-Como consecuencia, las imágenes se podían abrir usando programas estándares pero sin ver nada en concreto.
+El cifrado se realizó sobre los datos de la imagen, manteniendo las cabeceras del formato intacto.
+Como consecuencia, las imágenes se podían abrir pero no ver usando programas estándar.
 % TODO: Hacer programa y descifrar una imagen y poner comparativa
 
-El procedimiento para encontrar el algoritmo de cifrado en este caso es distinto al realizado con texto.
-No se puede partir de datos conocidos como anteriormente se partía de una frase que se veía en la pantalla.
-Sin embargo, dado que las cabeceras de la imagen no están cifradas se pudo buscar sobre el código en ensamblador la función que procesa esta cabecera.
-En concreto se buscó la palabra mágica \texttt{CHAR} que se procesa para determinar el comienzo de una sección del archivo.
-
-Una vez encontrado la función que lee una imagen, solo habría que acceder a una parte del juego donde se esperaba que se cargase una imagen como durante una batalla y poner un punto de interrupción sobre esta función.
-Tras omitir imágenes que no estaban cifradas\footnote{Dado que una imagen contiene suele tener píxeles cercanos de igual colores, siempre que en los datos se observara patrones se podía determinar que no estaba cifrada.}, se llegó a una que sí lo estaba donde se puso un punto de interrupción.
-
-La siguiente función que leía los datos de dicha imagen era el algoritmo de descifrado. Este algoritmo parte del hecho que todo el bloque de datos de una imagen tendrá el tamaño constante de \texttt{0x1900} bytes.
-Se trata de un cifrado parecido al realizado sobre el texto donde habrá una clave que irá cambiando después de aplicarse sobre cada valor y que se usará para aplicar la operación XOR sobre un dato cifrado.
-En este caso, la clave es de 32 bits y el dato a descifrar de 16 bits y se comencerá desde el final del fichero hasta el principio.
-La clave inicial será el primer valor (últimos dos bytes del fichero) e irá cambiando siguiendo la siguiente operación \verb!clave = (uint)(clave * 0x41C64E6D + 0x6073)!.
+Aplicando la metodología descrita en la sección~\ref{sec:met-search-img} se pudo encontrar el algoritmo.
+Usando bloques de datos con tamaño fijo de \texttt{0x1900} bytes, aplicar la operación \texttt{XOR} sobre valores de 16 bits comenzando por el final.
+La clave es de 32 bits y se actualiza después de usarse.
+Se inicializa con el primer valor cifrado, últimos dos bytes del fichero, e irá cambiando según \verb!clave = (uint)(clave * 0x41C64E6D + 0x6073)!.
 
 \subsubsection{Conclusión}
 
@@ -159,14 +158,15 @@ Puntos fuertes & Puntos débiles \\
 % Pros
 \begin{itemize}
 \item Los textos usando una codificación no estándar.
-\item Los textos están cifrados con una clave no estática.
-\item Las imágenes están cifradas con un clave no estática.
+\item Los textos están cifrados con una clave dinámica.
+\item Las imágenes están cifradas con un clave dinámica.
 \end{itemize} &
 
 % Contras
 \begin{itemize}
 \item Los archivos y carpetas tienen nombres descriptivos.
 \item Hay un fallo de seguridad en el cifrado de la tabla de contenido de los textos por el que se puede averiguar la clave.
+\item Las imágenes usan codificaciones estándar por lo que el \textit{software} existen de procesamiento se puede utilizar una vez descifrado el fichero.
 \end{itemize} \\
 \end{tabular}
 

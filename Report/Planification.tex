@@ -31,3 +31,13 @@ El segundo procedimiento posible es el de desarrollar un programa de búsqueda di
 Tras usar cualquiera de los dos procedimientos anteriormente descritos, se puedo encontrar una coincidencia en la memoria RAM del diálogo. El siguiente paso consistió en depurar el juego para hallar el algoritmo de descifrado o descompresión de textos. Para ello usando los programas descritos en el capítulo~\ref{sec:requirements} de depuración, se puso un punto de interrupción en dicha posición.
 
 Cabe destacar que esta posición es dinámica por lo que cambia cada vez que se inicia el juego pues depende de muchas variables. Para sortear este problema se hizo uso de los \textit{savestates} del emulador, es decir guardados de memoria del juego que permiten ir a cualquier momento de una ejecución. Gracias a esta característica se puede realizar un guardado justo antes de que el juego guarde un juego de forma que siempre que se use ese \textit{savestate} encontraremos el texto en la misma posición. El punto de interrupción hizo parar el emulador justo en las instrucciones máquinas que estaban realizando, en este caso, el descifrado.
+
+\subsection{Búsqueda de algoritmo sobre imágenes}
+\label{sec:met-search-img}
+El procedimiento para encontrar el algoritmo de cifrado en este caso es distinto al realizado con texto.
+No se puede partir de datos conocidos como anteriormente se partía de una frase que se veía en la pantalla.
+Sin embargo, dado que las cabeceras de la imagen no están cifradas se pudo buscar sobre el código en ensamblador la función que procesa esta cabecera.
+En concreto se buscó la palabra mágica \texttt{CHAR} que se procesa para determinar el comienzo de una sección del archivo.
+
+Una vez encontrado la función que lee una imagen, solo habría que acceder a una parte del juego donde se esperaba que se cargase una imagen como durante una batalla y poner un punto de interrupción sobre esta función.
+Tras omitir imágenes que no estaban cifradas\footnote{Dado que una imagen contiene suele tener píxeles cercanos de igual colores, siempre que en los datos se observara patrones se podía determinar que no estaba cifrada.}, se llegó a una que sí lo estaba donde se puso un punto de interrupción.
