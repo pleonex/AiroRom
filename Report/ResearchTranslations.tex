@@ -71,7 +71,7 @@ Por ejemplo, en \texttt{msgdata/msg.narc} se ha encontrado los textos del juego,
 \subsubsection{Textos}
 \label{sec:tr-pok-pearl-text}
 
-Respecto a los textos, tras aplicar la metodología de la sección~\ref{sec:met-search-tex} se ha visto que estaban cifrados, además de usar una codificación no estándar que dificultó la investigación.
+Respecto a los textos, tras aplicar la metodología de la sección~\ref{sec:met-search-text} se ha visto que estaban cifrados, además de usar una codificación no estándar que dificultó la investigación.
 Para usar el primer método descrito, se ha buscado y estudiado la fuente del juego para determinar la codificación, se muestra en la tabla~\ref{tab:tr-pearlfont}.
 % TODO: Crear plugin de Tinke para exportarla.
 % TODO: Añadir imagen de la tipografía extraída.
@@ -171,26 +171,25 @@ Puntos fuertes & Puntos débiles \\
 \end{tabular}
 
 \subsection{Pokémon HeartGold y SoulSilver}
-Los juegos \textit{Pokémon HeartGold y SoulSilver} son las siguiente generación de la saga que salieron también para \acl{NDS}.
-Se repite como es común el orden y plazo de lanzamiento. De esta forma se lanzó primero en Japón a mediados de septiembre de 2009, a continuación en América seis meses después, en abril de 2010, y finalmente en Europa una semana después.
-
-Esta vez no hubo mucha diferencia entre los lanzamientos de América y Europa lo que provocaría que no fuese necesario realizar traducciones no oficiales desde el inglés, idioma desde el cual al ser más sencillo se parten la mayoría de las traducciones.
-Sin embargo, sí hubo traducciones que partieron del japonés y que se quedaron entorno a un 90\% de finalización~\cite{PokProj-HG1}.
+\label{sec:tr-pok-heart}
+Los juegos \textit{Pokémon HeartGold y SoulSilver} son una remasterización para \acl{NDS} de la segunda generación, originalmente para \acl{GBA}.
+Se lanzó primero en Japón en de septiembre de 2009 y en Estados Unidos y Europa seis meses después.
+No hubo mucha diferencia entre los lanzamientos de América y Europa por lo que no se realizaron traducciones no oficiales desde el inglés, pero sí huboun caso desde el japonés que llegó a completarse a un 90\%~\cite{PokProj-HG1}.
 
 \subsubsection{Archivos}
 \label{sec:tr-pok-heart-file}
-La primera gran diferencia en esta generación llega con el ofuscado de nombres de archivos y directorios. Como se puede apreciar en la figura~\ref{fig:tr-heartfiles} todos los archivos principales del juego están nombrados con números y clasificados en carpetas numéricas también.
+La primera gran diferencia en estos nuevos juegos llegó con el ofuscado de nombres de archivos y directorios.
+Como se observa en la figura~\ref{fig:tr-heartfiles}, todos los archivos principales del juego están nombrados con números, al igual que las carpetas que los contienen.
 Además, el contenido de estas carpetas no relaciona a los archivos entre sí generando una organización aleatoria.
-En total hay 275 archivos que a su vez son contenedores de subarchivos sin nombre.
-Estos contenedores pueden llegar a tener más de 1000 archivos en su interior pero si se garantiza que el contenido de estos está relacionado entre si correspondiendo a las imágenes a las características de \textit{Pokémon} o las imágenes de un menú concreto.
+En total hay 275 archivos que a su vez son contenedores con más de 1000 ficheros sin nombre pero relacionados en contenido, como puede ser todos los textos o todos los \textit{sprites} de los \textit{Pokémons}.
 
 \includefigure{fig:tr-heartfiles}{Carpetas y ficheros ofuscados en Pokémon HeartGold}{imgs/TR-HeartFiles.png}
 
-Mediante depuración del código ensamblador se pudo comprobar la implementación del acceso a estos archivos.
-Todo se realiza llamando a varias funciones de similar cometido cuyo primer parámetro es un ID que identifica al archivo y como segundo parámetro el sub-archivos dentro del contenedor.
+Analizando el código en ensamblador se pudo encontrar la forma interna en la que se accede a estos ficheros.
+Se realiza llamando a varias funciones de similares, el primer parámetro es un ID que identifica al archivo y el segundo el índice del fichero dentro del contenedor.
 Este ID es lineal y si se descompone en base diez se puede calcular la ruta absoluta.
-De esta forma el ID \texttt{0x1B} (27) corresponde a \texttt{27 = 0*10 + 2*10 + 7} lo que significa que estaría ubicado en \textit{a/0/2/7}.
-A la hora de implementar este mecanismo durante el desarrollo del videojuego se usuaría un archivo de cabeceras similar al siguiente.
+De esta forma el ID \texttt{0x1B (27)} corresponde a \verb!27 = 0*100 + 2*10 + 7*1! lo que significa que estaría ubicado en \texttt{a/0/2/7}.
+A la hora de implementar este mecanismo durante el desarrollo del videojuego se podría haber usado un archivo de cabecera similar al siguiente.
 
 \begin{verbatim}
 file_paths.h
@@ -198,19 +197,19 @@ file_paths.h
 #define POKEMON_IMAGES_FILE_ID 0x1C
 \end{verbatim}
 
-De esta manera, en el proceso de desarrollo sería fácil y sin ofuscar su propio código el indicar qué fichero cargar usando las constantes definidas.
-Este método es sencillo de implementar y dificulta la tarea de edición del juego pues entre los 275 archivos disponibles, binarios, sin estructuras de datos conocidas, habría que averiguar qué hace cada uno sin tener una pista previa como pasaba en ediciones anteriores donde el nombre era descriptivo del contenido.
+Donde cada constante corresponde a un fichero, facilitando el desarrollo pero ofuscando el producto final.
+Los archivos, sin nombres, binarios y sin estructuras de datos conocidas en su mayoría, para poder editarlos habría que investigar mediante depuración de código, sin contar con pistas como pasaba en la edición anterior donde el nombre era descriptivo del contenido.
 
 \subsubsection{Textos}
-Los textos de esta generación vienen igualmente cifrados.
-Esto se pudo comprobar al realizar de nuevo una búsqueda de palabras de los primeros diálogos y no tener resultados ni en el archivo binario del juego ni sobre la memoria RAM.
+\label{sec:tr-pok-heart-text}
+Tras realizar una búsqueda del algoritmo que se aplica en los textos (sección~\ref{sec:met-search-text}) se pudo comprobar que están cifrados.
+Además, tanto el formato del archivo, el algoritmo de cifrado y las claves son las mismas a las descritas en los juegos anteriores (apartado textos de la sección~\ref{sec:tr-pok-pearl-text}). El formato de las fuentes es también el mismo.
 
-Tras repetir el proceso descrito en la sección~\ref{sec:tr-pok-pearl-text} de textos de la generación anterior, se comprobó que tanto el formato del archivo como el algoritmo de cifrado y claves son exactamente las mismas a las descritas ahí. Además el formato de las fuentes es también el mismo.
-
-En esta nueva generación no se apostó por cambiar el cifrado de textos y delegar toda la responsabilidad de dificultar la tarea de edición en el ofuscamiento de nombres de ficheros. El fichero está localizado en \textit{a/0/2/7}.
+A pesar de que el cifrado no cambió y que los mismos programas de edición se podían usar, se ofuscó este archivo pasando a estar en \texttt{a/0/2/7}.
 
 \subsubsection{Imágenes}
-Al igual que sucede con los textos, tras repetir los pasos de la sección~\ref{sec:tr-pok-pearl-img} de imágenes se descubrió que se utiliza el mismo algoritmo de cifrado con las mismas claves. Se encontró sin embargo, una diferencia en la implementación pues en este caso se descifra empezando por el comienzo de los datos en lugar de por el final.
+Al igual que sucedió con los textos, tras encontrar el algoritmo de cifrado de imágenes (sección~\ref{sec:met-search-img}), se descubrió que se utiliza el mismo algoritmo de cifrado con las mismas claves.
+Solo existe una diferencia de implementación ya que el descifrado empieza ahora por el comienzo del fichero en lugar de por el final.
 
 \subsubsection{Conclusión}
 
@@ -218,18 +217,18 @@ Al igual que sucede con los textos, tras repetir los pasos de la sección~\ref{se
 Puntos fuertes & Puntos débiles \\
 % Pros
 \begin{itemize}
-\item Los archivos están ofuscados por nombre y directorio.
+\item Los nombres de los archivos y directorios están ofuscados.
 \end{itemize} &
 
 % Contras
 \begin{itemize}
-\item No todos los archivos están ofuscados como se ve en la siguiente apartado.
-\item Se mantiene los mismos algoritmos y claves que en la generación anterior por lo que una vez encontrado los archivos se pueden reutilizar las mismas herramientas.
+\item No todos los archivos están ofuscados como se ve en la figura~\ref{fig:tr-blackheartfiles}.
+\item Se mantiene los mismos algoritmos y claves que en la generación anterior por lo que, una vez encontrado los archivos, se pueden reutilizar las mismas herramientas de edición.
 \end{itemize} \\
 \end{tabular}
 
 \subsection{Pokémon Blanco y Negro}
-La sexta generación corresponde a los juegos \textit{Pokémon Blanco y Negro} para la \acl{NDS}.
+La quinta generación corresponde a los juegos \textit{Pokémon Blanco y Negro} para \acl{NDS}.
 Primero salieron en Japón a mediados de septiembre de 2010 y a principios de marzo de 2011 en América y Europa.
 Esta vez, como curiosidad, el juego salió por primera vez dos días antes en Europa que en el resto de sitios.
 

@@ -21,4 +21,10 @@ CmdLine
 
   # Forget to add spaces before cite or figure should be error
   -e2
+
+  # Invalid number of { and }
+  -e17
+
+  # Only found a }
+  -e10
 }
