@@ -413,10 +413,12 @@ Además la historia y la mecánica del juego son diferentes.
 La protección encontrada sugiere que su objetivo era evitar modificaciones del juego y no una traducción del mismo.
 
 \subsubsection{Archivos}
+\label{sec:tr-nino-file}
 Los archivos y carpetas no están ofuscados y tienen nombres descriptivos.
 Incluso se incluyen archivos de una versión anterior y de una \textit{demo} que hubo del juego y que no se utilizan en la versión final.
 
 \subsubsection{Textos}
+\label{sec:tr-nino-text}
 En cuanto al apartado de textos hay que distinguir de dos tipos: \textit{scripts} y descripciones.
 
 Los \textit{scripts} debido a sus requisitos técnicos para ejecutar diferentes tipo de comandos con múltiples parámetros, son complejos de investigar, y necesita un análisis de las instrucciones máquinas que lo procesan.
@@ -430,10 +432,12 @@ Esto es un indicio (sección~\ref{sec:met-xor-key}) de que se trata de la operaci
 \includefigure{fig:tr-nino-minitext}{Archivo cifrado (arr.) y descifrado (ab.) de Ninokuni: El Mago de las Tinieblas}{imgs/TR-NinoMiniText.png}
 
 \subsubsection{Imágenes}
+\label{sec:tr-nino-img}
 Las imágenes no están cifradas pero usan una compresión privada sencilla.
 Sin embargo, esto requiere de nuevos programas para extraerlas e importarlas\footnote{\url{https://github.com/pleonex/ninoimager}}.
 
 \subsubsection{Integridad en archivos de guardado}
+\label{sec:tr-nino-save}
 Adicionalmente se ha estudiado los mecanismos de protección sobre el archivo con los datos de guardado de la partida.
 Se trata de un fichero que en los cartuchos originales no se puede editar sin poseer \textit{hardware} adicional pero, que en una \textit{flashcard} es un fácilmente accesible al tratarse de un archivo de 64 KB.
 
@@ -469,11 +473,13 @@ Puntos fuertes & Puntos débiles \\
 \end{tabular}
 
 \section{Proyectos abandonados}
+\label{sec:tr-aband}
 Para terminar el capítulo se incluye un estudio sobre los proyectos de traducciones no oficiales, que han sido abandonados con fecha de este trabajo y con sus respectivos motivos.
 El estudio se ha centrado en juegos para la \acl{NDS} a partir de los datos de~\cite{GTemp-Aband} y~\cite{RH-Aband}.
 El objetivo será el de mostrar las causas más frecuentes por los que estos proyectos no se completan.
 
 \subsubsection{Ausencia de \textit{software} de edición}
+\label{sec:tr-aband-soft}
 Surgidos por la falta de gente con conocimientos técnicos que puedan crear los programas necesarios de edición.
 \begin{itemize}
 \item WWII-Tank Battles (\acs{PS2}): Ausencia de descompresor de archivos.
@@ -487,6 +493,7 @@ Surgidos por la falta de gente con conocimientos técnicos que puedan crear los p
 \end{itemize}
 
 \subsubsection{Problemas técnicos tras editar el juego}
+\label{sec:tr-aband-tech}
 Problemas surgidos durante la traducción que no se llegaron a solucionar debido a falta de conocimientos o abandono de quienes crearon las herramientas.
 \begin{itemize}
 \item Dai Kaijuu Monogatari (\acs{PSX}): Los programas usados para editar los textos causan bloqueos en el juego.
@@ -494,6 +501,7 @@ Problemas surgidos durante la traducción que no se llegaron a solucionar debido 
 \end{itemize}
 
 \subsubsection{Abandono personal}
+\label{sec:tr-aband-pers}
 Abandonos del grupo del proyecto por causas personales, falta de motivación y de tiempo.
 \begin{itemize}
 \item Professor Layton: London Life (\acs{NDS}).
@@ -505,6 +513,7 @@ Abandonos del grupo del proyecto por causas personales, falta de motivación y de
 \end{itemize}
 
 \subsubsection{Traducción oficial}
+\label{sec:tr-aband-oficial}
 Abandonos de proyectos por la llegada o confirmación de una traducción oficial.
 \begin{itemize}
 \item Final Fantasy: The 4 Warriors of Light (\acs{NDS}). Traducción inglesa.
