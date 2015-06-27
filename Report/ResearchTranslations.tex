@@ -208,6 +208,7 @@ Además, tanto el formato del archivo, el algoritmo de cifrado y las claves son l
 A pesar de que el cifrado no cambió y que los mismos programas de edición se podían usar, se ofuscó este archivo pasando a estar en \texttt{a/0/2/7}.
 
 \subsubsection{Imágenes}
+\label{sec:tr-pok-heart-img}
 Al igual que sucedió con los textos, tras encontrar el algoritmo de cifrado de imágenes (sección~\ref{sec:met-search-img}), se descubrió que se utiliza el mismo algoritmo de cifrado con las mismas claves.
 Solo existe una diferencia de implementación ya que el descifrado empieza ahora por el comienzo del fichero en lugar de por el final.
 
@@ -291,6 +292,7 @@ La estructura de datos se especifica en la tabla~\ref{tab:tr-blacktxt} donde se 
 }
 
 \subsubsection{Imágenes}
+\label{sec:tr-pok-black-img}
 Las imágenes a diferencia de las pasadas ediciones no se han cifrado.
 En cambio, no se utiliza un formato estándar de codificación excepto para las paletas.
 Existe un conjunto de ficheros adicionales con nuevos formatos con la información necesaria para recomponer la imagen (figura~\ref{fig:tr-blackimg}).
@@ -320,6 +322,7 @@ Puntos fuertes & Puntos débiles \\
 \end{tabular}
 
 \subsection{Pokémon Conquest}
+\label{sec:tr-pok-conquest}
 \textit{Pokémon Conquest} es un juego desarrollado por \textit{Tecmo Koei} y publicado en el año 2012 para la consola \acl{NDS}.
 Este juego dista de la mecánica de la saga principal pues se trata de un género de combates por turnos y estrategia en lugar de \ac{RPG}.
 
@@ -329,21 +332,22 @@ A consecuencia, se formó un grupo de traducción no oficial\footnote{Foro donde s
 \url{http://pokecheats.net/forum/showthread.php?13925-Translation-project-for-Pokémon-Nobunaga-s-Ambition}} que llegó a casi completarse.
 
 \subsubsection{Archivos}
+\label{sec:tr-pok-conquest-file}
 En este juego no se han ofuscado los archivos y carpetas, tienen nombres descriptivos de su contenido.
 
 \subsubsection{Textos}
 \label{sec:tr-pok-conquest-text}
-Después de aplicar la mecánica descrita en la sección~\ref{sec:mec-search-text} se ha encontrado que los textos están cifrados y codificados.
+Los textos de este juego están cifrados como se ha podido ver tras encontrar el algoritmo que los descifra y decodifica (sección~\ref{sec:met-search-text}).
+En concreto, primero descifra un bloque de datos y luego lo descodifica para poder representar dichos caracteres con la fuente del juego.
+La codificación no se usa por la fuente (esta implementa el estándar \textit{Latin-1}), es una capa adicional para ahorrar espacio y posiblemente ofuscar.
 
-La codificación se usa
-Con el objetivo de ahorra espacio y ofuscar el texto los archivos de textos tienen una codificación especial basada en caracteres de control y optimizada para caracteres japoneses.
-Su sistema se basa en especificar solo un byte por carácter japonés en lugar de dos como dice SJIS.
-El segundo carácter restante al estar comprendido entre \texttt{0x81--0x83} y es igual entre caracteres cercanos, se va predice mediante unos códigos de control.
-Esta codificación está implementada en ambos sentidos en el proyecto AmbitionText\footnote{\url{https://github.com/pleonex/Pokemon-Conquest-Tools/AmbitionText}}.
-Destaca esta codificación pues no es sencilla de implementar y requiere mucho esfuerzo de creación de una herramienta que permita trabajar con ella.
+La codificación está optimizada para caracteres japoneses.
+Se basa en especificar solo un byte por carácter japonés en lugar de dos como usa la codificación SJIS.
+Para realizar esta reducción, se predice con códigos de control el primer byte del caracter, comprendido entre \texttt{0x81--0x83}, y que es igual entre caracteres cercanos.
+Se puede encontrar una implementación de esta codificación en el proyecto AmbitionText\footnote{\url{https://github.com/pleonex/Pokemon-Conquest-Tools/AmbitionText}}.
 
-Antes de esta parte de codificación, el texto se descifra.
-El cifrado se basa en aplicar la clave ``\texttt{MsgLinker Ver1.00}'' sobre cada byte de texto.
+Respecto al cifrado, se basa en la operación \texttt{XOR} con la clave fija
+``\texttt{MsgLinker Ver1.00}'' sobre cada byte de texto.
 A continuación se muestra la implementación en C\# para el cifrado y descifrado\footnote{\url{https://github.com/pleonex/Pokemon-Conquest-Tools/Decrypted}}.
 El formato del fichero se especifica en la tabla~\ref{tab:tr-conquesttxt}.
 
@@ -370,8 +374,9 @@ for (int i = 0; i < data.Length; i++)
 }
 
 \subsubsection{Imágenes}
-Tanto los fondos como los \textit{sprites} del juego no vienen cifrados.
-Sin embargo se usan formatos de ficheros nuevos, con codificaciones nuevas que supusieron un trabajo extra de creación de \textit{software}\footnote{\url{https://github.com/pleonex/tinke/tree/master/Plugins/PSL}}.
+\label{sec:tr-pok-conquest-img}
+Tanto los fondos como los \textit{sprites} del juego no se han hallado cifrados.
+Sin embargo se usan formatos de codificación específicos, que suponen crear nuevo \textit{software} para poder editarlos\footnote{\url{https://github.com/pleonex/tinke/tree/master/Plugins/PSL}}.
 
 \subsubsection{Conclusión}
 
@@ -380,69 +385,69 @@ Puntos fuertes & Puntos débiles \\
 % Pros
 \begin{itemize}
     \item Los textos vienen cifrados y codificados.
-    \item La codificación es única para este juego.
+    \item La codificación es única y difícil de implementar (más que el descifrado).
     \item Nuevos formatos de imágenes que requieren nuevos programas.
 \end{itemize} &
 
 % Contras
 \begin{itemize}
     \item Los archivos y carpetas no están ofuscados.
-    \item Se usa una codificación final estándar.
+    \item Se usa una codificación final estándar que facilita la investigación.
     \item Las imágenes no están cifradas.
 \end{itemize} \\
 \end{tabular}
 
-\section{Ninokuni y el Mago de las Tinieblas}
-\textit{Ni no Kuni: Shikkoku no Madoshi} es el título original de un juego que solo llegó a Japón de la mano de \textit{Level-5} para la consola \acl{NDS} en 2010.
-Desde su salida, debido a que el juego se distribuía junto a un libro físico, se confirmó que iba a poder salir de este país debido a los costes de producción y traducción que supondría el libro.
+\section{Ninokuni: El Mago de las Tinieblas}
+\label{sec:tr-nino}
+\textit{Ni no Kuni: Shikkoku no Madoshi} (en español \textit{Ninokuni: El Mago de las Tinieblas}) es el título de un juego que solo llegó a Japón desarrollado por \textit{Level-5} para la consola \acl{NDS} en 2010.
+La compañía confirmó que iba a ser traducido a otros idiomas debido a los problemas de traducción y distribución que suponía el libro físico que acompaña al juego~\cite{NinLif-NinTra}.
 
-Es por ello, que a finales de 2011 un grupo denominado GradienWords\footnote{\url{http://gradienwords.com}} se formó con el objetivo de realizar una traducción altruista del juego.
-Este proyecto terminó a finales de mayo de 2015 e incluye tanto el juego como una copia del libro en PDF traducida.
-Con fecha de este trabajo este es el único proyecto de traducción de este juego que se ha finalizado, a pesar de que están en marcha varios al francés, inglés e italiano\footnote{\url{http://gbatemp.net/forums/nds-rom-hacking-and-translations.41/}}.
+A finales de 2011 se formó el grupo GradienWords\footnote{\url{http://gradienwords.com}} con el objetivo de realizar una traducción no oficial, directa del japonés al español.
+Este proyecto terminó el 29 de mayo de 2015 e incluye tanto un parche del juego en español, como una copia escaneada del libro traducido en PDF.
+Con fecha de este trabajo, este es el único proyecto de traducción que ha finalizado, pero están en marcha otros al inglés, francés e italiano\footnote{\url{http://gbatemp.net/threads/spanish-v1-0-released-ninokuni-shikkoku-no-madoushi-translation-project.310214/}}.
 
-El juego se llegó a lanzar previamente en \acl{PS3} en varios idiomas incluyendo el español pero no llegó con la copia física del libro y tanto la mecánica del juego como la historia se cambiaron.
+A parte de esta versión, existe una versión alternativa para \acl{PS3} en varios idiomas incluyendo el español.
+A diferencia con la versión para \acl{NDS}, solo una versión \textit{premium} incluye la copia física del libro y en inglés.
+Además la historia y la mecánica del juego son diferentes.
 
-La protección encontrada en este juego muestra no se concentra en evitar una traducción, posiblemente porque la compañía sabía que ellos no lo iban a hacer, si no modificaciones del juego.
-De esta forma se aprecia como los archivos que contienen parámetros como características de los monstruos, de ataque y batalla sí están cifrados.
-Además de como se explicará el archivo de guardado también presenta un algoritmo de integridad.
+La protección encontrada sugiere que su objetivo era evitar modificaciones del juego y no una traducción del mismo.
 
 \subsubsection{Archivos}
-Los archivos y carpetas no están ofuscadas y está todo bien organizado y clasificado.
+Los archivos y carpetas no están ofuscados y tienen nombres descriptivos.
+Incluso se incluyen archivos de una versión anterior y de una \textit{demo} que hubo del juego y que no se utilizan en la versión final.
 
 \subsubsection{Textos}
-En cuanto al apartado de textos hay que distinguir de dos tipos: \textit{scripts} y nombres y descripciones.
-Empezando por el último, este tipo de textos se encuentran en archivos que contienen las características de personajes, objetos y ataques y no solo el texto.
-Con el objetivo de editar los parámetros que definen sus características y hacer una versión modificada del mismo con mayor, menor o una jugabilidad distinta estos ficheros se cifraron.
-El cifrado es muy básico y pero eficaz ante personas que no entienden.
-En la figura~\ref{fig:tr-nino-minitext} se puede ver como se repite el byte \texttt{0xFF} con frecuencia.
-Esto da una pista del tipo de cifrado empleado pues probando a realizar una operación \verb!XOR 0xFF! o lo que es lo mismo \verb!NOT! se puede ver como todo queda descifrado.
+En cuanto al apartado de textos hay que distinguir de dos tipos: \textit{scripts} y descripciones.
 
-\includefigure{fig:tr-nino-minitext}{Archivo cifrado (arr.) y descifrado (ab.) de Ninokuni y el Mago de las Tinieblas}{imgs/TR-NinoMiniText.png}
+Los \textit{scripts} debido a sus requisitos técnicos para ejecutar diferentes tipo de comandos con múltiples parámetros, son complejos de investigar, y necesita un análisis de las instrucciones máquinas que lo procesan.
+A fecha de este trabajo, solo existe un \textit{software} que no ha sido publicado, desarrollado para la traducción al español del juego, que solo es capaz de editar los textos de los diálogos.
 
-Respecto a los \textit{scripts} debido a sus requisitos técnicos para ejecutar todo tipo de comandos son complejos de investigar.
-A día de hoy solo existe un \textit{software} no público desarrollado para la traducción al español que solo es capaz de editar los textos de los diálogos.
-El formato está basado en parámetros a nivel de bits lo que hace inviable investigar el formato sin mirar las instrucciones máquinas del juego que lo procesan.
+Respecto al segundo tipo, se trata de archivos con características de personajes, monstruos, objetos y ataques, con un campo de texto.
+El cifrado que se ha encontrado es básico, pero eficiente para evitar que en la mayoría de los casos pueda ser editado.
+Para descubrir el algoritmo no hizo falta analizar el código ensamblador, pues observando el fichero, destacan las repeticiones del byte \texttt{0xFF} (figura~\ref{fig:tr-nino-minitext}).
+Esto es un indicio (sección~\ref{sec:met-xor-key}) de que se trata de la operación \texttt{XOR} con el byte (clave) \texttt{0xFF}, o lo que es lo mismo, aplicar la operación \texttt{NOT} sobre cada byte.
+
+\includefigure{fig:tr-nino-minitext}{Archivo cifrado (arr.) y descifrado (ab.) de Ninokuni: El Mago de las Tinieblas}{imgs/TR-NinoMiniText.png}
 
 \subsubsection{Imágenes}
-Las imágenes no están cifradas pero los archivos asociados a una imagen están comprimidos en un nuevo formato.
-Son fáciles de extraer pero requiere nuevo \textit{software}\footnote{\url{https://github.com/pleonex/ninoimager}}.
+Las imágenes no están cifradas pero usan una compresión privada sencilla.
+Sin embargo, esto requiere de nuevos programas para extraerlas e importarlas\footnote{\url{https://github.com/pleonex/ninoimager}}.
 
 \subsubsection{Integridad en archivos de guardado}
-En este videojuego se ha estudiado adicionalmente los mecanismos de protección en el archivo con los datos de guardado.
-Se trata de un fichero que en los cartuchos originales no se puede editar sin poseer \textit{hardware} adicional pero que en una \textit{flashcard} se trata de un fichero común, en este caso de 64 KB, y que por tanto es accesible y fácil de editar de forma no autorizada.
+Adicionalmente se ha estudiado los mecanismos de protección sobre el archivo con los datos de guardado de la partida.
+Se trata de un fichero que en los cartuchos originales no se puede editar sin poseer \textit{hardware} adicional pero, que en una \textit{flashcard} es un fácilmente accesible al tratarse de un archivo de 64 KB.
 
-Para evitar esto mismo, en lugar de cifrar se ha apostado por implementar un algoritmo de integridad.
-Para encontrarlo se buscó en la memoria RAM extraída con el emulador DeSmuME, los datos de este archivo.
-Una vez localizada la parte de la memoria que contiene el archivo, se puso un punto de interrupción en los primeros bytes para conocer qué operaciones se realizan sobre los mismos.
+Para evitarlo, en lugar de cifrar se ha implementado un algoritmo de integridad.
+En primer lugar se comprueba que el primer valor de 16 bits sea \texttt{0x0028} y que los últimos ocho bytes sean en hexadecimal sean \texttt{0B 3F A5 84 EC 32 9A 7D}.
 
-En primer lugar se comprueba que el primer valor de 16 bits sea \texttt{0x0028} y que los últimos ocho bytes sean en hexadecimal \texttt{0B 3F A5 84 EC 32 9A 7D}.
-A continuación sobre el resto de los datos, desde la posición \texttt{0x0002} hasta \texttt{0xFFE4} se calcula un hash usando el algoritmo SHA-1.
-Para añadir seguridad e imposibilitar la edición sin conocer todos los detalles de la implementación, lo requiere mirar estas instrucciones máquinas, en la posición \texttt{0xC5EC} durante el cálculo del hash se escriben los bytes en hexadecimal \texttt{6E 6B 6E 6E} (en ASCII y \textit{low-endian} equivalen a las consonantes del nombre del juego `\textit{nnkn}').
-Se trata de una clave que sin conocer ni su valor ni su posición sería imposible calcular un código SHA-1 válido.
-Este hash se guarda en la posición \texttt{0xFFE4} del archivo de guardado y durante el inicio del juego se comprueba.
+A continuación sobre el resto de los datos, desde la posición \texttt{0x0002} hasta \texttt{0xFFE4} se calcula un \textit{hash} usando el algoritmo \texttt{SHA-1}.
+Para añadir seguridad e imposibilitar la edición sin conocer todos los detalles de la implementación, en la posición \texttt{0xC5EC} se escriben solo durante el cálculo del \textit{hash} los bytes \texttt{6E 6B 6E 6E} (en ASCII y \textit{low-endian} equivalen a las consonantes del juego `\textit{nnkn}').
+Una vez realizado el cálculo y comprobación, estos bytes se ponen de nuevo a 0.
+Se trata de una clave que sin conocer ni su valor, ni su posición, sería imposible calcular un código \texttt{SHA-1} válido.
+La suma de verificación se guarda en la posición \texttt{0xFFE4} del archivo y durante el inicio del juego se comprueba.
 En caso de no ser válido el mensaje muestra un mensaje de error y borra todos los datos de la partida.
 
-\includefigure{fig:tr-ninosaveinvalid}{Mensaje de error al detectar una partida modificada (izq.) y advertencia (der.).}{imgs/TR-NinoSaveInvalid.png}
+\includefigure{fig:tr-ninosaveinvalid}{Mensaje de error al detectar una partida modificada (izq.) y advertencia (der.) en Ninokuni.}{imgs/TR-NinoSaveInvalid.png}
 
 \subsubsection{Conclusión}
 
@@ -457,16 +462,16 @@ Puntos fuertes & Puntos débiles \\
 
 % Contras
 \begin{itemize}
-    \item En general los archivos no están cifrados los archivos de texto.
+    \item Los \textit{scripts} no están cifrados.
     \item Las imágenes no están cifradas.
+    \item Dado que los archivos cifrados contienen muchos bytes de valor 0, la forma de descifrado queda visible.
 \end{itemize} \\
 \end{tabular}
 
 \section{Proyectos abandonados}
-Para terminar se incluye un estudio sobre los proyectos de traducciones no oficiales que han sido abandonados con fecha de este trabajo y con sus respectivos motivos.
-El estudio se ha centrado en juegos para la \acl{NDS} a partir de~\cite{GTemp-Aband} y~\cite{RH-Aband}.
-
-El objetivo será el de mostrar las causas más frecuentes que como se verá en la mayoría de los casos fue por la confirmación de una localización al idioma de la traducción.
+Para terminar el capítulo se incluye un estudio sobre los proyectos de traducciones no oficiales, que han sido abandonados con fecha de este trabajo y con sus respectivos motivos.
+El estudio se ha centrado en juegos para la \acl{NDS} a partir de los datos de~\cite{GTemp-Aband} y~\cite{RH-Aband}.
+El objetivo será el de mostrar las causas más frecuentes por los que estos proyectos no se completan.
 
 \subsubsection{Ausencia de \textit{software} de edición}
 Surgidos por la falta de gente con conocimientos técnicos que puedan crear los programas necesarios de edición.
