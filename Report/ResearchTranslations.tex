@@ -174,7 +174,7 @@ Puntos fuertes & Puntos débiles \\
 \label{sec:tr-pok-heart}
 Los juegos \textit{Pokémon HeartGold y SoulSilver} son una remasterización para \acl{NDS} de la segunda generación, originalmente para \acl{GBA}.
 Se lanzó primero en Japón en de septiembre de 2009 y en Estados Unidos y Europa seis meses después.
-No hubo mucha diferencia entre los lanzamientos de América y Europa por lo que no se realizaron traducciones no oficiales desde el inglés, pero sí huboun caso desde el japonés que llegó a completarse a un 90\%~\cite{PokProj-HG1}.
+No hubo mucha diferencia entre los lanzamientos de América y Europa por lo que no se realizaron traducciones no oficiales desde el inglés, pero sí huboun caso desde el japonés que llegó a completarse a un 90\%\footnote{En el siguiente hilo se llevó a cabo el proyecto. \url{http://projectpokemon.org/forums/showthread.php?4534-Pokemon-HeartGold-and-SoulSilver-Translation-Patch}}.
 
 \subsubsection{Archivos}
 \label{sec:tr-pok-heart-file}
@@ -228,43 +228,39 @@ Puntos fuertes & Puntos débiles \\
 \end{tabular}
 
 \subsection{Pokémon Blanco y Negro}
+\label{sec:tr-pok-black}
 La quinta generación corresponde a los juegos \textit{Pokémon Blanco y Negro} para \acl{NDS}.
-Primero salieron en Japón a mediados de septiembre de 2010 y a principios de marzo de 2011 en América y Europa.
-Esta vez, como curiosidad, el juego salió por primera vez dos días antes en Europa que en el resto de sitios.
-
-De nuevo esta edición fue esperada por muchos seguidores que unido con el avance que hay en el mundo de la ingeniería inversa para la \acl{NDS} en estos años, facilitó la tarea de traducción no oficial~\cite{PokProj-BW1}.
-No solo llegaron a salir traducciones al inglés si no también a otros idiomas como español.
-Todas ellas se llevaron a cabo de forma transparente y colaborativa mediante GitHub\footnote{\url{https://github.com/projectpokemon/Pokemon-Black-White-Translation-Files}}.
+Salieron en Japón en septiembre de 2010 y en marzo de 2011 en Estados Unidos y Europa.
+Hubo un proyecto de traducción desde el japonés al inglés\footnote{En el siguiente foro se puede encontrar el desarrollo del proyecto. \url{http://projectpokemon.org/forums/showthread.php?11397-Pokemon-Black-and-White-Translation-Project}} que llegó a estar casi completado.
 
 \subsubsection{Archivos}
-En la sexta generación decidieron optar de nuevo por ofuscar los nombres de las carpetas y archivos.
-En este caso, se dio un paso más y se hizo sobre todos los archivos.
-Sin bien, en el caso de \textit{Pokémon HeartGold y SoulSilver} fueron solo los archivos principales los ofuscados, en esta edición los únicos que no se procesaron fueron los de sonido y demo como se aprecia en la figura~\ref{fig:tr-blackheartfiles}.
+\label{sec:tr-pok-black-file}
+Los archivos y carpetas fueron ofuscados al igual que pasó con la generación anterior.
+En este caso, se protegieron todos los archivos en lugar de los principales como se ve en la figura~\ref{fig:tr-blackheartfiles}.
+Los únicos archivos que se dejaron fuera fueron el de sonido y la demo.
 
 \includefigure{fig:tr-blackheartfiles}{Comparación de carpetas entre Pokémon Blanco (izq.) y Pokémon HeartGold (der.)}{imgs/TR-BlackHeartFiles.png}
 
-A pesar de usar internamente la misma forma de acceso a como se describió en el apartado de archivos de la sección~\ref{sec:tr-pok-heart-file}, los identificadores y por tanto localización de estos cambió.
-Pasando de esta forma el archivo con los textos del juego a estar en \textit{a/0/0/2} en lugar de \textit{a/0/2/7} como sucedía en la edición anterior.
+A pesar de usar internamente la misma forma de acceso que se describió en el apartado de archivos de la sección~\ref{sec:tr-pok-heart-file}, los identificadores y por tanto localización de estos cambió.
+Por ejemplo, el archivo con los textos pasa a estar en \texttt{a/0/0/2} en lugar de \textit{a/0/2/7}.
 
 \subsubsection{Textos}
 \label{sec:tr-pok-black-text}
-En el apartado de protección a los textos, en las dos generaciones anteriores se utilizó un mismo algoritmo basado en un clave dinámica que se aplicaba con la operación XOR. En esta generación la filosofía del algoritmo se mantiene cambiando no obstante la forma de generación y actualización de la clave.
-Esta se pudo obtener tras realizar el procedimiento descrito en el apartado textos de la sección~\ref{sec:tr-pok-pearl-text}.
+En los dos apartados anteriores (\ref{sec:tr-pok-pearl-text} y~\ref{sec:tr-pok-heart-text}) se describió como los textos usaban el mismo algoritmo y clave para cifrarse.
+Una vez encontrado el algoritmo de esta generación (sección~\ref{sec:met-search-text}), se pudo ver que se trata de un cifrado \texttt{XOR} con clave dinámica pero cambia respecto a las pasadas ediciones.
 
-La principal diferencia tras aplicar el método de investigación de cifrado fue ver que no se usaba una codificación propia si no UTF-16.
-Esto facilitó la tarea, pues ya no es necesaria una búsqueda diferencial en la memoria RAM y por tanto crear \textit{software} adicional para investigar.
-Se trata por tanto de la eliminación de un mecanismo fuerte a la hora de proteger datos que posiblemente estaba realizando en ediciones anteriores de casualidad.
-
-La clave inicial usada para el texto se genera usando el número de bloque como variable, de forma que cada bloque comienza con una clave diferente. La operación es \verb!clave = (i + 3) * 0x2983!.
-Tras aplicar esta clave sobre un valor de 16 bits cifrado (dos bytes), se actualiza desplazando los tres bits más significados a la posición menos significativa.
-Esto se puede conseguir aplicando la siguiente serie de operaciones.
+Una de las principales diferencias es que no se usa una codificación propia, que dificulta la investigación, si no que se usa el estandar UTF-16.
+La clave inicial se genera según \verb!clave = (i + 3) * 0x2983! donde \verb!i! es el número de bloque al que se quiere acceder.
+A continuación se realizar la operación \texttt{XOR} sobre un caracter (un valor de 16 bits ya que se usa UTF-16) y se actualiza la clave.
+Para ello se desplaza los tres bits más significativos a la posición menos significativa.
 
 \begin{verbatim}
 temp  = clave & 0x1FFF;             // Elimina los bits más significativos
 clave = (temp << 3) | (clave >> 13) // y los añade al principio.
 \end{verbatim}
 
-Al desplazarse un número impar de veces, cada bit pasará de forma lineal sobre cada posición de la clave obteniéndose el máximo de permutaciones para una clave de 16 bits, es decir se usará a la hora de cifrar y descifrar 16 claves diferentes.
+Al desplazarse un número impar de veces, cada bit pasará sobre cada posición de la clave una vez, obteniéndose el máximo de permutaciones.
+En una clave de 16 bits esta será de 16.
 
 La estructura de datos se especifica en la tabla~\ref{tab:tr-blacktxt} donde se puede ver que la sección con la tabla de contenido no está cifrada a diferencia de cómo pasaba en ediciones anteriores.
 
@@ -295,17 +291,15 @@ La estructura de datos se especifica en la tabla~\ref{tab:tr-blacktxt} donde se 
 }
 
 \subsubsection{Imágenes}
-Las imágenes a diferencia de las pasadas generaciones no se cifraron.
-En cambio, no se utiliza un formato estándar de codificación.
-Si bien el formato para las paletas y datos de imagen si se reutiliza y sigue siendo estándar, existe un ficheros extras con una especificación nueva en este juego con la información necesaria para recomponer la imagen (figura~\ref{fig:tr-blackimg}).
+Las imágenes a diferencia de las pasadas ediciones no se han cifrado.
+En cambio, no se utiliza un formato estándar de codificación excepto para las paletas.
+Existe un conjunto de ficheros adicionales con nuevos formatos con la información necesaria para recomponer la imagen (figura~\ref{fig:tr-blackimg}).
 
 \includefigure{fig:tr-blackimg}{Imágenes sin cifrar en Pokémon Negro.}{imgs/TR-BlackImg.png}
 
-Esta forma de codificación, aunque pudiendo no ser específica para protegerlas ante modificaciones si no un requisito para animaciones, es más fuerte.
-De esta forma los programas de ediciones genéricas creados para juegos de \acl{NDS} ya no son útiles y se necesita nuevos y específicos.
-Esta tarea requiere de investigación de formatos y de programación, algo que toma más esfuerzo y tiempo que crear un decodificador como pasaba en las generaciones anteriores.
-
-A pesar de ello, esta reconstrucción y edición de la imagen se podría llegar a cabo manualmente ya que el formato de los ficheros principales: paleta y datos de imagen, sigue siendo el estándar para juegos de la \acl{NDS}.
+Esta forma de codificación funciona mejor como protección de edición.
+Aunque puede que su único motivo sea técnico para representar animaciones, los programas complejos de procesado de imagen ya no sirven.
+Esta tarea requiere de investigación de formatos y de programación, se requiere más esfuerzo y tiempo que crear un decodificador.
 
 \subsubsection{Conclusión}
 
@@ -315,14 +309,13 @@ Puntos fuertes & Puntos débiles \\
 \begin{itemize}
 \item Los nombres de las carpetas y archivos están ofuscados.
 \item Los textos están cifrados con un nuevo algoritmo y clave.
-\item Las imágenes usan archivos extras con especificaciones nuevas para recomponerlas por lo que \textit{software} nuevo sería necesario.
+\item Las imágenes usan archivos extras con especificaciones nuevas para recomponerlas por lo que \textit{software} de procesamiento nuevo sería necesario.
 \end{itemize} &
 
 % Contras
 \begin{itemize}
 \item Los textos no usan una codificación propia.
 \item Las imágenes no está cifradas.
-\item Las imágenes usando el formato estándar para los archivos principales.
 \end{itemize} \\
 \end{tabular}
 
