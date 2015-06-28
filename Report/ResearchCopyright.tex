@@ -5,48 +5,49 @@
 
 \chapter{Contenido con derechos de autor}
 \label{sec:copyright}
-% DRM -> Tipos DRM -> Agujero analógico -> Detractores -> Mi análisis.
+% DRM -> Tipos DRM -> Agujero analógico -> Mi análisis.
 La gestión de los derechos de autor ha generado un debate que sigue sin estar resuelto entre la libertad del usuario, y la protección del creador de la obra~\cite{EurAct-CPR}.
 Esta industria incluye a los videojuegos, donde la piratería causa pérdidas millonarias\cite{DRM-Game-Carolina}.
 De este contexto nace la idea del \ac{DRM}, un mecanismo para imposibilitar la distribución no autorizada de contenido.
 
-Las características comunes de estas técnicas se pueden resumir en\cite{Wiki-DRM} detectar quién accede a cada obra, cuándo y bajo qué condiciones, autorizar o denegar de manera inapelable el acceso a la obra y autorizar el acceso bajo condiciones restrictivas. En cuanto a tipos los más comunes son~\cite{DRM-Game-Carolina}:
+Las características de estas técnicas se resumen en detectar quién accede a cada obra, cuándo y bajo qué condiciones, autorizar o denegar de manera inapelable el acceso y autorizarlo bajo condiciones restrictivas~\cite{Wiki-DRM}.
+En cuanto a mecanismos que se aplican para evitar la distribución ilegítima, los más comunes son~\cite{DRM-Game-Carolina}:
 
 \begin{itemize}
-\item Claves en CD. Se imprimía en la superficie del CD una clave que se pedía durante la instalación. El punto negativo era que si se perdía esta clave el usuario legítimo ya no podía acceder y que con una simple búsqueda en Internet se podía obtener.
+\item Claves en CD.
+Se imprimían en la superficie del CD una clave que se pedía durante la instalación.
+La parte negativa es que si se perdía esta clave, el usuario legítimo no podía acceder y, que con una simple búsqueda en Internet se podía obtener.
 
-\item Límite de instalaciones. Uno de los siguientes métodos fue controlar el número de instalaciones. Para ello, el producto se tenía que activar realizando una conexión con los servidores de la compañía. Sin embargo esto requiere que el usuario tenga acceso a Internet, que los servidores estén activos y limita el número de dispositivos del usuarios y habría que tener en cuenta si el usuario quiere renovar su equipo o formatearlo.
+\item Límite de instalaciones.
+Uno de los siguientes métodos fue controlar el número de instalaciones.
+Para ello, el producto se tenía que activar realizando una conexión con los servidores de la compañía.
+Sin embargo esto requiere que el usuario tenga acceso a Internet, y  que los servidores estén activos.
+Además limita el número de dispositivos del usuario.
 
-\item Conexión permanente. Este método requiere una conexión en cada inicio del juego con los servidores de la compañía e incluso en algunos casos durante toda la partida. Este método ha sido polémico ya que ahora el usuario no puede jugar sin conexión a Internet (como puede ser cuando se mueve por vacaciones o durante un viaje) y porque los servidores tienen que estar activos todo el tiempo donde ya ha habido problemas por la caída de los mismos~\cite{GameSpot-UbiDRM}.
+\item Conexión permanente (\textit{Always-on DRM}\cite{Wiki-AlwaysOn}).
+Este método necesita una conexión en cada inicio del juego con los servidores de la compañía, e incluso en algunos casos, durante toda la partida.
+Esto ha causado polémica debido a que el usuario no podría jugar sin conexión a Internet y, porque los servidores tienen que estar activos todo el tiempo~\footnote{Algunos juegos de la compañía \textit{Ubisoft} se quedaron sin acceso por tiempo indefinido debido a tareas de mantenimiento de los servidores. \url{http://www.gamespot.com/articles/ubisoft-drm-games-to-be-temporarily-unplayable/1100-6349732/}}.
 
-\item Cifrado con datos personales. Consiste en cifrar la aplicación usando claves asimétricas~\cite{iOS-Encryption}. Como contrapartida, si el usuario pierde su clave privada y el acceso a ella no podría volver a ejecutar ninguna aplicación.
+\item Cifrado del \textit{software}.
+Consiste en cifrar la aplicación usando claves asimétricas~\cite{iOS-Encryption}.
+Como contrapartida, si el usuario pierde su clave privada y el acceso a ella, no podría volver a ejecutar ninguna aplicación.
 \end{itemize}
 
-Estos mecanismos a nivel general se basan en \textit{software} siendo lo frecuente el cifrado de contenido de forma que solo las \emph{aplicaciones autorizadas} tienen las claves y algoritmos necesarios para acceder a él.
-En otros casos, es el propio sistema operativo quien se encarga de esta tarea, esto se encuentra generalmente en entornos cerrados donde no es posible ejecutar aplicaciones no autorizadas para acceder a la memoria RAM donde se encontraría la aplicación.\footnote{Este es el caso del sistema operativo iOS donde el cifrado de la aplicación la realiza el \textit{kernel}. Una vez se pudo ejecutar aplicaciones no firmadas, fue fácil descifrar el contenido de terceras aplicaciones leyendo la memoria RAM.}.
-
 El principal problema es la posibilidad de aplicar métodos de \emph{ingeniería inversa} sobre el \textit{software} autorizado.
-Una vez conocido cómo una aplicación accede al contenido protegido, nada imposibilitar crear una versión que también lo permita.
-De aquí vienen la necesidad de trabajar sobre entornos cerrados cada vez más frecuentes en videoconsolas y móviles.
+Una vez comprendido cómo una aplicación autorizada accede al contenido protegido, se podría superar los mecanimos de protección para extraer y en algunos casos modificar el recurso.
+De aquí vienen la necesidad de trabajar sobre entornos cerrados (capítulo~\ref{sec:art}) cada vez más frecuentes en videoconsolas y móviles\footnote{Los sistemas operativos iOS y Android no permiten el acceso al sistema de ficheros por defecto.}.
 Una alternativa sería implementar el algoritmo en \textit{hardware} como es el caso de la \acl{N3DS}.
 
-Aun encontrando un algoritmo eficiente en términos de protección y sin sobrecarga a la hora de procesado, una vulnerabilidad inevitable es el denominado \textit{agujero analógico}.
-Este consiste en reconvertir un medio digital en analógico, perdiendo los mecanismos DRM.
-Por ejemplo: grabar música con un micrófono que se está reproduciendo, hacer una captura de pantalla a una imagen, grabar la pantalla o copiar a mano o incluso escanear un libro.
-Este tipo de procedimiento es el que emplea la mayoría de usuarios cuando quieren extraer contenido multimedia de un juego y compartirlo en páginas como \textit{Spriter Resource}\footnote{\url{http://www.spriters-resource.com/}}.
+Aun encontrando un algoritmo eficiente en términos de protección y, sin sobrecarga a la hora de procesado, una vulnerabilidad inevitable es el denominado \textbf{\textit{agujero analógico}}.
+La técnica consiste en reconvertir un medio digital en analógico, perdiendo los mecanismos DRM.
+Por ejemplo, grabar música que se está reproduciendo con un micrófono, grabar con una cámara una pantalla, escanear un libro o incluso copiarlo a mano.
+Estos procedimientos, se utilizan en los videojuegos para, mediante funciones del emulador como capturas de pantalla o grabación de audio, extraer y compartir recursos en páginas como \textit{Spriters Resource}\footnote{\url{http://www.spriters-resource.com/}}.
 
-Además, se da el problema de que el contenido podría quedar ligado al dispositivo de una compañía, como el caso de los iPod donde solo se admitía música con el mecanismo DRM de Apple\cite{Apple-DRM}.
-
-Por motivos como estos y por todas las libertades de las que se le priva al usuario al aplicar este mecanismo existen números detractores.
-Ejemplos son la \acl{EFF} o incluso desarrolladoras famosas como \textit{CD Projekt Red}\cite{EOL-Projekt}.
-Numerosos problemas se han dado en el mundo de los videojuegos que han llevado a esta situación de división.
-Los más notables se dan en consolas como \acl{PS3} y XBox donde para algunos juegos es necesaria una conexión con un servidor siempre que se quiere comenzar un juego (denominados \textit{Always-on DRM}\cite{Wiki-AlwaysOn}).
-Esto priva al usuario de la posibilidad de jugar sin tener una conexión a Internet (casos se irse de vacaciones) o de casos donde se caen los servidores de la compañía.
-
-En las siguientes secciones se analizará mecanismos de seguridad que diferentes juegos aplican sobre materiales con derechos de autor.
-Se analizará en primer lugar dos videojuegos que incluyen uno o más libros electrónicos y a continuación otros que incluyen canciones.
-El resultado en todos estos casos ha sido la carencia de cualquier mecanismo a la hora de proteger los contenidos, excepto en el material en formato de vídeo descrito en la última sección.
-También destaca la distribución de material adicional e imprescindible para el juego como el caso de un libro físico en \textit{Ninokuni} para \acl{NDS} o \textit{hardware} en la saga \textit{Guitar Hero: On Tour}.
+En las siguientes secciones se analizarán los posibles mecanismos de seguridad que los juegos aplicarían sobre contenido con derechos de autor.
+Para ello se han escogido una serie de juegos conocidos por tener materiales, que frecuentemente son protegidos~\cite{SurveyDrm}.
+En primer lugar se analizarán juegos con libros electrónicos, a continuación se investigará el género \textit{músical} y la protección sobre el material filmográfico.
+El resultado en todos los casos ha sido la carencia de cualquier mecanismo a la hora de proteger los contenidos, exceptuando en el material en formato de vídeo descrito en la última sección.
+También destaca la distribución de material adicional como el caso de un libro físico en \textit{Ninokuni} para \acl{NDS} o \textit{hardware} en la saga \textit{Guitar Hero: On Tour}.
 
 \section{Libros electrónicos}
 \subsection{Ninokuni y la Ira de la Bruja Blanca}
@@ -396,9 +397,7 @@ Esto permitió por ejemplo en el caso de \textit{Ninokuni} introducir en el juego
 Además, al ser propietario y único para estos juegos tanto el formato de archivo como de codificación de las muestras, dificultó la tarea de extracción y hubieron de pasar varios años hasta que se investigó.
 La codificación de este formato se ha investigado y documentado en repositorios de GitHub\footnote{\url{https://github.com/pleonex/SADL-Audio-format}}.
 
-Al proteger los archivos e imposibilitar su extracción, se permite abrir el mercado ante la posibilidad de vender la banda sonora de forma externa como pasó con este juego\footnote{La banda sonora se podía comprar en esta tienda virtual. \url{http://www.play-asia.com/ni-no-kuni-shikkoku-no-madoushi-original-soundtrack/13/704299}}.
-
-Caso distinto es la versión para \acl{PS3}\footnote{Esta banda sonora también se vendió aparte. \url{http://www.amazon.com/Ni-Kuni-Wrath-Original-Soundtrack/dp/B00DRS6UKQ}} de este juego dado que el formato de los archivos es estándar y se puede reproducir con programas como \url{http://www.videolan.org/vlc/}{VLC}.
+Caso distinto es la versión para \acl{PS3} de este juego dado que el formato de los archivos es estándar y se puede reproducir con programas como \url{http://www.videolan.org/vlc/}{VLC}.
 La protección en este juego se centra en el empaquetado de todos los archivos (excepto el libro electrónico) que como se describió en la primera sección viene protegida con una clave propia de la consola.
 
 \subsubsection{Conclusión}
@@ -419,7 +418,7 @@ Puntos fuertes & Puntos débiles \\
 \subsection{Duet}
 En último lugar se describirá el videojuego \textit{Duet}.
 Desarrollado por \textit{Kumobius} para las plataformas Android y iOS en 2013.
-La aplicación es de pago (entorno a 4?) pero en periodos de oferta está disponible gratuitamente.
+La aplicación es de pago pero en periodos de oferta está disponible gratuitamente.
 
 La banda sonora fue compuesta por Tim Shiel y puede comprarse en iTunes\footnote{\url{https://itunes.apple.com/us/album/duet/id721804015}} por \$4.99.
 Sin embargo, al igual que pasó con los juegos anteriormente descritos, la seguridad ante una posible extracción se dejó en la capa del binario del juego.
@@ -444,7 +443,6 @@ Puntos fuertes & Puntos débiles \\
 Hoy en día y cada vez más, las videoconsolas tienen más potencia y resolución.
 Tal punto es, que muchas de ellas son más potentes que los computadores de la época.
 Esto ha permitido introducir escenas tanto generadas por ordenador como de anime en los videojuegos.
-Muchas de ellas se han llegado a considerar películas participando grandes estudios de animación como el caso de \textit{Studio Ghibli} en \textit{Ninokuni}.
 
 Si bien de nuevo está presente el problema del agujero analógico, en algunos casos se ha aprovechado la creación de una codificación propia para la consola para proteger estos contenidos.
 
@@ -452,7 +450,7 @@ Si bien de nuevo está presente el problema del agujero analógico, en algunos cas
 En esta consola, la protección de muchos archivos se confió en la imposibilidad de descifrar archivos con una clave que sólo se conocía por la consola como se discutió con los libros electrónicos.
 
 El formato estándar tiene extensión \textsc{pam} y no es más que una codificación \textsc{MPEG} con una cabecera de 1000 bytes prescindible para su decodificación.
-En el repositorio\footnote{ \url{https://github.com/pleonex/Ninokuni/tree/master/Programs/PS3/pam2mpg}{repositorio}} se adjunta un programa que convierte los archivos a formato \textsc{MPEG}.
+El trabajo se ha documentado en un repositorio de GitHub donde además se ha creado un programar de conversión\footnote{ \url{https://github.com/pleonex/Ninokuni/tree/master/Programs/PS3/pam2mpg}}.
 
 \subsubsection{Conclusión}
 
