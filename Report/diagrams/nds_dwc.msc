@@ -1,0 +1,22 @@
+# MSC for Nintendo DS to Nintendo's server communication
+msc {
+  # hscale = "2";
+
+  "Nintendo DS", "ConnTest", "NAS", "DLC Server";
+
+  "Nintendo DS" -> "ConnTest" [label="GET"];
+  "ConnTest" -> "Nintendo DS" [label="200 OK"];
+
+  "Nintendo DS" -> "NAS" [label="[login] userid, gamecd, passwd, makercd"];
+  "NAS" -> "Nintendo DS" [label="[200 OK] challenge, token"];
+
+  "Nintendo DS" -> "NAS" [label="[SVCLOC] userid, gamecd, passwd, makercd"];
+  "NAS" -> "Nintendo DS" [label="[200 OK] servicetoken, svchost"];
+
+  "Nintendo DS" -> "DLC Server" [label="[count] gamecd, passwd, token"];
+  "DLC Server" -> "Nintendo DS" [label="[200 OK] 0"];
+  "Nintendo DS" -> "DLC Server" [label="[list] gamecd, passwd, token, offset, num"];
+  "DLC Server" -> "Nintendo DS" [label="[200 OK] tweet111209.bin 2416"];
+  "Nintendo DS" -> "DLC Server" [label="[content], gamecd, passwd, token, contents"];
+  "DLC Server" -> "Nintendo DS" [label="[200 OK] datos"];
+}

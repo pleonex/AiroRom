@@ -4,16 +4,33 @@
 % http://creativecommons.org/licenses/by/4.0/.
 
 \chapter{Multijugador y contenido descargable}
+% TODO: Intro
 
+En la sección multijugador se explicará cómo funciona la autenticación en los servidores de Nintendo y cómo puede afectar a la jugabilidad no usar HTTPS en el caso del juego Preguntados.
+En la sección de contenido descargables se comentará la seguridad o su ausencia en tres juegos.
+Por última, la sección de cifrado de archivos binarios explica cómo se implementan mecanimos de integridad para la transmisión segura de código entre consolas.
 
 \section{Multijugador}
-
 \subsection{Conexión segura en servidores de Nintendo}
+El 20 de mayo de 2014 Nintendo cesó su servicio de conectividad Wi-Fi para las consolas \acl{NDS} y Wii~\cite{Nintendo-Cese}.
+Los juegos en lína, clasificaciones, torneos, contenido creado por usuario, contenido descargable y el intercambio de objetos se perdió ya que los servidores ya no estaban disponible~\cite{Nintendo-Cese2}.
+Es por ello que un grupo de usuarios decidió de investigar la comunicación entre la consola y el servidor, para crear una aplicación web que replicase el funcionamiento\footnote{\url{https://github.com/polaris-/dwc_network_server_emulator}}.
+
+En la sección~\ref{sec:met-nds-desmume} del capítulo de metodologías se explican diferentes procedimientos para capturar una comunicación entre consola y servidor.
+Tras conseguir una captura (figura~\ref{fig:mp-nintendo-encry}), se ha visto que a parte de una primera comunicación \texttt{HTTP}, el resto de la comunicación se realiza en \texttt{HTTPS}.
+
+\includefigure{fig:mp-nintendo-encry}{Primeros paquetes de una comunicación entre una \acl{NDS} y el servidor de Nintendo.}{imgs/MP-NintendoEncry.png}
+
+Para poder eludir la capa de seguridad de \texttt{TLS} se descubrieron dos mecanismos.
+El primero consiste en encontrar la función que cifra la comunicación, \texttt{RC4}, en el código del juego.
+El programa
+
+\includefigure{fig:mp-nintendo-comm}{Comunicación entre \acl{NDS} y servidor de Nintendo para descargar un fichero.}{diagrams/nds_dwc.eps}
 
 \subsection{Preguntados}
+% TODO: Introducir juego -> escenario man-in-the-middle -> mostrar trazas wireshark con los campos relevante
 
 \section{Contenido descargable}
-
 \subsection{100 Classic Books Collection}
 \textit{100 Classic Books Collection} se trata de un juego que como se analizó en la sección~\ref{sec:cr-100-books} ofrece al usuario un lector de libros electrónicos. En esta sección se pudo observa como los ficheros no vienen protegidos de ninguna manera a parte de usar un formato diferente.
 
@@ -26,16 +43,16 @@ Además, reproducir contenido desde un archivo de guardado y más teniendo en cuen
 \subsubsection{Conclusión}
 \begin{tabular}{p{0.4\textwidth}p{0.5\textwidth}}
 Puntos fuertes & Puntos débiles \\
-\begin{itemize}
+\begin{itemize} % Pros
 \item Las comunicaciones inalámbricas nativamente van cifradas con HTTPS por lo que no se podría realizar un ataque de \textit{man-in-the-middle}.
 \end{itemize} &
-
-\begin{itemize}
+\begin{itemize} % Contras
 \item Los archivos no van cifrados ni incorporan algún mecanismo de integridad que asegure que el contenido es el que proporcionado por el desarrollador.
 \end{itemize} \\
 \end{tabular}
 
-\subsection{Ninokuni y El Mago de las Tinieblas}
+\subsection{Ninokuni: El Mago de las Tinieblas}
+% TODO: Decir que archivos se bajan -> desmume -> cifrado RC4 -> integridad
 
 \subsection{Duet}
 Por último se verá el caso del juego \textit{Duet} para \textit{iOS} y sus niveles extras.
@@ -57,6 +74,7 @@ Se trata de un mecanismo que está implementado nativamente\footnote{\url{http://
 La contraseña se puede almacenar en texto plano en la aplicación, pues dificultará la tarea de conocerla y al valer el contenido tan poco (menos de 1 euro) no compensará el esfuerzo dedicado como se ha discutido en capítulos anteriores.
 
 \section{Ejecutables firmados}
+% TODO: Introducir DWP -> seguridad para ejecutar codigo no autoridazo -> paquete integridad de arm9 -> este integridad de datos -> no se puede man-in-the-middle -> se puede editar de flashcard.
 %http://problemkaputt.de/gbatek.htm#biosramusage
 Si 0x27FFC40 está a 1 indica que se carga de la ROM, se supone segura y no se comprueba el HMAC de los archivos.
 En download play hay otro valor y se comprueba, como se hace en ARM9 se puede omitir.
