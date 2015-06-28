@@ -72,19 +72,19 @@ En GitHub hay repositorios con programas para la extracción de los archivos\foot
 }{                                                                      \FL
     Posición      & Tamaño        & Descripción                         \ML
     \multicolumn{3}{c}{Cabecera}                                        \NN
-    \textsf{0x00} & \textsf{0x04} & Identificador: \texttt{PSAR}        \NN
-    \textsf{0x04} & \textsf{0x04} & Versión: \texttt{0x00010004}        \NN
-    \textsf{0x08} & \textsf{0x04} & Compresión: \texttt{zlib}           \NN
-    \textsf{0x0C} & \textsf{0x04} & Posición de los datos               \NN
-    \textsf{0x10} & \textsf{0x04} & Tamaño de la siguiente sección      \NN
-    \textsf{0x14} & \textsf{0x04} & Número de archivos                  \NN
-    \textsf{0x18} & \textsf{0x04} & Reservado                           \NN
-    \textsf{0x1C} & \textsf{0x04} & Reservado                           \ML
+    \texttt{0x00} & \texttt{0x04} & Identificador: \texttt{PSAR}        \NN
+    \texttt{0x04} & \texttt{0x04} & Versión: \texttt{0x00010004}        \NN
+    \texttt{0x08} & \texttt{0x04} & Compresión: \texttt{zlib}           \NN
+    \texttt{0x0C} & \texttt{0x04} & Posición de los datos               \NN
+    \texttt{0x10} & \texttt{0x04} & Tamaño de la siguiente sección      \NN
+    \texttt{0x14} & \texttt{0x04} & Número de archivos                  \NN
+    \texttt{0x18} & \texttt{0x04} & Reservado                           \NN
+    \texttt{0x1C} & \texttt{0x04} & Reservado                           \ML
     \multicolumn{3}{c}{\textit{File Info Table}}                        \NN
-    \textsf{0x00} & \textsf{0x10} & Código MD5 del nombre del fichero   \NN
-    \textsf{0x10} & \textsf{0x04} & Desconocido                         \NN
-    \textsf{0x14} & \textsf{0x05} & Posición de los datos               \NN
-    \textsf{0x19} & \textsf{0x05} & Tamaño de los datos                 \ML
+    \texttt{0x00} & \texttt{0x10} & Código MD5 del nombre del fichero   \NN
+    \texttt{0x10} & \texttt{0x04} & Desconocido                         \NN
+    \texttt{0x14} & \texttt{0x05} & Posición de los datos               \NN
+    \texttt{0x19} & \texttt{0x05} & Tamaño de los datos                 \ML
     \multicolumn{3}{c}{Archivos\tmark[a]\tmark[b]}                      \LL
 }
 
@@ -102,53 +102,53 @@ A continuación en la figura~\ref{tab:cr-gvd} se muestra la especificación de est
     \tnote[b]{Relativo al inicio del bloque de datos.}
     \tnote[c]{La codificación del nombre es ASCII.}
     \tnote[d]{Hay un bloque por cada calidad.}
-    \tnote[e]{Los datos pueden estar comprimidos en \textsf{GVMP}, en ese
-    caso el primer bloque será la imagen \textsf{JPEG}.}
+    \tnote[e]{Los datos pueden estar comprimidos en \texttt{GVMP}, en ese
+    caso el primer bloque será la imagen \texttt{JPEG}.}
 }{                                                                          \FL
     Posición      & Tamaño        & Descripción                             \ML
     \multicolumn{3}{c}{Cabecera}                                            \NN
-    \textsf{0x00} & \textsf{0x08} & Identificador: \textsf{TGDT0100}        \NN
-    \textsf{0x08} & \textsf{0x04} & Número de páginas                       \NN
-    \textsf{0x0C} & \textsf{0x04} & Posición de los datos                   \ML
+    \texttt{0x00} & \texttt{0x08} & Identificador: \texttt{TGDT0100}        \NN
+    \texttt{0x08} & \texttt{0x04} & Número de páginas                       \NN
+    \texttt{0x0C} & \texttt{0x04} & Posición de los datos                   \ML
     \multicolumn{3}{c}{Bloques GVD\tmark[a]}                                \NN
-    \textsf{0x00} & \textsf{0x04} & Posición del nombre\tmark[b]\tmark[c]   \NN
-    \textsf{0x04} & \textsf{0x04} & Tamaño del nombre                       \NN
-    \textsf{0x08} & \textsf{0x04} & Posición de los datos\tmark[b]          \NN
-    \textsf{0x0C} & \textsf{0x04} & Tamaño de los datos                     \ML
+    \texttt{0x00} & \texttt{0x04} & Posición del nombre\tmark[b]\tmark[c]   \NN
+    \texttt{0x04} & \texttt{0x04} & Tamaño del nombre                       \NN
+    \texttt{0x08} & \texttt{0x04} & Posición de los datos\tmark[b]          \NN
+    \texttt{0x0C} & \texttt{0x04} & Tamaño de los datos                     \ML
     \multicolumn{3}{c}{Información de la página}                            \NN
-    \textsf{0x00} & \textsf{0x04} & Identificador bloque: \textsf{GVEW0100} \NN
-    \textsf{0x04} & \textsf{0x04} & Identificador imagen: \textsf{JPEG0100} \NN
-    \textsf{0x08} & \textsf{0x04} & Ancho de la imagen con más calidad      \NN
-    \textsf{0x0C} & \textsf{0x04} & Alto de la imagen con más calidad       \NN
-    \textsf{0x10} & \textsf{0x04} & Identificador: \textsf{BLK\_}           \NN
-    \textsf{0x14} & \textsf{0x04} & Tamaño del bloque                       \NN
-    \textsf{0x18} & \textsf{0x04} & ID                                      \NN
-    \textsf{0x1C} & \textsf{0x04} & Reservado                               \NN
-    \textsf{0x20} & \textsf{0x04} & Constante \textsf{0x20}                 \NN
-    \textsf{0x24} & \textsf{0x04} & Constante \textsf{0x04}                 \ML
+    \texttt{0x00} & \texttt{0x04} & Identificador bloque: \texttt{GVEW0100} \NN
+    \texttt{0x04} & \texttt{0x04} & Identificador imagen: \texttt{JPEG0100} \NN
+    \texttt{0x08} & \texttt{0x04} & Ancho de la imagen con más calidad      \NN
+    \texttt{0x0C} & \texttt{0x04} & Alto de la imagen con más calidad       \NN
+    \texttt{0x10} & \texttt{0x04} & Identificador: \texttt{BLK\_}           \NN
+    \texttt{0x14} & \texttt{0x04} & Tamaño del bloque                       \NN
+    \texttt{0x18} & \texttt{0x04} & ID                                      \NN
+    \texttt{0x1C} & \texttt{0x04} & Reservado                               \NN
+    \texttt{0x20} & \texttt{0x04} & Constante \texttt{0x20}                 \NN
+    \texttt{0x24} & \texttt{0x04} & Constante \texttt{0x04}                 \ML
     \multicolumn{3}{c}{Datos de la página\tmark[d]}                         \NN
-    \textsf{0x00} & \textsf{0x04} & Posición X de la imagen en la página    \NN
-    \textsf{0x04} & \textsf{0x04} & Posición Y de la imagen en la página    \NN
-    \textsf{0x08} & \textsf{0x04} & Calidad                                 \NN
-    \textsf{0x0C} & \textsf{0x04} & Tamaño de los datos                     \NN
-    \textsf{0x10} & \textsf{0x04} & Desconocido                             \NN
-    \textsf{0x14} & \textsf{0x04} & Desconocido                             \NN
-    \textsf{0x18} & \textsf{0x04} & Ancho                                   \NN
-    \textsf{0x1C} & \textsf{0x04} & Alto                                    \NN
-    \textsf{0x20} & Variable      & Imagen \textsf{JPEG}\tmark[e]           \ML
+    \texttt{0x00} & \texttt{0x04} & Posición X de la imagen en la página    \NN
+    \texttt{0x04} & \texttt{0x04} & Posición Y de la imagen en la página    \NN
+    \texttt{0x08} & \texttt{0x04} & Calidad                                 \NN
+    \texttt{0x0C} & \texttt{0x04} & Tamaño de los datos                     \NN
+    \texttt{0x10} & \texttt{0x04} & Desconocido                             \NN
+    \texttt{0x14} & \texttt{0x04} & Desconocido                             \NN
+    \texttt{0x18} & \texttt{0x04} & Ancho                                   \NN
+    \texttt{0x1C} & \texttt{0x04} & Alto                                    \NN
+    \texttt{0x20} & Variable      & Imagen \texttt{JPEG}\tmark[e]           \ML
     \multicolumn{3}{c}{GVMP}                                                \NN
-    \textsf{0x00} & \textsf{0x04} & Identificador: \textsf{GVMP}            \NN
-    \textsf{0x04} & \textsf{0x04} & Número de bloques.                      \NN
-    \textsf{0x08} & \textsf{0x04} & Posición de los datos del primer bloque \NN
-    \textsf{0x0C} & \textsf{0x04} & Tamaño de los datos del primer bloque   \LL
+    \texttt{0x00} & \texttt{0x04} & Identificador: \texttt{GVMP}            \NN
+    \texttt{0x04} & \texttt{0x04} & Número de bloques.                      \NN
+    \texttt{0x08} & \texttt{0x04} & Posición de los datos del primer bloque \NN
+    \texttt{0x0C} & \texttt{0x04} & Tamaño de los datos del primer bloque   \LL
 }
 
-Como se aprecia, una página se compone de diferentes imágenes \textsf{JPEG} concatenadas.
-Tras este análisis, desde el primer fichero directamente extraído de la carpeta del juego en formato \textsf{PSAR} hasta este que contiene cada una de las páginas en formato \textsf{GVD} no se ha apreciado ningún mecanismo que intente proteger o dificultar la tarea de extraer cada una de las páginas.
+Como se aprecia, una página se compone de diferentes imágenes \texttt{JPEG} concatenadas.
+Tras este análisis, desde el primer fichero directamente extraído de la carpeta del juego en formato \texttt{PSAR} hasta este que contiene cada una de las páginas en formato \texttt{GVD} no se ha apreciado ningún mecanismo que intente proteger o dificultar la tarea de extraer cada una de las páginas.
 Incluso los formatos de las propias imágenes son estándar.
 
 Cabe destacar también, que la \acs{PS3} provee de mecanismos nativos para cifrar archivos que sí se usa para proteger el resto de datos del juego como imágenes y textos (archivo \textit{hs06\_es.adat.sdat}).
-Este formatos con extensión \textsf{sdat} y cabecera \textsf{NPD} usa las claves internas y mecanismos internos de cifrado de la consola que asegura su confidencialidad\footnote{A día de hoy ya se ha podido romper este mecanismo~\cite{GH-npdata}.}.
+Este formatos con extensión \texttt{sdat} y cabecera \texttt{NPD} usa las claves internas y mecanismos internos de cifrado de la consola que asegura su confidencialidad\footnote{A día de hoy ya se ha podido romper este mecanismo~\cite{GH-npdata}.}.
 
 \subsubsection{Conclusión}
 
@@ -228,12 +228,12 @@ En occidente salió también una segunda versión que usaba el mismo motor un año d
 Se trata de dos juegos musicales donde hay que seguir el ritmo de canciones conocidas de los años 80 y 90 con el lápiz.
 Internamente los dos juegos son idénticos cambiando solo el contenido pero no la estructura.
 
-Las canciones están comprimidas dentro del archivo de sonido estándar en \acs{NDS}: \textsf{SDAT}.
+Las canciones están comprimidas dentro del archivo de sonido estándar en \acs{NDS}: \texttt{SDAT}.
 El formato, posiblemente soportado nativamente por la \acs{API} de la consola, permite almacenar sonido tanto sintetizado parecido a \acs{MIDI} como digitalizado.
 Para este último se permite varias codificaciones: \acs{PCM} de 8 bits, \acs{PCM} de 16 bits y \acs{IMA-ADPCM} siendo esta la que más calidad provee y el que se usa en estos juegos (figura~\ref{fig:cr-elite}).
 
 \includefigure{fig:cr-elite}%
-{Archivos comprimidos en \textsf{SDAT} y codificados con \acs{IMA-ADPCM} visto con Tinke.}%
+{Archivos comprimidos en \texttt{SDAT} y codificados con \acs{IMA-ADPCM} visto con Tinke.}%
 {imgs/CR-Elite.png}
 
 Esto no provee ninguna protección pues no se usa ningún tipo de cifrado y se usa una codificación y formato estándar de la consola y muy estudiado.
@@ -270,7 +270,7 @@ Gracias a incluir \textit{hardware} adicional hace que no sea posible piratear e
 
 Analizando el primer juego de la saga, se puede ver que todos los archivos están contenidos en los ficheros \textit{mainFIGS.gfc} y \textit{mainFIGS.gob}. Si bien la estructura del primer fichero parece sencilla: 4 bytes con el tamaño y otros 4 bytes con la posición del fichero.
 Sin embargo, el archivo que contiene todos los datos está cifrado.
-El código ensamblador con el algoritmo de descifrado cuenta con alrededor de 1900 líneas de instrucciones que hacen muy difícil su comprensión y que, como se comentó en el segundo capítulo, hace que el esfuerzo valga más que el contenido. En concreto, tras tardar entorno a 4 horas en analizar las primeras 200 instrucciones se desistió de la tarea. Más adelante, se pudo encontrar información al respecto del algoritmo, tratándose simplemente de una implementación de \textsf{zlib}~\cite{Ungob}.
+El código ensamblador con el algoritmo de descifrado cuenta con alrededor de 1900 líneas de instrucciones que hacen muy difícil su comprensión y que, como se comentó en el segundo capítulo, hace que el esfuerzo valga más que el contenido. En concreto, tras tardar entorno a 4 horas en analizar las primeras 200 instrucciones se desistió de la tarea. Más adelante, se pudo encontrar información al respecto del algoritmo, tratándose simplemente de una implementación de \texttt{zlib}~\cite{Ungob}.
 
 Al ser un juego famoso, ha habido investigaciones sobre el formato de los ficheros por lo que el procedimiento de extracción de las canciones está documentado\cite{SH-GH}. La estructura de este formato se describe en la tabla~\ref{tab:cr-guitarHero}.
 
