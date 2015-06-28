@@ -51,6 +51,7 @@ También destaca la distribución de material adicional como el caso de un libro f
 
 \section{Libros electrónicos}
 \subsection{Ninokuni: La Ira de la Bruja Blanca}
+\label{sec:cr-nino}
 \textit{Ninokuni: La Ira de la Bruja Blanca} es un juego desarrollado por \textit{Level-5} para \acl{PS3} en el año 2011.
 En el capítulo de traducciones no oficiales se expusieron los resultado del análisis de este juego para \acl{NDS}~\ref{sec:tr-nino}.
 En esa versión se incluía un libro físico necesario durante el desarrollo del juego.
@@ -150,16 +151,12 @@ Cabe destacar, que la \acs{PS3} provee de mecanismos nativos para cifrar archivo
 Este formatos con extensión \texttt{sdat} y cabecera \texttt{NPD} usa las claves y mecanismos internos de cifrado de la consola que asegura su confidencialidad\footnote{A día de hoy ya se ha podido romper este mecanismo. \url{https://github.com/Hykem/make_npdata}.}.
 
 \subsubsection{Conclusión}
-
 \begin{tabular}{p{0.4\textwidth}p{0.5\textwidth}}
 Puntos fuertes & Puntos débiles \\
-% Pros
-\begin{itemize}
+\begin{itemize} % Pros
 \item El libro está codificado en un formato propietario, se requiere de \textit{software} no estándar para extraer las páginas.
 \end{itemize} &
-
-% Contras
-\begin{itemize}
+\begin{itemize} % Contras
 \item El archivo no está cifrado, a pesar de que consola provee de mecanismos para ello que sí se utilizan sobre el resto de los ficheros.
 \item La codificación de las páginas es estándar (\texttt{JPEG}).
 \end{itemize} \\
@@ -198,16 +195,12 @@ De los 23 bloques que contiene un libro, el primero tiene información general, d
 A pesar de que las obras son clásicas, sin derechos de autor, debería ofrecer una protección por el trabajo de maquetado, traducción y adaptación.
 
 \subsubsection{Conclusión}
-
 \begin{tabular}{p{0.4\textwidth}p{0.5\textwidth}}
 Puntos fuertes & Puntos débiles \\
-% Pros
-\begin{itemize}
+\begin{itemize} % Pros
 \item No se usa un formato estándar para la representación del texto ni la estructura del libro. Se requiere de programas especializados para extraer y editar.
 \end{itemize} &
-
-% Contras
-\begin{itemize}
+\begin{itemize} % Contras
 \item Los libros no están cifrados.
 \item No hay mecanismos de integridad para protegerlos ante modficaciones.
 \end{itemize} \\
@@ -231,39 +224,38 @@ Para este último se permite las codificaciones \ac{PCM} de 8 bits, \ac{PCM} de 1
 A pesar de que estos formatos y codificaciones no proveen protecciones, por motivos técnicos, las canciones vienen fragmentadas y no es inmediata su recomponsición.
 
 \subsubsection{Conclusión}
-
 \begin{tabular}{p{0.4\textwidth}p{0.5\textwidth}}
 Puntos fuertes & Puntos débiles \\
-% Pros
-\begin{itemize}
+\begin{itemize} % Pros
 \item Las canciones necesitan de procesamiento ya que están dividas en partes.
 \end{itemize} &
-
-% Contras
-\begin{itemize}
+\begin{itemize} % Contras
 \item Los archivos no están cifrados.
 \item Se usa formatos y codificaciones estándar.
 \end{itemize} \\
 \end{tabular}
 
 \subsection{Guitar Hero: On Tour}
-\textit{Guitar Hero: On Tour} es una serie de tres videojuegos para la \textit{Nintendo DS} desarrollados por \textit{Vicarius Visions} y que salieron en 2008 y 2009.
-Son juegos musicales donde el jugador simula estar tocando una guitarra a la vez que escucha canciones desde los años 70 hasta la actualidad.
-Se caracterizan por incluir una pieza de \textit{hardware} extra e imprescindible para el juego denominado \textit{Guitar Grip}.
-Este aparato tiene los cuatro botones que la guitarra simulada que se conectan en el segundo \textit{slot} de la consola.
-
-Gracias a incluir \textit{hardware} adicional hace que no sea posible piratear el juego~(figura~\ref{fig:cr-guitarGrip}), pues no había forma de jugar sin esta
-\footnote{Más tarde se descubrió un parche\cite{GTemp-GHhack} para poder jugar usando los botones de la consola y no necesitar \textit{Guitar Grip}.}.
+\textit{Guitar Hero: On Tour} es una serie de tres videojuegos para la \acl{NDS} desarrollados por \textit{Vicarius Visions} en 2008 y 2009.
+Son juegos musicales para simular tocar canciones de una guitarra desde los años 70 hasta la actualidad.
+Se caracterizan por incluir una pieza de \textit{hardware} extra e imprescindible para el juego denominada \textit{Guitar Grip} (figura~\ref{fig:cr-guitarGrip}).
+Este aparato tiene cuatro botones para tocar acordes de la guitarra y se conecta en la segunda ranura de la consola.
+Gracias a incluir \textit{hardware} adicional hace que no sea posible piratear el juego
+\footnote{Más tarde se descubrió un parche\cite{GTemp-GHhack} para jugar usando los botones de la consola y no necesitar \textit{Guitar Grip}.}.
 
 \includefigure{fig:cr-guitarGrip}%
 {\textit{Guitar Grip} necesario para jugar a la saga \textit{Guitar Hero: On Tour}.}%
 {imgs/CR-GuitarGrip.png}
 
-Analizando el primer juego de la saga, se puede ver que todos los archivos están contenidos en los ficheros \textit{mainFIGS.gfc} y \textit{mainFIGS.gob}. Si bien la estructura del primer fichero parece sencilla: 4 bytes con el tamaño y otros 4 bytes con la posición del fichero.
-Sin embargo, el archivo que contiene todos los datos está cifrado.
-El código ensamblador con el algoritmo de descifrado cuenta con alrededor de 1900 líneas de instrucciones que hacen muy difícil su comprensión y que, como se comentó en el segundo capítulo, hace que el esfuerzo valga más que el contenido. En concreto, tras tardar entorno a 4 horas en analizar las primeras 200 instrucciones se desistió de la tarea. Más adelante, se pudo encontrar información al respecto del algoritmo, tratándose simplemente de una implementación de \texttt{zlib}~\cite{Ungob}.
+El primer juego de la saga se ha visto que comprime los archivos en \texttt{mainFIGS.gfc} y \texttt{mainFIGS.gob}.
+El primer fichero (tabla~\ref{tab:cr-guitarHero}) tiene la información para acceder a los datos del segundo.
+Tras analizar los bloques de datos, se pudo ver que estaban comprimidos con un algoritmo cuyo descifrado se implementaba en 1900 líneas de código.
 
-Al ser un juego famoso, ha habido investigaciones sobre el formato de los ficheros por lo que el procedimiento de extracción de las canciones está documentado\cite{SH-GH}. La estructura de este formato se describe en la tabla~\ref{tab:cr-guitarHero}.
+Esta misma compresión se encontró en el juego \textit{Last Window: El secreto de Cape West} para la \acl{NDS}.
+De media, en realizar un análisis completo se tardaría unas 60 horas.
+Por este motivo, implementar algoritmos tan largos y eficientes es una de las mejores estrategias a la hora de proteger datos.
+En~\cite{Ungob} se revela que se trata de la compresión \texttt{zlib}.
+Estudiarlo sobre este juego hubiese resultado más sencillo, pues hay indicios de que se compiló en modo de depuración y los mensajes de error aunque no se usaban, estaban presentes, dando pistas sobre el funcionamiento de cada parte.
 
 \ctable[
     caption = Especificación del formato de \textit{Guitar Hero: On Tour},
@@ -294,19 +286,22 @@ Al ser un juego famoso, ha habido investigaciones sobre el formato de los ficher
     \texttt{0x08} & \texttt{0x04} & Posición del primer bloque              \LL
 }
 
-Tras descomprimir este fichero se pueden ver diferentes carpetas y archivos con nombres descriptivos de su contenido. Estas carpetas coinciden en nombre y formato de ficheros con las siguientes versiones del juego que se describen a continuación. Por tanto, esta primera edición del juego provee de buenos mecanismos frente tanto a la distribución ilícita por la necesidad de  \textit{hardware} adicional además de la extracción de canciones mediante un algoritmo largo y complejo de descifrar.
+Tras descomprimirlo se observaron carpetas y archivos con nombres descriptivos de su contenido.
+Estas carpetas coinciden en nombre y formato de ficheros con las siguientes versiones del juego que se describen a continuación.
+Esta edición del juego provee de buenos mecanismos frente distribución ilícita, por la necesidad de \textit{hardware} adicional, y a la extracción de recursos mediante un algoritmo largo y complejo de descifrar.
 
-Sin embargo, se encuentra un descuido en las siguientes dos ediciones del juego.
-Los archivos no llegaron a ser empaquetados en formato \texttt{GFC} + \texttt{GOB} ni protegidos de ninguna manera.
-Se haya dentro del juego las carpetas \textit{StrmFIGS} y \textit{TracksFIGS} (nótese la terminación \textit{FIGS} usada anteriormente para nombrar al archivo \texttt{GOB}).
-Dentro se puede encontrar las canciones en formato \texttt{Vorbis OGG} estándar\cite{Xentax-HWAS}.
-En concreto, por facilidades técnicas se han separado cada canción en tres archivos, uno con la base de guitarra, otra con la base de batería y otra con la voz.
+Las siguientes ediciones del juego para esta consola fueron \textit{Guitar Hero On Tour: Decades} y \textit{Guitar Hero On Tour: Modern Hits}.
+En estas versiones, los archivos no están empaquetados con el formato \texttt{GOB}, ni protegidos de otra forma.
+Se haya dentro del juego las carpetas \textit{StrmFIGS} y \textit{TracksFIGS}, las mismas que se encontraban en la primera edición dentro del fichero comprimido.
+
+Dentro se puede encontrar las canciones en formato \texttt{Vorbis OGG}.
+En concreto, por facilidades técnicas, se han separado cada canción en tres pistas, una con la base de guitarra, otra con la de batería y otra con la voz.
 Las dos primeras están codificadas en \texttt{OGG} y la tercera en \texttt{HWAS}.
-Este último formato se trata de \texttt{IMA-ADPCM-Vorbis VOX} con una cabecera de 512 bytes descrita en la tabla~\ref{tab:cr-vox}.
-Mezclando las tres pistas se obtiene una versión casi perfecta del audio original.
+La codificación de este formato es \texttt{IMA-ADPCM-Vorbis VOX}~\cite{Xentax-HWAS} con una cabecera de 512 bytes descrita en la tabla~\ref{tab:cr-vox}.
+Mezclando las tres pistas se obtiene una versión casi idéntica del audio original.
 
 \ctable[
-    caption = Especificación del formato \textit{HWAS},
+    caption = Especificación del formato \texttt{HWAS},
     label   = tab:cr-vox,
     pos     = h
 ]{ccl}{
@@ -326,135 +321,110 @@ Mezclando las tres pistas se obtiene una versión casi perfecta del audio origina
 }
 
 \subsubsection{Conclusión}
-
 \begin{tabular}{p{0.4\textwidth}p{0.5\textwidth}}
 Puntos fuertes & Puntos débiles \\
-% Pros
-\begin{itemize}
-\item En la primera edición se comprimen todos los ficheros en un formato difícil de investigar.
-\item Los datos están comprimidos en una compresión de 1900 instrucciones máquinas que imposibilita prácticamente su estudio.
+\begin{itemize} % Pros
+\item En la primera edición se comprimen todos los ficheros.
+\item Los datos están comprimidos en una compresión de 1900 instrucciones máquinas que dificulta su estudio.
 \item El formato de algunos ficheros de audio no es estándar y no se puede obtener fácilmente una conversión completamente exacta con programas normales.
 \end{itemize} &
-
-% Contras
-\begin{itemize}
-\item La compresión \textit{zlib} se incluye con información de depuración innecesaria que facilita su comprensión.
-\item En las dos ediciones que siguieron a la primera del juego los archivos están sin comprimir y codificar.
-\item La mayoría de las canciones vienen codificadas en \textit{OGG} que estándar. Además, se da a conocer este formato mediante la extensión de los ficheros.
+\begin{itemize} % Contras
+\item La compresión \texttt{zlib} se incluye con información de depuración innecesaria que facilita su comprensión.
+\item En las dos ediciones que siguieron, los archivos están sin comprimir.
+\item La mayoría de las canciones vienen codificadas en el estándar \texttt{Vorbix OGG}. Además, se da a conocer este formato mediante la extensión de los ficheros.
 \end{itemize} \\
 \end{tabular}
 
 \subsection{Guitar Rock}
-\textit{Guitar Rock} es un juego desarrollado por \textit{Gameloft} en el año 2008 para la \textit{Nintendo DS}.
+\textit{Guitar Rock} es un juego desarrollado por \textit{Gameloft} en el año 2008 para la \acl{NDS}.
 Su jugabilidad es muy parecida a la de \textit{Guitar Hero: On Tour} diferenciándose en que no necesita \textit{hardware} como el \textit{Guitar Grip}.
 
-De nuevo las canciones vienen sin proteger dentro del juego encontrándolas dentro de los archivos \textit{trackX.bar}.
-Este formato tiene una cabecera de 512 bytes siguiéndole tres pistas musicales de la canción en formato estándar de la \textit{Nintendo DS} \texttt{SWAV}.
+Las canciones no están protegidas dentro del juego, ya que se encontraron dentro de los archivos \textit{trackX.bar}.
+Este formato tiene una cabecera de 512 bytes siguiéndole tres pistas musicales de la canción en formato estándar \texttt{SWAV}.
 Mezclando estas tres pistas se obtiene la canción original sin pérdidas.
 
 \subsubsection{Conclusión}
-
 \begin{tabular}{p{0.4\textwidth}p{0.5\textwidth}}
 Puntos fuertes & Puntos débiles \\
-% Pros
-\begin{itemize}
-\item Los archivos vienen comprimidos en un formato no estándar por lo que no es inmediata su extracción.
+\begin{itemize} % Pros
+\item Los archivos vienen comprimidos en un formato no estándar.
 \end{itemize} &
-
-% Contras
-\begin{itemize}
-\item Las canciones no están cifradas y además están codificadas con códecs estándar.
+\begin{itemize} % Contras
+\item Las canciones no están cifradas y usan codificaciones estándar.
 \end{itemize} \\
 \end{tabular}
 
 \subsection{Level-5}
-El estudio \textit{Level-5} se centra en el desarrollo de juegos para la \textit{Nintendo DS}.
-Cabe destacarlo como objeto de estudio pues la banda sonora de juegos tan famosos como \textit{El Profesor Layton}, \textit{Inazuma Eleven} o \textit{Ninokuni} ha estado codificada en un formato propietario y exclusivo.
+La compañía \textit{Level-5} se centra en el desarrollo de juegos para la \acl{NDS}.
+En este apartado se estudiará la codificación de audio que usa en videojuegos como \textit{El Profesor Layton}, \textit{Inazuma Eleven} y \textit{Ninokuni}.
 
-El formato \texttt{SADL} es un contenedor que admite las codificaciones \acs{IMA-ADPCM} y una desarrollada por el estudio \textit{Procyon}.
-Esta última, se trata de una variante de \acs{IMA-ADPCM} con algoritmo predictivo lo que ofrece gran compresión sin pérdida de calidad apenas.
+El formato \texttt{SADL} es un contenedor de audio que admite las codificaciones \ac{IMA-ADPCM} y una desarrollada por el estudio \textit{Procyon}.
+Esta última, se basa en un algoritmo predictivo de coeficientes variables, que ofrece gran calidad de audio.
+El programa \textit{SADLer} implementa un codificador y decodificador de este formato.\footnote{\url{https://github.com/pleonex/SADL-Audio-format}}.
 
-Esto permitió por ejemplo en el caso de \textit{Ninokuni} introducir en el juego una banda sonora grabada por la orquesta de Tokio.
-Además, al ser propietario y único para estos juegos tanto el formato de archivo como de codificación de las muestras, dificultó la tarea de extracción y hubieron de pasar varios años hasta que se investigó.
-La codificación de este formato se ha investigado y documentado en repositorios de GitHub\footnote{\url{https://github.com/pleonex/SADL-Audio-format}}.
-
-Caso distinto es la versión para \acl{PS3} de este juego dado que el formato de los archivos es estándar y se puede reproducir con programas como \url{http://www.videolan.org/vlc/}{VLC}.
-La protección en este juego se centra en el empaquetado de todos los archivos (excepto el libro electrónico) que como se describió en la primera sección viene protegida con una clave propia de la consola.
+En el caso de \textit{Ninokuni} para \acl{PS3}, se ha usado un formato estándar admitido por los reproductos comunes.
+La protección en este juego se basa en el contenedor de los archivos, excepto del libro electrónico (sección~\ref{sec:cr-nino}), que se cifra con una clave única de la consola.
 
 \subsubsection{Conclusión}
-
 \begin{tabular}{p{0.4\textwidth}p{0.5\textwidth}}
 Puntos fuertes & Puntos débiles \\
-% Pros
-\begin{itemize}
-\item Se ha usado un formato y codificación nueva que requiere el desarrollo de nuevos programas.
+\begin{itemize} % Pros
+\item Se usa un formato y codificación propietaria no documentada.
+\item En el juego de \acl{PS3}, los archivos de audio están cifrados con el contenedor \texttt{NPD}.
 \end{itemize} &
-
-% Contras
-\begin{itemize}
-\item No se provee de cifrado u otro mecanismo de protección más allá del cambio de formato.
+\begin{itemize} % Contras
+\item En los juegos de \acl{NDS}, no se provee de cifrado u otro mecanismo de protección.
 \end{itemize} \\
 \end{tabular}
 
 \subsection{Duet}
-En último lugar se describirá el videojuego \textit{Duet}.
-Desarrollado por \textit{Kumobius} para las plataformas Android y iOS en 2013.
+\textit{Duet} es un juego para las plataformas iOS y Android, desarrollado por \textit{Kumobius} en 2013.
 La aplicación es de pago pero en periodos de oferta está disponible gratuitamente.
 
 La banda sonora fue compuesta por Tim Shiel y puede comprarse en iTunes\footnote{\url{https://itunes.apple.com/us/album/duet/id721804015}} por \$4.99.
-Sin embargo, al igual que pasó con los juegos anteriormente descritos, la seguridad ante una posible extracción se dejó en la capa del binario del juego.
-En este caso, si se cuenta con un móvil con acceso al sistema de archivos (\textit{jailbreak} en el caso de iOS) y se accede a la carpeta de la aplicación se puede encontrar toda la banda sonara en formato \texttt{WAV}.
+Sin embargo, los archivos dentro de la carpeta de la aplicación carecen de seguridad.
+Si se cuenta con un móvil con acceso al sistema de archivos (\textit{jailbreak} en el caso de iOS) y se accede a su directorio, se puede encontrar toda la banda sonara en formato \texttt{WAV}.
 
 \subsubsection{Conclusión}
-
 \begin{tabular}{p{0.4\textwidth}p{0.5\textwidth}}
 Puntos fuertes & Puntos débiles \\
-% Pros
-\begin{itemize}
-\item Si no se posee de un dispositivo con acceso de \textit{superusuario} no se puede acceder a los audios.
+\begin{itemize} % Pros
+\item Si no se posee de un dispositivo con acceso al sistema de archivos, no se puede acceder a los audios.
 \end{itemize} &
-
-% Contras
-\begin{itemize}
+\begin{itemize} % Contras
 \item Los ficheros vienen en formato estándar, sin cifrar y con una extensión que indica su contenido y formato.
 \end{itemize} \\
 \end{tabular}
 
 \section{Vídeos}
-\subsection{\acl{PS3}}
-En esta consola, la protección de muchos archivos se confió en la imposibilidad de descifrar archivos con una clave que sólo se conocía por la consola como se discutió con los libros electrónicos.
+Por último lugar, en esta sección se comentará la codificación encontrada en los archivos de vídeo de \acl{PS3} y \acl{NDS}.
 
-El formato estándar tiene extensión \texttt{pam} y no es más que una codificación \texttt{MPEG} con una cabecera de 1000 bytes prescindible para su decodificación.
-El trabajo se ha documentado en un repositorio de GitHub donde además se ha creado un programar de conversión\footnote{ \url{https://github.com/pleonex/Ninokuni/tree/master/Programs/PS3/pam2mpg}}.
+\subsection{\acl{PS3}}
+En esta consola, la protección de muchos archivos se confió en la imposibilidad de descifrar archivos con una clave que sólo se conocía por la consola como se discutió en el apartado~\ref{sec:cr-nino}.
+
+Estos archivos tienen la extensión \texttt{pam}, tratándose de una codificación \texttt{MPEG} con una cabecera de \texttt{0x800} bytes opcionales para su decodificación~\cite{Xentax-PAM}.
+El programa \textit{pam2mpg} realiza estas labores de conversión\footnote{ \url{https://github.com/pleonex/Ninokuni/tree/master/Programs/PS3/pam2mpg}}.
 
 \subsubsection{Conclusión}
-
 \begin{tabular}{p{0.4\textwidth}p{0.5\textwidth}}
 Puntos fuertes & Puntos débiles \\
-% Pros
-\begin{itemize}
-\item La cabecera y extensión garantiza que no sea inmediata su extracción.
+\begin{itemize} % Pros
+\item La cabecera y extensión no indica la codificación.
 \end{itemize} &
-
-% Contras
-\begin{itemize}
+\begin{itemize} % Contras
 \item Se ha usado una codificación estándar sin cifrado. Sin embargo se entiende en este tipo de contenido debido a los requisitos técnicos de calidad, compresión y eficiencia.
 \end{itemize} \\
 \end{tabular}
 
 \subsection{\acl{NDS}}
-Caso distinto es el de esta consola.
-Aun con menos potencia, cinemáticas de alta calidad han sido desarrolladas.
-La mayoría de juegos usa una codificación propietaria proporcionada por Nintendo y desarrollada por Mobiclip (tras la compra de Nintendo pasó a llamarse \textit{Nintendo European Research and Development}).
+En esta consola, la mayoría de juegos usa una codificación propietaria proporcionada por Nintendo y desarrollada por \textit{Nintendo European Research and Development}\footnote{También conocida como \textit{Mobiclip} y \textit{Actimagine}}.
 
-A día de hoy nadie ha sido capaz de estudiar la codificación debido a la complejidad de la misma.
-Al estar desarrollada explícitamente para la consola y basarse en piezas específicas de \textit{hardware}, se requiere un tiempo y conocimientos que superan el valor de la misma.
-La alternativa a la hora de extraer recursos de este calibre es grabar la pantalla mientras se reproduce el juego en un emulador\footnote{El emulador DeSmuME tiene esta funcionalidad implementada.}.
+Con fecha de este trabajo, esta codificación no se ha conseguido documentar debido a sus características únicas y complejidad.
+Es un algoritmo desarrollado específicamente para consola y su \textit{hardware}.
+La alternativa a la hora de extraer estos recursos es grabar la pantalla mientras se reproduce el juego en un emulador\footnote{El emulador DeSmuME tiene esta funcionalidad implementada.}.
 
 \subsubsection{Conclusión}
-
 Puntos fuertes
-% Pros
-\begin{itemize}
-\item Al usar una codificación diferente a lo conocido y única para la \acl{NDS}, a pesar de ser la usada en mayoría de los juegos, a fecha de este trabajo nadie ha conseguido crear un descodificador.
+\begin{itemize} % Pros
+\item Al usar una codificación única y compleja no se ha podido documentar.
 \end{itemize}

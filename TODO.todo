@@ -42,13 +42,13 @@ Traducciones:
 ✔ Ninokuni: Integridad en partidas para evitar modificaciones @done(2015-06-22 21:20)
 ✘ Hetalia: Textos & Imágenes @cancelled(2015-06-18 05:18)
 ✔ Analizar proyectos abandonados. @done(2015-06-21 23:39)
-☐ Layton 4
-☐ London Life
-☐ Trauma Center
-☐ Boku
-☐ Brave Fencer
-☐ Last Window
-☐ Gakuen Hetalia
+✘ Layton 4 @cancelled(2015-06-28 12:19)
+✘ London Life @cancelled(2015-06-28 12:19)
+✘ Trauma Center @cancelled(2015-06-28 12:19)
+✘ Boku @cancelled(2015-06-28 12:19)
+✘ Brave Fencer @cancelled(2015-06-28 12:18)
+✘ Last Window @cancelled(2015-06-28 12:18)
+✘ Gakuen Hetalia @cancelled(2015-06-28 12:18)
 ✔ Reescribir @done(2015-06-27 22:21)
 
 Copyright:
@@ -64,10 +64,11 @@ Copyright:
 ✔ Vídeo: NDS @done(2015-06-16 01:14)
 ✔ Sprite resource web (http://www.spriters-resource.com/) @done(2015-06-24 03:10)
 ✔ Profundizar en Guitar Hero: On Tours @done(2015-06-25 03:34)
-☐ Modo debug y release en zlib.
-☐ Introducción: Añadir información del cap. 13 negro.
+✔ Modo debug y release en zlib. @done(2015-06-28 12:19)
+✘ Introducción: Añadir información del cap. 13 negro. @cancelled(2015-06-28 12:19)
 ✔ Añadir conclusiones (pros y contras) a los juegos. @done(2015-06-25 04:07)
 ✔ Revisar footnotes. @done(2015-06-19 01:51)
+✔ Revisar @done(2015-06-28 14:10)
 
 Multijugador y DLC:
 ☐ Introducir en el tema y su importancia en proteger comunicación.
