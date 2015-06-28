@@ -1,0 +1,48 @@
+% Copyright (c) 2015 Benito Palacios Sánchez - All Rights Reserved.
+% Esta obra está licenciada bajo la Licencia Creative Commons Atribución 4.0
+% Internacional. Para ver una copia de esta licencia, visita
+% http://creativecommons.org/licenses/by/4.0/.
+
+\chapter{Metodología}
+\label{sec:met}
+
+
+\includefigure{fig:met-psar}%
+{Primeros \textit{bytes} del fichero \emph{PSAR}.}%
+{imgs/CR-PSAR.png}
+
+% TODO: Boku y hebras GZIP
+
+\subsection{Claves XOR en texto plano}
+\label{sec:met-xor-key}
+
+\subsection{Búsqueda de algoritmos sobre textos}
+\label{sec:met-search-text}
+% TODO:
+Tras una búsqueda de las frases de diálogos iniciales sobre todo el archivo binario del juego no se encuentran resultados.
+Se probó en las codificaciones más frecuentes de esta consola como son ASCII y UNICODE sin resultado.
+Esto indica que bien el archivo que contiene los textos está comprimido o cifrado.
+
+El siguiente procedimiento fue extraer la memoria RAM del juego justo en el momento de mostrar ese diálogo, pues debería estar almacenada esa frase para poder ser mostrada en pantalla.
+Esto se puede realizar gracias al emulador DeSmuME mencionado en el capítulo~\ref{sec:requirements}.
+Una vez extraído el archivo binario con la memoria RAM, mediante visores hexadecimales se buscó la frase que aparecía en pantalla usando las codificaciones estándar y sin obtener resultado de nuevo.
+Dado que la frase ha de estar en la memoria RAM, el problema era por tanto que no estaba usando una codificación estándar.
+Existen dos procedimientos básicos para realizar una búsqueda en estos casos.
+
+El primero consiste en buscar el archivo con la tipografía del juego, pues la codificación será la misma que el orden con el que aparecen los caracteres en ella.
+
+El segundo procedimiento posible es el de desarrollar un programa de búsqueda diferencial. Con motivo de este trabajo en el capítulo~\ref{sec:requirements} se explica el programa \textit{RelativeSearch} que se llevó a cabo. Este tipo de \textit{software} se puede usar siempre y cuando el orden de los caracteres de un mismo grupo (por ejemplo letras minúsculas) corresponda a estándares como ASCII. Si se hubiese seguido un orden aleatorio en la codificación propietaria este no serviría quedando la primera opción como única alternativa.
+
+Tras usar cualquiera de los dos procedimientos anteriormente descritos, se puedo encontrar una coincidencia en la memoria RAM del diálogo. El siguiente paso consistió en depurar el juego para hallar el algoritmo de descifrado o descompresión de textos. Para ello usando los programas descritos en el capítulo~\ref{sec:requirements} de depuración, se puso un punto de interrupción en dicha posición.
+
+Cabe destacar que esta posición es dinámica por lo que cambia cada vez que se inicia el juego pues depende de muchas variables. Para sortear este problema se hizo uso de los \textit{savestates} del emulador, es decir guardados de memoria del juego que permiten ir a cualquier momento de una ejecución. Gracias a esta característica se puede realizar un guardado justo antes de que el juego guarde un juego de forma que siempre que se use ese \textit{savestate} encontraremos el texto en la misma posición. El punto de interrupción hizo parar el emulador justo en las instrucciones máquinas que estaban realizando, en este caso, el descifrado.
+
+\subsection{Búsqueda de algoritmo sobre imágenes}
+\label{sec:met-search-img}
+El procedimiento para encontrar el algoritmo de cifrado en este caso es distinto al realizado con texto.
+No se puede partir de datos conocidos como anteriormente se partía de una frase que se veía en la pantalla.
+Sin embargo, dado que las cabeceras de la imagen no están cifradas se pudo buscar sobre el código en ensamblador la función que procesa esta cabecera.
+En concreto se buscó la palabra mágica \texttt{CHAR} que se procesa para determinar el comienzo de una sección del archivo.
+
+Una vez encontrado la función que lee una imagen, solo habría que acceder a una parte del juego donde se esperaba que se cargase una imagen como durante una batalla y poner un punto de interrupción sobre esta función.
+Tras omitir imágenes que no estaban cifradas\footnote{Dado que una imagen contiene suele tener píxeles cercanos de igual colores, siempre que en los datos se observara patrones se podía determinar que no estaba cifrada.}, se llegó a una que sí lo estaba donde se puso un punto de interrupción.
