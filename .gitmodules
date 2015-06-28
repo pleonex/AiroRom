@@ -22,3 +22,6 @@
 [submodule "Programs/DataBrithm/libs/xwt"]
 	path = Programs/DataBrithm/libs/xwt
 	url = https://github.com/mono/xwt
+[submodule "Programs/RC4Finder/modime"]
+	path = Programs/RC4Finder/modime
+	url = http://github.com/pleonex/modime
