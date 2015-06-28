@@ -56,9 +56,9 @@ En el capítulo de traducciones no oficiales se expusieron los resultado del anál
 En esa versión se incluía un libro físico necesario durante el desarrollo del juego.
 Sin embargo, en \acl{PS3} se incluye digitalmente y se puede acceder a él mediante un visor integrado en el juego.
 
-El libro se encuentra en el archivo \texttt{hd05\_es.sdat} dentro de la carpeta raíz, en formato \texttt{PSAR}.
-Este tipo de formato es común en juegos de \acs{PS3}, permite agrupar varios archivos y comprimirlos.
-El tipo de compresión, \texttt{zlib}, se indica con cuatro caracteres en la posición \texttt{0x08} (figura~\ref{fig:met-psar}).
+El libro se encuentra en el archivo \texttt{hd05\_es.sdat}, dentro de la carpeta raíz y en formato \texttt{PSAR}.
+Este tipo de formato, común en juegos de \acs{PS3}, permite agrupar varios archivos y comprimirlos.
+La compresión, \texttt{zlib}, se indica claramente con cuatro caracteres en la posición \texttt{0x08} (figura~\ref{fig:met-psar}).
 Respecto a la estructura del fichero (tabla~\ref{tab:cr-psar}), tiene una pequeña cabecera, a la que le sigue una tabla de contenidos y los datos.
 En GitHub hay repositorios con programas para la extracción de los archivos\footnote{\url{https://github.com/pleonex/Ninokuni/tree/master/Programs/PS3/NinoDecompiler}}.
 
@@ -88,19 +88,17 @@ En GitHub hay repositorios con programas para la extracción de los archivos\foot
     \multicolumn{3}{c}{Archivos\tmark[a]\tmark[b]}                      \LL
 }
 
-Descomprimiendo el fichero se encuentran nueve archivos de los cuales destaca uno de 438 MB \textit{data/book/es/BigData/gdv.dat}.
-Por su tamaño se intuye su contenido.
-Su formato de nuevo fácil de analizar pues tras unas largas cabeceras, al inicio de los datos hay una cabecera con las siglas \emph{JPEG}.
-A continuación en la figura~\ref{tab:cr-gvd} se muestra la especificación de este tipo de fichero que contiene cada una de las hojas del libro electrónico.
-
+Descomprimiendo el fichero se encuentran nueve archivos, de los cuales destaca uno de 438 MB en \texttt{data/book/es/BigData/gdv.dat} donde se encuentra el libro.
+El formato se especifica en la tabla~\ref{tab:cr-gvd}.
+Destaca que la codificación de las páginas viene especificada de forma visible con los caracteres \texttt{JPEG} en una de las cabeceras.
 
 \ctable[
-    caption = Especificación de formato GVD,
+    caption = Especificación de formato \texttt{GVD},
     label   = tab:cr-gvd,
 ]{ccl}{
     \tnote[a]{Hay un bloque por página.}
     \tnote[b]{Relativo al inicio del bloque de datos.}
-    \tnote[c]{La codificación del nombre es ASCII.}
+    \tnote[c]{La codificación del nombre es \texttt{ASCII}.}
     \tnote[d]{Hay un bloque por cada calidad.}
     \tnote[e]{Los datos pueden estar comprimidos en \texttt{GVMP}, en ese
     caso el primer bloque será la imagen \texttt{JPEG}.}
@@ -143,12 +141,13 @@ A continuación en la figura~\ref{tab:cr-gvd} se muestra la especificación de est
     \texttt{0x0C} & \texttt{0x04} & Tamaño de los datos del primer bloque   \LL
 }
 
-Como se aprecia, una página se compone de diferentes imágenes \texttt{JPEG} concatenadas.
-Tras este análisis, desde el primer fichero directamente extraído de la carpeta del juego en formato \texttt{PSAR} hasta este que contiene cada una de las páginas en formato \texttt{GVD} no se ha apreciado ningún mecanismo que intente proteger o dificultar la tarea de extraer cada una de las páginas.
-Incluso los formatos de las propias imágenes son estándar.
+Como se ha podido apreciar, una página se compone de diferentes imágenes \texttt{JPEG} concatenadas.
+Tras este análisis, en ninguno de los dos ficheros intermediarios en formato \texttt{PSAR} y \texttt{GVD}, se han encontrado mecanismos que intenten proteger u ofuscar la extracción del libro.
+Incluso la codificación de las páginas es estándar.
+Como consecuencia, a pesar de que el libro físico de la versión para \acl{NDS} no se llegó a distribuir de forma ilícita en Internet por el trabajo de escanear 300 páginas, el de esta versión si puede ser encontrado fácilmente.
 
-Cabe destacar también, que la \acs{PS3} provee de mecanismos nativos para cifrar archivos que sí se usa para proteger el resto de datos del juego como imágenes y textos (archivo \textit{hs06\_es.adat.sdat}).
-Este formatos con extensión \texttt{sdat} y cabecera \texttt{NPD} usa las claves internas y mecanismos internos de cifrado de la consola que asegura su confidencialidad\footnote{A día de hoy ya se ha podido romper este mecanismo~\cite{GH-npdata}.}.
+Cabe destacar, que la \acs{PS3} provee de mecanismos nativos para cifrar archivos que sí se usan para proteger el resto de datos del juego como imágenes y textos (archivo \texttt{hs06\_es.adat.sdat}).
+Este formatos con extensión \texttt{sdat} y cabecera \texttt{NPD} usa las claves y mecanismos internos de cifrado de la consola que asegura su confidencialidad\footnote{A día de hoy ya se ha podido romper este mecanismo. \url{https://github.com/Hykem/make_npdata}.}.
 
 \subsubsection{Conclusión}
 
@@ -156,25 +155,24 @@ Este formatos con extensión \texttt{sdat} y cabecera \texttt{NPD} usa las claves
 Puntos fuertes & Puntos débiles \\
 % Pros
 \begin{itemize}
-\item El libro está codificado en un formato propietario.
-\item Se requiere de nuevo \textit{software} para extraer las páginas.
+\item El libro está codificado en un formato propietario, se requiere de \textit{software} no estándar para extraer las páginas.
 \end{itemize} &
 
 % Contras
 \begin{itemize}
-\item El archivo con el libro no está cifrado a pesar de que la \acl{PS3} provee de mecanismos para ello que se utiliza sobre el resto de los ficheros.
-\item La codificación de las páginas es estándar (\textit{JPEG}).
+\item El archivo no está cifrado, a pesar de que consola provee de mecanismos para ello que sí se utilizan sobre el resto de los ficheros.
+\item La codificación de las páginas es estándar (\texttt{JPEG}).
 \end{itemize} \\
 \end{tabular}
 
 \subsection{100 Classic Book Collection}
 \label{sec:cr-100-books}
-El segundo juego que se ha analizado para comprobar su seguridad en cuanto a libros electrónicos ha sido \textit{100 Classic Book Collection}.
-Desarrollado por \textit{HaperCollins} en 2008 para la \textit{Nintendo DS}.
-No se trata de un juego propiamente dicho, si no de una colección de libros junto a un visor, de forma que la videoconsola se convierte en un lector.
-Como el nombre indica, el juego contiene entorno a 100 libros incluyendo descargables.
+\textit{100 Classic Book Collection} fue desarrollado por \textit{HaperCollins} en 2008 para la \acl{NDS}.
+No se trata de un juego, si no de una colección de libros junto a un visor, que simular ser un \textit{e-book}.
+La aplicación contiene entorno a 100 libros además de descargables.
 
-El formato que contiene los libros de nuevo no tiene mecanismo alguno de protección siendo incluso más sencillo que el caso anterior (table~\ref{tab:cr-100books}). De los hasta 23 bloques que contiene un libro, el primero contiene información del libro, del segundo al quinto imágenes de portada y el resto el texto del libro junto a resumen y descripción del autor (figura~\ref{fig:cr-100books}).
+El formato que contiene los libros no ha presentado ningún mecanismo de protección, siendo incluso más sencillo que el caso anterior (tabla~\ref{tab:cr-100books}).
+De los 23 bloques que contiene un libro, el primero tiene información general, del segundo al quinto imágenes de portada y el resto el texto junto a resumen y descripción del autor (figura~\ref{fig:cr-100books}).
 
 \ctable[
     caption = Especificación del formato de \textit{100 Classic Books},
@@ -182,22 +180,22 @@ El formato que contiene los libros de nuevo no tiene mecanismo alguno de protecc
     pos     = h
 ]{ccl}{
     \tnote[a]{Algunos bloques pueden estar vacíos.}
-    \tnote[b]{Todos los bloques excepto el primero están comprimidos con \textsc{LZSS}.}
+    \tnote[b]{Todos los bloques excepto el primero están comprimidos con \texttt{LZSS}.}
 }{                                                                      \FL
     Posición      & Tamaño        & Descripción                         \ML
     \multicolumn{3}{c}{Cabecera}                                        \NN
-    \textsc{0x00} & \textsc{0x10} & Desconocido                         \NN
-    \textsc{0x10} & \textsc{0x04} & Desconocido                         \NN
-    \textsc{0x14} & \textsc{0x04*23} & Puntero a cada uno de los bloques\NN
-    \textsc{0x70} & \textsc{0x04*23} & Tamaño de cada bloque            \ML
+    \texttt{0x00} & \texttt{0x10} & Desconocido                         \NN
+    \texttt{0x10} & \texttt{0x04} & Desconocido                         \NN
+    \texttt{0x14} & \texttt{0x04$\times$23} & Puntero a cada bloques    \NN
+    \texttt{0x70} & \texttt{0x04$\times$23} & Tamaño de cada bloque     \ML
     \multicolumn{3}{c}{Bloques\tmark[a]\tmark[b]}                       \LL
 }
 
 \includefigure{fig:cr-100books}%
-{Extracto de texto de un libro de \textit{100 Classic Books}.}%
+{Extracto de texto de un libro de \textit{100 Classic Books Collection}.}%
 {imgs/CR-100Books.png}
 
-Si bien es cierto que todas estas obras son clásicas, sin derechos de autor a día de hoy, el trabajo de maquetado y adaptación sí se puede cobrar.
+A pesar de que las obras son clásicas, sin derechos de autor, debería ofrecer una protección por el trabajo de maquetado, traducción y adaptación.
 
 \subsubsection{Conclusión}
 
@@ -205,13 +203,13 @@ Si bien es cierto que todas estas obras son clásicas, sin derechos de autor a dí
 Puntos fuertes & Puntos débiles \\
 % Pros
 \begin{itemize}
-\item No se usa un formato estándar para la representación del texto ni la estructura del libro. Se requiere por tanto de nuevos programas para extrar y editar.
+\item No se usa un formato estándar para la representación del texto ni la estructura del libro. Se requiere de programas especializados para extraer y editar.
 \end{itemize} &
 
 % Contras
 \begin{itemize}
 \item Los libros no están cifrados.
-\item No hay mecanismos de integridad para proteger ante modficaciones.
+\item No hay mecanismos de integridad para protegerlos ante modficaciones.
 \end{itemize} \\
 \end{tabular}
 
@@ -282,36 +280,36 @@ Al ser un juego famoso, ha habido investigaciones sobre el formato de los ficher
     \tnote[a]{Información extraída de ungob.pl~\cite{Ungob} y corroborada.}
     \tnote[b]{Los datos del fichero están codificados en \textit{big-endian}.}
     \tnote[c]{Se describe la primera entrada.}
-    \tnote[d]{Si es el último bloque el valor será \textsc{0x7FFF}.}
+    \tnote[d]{Si es el último bloque el valor será \texttt{0x7FFF}.}
 }{                                                                          \FL
     Posición      & Tamaño        & Descripción                             \ML
     \multicolumn{3}{c}{Cabecera\tmark[a]\tmark[b]}                          \NN
-    \textsc{0x00} & \textsc{0x04} & Identificador: \textsc{0x00008008}      \NN
-    \textsc{0x04} & \textsc{0x04} & Tamaño del archivo \textsc{GOB}         \NN
-    \textsc{0x08} & \textsc{0x04} & Número de bloques                       \NN
-    \textsc{0x0C} & \textsc{0x04} & Número de archivos                      \ML
+    \texttt{0x00} & \texttt{0x04} & Identificador: \texttt{0x00008008}      \NN
+    \texttt{0x04} & \texttt{0x04} & Tamaño del archivo \texttt{GOB}         \NN
+    \texttt{0x08} & \texttt{0x04} & Número de bloques                       \NN
+    \texttt{0x0C} & \texttt{0x04} & Número de archivos                      \ML
     \multicolumn{3}{c}{Tabla de bloques\tmark[c]}                           \NN
-    \textsc{0x00} & \textsc{0x04} & Tamaño del bloque                       \NN
-    \textsc{0x04} & \textsc{0x04} & Posición del bloque                     \NN
-    \textsc{0x08} & \textsc{0x04} & Posición del siguiente bloque\tmark[d]  \NN
-    \textsc{0x0C} & \textsc{0x04} & Tipo de bloque: \textsc{0x30} descomprimido, \textsc{0x7A} comprimido con \textit{zlib}                              \ML
+    \texttt{0x00} & \texttt{0x04} & Tamaño del bloque                       \NN
+    \texttt{0x04} & \texttt{0x04} & Posición del bloque                     \NN
+    \texttt{0x08} & \texttt{0x04} & Posición del siguiente bloque\tmark[d]  \NN
+    \texttt{0x0C} & \texttt{0x04} & Tipo de bloque: \texttt{0x30} descomprimido, \texttt{0x7A} comprimido con \textit{zlib}                              \ML
     \multicolumn{3}{c}{Tabla desconocida\tmark[c]}                          \NN
-    \textsc{0x00} & \textsc{0x04} & Desconocido                             \ML
+    \texttt{0x00} & \texttt{0x04} & Desconocido                             \ML
     \multicolumn{3}{c}{Tabla de ficheros\tmark[c]}                          \NN
-    \textsc{0x00} & \textsc{0x04} & CRC32 del nombre en minúscula           \NN
-    \textsc{0x04} & \textsc{0x04} & Tamaño del fichero                      \NN
-    \textsc{0x08} & \textsc{0x04} & Posición del primer bloque              \LL
+    \texttt{0x00} & \texttt{0x04} & CRC32 del nombre en minúscula           \NN
+    \texttt{0x04} & \texttt{0x04} & Tamaño del fichero                      \NN
+    \texttt{0x08} & \texttt{0x04} & Posición del primer bloque              \LL
 }
 
 Tras descomprimir este fichero se pueden ver diferentes carpetas y archivos con nombres descriptivos de su contenido. Estas carpetas coinciden en nombre y formato de ficheros con las siguientes versiones del juego que se describen a continuación. Por tanto, esta primera edición del juego provee de buenos mecanismos frente tanto a la distribución ilícita por la necesidad de  \textit{hardware} adicional además de la extracción de canciones mediante un algoritmo largo y complejo de descifrar.
 
 Sin embargo, se encuentra un descuido en las siguientes dos ediciones del juego.
-Los archivos no llegaron a ser empaquetados en formato \textsc{GFC} + \textsc{GOB} ni protegidos de ninguna manera.
-Se haya dentro del juego las carpetas \textit{StrmFIGS} y \textit{TracksFIGS} (nótese la terminación \textit{FIGS} usada anteriormente para nombrar al archivo \textsc{GOB}).
-Dentro se puede encontrar las canciones en formato \textsc{Vorbis OGG} estándar\cite{Xentax-HWAS}.
+Los archivos no llegaron a ser empaquetados en formato \texttt{GFC} + \texttt{GOB} ni protegidos de ninguna manera.
+Se haya dentro del juego las carpetas \textit{StrmFIGS} y \textit{TracksFIGS} (nótese la terminación \textit{FIGS} usada anteriormente para nombrar al archivo \texttt{GOB}).
+Dentro se puede encontrar las canciones en formato \texttt{Vorbis OGG} estándar\cite{Xentax-HWAS}.
 En concreto, por facilidades técnicas se han separado cada canción en tres archivos, uno con la base de guitarra, otra con la base de batería y otra con la voz.
-Las dos primeras están codificadas en \textsc{OGG} y la tercera en \textsc{HWAS}.
-Este último formato se trata de \textsc{IMA-ADPCM-Vorbis VOX} con una cabecera de 512 bytes descrita en la tabla~\ref{tab:cr-vox}.
+Las dos primeras están codificadas en \texttt{OGG} y la tercera en \texttt{HWAS}.
+Este último formato se trata de \texttt{IMA-ADPCM-Vorbis VOX} con una cabecera de 512 bytes descrita en la tabla~\ref{tab:cr-vox}.
 Mezclando las tres pistas se obtiene una versión casi perfecta del audio original.
 
 \ctable[
@@ -323,14 +321,14 @@ Mezclando las tres pistas se obtiene una versión casi perfecta del audio origina
 }{                                                                          \FL
     Posición      & Tamaño        & Descripción                             \ML
     \multicolumn{3}{c}{Cabecera\tmark[a]\tmark[b]}                          \NN
-    \textsc{0x00} & \textsc{0x04} & Identificador: \textsc{hwas}            \NN
-    \textsc{0x04} & \textsc{0x04} & Desconocido                             \NN
-    \textsc{0x08} & \textsc{0x04} & Frecuencia de muestreo                  \NN
-    \textsc{0x0C} & \textsc{0x04} & Número de canales                       \NN
-    \textsc{0x10} & \textsc{0x04} & Reservado                               \NN
-    \textsc{0x14} & \textsc{0x04} & Tamaño de los datos de audio            \NN
-    \textsc{0x18} & \textsc{0x04} & Número de muestras                      \NN
-    \textsc{0x1C} & \textsc{0x1E4} & Reservado                              \ML
+    \texttt{0x00} & \texttt{0x04} & Identificador: \texttt{hwas}            \NN
+    \texttt{0x04} & \texttt{0x04} & Desconocido                             \NN
+    \texttt{0x08} & \texttt{0x04} & Frecuencia de muestreo                  \NN
+    \texttt{0x0C} & \texttt{0x04} & Número de canales                       \NN
+    \texttt{0x10} & \texttt{0x04} & Reservado                               \NN
+    \texttt{0x14} & \texttt{0x04} & Tamaño de los datos de audio            \NN
+    \texttt{0x18} & \texttt{0x04} & Número de muestras                      \NN
+    \texttt{0x1C} & \texttt{0x1E4} & Reservado                              \ML
     \multicolumn{3}{c}{Datos de audio en IMA-ADPCM}                         \LL
 }
 
@@ -358,7 +356,7 @@ Puntos fuertes & Puntos débiles \\
 Su jugabilidad es muy parecida a la de \textit{Guitar Hero: On Tour} diferenciándose en que no necesita \textit{hardware} como el \textit{Guitar Grip}.
 
 De nuevo las canciones vienen sin proteger dentro del juego encontrándolas dentro de los archivos \textit{trackX.bar}.
-Este formato tiene una cabecera de 512 bytes siguiéndole tres pistas musicales de la canción en formato estándar de la \textit{Nintendo DS} \textsc{SWAV}.
+Este formato tiene una cabecera de 512 bytes siguiéndole tres pistas musicales de la canción en formato estándar de la \textit{Nintendo DS} \texttt{SWAV}.
 Mezclando estas tres pistas se obtiene la canción original sin pérdidas.
 
 \subsubsection{Conclusión}
@@ -380,7 +378,7 @@ Puntos fuertes & Puntos débiles \\
 El estudio \textit{Level-5} se centra en el desarrollo de juegos para la \textit{Nintendo DS}.
 Cabe destacarlo como objeto de estudio pues la banda sonora de juegos tan famosos como \textit{El Profesor Layton}, \textit{Inazuma Eleven} o \textit{Ninokuni} ha estado codificada en un formato propietario y exclusivo.
 
-El formato \textsc{SADL} es un contenedor que admite las codificaciones \acs{IMA-ADPCM} y una desarrollada por el estudio \textit{Procyon}.
+El formato \texttt{SADL} es un contenedor que admite las codificaciones \acs{IMA-ADPCM} y una desarrollada por el estudio \textit{Procyon}.
 Esta última, se trata de una variante de \acs{IMA-ADPCM} con algoritmo predictivo lo que ofrece gran compresión sin pérdida de calidad apenas.
 
 Esto permitió por ejemplo en el caso de \textit{Ninokuni} introducir en el juego una banda sonora grabada por la orquesta de Tokio.
@@ -412,7 +410,7 @@ La aplicación es de pago pero en periodos de oferta está disponible gratuitament
 
 La banda sonora fue compuesta por Tim Shiel y puede comprarse en iTunes\footnote{\url{https://itunes.apple.com/us/album/duet/id721804015}} por \$4.99.
 Sin embargo, al igual que pasó con los juegos anteriormente descritos, la seguridad ante una posible extracción se dejó en la capa del binario del juego.
-En este caso, si se cuenta con un móvil con acceso al sistema de archivos (\textit{jailbreak} en el caso de iOS) y se accede a la carpeta de la aplicación se puede encontrar toda la banda sonara en formato \textsc{WAV}.
+En este caso, si se cuenta con un móvil con acceso al sistema de archivos (\textit{jailbreak} en el caso de iOS) y se accede a la carpeta de la aplicación se puede encontrar toda la banda sonara en formato \texttt{WAV}.
 
 \subsubsection{Conclusión}
 
@@ -439,7 +437,7 @@ Si bien de nuevo está presente el problema del agujero analógico, en algunos cas
 \subsection{\acl{PS3}}
 En esta consola, la protección de muchos archivos se confió en la imposibilidad de descifrar archivos con una clave que sólo se conocía por la consola como se discutió con los libros electrónicos.
 
-El formato estándar tiene extensión \textsc{pam} y no es más que una codificación \textsc{MPEG} con una cabecera de 1000 bytes prescindible para su decodificación.
+El formato estándar tiene extensión \texttt{pam} y no es más que una codificación \texttt{MPEG} con una cabecera de 1000 bytes prescindible para su decodificación.
 El trabajo se ha documentado en un repositorio de GitHub donde además se ha creado un programar de conversión\footnote{ \url{https://github.com/pleonex/Ninokuni/tree/master/Programs/PS3/pam2mpg}}.
 
 \subsubsection{Conclusión}
