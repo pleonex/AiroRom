@@ -1,5 +1,5 @@
 [submodule "NitroDebugger"]
-	path = NitroDebugger
+	path = Programs/NitroDebugger
 	url = https://github.com/pleonex/NitroDebugger
 [submodule "DataBrithm/libs/xwt"]
 	path = DataBrithm/libs/xwt
@@ -19,3 +19,6 @@
 [submodule "Games/Pokemon-Conquest"]
 	path = Games/Pokemon-Conquest
 	url = https://github.com/pleonex/Pokemon-Conquest-Tools
+[submodule "Programs/DataBrithm/libs/xwt"]
+	path = Programs/DataBrithm/libs/xwt
+	url = https://github.com/mono/xwt
