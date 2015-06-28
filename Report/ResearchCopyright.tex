@@ -215,21 +215,20 @@ Puntos fuertes & Puntos débiles \\
 
 \section{Bandas sonoras}
 \subsection{Osu! Tatakae! Ouendan!}
-\textit{Osu! Tatakae! Ouendan!} se trata de un juego japonés para la \textit{Nintendo DS} que salió en 2005.
-En occidente salió también una segunda versión que usaba el mismo motor un año después, \textit{Elite Beat Agents}.
-Se trata de dos juegos musicales donde hay que seguir el ritmo de canciones conocidas de los años 80 y 90 con el lápiz.
+\textit{Osu! Tatakae! Ouendan!} es un juego japonés desarollado por \textit{iNis} para la \acl{NDS} en 2005.
+En occidente salió una segunda versión que usaba el mismo moto, \textit{Elite Beat Agents}.
+Son juegos musicales en los que hay que seguir el ritmo de canciones con el lápiz táctil.
 Internamente los dos juegos son idénticos cambiando solo el contenido pero no la estructura.
 
-Las canciones están comprimidas dentro del archivo de sonido estándar en \acs{NDS}: \texttt{SDAT}.
-El formato, posiblemente soportado nativamente por la \acs{API} de la consola, permite almacenar sonido tanto sintetizado parecido a \acs{MIDI} como digitalizado.
-Para este último se permite varias codificaciones: \acs{PCM} de 8 bits, \acs{PCM} de 16 bits y \acs{IMA-ADPCM} siendo esta la que más calidad provee y el que se usa en estos juegos (figura~\ref{fig:cr-elite}).
+Las canciones están contenidos en un archivo de tipo \texttt{SDAT}, estándar en la consola.
+El formato permite almacenar sonido tanto sintetizado como digitalizado.
+Para este último se permite las codificaciones \ac{PCM} de 8 bits, \ac{PCM} de 16 bits y \ac{IMA-ADPCM} siendo esta la que más calidad provee y usada en estos juegos (figura~\ref{fig:cr-elite}).
 
 \includefigure{fig:cr-elite}%
 {Archivos comprimidos en \texttt{SDAT} y codificados con \acs{IMA-ADPCM} visto con Tinke.}%
 {imgs/CR-Elite.png}
 
-Esto no provee ninguna protección pues no se usa ningún tipo de cifrado y se usa una codificación y formato estándar de la consola y muy estudiado.
-Sin embargo, por facilidades técnicas las canciones vienen en fragmentos y la dificultad recae en saber el orden de los mismos para recomponerla.
+A pesar de que estos formatos y codificaciones no proveen protecciones, por motivos técnicos, las canciones vienen fragmentadas y no es inmediata su recomponsición.
 
 \subsubsection{Conclusión}
 
@@ -237,13 +236,13 @@ Sin embargo, por facilidades técnicas las canciones vienen en fragmentos y la di
 Puntos fuertes & Puntos débiles \\
 % Pros
 \begin{itemize}
-\item Las canciones están dividas en partes de forma que no es inmediato conocer el orden exacto para reconstruir una canción.
+\item Las canciones necesitan de procesamiento ya que están dividas en partes.
 \end{itemize} &
 
 % Contras
 \begin{itemize}
 \item Los archivos no están cifrados.
-\item Se usa formatos y códecs estándar.
+\item Se usa formatos y codificaciones estándar.
 \end{itemize} \\
 \end{tabular}
 
