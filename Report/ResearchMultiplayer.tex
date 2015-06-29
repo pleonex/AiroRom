@@ -120,8 +120,26 @@ La configuración de la consola permite configurar servidores alternativos de DNS
 
 \subsection{Preguntados}
 % TODO: Introducir juego -> escenario man-in-the-middle -> mostrar trazas wireshark con los campos relevante
+\textit{Preguntados} es un juego desarrollado por \textit{TODO} en el año \textit{TODO} para las plataformas TODO.
+La aplicación encuentra adversarios de forma aleatoria y muestra una serie de preguntas con posibles opciones.
+
+El objeto de este estudio es comprobar si la seguridad en las comunicaciones es segura, evitando posibles trampas.
+Para ello se preparó un escenario para realizar un ataque \textit{man-in-the-middle}, usando un punto de acceso adicional, este se conectó al ordenador mediante \textit{Ethernet} y su vez mediante una conexión inalámbrica con el punto de acceso original.
+Además, hubo que configurar el ordenador ya que el sistema operativo \textit{Fedora 20} por defecto tiene una configuración restrictiva que no permite conexiones a subredes.
+
+\begin{verbatim}
+TODO
+\end{verbatim}
+
+Los paquetes capturados con \textit{Wireshark} muestran que no se usa una conexión segura ya que se transmite todo por \texttt{HTTP}.
+Además, como se ve en la figura ~\ref{fig:mp-preguntados}, tras analizar la transmisión de datos con el servidor del juego se encuentra una mala implementación del protocolo.
+Cada vez que una partida comienza, el servidor le envía al usuario una lista de preguntas y respuestas a usar \textbf{junto a la respuesta correcta}.
+Dado que la comunicación no está protegida, y es fácil capturarla, es fácil saber la respuesta a cualquier pregunta antes de la misma.
+A parte de los problemas de seguridad y confidencialidad que esto implica, esto permitiría crear un programa que responda automática a las preguntas.
 
 \includefigure{fig:mp-preguntados}{Captura de tráfico con las preguntas y respuestas de una partida de Preguntados.}{imgs/MP-Preguntados.png}
+
+Una buena implementación hubiese sido que el servidor enviase solo las preguntas con sus posibles respuestas, y que la respuesta escogida se envíe al servidor donde se comprobaría.
 
 \section{Contenido descargable}
 \subsection{100 Classic Books Collection}
