@@ -4,7 +4,9 @@
 % http://creativecommons.org/licenses/by/4.0/.
 
 \chapter{Multijugador y contenido descargable}
-% TODO: Intro
+Este capítulo tiene el objetivo de analizar y mostrar los protocolos de comunicación de algunas plataformas y juegos, así como la seguridad aplicada sobre los ficheros transmitidos.
+Este tipo de contenido se está volviendo más popular gracias a las tiendas virtuales, donde se venden pequeños extras.
+Además, en las consolas de última generación \acl{PS4} y \acl{XOne}, los servicios de multijugador necesitan una subscripción de pago.
 
 En la sección multijugador se explicará cómo funciona la autenticación en los servidores de Nintendo y cómo puede afectar a la jugabilidad no usar HTTPS en el caso del juego Preguntados.
 En la sección de contenido descargables se comentará la seguridad o su ausencia en tres juegos.
@@ -202,8 +204,7 @@ Se trata de un mecanismo que está implementado nativamente\footnote{\url{http://
 La contraseña se puede almacenar en texto plano en la aplicación, pues dificultará la tarea de conocerla y al valer el contenido tan poco (menos de 1 euro) no compensará el esfuerzo dedicado como se ha discutido en capítulos anteriores.
 
 \section{Ejecutables firmados}
-% TODO: Introducir DWP -> seguridad para ejecutar codigo no autoridazo -> paquete integridad de arm9 -> este integridad de datos -> no se puede man-in-the-middle -> se puede editar de flashcard.
-%http://problemkaputt.de/gbatek.htm#biosramusage
+% Introducir DWP -> seguridad para ejecutar codigo no autoridazo -> paquete integridad de arm9 -> este integridad de datos -> no se puede man-in-the-middle -> se puede editar de flashcard.
 Una de las posibilidades de comunicación inalámbrica que ofrece la \ac{NDS} es que un juego envía una \textit{demo} a otra consola, en algunos casos incluso para poder jugar en multijugador teniendo un único juego, denominado \textit{Download Play}.
 
 En este contexto, dado que la transmisión de código se hace en un canal compartido (se usa el protocolo \textit{Wi-Fi}), son necesarios mecanimos que protegen la comunicación.
