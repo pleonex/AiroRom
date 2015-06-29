@@ -34,7 +34,7 @@ Como contrapartida, si el usuario pierde su clave privada y el acceso a ella, no
 \end{itemize}
 
 El principal problema es la posibilidad de aplicar métodos de \emph{ingeniería inversa} sobre el \textit{software} autorizado.
-Una vez comprendido cómo una aplicación autorizada accede al contenido protegido, se podría superar los mecanimos de protección para extraer y en algunos casos modificar el recurso.
+Una vez comprendido cómo una aplicación autorizada accede al contenido protegido, se podría superar los mecanismos de protección para extraer y en algunos casos modificar el recurso.
 De aquí vienen la necesidad de trabajar sobre entornos cerrados (capítulo~\ref{sec:art}) cada vez más frecuentes en videoconsolas y móviles\footnote{Los sistemas operativos iOS y Android no permiten el acceso al sistema de ficheros por defecto.}.
 Una alternativa sería implementar el algoritmo en \textit{hardware} como es el caso de la \acl{N3DS}.
 
@@ -202,13 +202,13 @@ Puntos fuertes & Puntos débiles \\
 \end{itemize} &
 \begin{itemize} % Contras
 \item Los libros no están cifrados.
-\item No hay mecanismos de integridad para protegerlos ante modficaciones.
+\item No hay mecanismos de integridad para protegerlos ante modificaciones.
 \end{itemize} \\
 \end{tabular}
 
 \section{Bandas sonoras}
 \subsection{Osu! Tatakae! Ouendan!}
-\textit{Osu! Tatakae! Ouendan!} es un juego japonés desarollado por \textit{iNis} para la \acl{NDS} en 2005.
+\textit{Osu! Tatakae! Ouendan!} es un juego japonés desarrollado por \textit{iNis} para la \acl{NDS} en 2005.
 En occidente salió una segunda versión que usaba el mismo moto, \textit{Elite Beat Agents}.
 Son juegos musicales en los que hay que seguir el ritmo de canciones con el lápiz táctil.
 Internamente los dos juegos son idénticos cambiando solo el contenido pero no la estructura.
@@ -221,7 +221,7 @@ Para este último se permite las codificaciones \ac{PCM} de 8 bits, \ac{PCM} de 1
 {Archivos comprimidos en \texttt{SDAT} y codificados con \acs{IMA-ADPCM} visto con Tinke.}%
 {imgs/CR-Elite.png}
 
-A pesar de que estos formatos y codificaciones no proveen protecciones, por motivos técnicos, las canciones vienen fragmentadas y no es inmediata su recomponsición.
+A pesar de que estos formatos y codificaciones no proveen protecciones, por motivos técnicos, las canciones vienen fragmentadas y no es inmediata su recomposición.
 
 \subsubsection{Conclusión}
 \begin{tabular}{p{0.4\textwidth}p{0.5\textwidth}}
@@ -362,7 +362,7 @@ El formato \texttt{SADL} es un contenedor de audio que admite las codificaciones
 Esta última, se basa en un algoritmo predictivo de coeficientes variables, que ofrece gran calidad de audio.
 El programa \textit{SADLer} implementa un codificador y decodificador de este formato.\footnote{\url{https://github.com/pleonex/SADL-Audio-format}}.
 
-En el caso de \textit{Ninokuni} para \acl{PS3}, se ha usado un formato estándar admitido por los reproductos comunes.
+En el caso de \textit{Ninokuni} para \acl{PS3}, se ha usado un formato estándar admitido por los reproductor comunes.
 La protección en este juego se basa en el contenedor de los archivos, excepto del libro electrónico (sección~\ref{sec:cr-nino}), que se cifra con una clave única de la consola.
 
 \subsubsection{Conclusión}

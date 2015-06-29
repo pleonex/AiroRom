@@ -249,9 +249,9 @@ Por ejemplo, el archivo con los textos pasa a estar en \texttt{a/0/0/2} en lugar
 En los dos apartados anteriores (\ref{sec:tr-pok-pearl-text} y~\ref{sec:tr-pok-heart-text}) se describió como los textos usaban el mismo algoritmo y clave para cifrarse.
 Una vez encontrado el algoritmo de esta generación (sección~\ref{sec:met-search-text}), se pudo ver que se trata de un cifrado \texttt{XOR} con clave dinámica pero cambia respecto a las pasadas ediciones.
 
-Una de las principales diferencias es que no se usa una codificación propia, que dificulta la investigación, si no que se usa el estandar UTF-16.
+Una de las principales diferencias es que no se usa una codificación propia, que dificulta la investigación, si no que se usa el estándar UTF-16.
 La clave inicial se genera según \verb!clave = (i + 3) * 0x2983! donde \verb!i! es el número de bloque al que se quiere acceder.
-A continuación se realizar la operación \texttt{XOR} sobre un caracter (un valor de 16 bits ya que se usa UTF-16) y se actualiza la clave.
+A continuación se realizar la operación \texttt{XOR} sobre un carácter (un valor de 16 bits ya que se usa UTF-16) y se actualiza la clave.
 Para ello se desplaza los tres bits más significativos a la posición menos significativa.
 
 \begin{verbatim}
@@ -342,7 +342,7 @@ La codificación no se usa por la fuente (esta implementa el estándar \textit{Lat
 
 La codificación está optimizada para caracteres japoneses.
 Se basa en especificar solo un byte por carácter japonés en lugar de dos como usa la codificación SJIS.
-Para realizar esta reducción, se predice con códigos de control el primer byte del caracter, comprendido entre \texttt{0x81--0x83}, y que es igual entre caracteres cercanos.
+Para realizar esta reducción, se predice con códigos de control el primer byte del carácter, comprendido entre \texttt{0x81--0x83}, y que es igual entre caracteres cercanos.
 Se puede encontrar una implementación de esta codificación en el proyecto AmbitionText\footnote{\url{https://github.com/pleonex/Pokemon-Conquest-Tools/AmbitionText}}.
 
 Respecto al cifrado, se basa en la operación \texttt{XOR} con la clave fija

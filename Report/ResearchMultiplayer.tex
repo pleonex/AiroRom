@@ -10,13 +10,13 @@ Además, en las consolas de última generación \acl{PS4} y \acl{XOne}, los servici
 
 En la sección multijugador se explicará cómo funciona la autenticación en los servidores de Nintendo y cómo puede afectar a la jugabilidad no usar HTTPS en el caso del juego Preguntados.
 En la sección de contenido descargables se comentará la seguridad o su ausencia en tres juegos.
-Por última, la sección de cifrado de archivos binarios explica cómo se implementan mecanimos de integridad para la transmisión segura de código entre consolas.
+Por última, la sección de cifrado de archivos binarios explica cómo se implementan mecanismos de integridad para la transmisión segura de código entre consolas.
 
 \section{Multijugador}
 \subsection{Conexión segura en servidores de Nintendo}
 \label{sec:mp-nintendo-server}
 El 20 de mayo de 2014 Nintendo cesó su servicio de conectividad Wi-Fi para las consolas \acl{NDS} y Wii~\cite{Nintendo-Cese}.
-Los juegos en lína, torneos, contenido descargable e intercambio de objetos se perdió ya que los servidores habrían sido retirados~\cite{Nintendo-Cese2}.
+Los juegos en línea, torneos, contenido descargable e intercambio de objetos se perdió ya que los servidores habrían sido retirados~\cite{Nintendo-Cese2}.
 Es por ello que un grupo de usuarios decidió de investigar la comunicación entre la consola y el servidor, para crear una aplicación web que replicase el funcionamiento\footnote{\url{https://github.com/polaris-/dwc_network_server_emulator}}.
 En este apartado se estudiará este protocolo de comunicación.
 
@@ -27,7 +27,7 @@ Para poder eludir la capa de seguridad de \texttt{TLS} se descubrieron dos mecan
 \includefigure{fig:mp-nintendo-encry}{Primeros paquetes de una comunicación entre una \acl{NDS} y los servidores de Nintendo.}{imgs/MP-NintendoEncry.png}
 
 El primero consiste en encontrar la función que cifra la comunicación, \texttt{RC4}, en el código del juego.
-Dado que este código se incluye con la biblioteca que propociona Nintendo a los desarrolladores, será igual en todos los juegos.
+Dado que este código se incluye con la biblioteca que proporciona Nintendo a los desarrolladores, será igual en todos los juegos.
 Esta táctica es la que implementa el programa \textit{RC4Finder}\footnote{\url{https://github.com/pleonex/AiroRom/tree/master/Programs/RC4Finder}} para encontrar y devolver la posición de la función.
 
 Conociendo dónde se encuentra el algoritmo de cifrado y aprovechando las capacidades de depuración del emulador DeSmuME, se puede añadir código para que guarde en un fichero los datos que pasan por el algoritmo.
@@ -58,13 +58,13 @@ parámetros más importantes.
     Adicionalmente, la consola también envía un ID de usuario, el ID del desarrollador del juego, el BSSID del punto de acceso, la dirección MAC de la consola, el lenguaje configurado, la fecha de cumpleaños del usuario y el nombre del usuario.
     El servidor contesta enviando un \textit{token} generado y un \textit{challenge} que se explicarán más tarde.
 
-    \item Esta conexión se realiza cuando se pide contactar con un servidor externo como de contenidos descargables (comand \texttt{svcloc}).
+    \item Esta conexión se realiza cuando se pide contactar con un servidor externo como de contenidos descargables (comando \texttt{svcloc}).
     Se descarta los datos de la operación anterior (\textit{token} y \textit{challenge}) y se devuelve uno nuevo para ese servicio en concreto (\texttt{servicetoken}) junto con la dirección a la que contactar (\texttt{svchost}).
 
     \item Contacto con el servidor de contenidos.
     En primer lugar el juego envía siempre el comando \texttt{count} donde opcionalmente puede especificar un filtro.
     El servidor devolvería el número de ficheros que coinciden con dicho filtro, como en este caso no se ha especificado ninguno devuelvo cero.
-    Para autenticarse en este servidor usa tanto el \texttt{servicetoken} que devolvío el \ac{NAS} como el código del juego y una contraseña que es diferente a la usada en el servidor anterior.
+    Para autenticarse en este servidor usa tanto el \texttt{servicetoken} que devolvió el \ac{NAS} como el código del juego y una contraseña que es diferente a la usada en el servidor anterior.
 
     \item Obtiene nombre de ficheros.
     El juego envía ahora el comando \texttt{list} para obtener la lista de ficheros disponibles.
@@ -117,7 +117,7 @@ De esta forma solo aquellos dispositivos que reunan tanto los códigos devueltos 
 Esta parte fue clave a la hora de realizar un servidor alternativo.
 Para que este servidor funcionase, dado que no se pueden conocer las claves privadas de los certificados de Nintendo, se apostó por utilizar una conexión \texttt{HTTP} lo que requiere modificar el juego como se ha explicado anteriormente (el servidor de descargas también se ha habilitado con este protocolo).
 La dirección de este servidor sin embargo no hace falta cambiarla en el juego ya que se utiliza un servidor proxy DNS.
-La configuración de la consola permite configurar servidores alternativos de DNS, aprovechando esta característica como se explica en eldiagrama de la figura~\ref{fig:mp-nintendodns}, este servidor DNS resuelve los dominios de Nintendo apuntando a los alternativos.
+La configuración de la consola permite configurar servidores alternativos de DNS, aprovechando esta característica como se explica en el diagrama de la figura~\ref{fig:mp-nintendodns}, este servidor DNS resuelve los dominios de Nintendo apuntando a los alternativos.
 
 \includefigure{fig:mp-nintendodns}{Conexión a los servidores alternativos de Nintendo.}{imgs/MP-NintendoDNS.eps}
 
@@ -207,23 +207,23 @@ La contraseña se puede almacenar en texto plano en la aplicación, pues dificulta
 % Introducir DWP -> seguridad para ejecutar codigo no autoridazo -> paquete integridad de arm9 -> este integridad de datos -> no se puede man-in-the-middle -> se puede editar de flashcard.
 Una de las posibilidades de comunicación inalámbrica que ofrece la \ac{NDS} es que un juego envía una \textit{demo} a otra consola, en algunos casos incluso para poder jugar en multijugador teniendo un único juego, denominado \textit{Download Play}.
 
-En este contexto, dado que la transmisión de código se hace en un canal compartido (se usa el protocolo \textit{Wi-Fi}), son necesarios mecanimos que protegen la comunicación.
+En este contexto, dado que la transmisión de código se hace en un canal compartido (se usa el protocolo \textit{Wi-Fi}), son necesarios mecanismos que protegen la comunicación.
 De esta forma no sería posible realizar un ataque \textit{man-in-the-midle} para ejecutar código no autorizado introduciendo así una brecha de seguridad.
 
 El protocolo~\cite{GbaTek-MultiBoot} implementa varios mensaje, los más importantes en cuanto seguridad son \texttt{RSA signature} y \texttt{data}.
 Con el primero se envían los archivos binarios de código principales de la aplicación, uno por procesador.
 Este mensaje está además firmado usando \texttt{SHA-1} para que no se pueda alterar el código.
 El segundo mensaje sirve para transmitir el resto de datos del juego como imágenes, textos y sonidos.
-Sin embargo, en algunos casos, dado que el fichero principal de código es muy grande, este se devide en partes llamados \textit{overlays}.
+Sin embargo, en algunos casos, dado que el fichero principal de código es muy grande, este se divide en partes llamados \textit{overlays}.
 Estos archivos se tratan como ficheros normales y son transmitidos en el segundo paquete, que no está firmado.
 
-Para solventar este problema, Nintendo introdució una comprobación de seguridad que a diferencia de la que se aplica sobre el archivo principal, esta se realizar durante la ejecución del juego.
+Para solventar este problema, Nintendo introdujo una comprobación de seguridad que a diferencia de la que se aplica sobre el archivo principal, esta se realizar durante la ejecución del juego.
 A cada archivo de código secundario se le realiza un algoritmo de tipo \texttt{HMAC} (\texttt{SHA-1} para el \textit{hash}), con una clave que se guarda en el archivo de código principal.
 Este resultado se comprueba con uno almacenado y en caso de fallar se para la ejecución del juego.
 
 Este procedimiento, aunque implementado en la mayoría de juegos, solo se activa si se está ejecutando con el modo de \textit{Download Play}.
 En este modo, se activa un bit del \textit{firmware} (posición en la memoria RAM \texttt{0x27FFC40}), y durante la ejecución se comprueba para saber si hay que verificar los archivos.
-En otro caso, como el de un inicio normal desde el cartucho, se asume que no es necesario pues no han tenido modificacion externas.
+En otro caso, como el de un inicio normal desde el cartucho, se asume que no es necesario pues no han tenido modificación externas.
 
-Ese valor está desactivado en emuladores como DeSmuME y \textit{flashcards} para poder aplicar parches antipiratería y saltarse el mencanismo.
-De esta forma, una vez modificado el juego original, se puede envíar a otras consolas el juego editado, permitiendo ejecutar código no seguro.
+Ese valor está desactivado en emuladores como DeSmuME y \textit{flashcards} para poder aplicar parches antipiratería y saltarse el mecanismo.
+De esta forma, una vez modificado el juego original, se puede enviar a otras consolas el juego editado, permitiendo ejecutar código no seguro.
