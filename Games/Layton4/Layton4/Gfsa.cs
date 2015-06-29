@@ -56,6 +56,7 @@ namespace Layton4
 
             // TODO: Precalculate name CRC
 
+
             // TODO: For each folder, match with name
 
             // TODO: Go to FAT from that folder info and read entries

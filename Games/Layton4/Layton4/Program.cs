@@ -30,6 +30,8 @@ namespace Layton4
     {
         public static void Main(string[] args)
         {
+            args = new string[] { "/home/benito/workdir/Algoritmos/AiroRom/Games/Layton4/Layton4/bin/Debug/" };
+
             if (args.Length < 1)
                 return;
 
