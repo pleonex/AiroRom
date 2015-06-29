@@ -21,6 +21,7 @@ Estado del arte:
 ☐ Prologo xbox
 ☐ Guías de romhacking.
 ☐ ¡Esto es legal!: http://www.bloomberg.com/news/articles/2012-05-02/copyright-can-t-block-software-reverse-engineering-court Y http://www.woodmann.com/fravia/legal.htm
+☐ Hasta qué punto el esfuerzo vale el producto.
 
 Requisitos, planificación y costes:
 ☐ Objetivos específicos y tareas para llevarlos a cabo. Repo y wiki.
@@ -83,20 +84,19 @@ Multijugador y DLC:
 ✔ Hablar del desarrollo del emulador trucado y del hack https. @done(2015-06-28 23:14)
 
 Juegos famosos:
-☐ New Super Mario Bros
-☐ NintenDogs
-☐ Mario Kart DS
-☐ Babyz
+✘ New Super Mario Bros @cancelled(2015-06-30 00:04)
+✘ NintenDogs @cancelled(2015-06-30 00:04)
+✘ Mario Kart DS @cancelled(2015-06-30 00:04)
+✘ Babyz @cancelled(2015-06-30 00:04)
 
 Resultados:
 ☐ Resumen de los fallos de seguridad visto.
 ☐ Recomendar soluciones.
 ☐ Encriptar ficheros usando nombre del fichero.
-☐ Ocultar el nombre de los ficheros con CRC32 por rapidez (Ninokuni).
-☐ Explicar algoritmo pensado -- Contenedor + Identificador de archivo almacenador en código fuente escrito mediante #define de preprocesador + Acceso a subarchivos por transformación de código (CRC32) + Cifrado de archivos usando ese código.
-☐ No se puede parar solo retrasar hasta la llegada de la traducción.
-☐ Hasta qué punto el esfuerzo vale el producto.
-☐ Cifrado no simétrico sin poder alterar el código.
+☐ Ocultar el nombre de los ficheros con CRC32 por rapidez.
+✘ Explicar algoritmo pensado -- Contenedor + Identificador de archivo almacenador en código fuente escrito mediante #define de preprocesador + Acceso a subarchivos por transformación de código (CRC32) + Cifrado de archivos usando ese código. @cancelled(2015-06-30 00:05)
+✘ No se puede parar solo retrasar hasta la llegada de la traducción. @cancelled(2015-06-30 00:05)
+☐ Cifrado no asimétrico sin poder alterar el código.
 ☐ Desordenar caracteres fuente para no realizar búsqueda diferencial.
 ☐ Cifrar fuente pues es un punto de entrada.
 ☐ No utilizar formato estándar como en las imágenes (más complicado software de procesado que de descifrado).

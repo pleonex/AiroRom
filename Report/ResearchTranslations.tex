@@ -35,17 +35,15 @@ Sin embargo, sí puede retrasar o al menos imposibilitar para aquellas personas q
 \label{sec:tr-pok}
 \textit{Pokémon} es una serie de juegos desarrollados por \textit{Game Freak} desde 1993 para las consolas de Nintendo.
 La saga se divide en denominadas `generaciones' que engloban al menos tres juegos.
-Ha sido una de las franquicias más exitosas a nivel mundial~\cite{GamSpo-GF} y cuenta con una serie de animación y películas entre otros.
+Ha sido una de las franquicias más exitosas a nivel mundial~\cite{GamSpo-GF} con series de animación y películas entre otros.
 
 A causa de la fama de los juegos y la falta de paciencia de los seguidores, se desarrollan traducciones parciales del juego.
 Estos proyectos, comenzados pocas horas después del primer lanzamiento en Japón, pretenden ofrecer una versión parcialmente traducida en semanas, adelantándose a los lanzamientos oficiales.
 Este es el caso de comunidades como PokéCheats.net\footnote{\url{http://pokecheats.net/tools/translations.php}} o ProjectPokemon.org\footnote{\url{http://projectpokemon.org/}}.
 
 Es por estos motivos, que \textit{Game Freak} desde el primer juego de \acl{NDS} incluyó métodos de ofuscación, con el objeto de no solo evitar traducciones, si no también los \textit{mods}.
-Dado que no se puede evitar conocer qué algoritmos protegen a los archivos ya que se puede mirar qué instrucciones máquinas ejecuta la consola para realiza esa misma tarea, el objetivo es retrasar y dificultar, para que se requieren conocimientos técnicos y esfuerzo para realizar dicha tarea.
-
 Los textos que aparecen en diálogos y menús, al igual que las imágenes principales de \textit{Pokémons}, son el primer objetivo a la hora de realizar una traducción o edición.
-Estos han sido el objeto de estudio y donde se han encontrado los algoritmos de protección que se analizarán en los siguientes subapartados.
+Estos han sido el objeto de estudio y se han encontrado los algoritmos de protección que se analizarán en los siguientes subapartados.
 Además se ha podido comprobar una evolución de estas técnicas a lo largo de las generaciones.
 
 Los sonidos y música han sido los únicos archivos que no han estado protegidos.
@@ -59,19 +57,19 @@ Primero llegó a Japón en septiembre de 2006, siete meses después a los Estados U
 \subsubsection{Archivos}
 \label{sec:tr-pok-pearl-file}
 Una de las características de la \acl{NDS} respecto a su antecesora (\acl{GBA}) es la introducción del sistema de ficheros.
-Dentro los juegos existe una sección para indicar cómo dividir los datos del juego en ficheros y a su vez estos en carpetas con nombres.
-Esto ha facilitado la tarea de investigación ya que en la mayoría de los juegos, los archivos tienen nombres descriptivos sobre su contenido.
+El formato del juego incluye una sección en la que indicar cómo dividir los datos en ficheros y clasificarlos en carpetas con nombres.
+Esto ha facilitado la tarea de investigación ya que, en la mayoría de los juegos, los archivos tienen nombres descriptivos sobre su contenido.
 
-Es el caso de esta generación, donde como se ha visto (figura~\ref{fig:tr-pearlfiles}) la jerarquía de carpetas y aun más el nombre de los archivos ofrecen claras pistas de su contenido.
-Por ejemplo, en \texttt{msgdata/msg.narc} se ha encontrado los textos del juego, en \texttt{itemtool/itemdata/item\_icon.narc} las imágenes de los objetos y en \texttt{graphic/font.narc} las tipografías del juego.
+Es el caso de esta generación donde, como se ha visto (figura~\ref{fig:tr-pearlfiles}), la jerarquía de carpetas y aún más el nombre de los archivos ofrecen pistas de su contenido.
+Por ejemplo, en \texttt{msgdata/msg.narc} se han encontrado los textos del juego, en \texttt{itemtool/itemdata/item\_icon.narc} las imágenes de los objetos y en \texttt{graphic/font.narc} las tipografías del juego.
 
 \includefigure{fig:tr-pearlfiles}{Sistema de ficheros en Pokémon Perla visto con Tinke}{imgs/TR-PearlFiles.png}
 
 \subsubsection{Textos}
 \label{sec:tr-pok-pearl-text}
-
-Respecto a los textos, tras aplicar la metodología de la sección~\ref{sec:met-search-text} se ha visto que estaban cifrados, además de usar una codificación no estándar que dificultó la investigación.
-Para usar el primer método descrito, se ha buscado y estudiado la fuente del juego para determinar la codificación, se muestra en la tabla~\ref{tab:tr-pearlfont}.
+La investigación de los textos se llevó a cabo usando la metodología descrita en la sección~\ref{sec:met-search-text}.
+Se ha podido comprobar que están cifrados, además de codificados sin usar un estándar (como podría ser \texttt{ASCII} o \texttt{UNICODE}).
+Para usar el primer método descrito, se ha buscado y estudiado la tipografía del juego, determinando así la tabla de codificación, es decir el valor número que está asociado a cada caracter (tabla~\ref{tab:tr-pearlfont}).
 % TODO: Crear plugin de Tinke para exportarla.
 % TODO: Añadir imagen de la tipografía extraída.
 
@@ -138,11 +136,11 @@ En la tabla~\ref{tab:tr-pearltxt} se especifica el formato de los archivos de te
 \subsubsection{Imágenes}
 \label{sec:tr-pok-pearl-img}
 En este juego las imágenes no contienen texto por lo que no son necesarias editarlas en una traducción.
-Sin embargo, si son objetivo de los \textit{mods} y de extraerlas para compartirlas.
+Sin embargo, son uno de los recursos a editar para realizar un \textit{mod}.
 Es por ello que se ha podido ver como las imágenes del archivo \texttt{poketool/pokegra/pokegra.narc}, que contiene seis \textit{sprites} por \textit{Pokémon} usados durantes las batalla, están cifradas.
+El cifrado se realizó sobre los datos de la imagen, manteniendo las cabeceras del formato.
 
-El cifrado se realizó sobre los datos de la imagen, manteniendo las cabeceras del formato intacto.
-Como consecuencia, las imágenes se podían abrir pero no ver usando programas estándar.
+% Como consecuencia, las imágenes se podían abrir pero no ver usando programas estándar.
 % TODO: Hacer programa y descifrar una imagen y poner comparativa
 
 Aplicando la metodología descrita en la sección~\ref{sec:met-search-img} se pudo encontrar el algoritmo.
@@ -173,14 +171,14 @@ Puntos fuertes & Puntos débiles \\
 \label{sec:tr-pok-heart}
 Los juegos \textit{Pokémon HeartGold y SoulSilver} son una remasterización para \acl{NDS} de la segunda generación, originalmente para \acl{GBA}.
 Se lanzó primero en Japón en de septiembre de 2009 y en Estados Unidos y Europa seis meses después.
-No hubo mucha diferencia entre los lanzamientos de América y Europa por lo que no se realizaron traducciones no oficiales desde el inglés, pero sí huboun caso desde el japonés que llegó a completarse a un 90\%\footnote{En el siguiente hilo se llevó a cabo el proyecto. \url{http://projectpokemon.org/forums/showthread.php?4534-Pokemon-HeartGold-and-SoulSilver-Translation-Patch}}.
+No hubo mucha diferencia entre los lanzamientos de Estados Unidos y Europa por lo que no se realizaron traducciones no oficiales desde el inglés, solo desde el japonés que llegó a completarse al 90\%\footnote{En el siguiente hilo se llevó a cabo el proyecto. \url{http://projectpokemon.org/forums/showthread.php?4534-Pokemon-HeartGold-and-SoulSilver-Translation-Patch}}.
 
 \subsubsection{Archivos}
 \label{sec:tr-pok-heart-file}
 La primera gran diferencia en estos nuevos juegos llegó con el ofuscado de nombres de archivos y directorios.
 Como se observa en la figura~\ref{fig:tr-heartfiles}, todos los archivos principales del juego están nombrados con números, al igual que las carpetas que los contienen.
 Además, el contenido de estas carpetas no relaciona a los archivos entre sí generando una organización aleatoria.
-En total hay 275 archivos que a su vez son contenedores con más de 1000 ficheros sin nombre pero relacionados en contenido, como puede ser todos los textos o todos los \textit{sprites} de los \textit{Pokémons}.
+En total hay 275 archivos que, a su vez, son contenedores de 1000 ficheros sin nombre pero relacionados en contenido, como son los textos o \textit{sprites} de los \textit{Pokémons}.
 
 \includefigure{fig:tr-heartfiles}{Carpetas y ficheros ofuscados en Pokémon HeartGold}{imgs/TR-HeartFiles.png}
 
@@ -201,7 +199,7 @@ Los archivos, sin nombres, binarios y sin estructuras de datos conocidas en su m
 
 \subsubsection{Textos}
 \label{sec:tr-pok-heart-text}
-Tras realizar una búsqueda del algoritmo que se aplica en los textos (sección~\ref{sec:met-search-text}) se pudo comprobar que están cifrados.
+Tras realizar una búsqueda del algoritmo, que se aplica en los textos (sección~\ref{sec:met-search-text}), se pudo comprobar que están cifrados.
 Además, tanto el formato del archivo, el algoritmo de cifrado y las claves son las mismas a las descritas en los juegos anteriores (apartado textos de la sección~\ref{sec:tr-pok-pearl-text}). El formato de las fuentes es también el mismo.
 
 A pesar de que el cifrado no cambió y que los mismos programas de edición se podían usar, se ofuscó este archivo pasando a estar en \texttt{a/0/2/7}.
@@ -209,7 +207,7 @@ A pesar de que el cifrado no cambió y que los mismos programas de edición se pod
 \subsubsection{Imágenes}
 \label{sec:tr-pok-heart-img}
 Al igual que sucedió con los textos, tras encontrar el algoritmo de cifrado de imágenes (sección~\ref{sec:met-search-img}), se descubrió que se utiliza el mismo algoritmo de cifrado con las mismas claves.
-Solo existe una diferencia de implementación ya que el descifrado empieza ahora por el comienzo del fichero en lugar de por el final.
+Solo existe una diferencia de implementación, ya que el descifrado empieza por el comienzo del fichero en lugar de por el final.
 
 \subsubsection{Conclusión}
 
@@ -241,18 +239,18 @@ Los únicos archivos que se dejaron fuera fueron el de sonido y la demo.
 
 \includefigure{fig:tr-blackheartfiles}{Comparación de carpetas entre Pokémon Blanco (izq.) y Pokémon HeartGold (der.)}{imgs/TR-BlackHeartFiles.png}
 
-A pesar de usar internamente la misma forma de acceso que se describió en el apartado de archivos de la sección~\ref{sec:tr-pok-heart-file}, los identificadores y por tanto localización de estos cambió.
+A pesar de usar internamente la misma forma de acceso que se describió en el apartado de archivos de la sección~\ref{sec:tr-pok-heart-file}, los identificadores, y por tanto localización de estos, cambió.
 Por ejemplo, el archivo con los textos pasa a estar en \texttt{a/0/0/2} en lugar de \textit{a/0/2/7}.
 
 \subsubsection{Textos}
 \label{sec:tr-pok-black-text}
-En los dos apartados anteriores (\ref{sec:tr-pok-pearl-text} y~\ref{sec:tr-pok-heart-text}) se describió como los textos usaban el mismo algoritmo y clave para cifrarse.
+En los dos apartados anteriores (\ref{sec:tr-pok-pearl-text} y~\ref{sec:tr-pok-heart-text}), se describió como los textos usaban el mismo algoritmo y clave para cifrarse.
 Una vez encontrado el algoritmo de esta generación (sección~\ref{sec:met-search-text}), se pudo ver que se trata de un cifrado \texttt{XOR} con clave dinámica pero cambia respecto a las pasadas ediciones.
 
 Una de las principales diferencias es que no se usa una codificación propia, que dificulta la investigación, si no que se usa el estándar UTF-16.
 La clave inicial se genera según \verb!clave = (i + 3) * 0x2983! donde \verb!i! es el número de bloque al que se quiere acceder.
-A continuación se realizar la operación \texttt{XOR} sobre un carácter (un valor de 16 bits ya que se usa UTF-16) y se actualiza la clave.
-Para ello se desplaza los tres bits más significativos a la posición menos significativa.
+A continuación se aplica la operación \texttt{XOR} sobre un carácter (un valor de 16 bits ya que se usa UTF-16) y se actualiza la clave.
+Para ello, se mueven los tres bits más significativos a la posición menos significativa.
 
 \begin{verbatim}
 temp  = clave & 0x1FFF;             // Elimina los bits más significativos
@@ -292,14 +290,14 @@ La estructura de datos se especifica en la tabla~\ref{tab:tr-blacktxt} donde se 
 
 \subsubsection{Imágenes}
 \label{sec:tr-pok-black-img}
-Las imágenes a diferencia de las pasadas ediciones no se han cifrado.
+Las imágenes, a diferencia de las pasadas ediciones, no se han cifrado.
 En cambio, no se utiliza un formato estándar de codificación excepto para las paletas.
 Existe un conjunto de ficheros adicionales con nuevos formatos con la información necesaria para recomponer la imagen (figura~\ref{fig:tr-blackimg}).
 
 \includefigure{fig:tr-blackimg}{Imágenes sin cifrar en Pokémon Blanco.}{imgs/TR-BlackImg.png}
 
-Esta forma de codificación funciona mejor como protección de edición.
-Aunque puede que su único motivo sea técnico para representar animaciones, los programas complejos de procesado de imagen ya no sirven.
+El cambio de formato es más eficaz como método de protección para prevenir modificaciones.
+Aunque podría ser que el único motivo fuera técnico (representar animaciones), usando un nuevo formato hace que los programas de procesado de imagen existentes no se puedan usar.
 Esta tarea requiere de investigación de formatos y de programación, se requiere más esfuerzo y tiempo que crear un decodificador.
 
 \subsubsection{Conclusión}
@@ -323,7 +321,7 @@ Puntos fuertes & Puntos débiles \\
 \subsection{Pokémon Conquest}
 \label{sec:tr-pok-conquest}
 \textit{Pokémon Conquest} es un juego desarrollado por \textit{Tecmo Koei} y publicado en el año 2012 para la consola \acl{NDS}.
-Este juego dista de la mecánica de la saga principal pues se trata de un género de combates por turnos y estrategia en lugar de \ac{RPG}.
+Este juego dista de la mecánica de la saga principal al ser de combates tácticos por turnos.
 
 Aunque hubo una diferencia de tres meses entre la salida en Japón y Estados Unidos, la compañía no confirmó de inmediato las fechas.
 A consecuencia, se formó un grupo de traducción no oficial\footnote{Foro donde se desarrolló el proyecto.
@@ -403,11 +401,10 @@ La compañía confirmó que iba a ser traducido a otros idiomas debido a los proble
 
 A finales de 2011 se formó el grupo GradienWords\footnote{\url{http://gradienwords.com}} con el objetivo de realizar una traducción no oficial, directa del japonés al español.
 Este proyecto terminó el 29 de mayo de 2015 e incluye tanto un parche del juego en español, como una copia escaneada del libro traducido en PDF.
-Con fecha de este trabajo, este es el único proyecto de traducción que ha finalizado, pero están en marcha otros al inglés, francés e italiano\footnote{\url{http://gbatemp.net/threads/spanish-v1-0-released-ninokuni-shikkoku-no-madoushi-translation-project.310214/}}.
 
 A parte de esta versión, existe una versión alternativa para \acl{PS3} en varios idiomas incluyendo el español.
-A diferencia con la versión para \acl{NDS}, solo una versión \textit{premium} incluye la copia física del libro y en inglés.
-Además la historia y la mecánica del juego son diferentes.
+A diferencia de la versión para \acl{NDS}, solo el paquete \textit{premium} incluye la copia física del libro y en inglés.
+Además, la historia y la mecánica del juego son diferentes.
 
 La protección encontrada sugiere que su objetivo era evitar modificaciones del juego y no una traducción del mismo.
 
@@ -420,8 +417,8 @@ Incluso se incluyen archivos de una versión anterior y de una \textit{demo} que 
 \label{sec:tr-nino-text}
 En cuanto al apartado de textos hay que distinguir de dos tipos: \textit{scripts} y descripciones.
 
-Los \textit{scripts} debido a sus requisitos técnicos para ejecutar diferentes tipo de comandos con múltiples parámetros, son complejos de investigar, y necesita un análisis de las instrucciones máquinas que lo procesan.
-A fecha de este trabajo, solo existe un \textit{software} que no ha sido publicado, desarrollado para la traducción al español del juego, que solo es capaz de editar los textos de los diálogos.
+Los \textit{scripts} debido a sus requisitos técnicos para ejecutar diferentes tipos de comandos con múltiples parámetros, son complejos de investigar, y necesita un análisis de las instrucciones máquinas que lo procesan.
+Solo existe un \textit{software} que no ha sido publicado, desarrollado para la traducción al español del juego, que solo es capaz de editar los textos de los diálogos.
 
 Respecto al segundo tipo, se trata de archivos con características de personajes, monstruos, objetos y ataques, con un campo de texto.
 El cifrado que se ha encontrado es básico, pero eficiente para evitar que en la mayoría de los casos pueda ser editado.
@@ -438,7 +435,7 @@ Sin embargo, esto requiere de nuevos programas para extraerlas e importarlas\foo
 \subsubsection{Integridad en archivos de guardado}
 \label{sec:tr-nino-save}
 Adicionalmente se ha estudiado los mecanismos de protección sobre el archivo con los datos de guardado de la partida.
-Se trata de un fichero que en los cartuchos originales no se puede editar sin poseer \textit{hardware} adicional pero, que en una \textit{flashcard} es un fácilmente accesible al tratarse de un archivo de 64 KB.
+Se trata de un fichero que en los cartuchos originales no se puede editar sin poseer \textit{hardware} adicional pero, en una \textit{flashcard} es fácilmente accesible al tratarse de un archivo de 64 KB.
 
 Para evitarlo, en lugar de cifrar se ha implementado un algoritmo de integridad.
 En primer lugar se comprueba que el primer valor de 16 bits sea \texttt{0x0028} y que los últimos ocho bytes sean en hexadecimal sean \texttt{0B 3F A5 84 EC 32 9A 7D}.
@@ -473,9 +470,9 @@ Puntos fuertes & Puntos débiles \\
 
 \section{Proyectos abandonados}
 \label{sec:tr-aband}
-Para terminar el capítulo se incluye un estudio sobre los proyectos de traducciones no oficiales, que han sido abandonados con fecha de este trabajo y con sus respectivos motivos.
+Para terminar el capítulo se incluye un estudio sobre los proyectos de traducciones no oficiales que han sido abandonados, con sus respectivos motivos.
 El estudio se ha centrado en juegos para la \acl{NDS} a partir de los datos de~\cite{GTemp-Aband} y~\cite{RH-Aband}.
-El objetivo será el de mostrar las causas más frecuentes por los que estos proyectos no se completan.
+El objetivo será mostrar las causas más frecuentes por los que estos proyectos no se completan.
 
 \subsubsection{Ausencia de \textit{software} de edición}
 \label{sec:tr-aband-soft}
