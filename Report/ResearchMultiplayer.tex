@@ -120,8 +120,8 @@ La configuración de la consola permite configurar servidores alternativos de DNS
 \includefigure{fig:mp-nintendodns}{Conexión a los servidores alternativos de Nintendo.}{imgs/MP-NintendoDNS.eps}
 
 \subsection{Preguntados}
-% TODO: Introducir juego -> escenario man-in-the-middle -> mostrar trazas wireshark con los campos relevante
-\textit{Preguntados} es un juego desarrollado por \textit{TODO} en el año \textit{TODO} para las plataformas TODO.
+% Introducir juego -> escenario man-in-the-middle -> mostrar trazas wireshark
+\textit{Preguntados} es un juego desarrollado por \textit{Etermax} en el año \textit{2013} para las plataformas iOS, Android y Windows Phone.
 La aplicación encuentra adversarios de forma aleatoria y muestra una serie de preguntas con posibles opciones.
 
 El objeto de este estudio es comprobar si la seguridad en las comunicaciones es segura, evitando posibles trampas.
@@ -129,7 +129,21 @@ Para ello se preparó un escenario para realizar un ataque \textit{man-in-the-mid
 Además, hubo que configurar el ordenador ya que el sistema operativo \textit{Fedora 20} por defecto tiene una configuración restrictiva que no permite conexiones a subredes.
 
 \begin{verbatim}
-TODO
+# El primer argumento es la IP de la interfaz que tiene conexión a Internet
+# Crea la ruta hacia la subred
+sudo route add -net 192.168.3.0/24 gw 10.42.0.29 p35p1
+
+# Habilita SNAT para la segunda subred
+sudo iptables -t nat -I POSTROUTING -s 192.168.3.0/24 -o wlp4s0 -j SNAT --to $1
+
+# Permite los paquetes de destino la segunda subred
+sudo iptables -t filter -I FORWARD -d 192.168.3.0/24 -j ACCEPT
+
+# Permite los paquetes con origen la segunda subred
+sudo iptables -t filter -I FORWARD -s 192.168.3.0/24 -j ACCEPT
+
+# Permite sin restricción los paquetes con destino la primera subred
+sudo iptables -t filter -I FORWARD -d 10.42.0.0/24 -j ACCEPT
 \end{verbatim}
 
 Los paquetes capturados con \textit{Wireshark} muestran que no se usa una conexión segura ya que se transmite todo por \texttt{HTTP}.
@@ -153,7 +167,7 @@ A pesar de que todavía no se conoce públicamente de usuarios que hayan modificad
 Además, reproducir contenido desde un archivo de guardado y más teniendo en cuenta que este se añade mediante descarga externa es una vulnerabilidad en cuenta a la posibilidad de ejecutar código malicioso. Si se diese el caso de encontrar un fallo de seguridad en el código como puede ser un desbordamiento de buffer al insertar un texto muy largo, se podría ejecutar código no autorizado.
 
 \subsection{Ninokuni: El Mago de las Tinieblas}
-% TODO: Decir que archivos se bajan -> desmume -> cifrado RC4 -> integridad
+% Decir que archivos se bajan -> desmume -> cifrado RC4 -> integridad
 \textit{Ninokuni} es un juego que como se comentó en la sección~\ref{sec:tr-nino} es para la \textit{Nintendo DS}.
 \textit{Level-5} ofrecía dos servicios adicionales para el juego mediante la conectividad inalámbrica.
 El primero se trataba de una lista de noticias cortas relacionadas con la historia que salían una vez al día y, la segunda era contenido adicional como objetos o misiones.
@@ -195,16 +209,20 @@ Una de las posibilidades de comunicación inalámbrica que ofrece la \ac{NDS} es q
 En este contexto, dado que la transmisión de código se hace en un canal compartido (se usa el protocolo \textit{Wi-Fi}), son necesarios mecanimos que protegen la comunicación.
 De esta forma no sería posible realizar un ataque \textit{man-in-the-midle} para ejecutar código no autorizado introduciendo así una brecha de seguridad.
 
-El protocolo~\cite{GbaTek-MultiBoot} implementa varios mensaje, los más importantes en cuanto seguridad son \texttt{TODO} y \texttt{TODO}.
+El protocolo~\cite{GbaTek-MultiBoot} implementa varios mensaje, los más importantes en cuanto seguridad son \texttt{RSA signature} y \texttt{data}.
 Con el primero se envían los archivos binarios de código principales de la aplicación, uno por procesador.
 Este mensaje está además firmado usando \texttt{SHA-1} para que no se pueda alterar el código.
 El segundo mensaje sirve para transmitir el resto de datos del juego como imágenes, textos y sonidos.
 Sin embargo, en algunos casos, dado que el fichero principal de código es muy grande, este se devide en partes llamados \textit{overlays}.
 Estos archivos se tratan como ficheros normales y son transmitidos en el segundo paquete, que no está firmado.
 
-Para solventar este problema, Nintendo introdució una comprobación de seguridad que a diferencia de que se aplica sobre el archivo principal, esta se realizar durante la ejecución del juego.
-También mediante el algoritmo \texttt{SHA-1}, el juego comprueba que los \textit{overlays} sean válidos.
+Para solventar este problema, Nintendo introdució una comprobación de seguridad que a diferencia de la que se aplica sobre el archivo principal, esta se realizar durante la ejecución del juego.
+A cada archivo de código secundario se le realiza un algoritmo de tipo \texttt{HMAC} (\texttt{SHA-1} para el \textit{hash}), con una clave que se guarda en el archivo de código principal.
+Este resultado se comprueba con uno almacenado y en caso de fallar se para la ejecución del juego.
 
-Si 0x27FFC40 está a 1 indica que se carga de la ROM, se supone segura y no se comprueba el HMAC de los archivos.
-En download play hay otro valor y se comprueba, como se hace en ARM9 se puede omitir.
-Una vez que se ha ejecutado un juego desde una flashcard, el arm9 se puede editar pues el RSA se genera al vuelo sobre lo que hay y habria que cambiar el código de los overlays guardado en el arm9 o deshabilitar el flag de la tabla de overlays.
+Este procedimiento, aunque implementado en la mayoría de juegos, solo se activa si se está ejecutando con el modo de \textit{Download Play}.
+En este modo, se activa un bit del \textit{firmware} (posición en la memoria RAM \texttt{0x27FFC40}), y durante la ejecución se comprueba para saber si hay que verificar los archivos.
+En otro caso, como el de un inicio normal desde el cartucho, se asume que no es necesario pues no han tenido modificacion externas.
+
+Ese valor está desactivado en emuladores como DeSmuME y \textit{flashcards} para poder aplicar parches antipiratería y saltarse el mencanismo.
+De esta forma, una vez modificado el juego original, se puede envíar a otras consolas el juego editado, permitiendo ejecutar código no seguro.
