@@ -190,10 +190,21 @@ La contraseña se puede almacenar en texto plano en la aplicación, pues dificulta
 \section{Ejecutables firmados}
 % TODO: Introducir DWP -> seguridad para ejecutar codigo no autoridazo -> paquete integridad de arm9 -> este integridad de datos -> no se puede man-in-the-middle -> se puede editar de flashcard.
 %http://problemkaputt.de/gbatek.htm#biosramusage
+Una de las posibilidades de comunicación inalámbrica que ofrece la \ac{NDS} es que un juego envía una \textit{demo} a otra consola, en algunos casos incluso para poder jugar en multijugador teniendo un único juego, denominado \textit{Download Play}.
+
+En este contexto, dado que la transmisión de código se hace en un canal compartido (se usa el protocolo \textit{Wi-Fi}), son necesarios mecanimos que protegen la comunicación.
+De esta forma no sería posible realizar un ataque \textit{man-in-the-midle} para ejecutar código no autorizado introduciendo así una brecha de seguridad.
+
+El protocolo~\cite{GbaTek-MultiBoot} implementa varios mensaje, los más importantes en cuanto seguridad son \texttt{TODO} y \texttt{TODO}.
+Con el primero se envían los archivos binarios de código principales de la aplicación, uno por procesador.
+Este mensaje está además firmado usando \texttt{SHA-1} para que no se pueda alterar el código.
+El segundo mensaje sirve para transmitir el resto de datos del juego como imágenes, textos y sonidos.
+Sin embargo, en algunos casos, dado que el fichero principal de código es muy grande, este se devide en partes llamados \textit{overlays}.
+Estos archivos se tratan como ficheros normales y son transmitidos en el segundo paquete, que no está firmado.
+
+Para solventar este problema, Nintendo introdució una comprobación de seguridad que a diferencia de que se aplica sobre el archivo principal, esta se realizar durante la ejecución del juego.
+También mediante el algoritmo \texttt{SHA-1}, el juego comprueba que los \textit{overlays} sean válidos.
+
 Si 0x27FFC40 está a 1 indica que se carga de la ROM, se supone segura y no se comprueba el HMAC de los archivos.
 En download play hay otro valor y se comprueba, como se hace en ARM9 se puede omitir.
-Parece que se introdujo en DSi.
-Evitar codigo no seguro cambiado en un man-in-the-middle para hackear la DSi.
-El arm9 se firma durante el envio pero los datos no.
-%http://problemkaputt.de/gbatek.htm#dswifimultiboot
 Una vez que se ha ejecutado un juego desde una flashcard, el arm9 se puede editar pues el RSA se genera al vuelo sobre lo que hay y habria que cambiar el código de los overlays guardado en el arm9 o deshabilitar el flag de la tabla de overlays.
