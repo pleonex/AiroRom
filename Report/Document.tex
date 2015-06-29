@@ -26,6 +26,10 @@
 \usepackage[backend=biber,style=alphabetic]{biblatex}
 \addbibresource{Bibliography.bib}
 
+% License
+\usepackage{xmpincl}            % For XMP license
+\includexmp{license}
+
 % Extra packages
 \usepackage{graphicx}           % For graphics
 \usepackage{verbatim}           % For non-parsed text blocks
@@ -59,6 +63,7 @@
     \fncyfront{}
     \frontmatter
     \input{TitlePage}
+    \input{Copyright}
     \input{Abstract}
 
     % Set Spanish since in abstract it could be changed
