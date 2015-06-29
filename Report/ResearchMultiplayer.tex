@@ -12,6 +12,7 @@ Por última, la sección de cifrado de archivos binarios explica cómo se implement
 
 \section{Multijugador}
 \subsection{Conexión segura en servidores de Nintendo}
+\label{sec:mp-nintendo-server}
 El 20 de mayo de 2014 Nintendo cesó su servicio de conectividad Wi-Fi para las consolas \acl{NDS} y Wii~\cite{Nintendo-Cese}.
 Los juegos en lína, torneos, contenido descargable e intercambio de objetos se perdió ya que los servidores habrían sido retirados~\cite{Nintendo-Cese2}.
 Es por ello que un grupo de usuarios decidió de investigar la comunicación entre la consola y el servidor, para crear una aplicación web que replicase el funcionamiento\footnote{\url{https://github.com/polaris-/dwc_network_server_emulator}}.
@@ -153,6 +154,19 @@ Además, reproducir contenido desde un archivo de guardado y más teniendo en cuen
 
 \subsection{Ninokuni: El Mago de las Tinieblas}
 % TODO: Decir que archivos se bajan -> desmume -> cifrado RC4 -> integridad
+\textit{Ninokuni} es un juego que como se comentó en la sección~\ref{sec:tr-nino} es para la \textit{Nintendo DS}.
+\textit{Level-5} ofrecía dos servicios adicionales para el juego mediante la conectividad inalámbrica.
+El primero se trataba de una lista de noticias cortas relacionadas con la historia que salían una vez al día y, la segunda era contenido adicional como objetos o misiones.
+Ambas se obtenían descargando unos archivos de los servidores de Nintendo con el protocolo descrito en el apartado~\ref{sec:mp-nintendo-server}.
+
+Usando la versión modificada de DeSmuME se pudo obtener los paquetes descifrados.
+En ellos, a pesar de que debía de transmitirse texto para las noticias no se encontró, por lo que debían de estar cifrados.
+Tras investigar las instrucciones máquinas que procesaban el fichero se vio que se usaba el algoritmo \texttt{RC4} de nuevo para descifrar los archivos.
+Por tanto, en una comunicación normal, este algoritmo se usaba dos veces, una para la capa de sesión \texttt{TLS} y otro en la capa de aplicación.
+Las claves en esos dos casos son diferentes, pues en la última es una constante almacenada en el juego mientras en la primera se crea para cada conexión.
+
+A parte del cifrado, se encontró un algoritmo de integridad en la posición \texttt{0x04} de ambos ficheros.
+Concretamente se aplica el algoritmo \texttt{CRC32} sobre el resto de datos que aunque, dado que la comunicación va por \texttt{TCP} no son necesarios, asegura que el juego no procese datos no esperados.
 
 \subsection{Duet}
 Por último se verá el caso del juego \textit{Duet} para \textit{iOS} y sus niveles extras.
