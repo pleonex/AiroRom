@@ -6,11 +6,11 @@
 \chapter{Contenido con derechos de autor}
 \label{sec:copyright}
 % DRM -> Tipos DRM -> Agujero analógico -> Mi análisis.
-La gestión de los derechos de autor ha generado un debate que sigue sin estar resuelto, entre la libertad del usuario y la protección del creador de la obra~\cite{EurAct-CPR}.
-Esta industria incluye a los videojuegos, donde la piratería causa pérdidas millonarias\cite{DRM-Game-Carolina}.
+La gestión de los derechos de autor ha generado un debate, que sigue sin estar resuelto, entre la libertad del usuario y la protección del creador de la obra~\cite{EurAct-CPR}.
+Este incluye a los videojuegos, donde la piratería causa pérdidas millonarias\cite{DRM-Game-Carolina}.
 De este contexto nace la idea del \ac{DRM}, un mecanismo para imposibilitar la distribución no autorizada de contenido.
 
-Las características de estas técnicas se resumen en detectar quién accede a cada obra, cuándo y bajo qué condiciones, autorizar o denegar de manera inapelable el acceso y autorizarlo bajo condiciones restrictivas~\cite{Wiki-DRM}.
+Las características de estas técnicas se resumen en: detectar quién accede a cada obra, cuándo y bajo qué condiciones, autorizar o denegar de manera inapelable el acceso y autorizarlo bajo condiciones restrictivas~\cite{Wiki-DRM}.
 En cuanto a mecanismos que se aplican para evitar la distribución ilegítima, los más comunes son~\cite{DRM-Game-Carolina}:
 
 \begin{itemize}
@@ -38,7 +38,7 @@ Una vez comprendido cómo una aplicación autorizada accede al contenido protegido
 De aquí vienen la necesidad de trabajar sobre entornos cerrados (capítulo~\ref{sec:art}) cada vez más frecuentes en videoconsolas y móviles\footnote{Los sistemas operativos iOS y Android no permiten el acceso al sistema de ficheros por defecto.}.
 Una alternativa sería implementar el algoritmo en \textit{hardware} como es el caso de la \acl{N3DS}.
 
-Aun encontrando un algoritmo eficiente en términos de protección y, sin sobrecarga a la hora de procesado, una vulnerabilidad inevitable es el denominado \textbf{\textit{agujero analógico}}.
+Aún encontrando un algoritmo eficiente en términos de protección y, sin sobrecarga a la hora de procesado, una vulnerabilidad inevitable es el denominado \textbf{\textit{agujero analógico}}.
 La técnica consiste en reconvertir un medio digital en analógico, perdiendo los mecanismos DRM.
 Por ejemplo, grabar música que se está reproduciendo con un micrófono, grabar con una cámara una pantalla, escanear un libro o incluso copiarlo a mano.
 Estos procedimientos, se utilizan en los videojuegos para, mediante funciones del emulador como capturas de pantalla o grabación de audio, extraer y compartir recursos en páginas como \textit{Spriters Resource}\footnote{\url{http://www.spriters-resource.com/}}.
@@ -258,7 +258,7 @@ Esta misma compresión se encontró en el juego \textit{Last Window: El secreto de
 De media, en realizar un análisis completo se tardaría unas 60 horas.
 Por este motivo, implementar algoritmos tan largos y eficientes es una de las mejores estrategias a la hora de proteger datos.
 En~\cite{Ungob} se revela que se trata de la compresión \texttt{zlib}.
-Estudiarlo sobre este juego hubiese resultado más sencillo, pues hay indicios de que se compiló en modo de depuración y los mensajes de error aunque no se usaban, estaban presentes, dando pistas sobre el funcionamiento de cada parte.
+Estudiar el algoritmo usando este juego hubiese resultado más sencillo, pues hay indicios de que se compiló en modo de depuración y, los mensajes de error aunque no se usaban, estaban presentes, dando pistas sobre el funcionamiento de cada parte.
 
 \ctable[
     caption = Especificación del formato de \textit{Guitar Hero: On Tour},
@@ -290,15 +290,15 @@ Estudiarlo sobre este juego hubiese resultado más sencillo, pues hay indicios de
 }
 
 Tras descomprimirlo se observaron carpetas y archivos con nombres descriptivos de su contenido.
-Estas carpetas coinciden en nombre y formato de ficheros con las siguientes versiones del juego que se describen a continuación.
+El nombre de estas carpetas y el formato de los ficheros coinciden con los presentes en siguientes versiones del juego y, se describirán a continuación.
 Esta edición del juego provee de buenos mecanismos frente distribución ilícita, por la necesidad de \textit{hardware} adicional, y a la extracción de recursos mediante un algoritmo largo y complejo de descifrar.
 
 Las siguientes ediciones del juego para esta consola fueron \textit{Guitar Hero On Tour: Decades} y \textit{Guitar Hero On Tour: Modern Hits}.
 En estas versiones, los archivos no están empaquetados con el formato \texttt{GOB}, ni protegidos de otra forma.
 Se haya dentro del juego las carpetas \textit{StrmFIGS} y \textit{TracksFIGS}, las mismas que se encontraban en la primera edición dentro del fichero comprimido.
 
-Dentro se puede encontrar las canciones en formato \texttt{Vorbis OGG}.
-En concreto, por facilidades técnicas, se han separado cada canción en tres pistas, una con la base de guitarra, otra con la de batería y otra con la voz.
+Dentro de las carpetas se puede encontrar las canciones en formato \texttt{Vorbis OGG}.
+En concreto, por facilidades técnicas, se ha separado cada canción en tres pistas, una con la base de guitarra, otra con la de batería y otra con la voz.
 Las dos primeras están codificadas en \texttt{OGG} y la tercera en \texttt{HWAS}.
 La codificación de este formato es \texttt{IMA-ADPCM-Vorbis VOX}~\cite{Xentax-HWAS} con una cabecera de 512 bytes descrita en la tabla~\ref{tab:cr-vox}.
 Mezclando las tres pistas se obtiene una versión casi idéntica del audio original.
@@ -340,7 +340,7 @@ Puntos fuertes & Puntos débiles \\
 
 \subsection{Guitar Rock}
 \textit{Guitar Rock} es un juego desarrollado por \textit{Gameloft} en el año 2008 para la \acl{NDS}.
-Su jugabilidad es muy parecida a la de \textit{Guitar Hero: On Tour} diferenciándose en que no necesita \textit{hardware} como el \textit{Guitar Grip}.
+Su jugabilidad es muy parecida a la de \textit{Guitar Hero: On Tour} diferenciándose en la falta de necesidad de \textit{hardware} como el \textit{Guitar Grip}.
 
 Las canciones no están protegidas dentro del juego, ya que se encontraron dentro de los archivos \textit{trackX.bar}.
 Este formato tiene una cabecera de 512 bytes siguiéndole tres pistas musicales de la canción en formato estándar \texttt{SWAV}.
@@ -424,7 +424,7 @@ Puntos fuertes & Puntos débiles \\
 \subsection{\acl{NDS}}
 En esta consola, la mayoría de juegos usa una codificación propietaria proporcionada por Nintendo y desarrollada por \textit{Nintendo European Research and Development}\footnote{También conocida como \textit{Mobiclip} y \textit{Actimagine}}.
 
-Con fecha de este trabajo, esta codificación no se ha conseguido documentar debido a sus características únicas y complejidad.
+Hasta el momento, esta codificación no se ha conseguido documentar debido a su complejidad y a sus características únicas.
 Es un algoritmo desarrollado específicamente para consola y su \textit{hardware}.
 La alternativa a la hora de extraer estos recursos es grabar la pantalla mientras se reproduce el juego en un emulador\footnote{El emulador DeSmuME tiene esta funcionalidad implementada.}.
 

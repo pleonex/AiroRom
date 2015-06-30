@@ -34,7 +34,7 @@ Conociendo dónde se encuentra el algoritmo de cifrado y aprovechando las capacid
 Dado que el mismo algoritmo se usa para cifrado y descifrado (es un cifrado simétrico), hará falta controlar dos puntos de la función.
 Si se quiere obtener los datos que envía el juego, serán aquellos que se van a cifrar y que po tanto, será el contenido inicial al principio de la función.
 En el caso de querer guardar los datos que se reciben, los que se descifrarían, que estarán al final del algoritmo.
-El mecanismo se ha implementado usando el método \verb!HandleDebugEvent_Execute! del archivo \texttt{debug.cpp} que se llama después procesar cada instrucción.
+El mecanismo se ha implementado usando el método \verb!HandleDebugEvent_Execute! del archivo \texttt{debug.cpp}, este se llama después de haber procesado una instrucción por lo que, se puede utilizar para realizar una acción al ejecutarse una parte concreta del juego.
 En el repositorio del proyecto se encuentra el archivo con la implementación\footnote{\url{https://github.com/pleonex/AiroRom/blob/master/Programs/DeSmuME PCAP/debug.cpp}}.
 Hay que tener en cuenta que necesita ser modificada para cada juego para poner el inicio y el final del algoritmo \texttt{RC4}.
 
@@ -91,7 +91,7 @@ Este protocolo tiene ciertos \textbf{fallos tanto de seguridad como de eficienci
     \item La autenticación con el servidor de contenidos es de tipo \ac{PAP} (solo se utiliza una contraseña), frente la del servidor de juegos en línea que es \ac{CHAP} (autenticación mediante \textit{tokens}).
 
     \item Conociendo la contraseña de un juego y gracias al comando \texttt{list}, se puede crear un programa que solicite todos los ficheros del servidor y los descargue.
-    Esto se hizo a la hora de recuperar los contenidos descargables cuando se conoció que los servidores de Nintendo iba se iban a desactivar.
+    Esto se hizo a la hora de recuperar los contenidos descargables cuando se conoció que los servidores de Nintendo se iban a desactivar.
 \end{itemize}
 
 Respecto a la comunicación \texttt{HTTPS}, la implementación sobre la consola es segura y no se pueden usar servidores alternativos sin modificar el juego.
@@ -104,7 +104,7 @@ Para finalizar, se investigó el algoritmo usado para generar un \textit{token} d
 En ese caso, después de la primera conexión con el \ac{NAS}, se inicia una comunicación con el servidor multijugador cuyo protocolo está basado en \textit{GameSpy}.
 Para contactar, es necesario que los \textit{tokens} generados por la consola y servidor coincidan.
 Iniciada la conexión \texttt{TCP}, este le enviará un primer mensaje con un segundo \textit{challenge}.
-El \textit{token} a calcular es el resultado de aplicar el algoritmo \texttt{MD5} sobre la cadena de caracteres formada al concatenar los siguientes parámetros (conocidos por ambas entidades).
+El \textit{token} que se calcula es el resultado de aplicar el algoritmo \texttt{MD5} sobre la cadena de caracteres formada al concatenar los siguientes parámetros (conocidos por ambas entidades).
 \begin{itemize}
     \item \texttt{MD5} del \textit{challenge} del servidor \ac{NAS}.
     \item 48 espacios en blanco
@@ -134,7 +134,7 @@ La aplicación encuentra adversarios de forma aleatoria y muestra una serie de pr
 El objeto de este estudio es comprobar si la seguridad en las comunicaciones es segura, evitando posibles trampas.
 Para ello se preparó un escenario para realizar un ataque \textit{man-in-the-middle}.
 Un punto de acceso adicional se conectó al ordenador mediante \textit{Ethernet} y este a su vez mediante conexión Wi-Fi con el punto de acceso original.
-Dado que el sistema operativo \textit{Fedora 20} por defecto tiene una configuración restrictiva de red, hubo que diseñar el siguiente \textit{script} para compartir la conexión.
+Dado que el sistema operativo \textit{Fedora 20} por defecto tiene una configuración restrictiva de red, se tuvo que diseñar el siguiente \textit{script} para compartir la conexión.
 
 \begin{verbatim}
 # El primer argumento es la IP de la interfaz que tiene conexión a Internet
@@ -158,19 +158,19 @@ Los paquetes capturados con \textit{Wireshark} muestran que no se usa una conexi
 Como se ve en la figura~\ref{fig:mp-preguntados}, tras analizar la transmisión de datos con el servidor del juego se encuentra una mala implementación del protocolo.
 Cada vez que una partida comienza, el servidor le envía al usuario una lista de preguntas y respuestas a usar \textbf{junto a la respuesta correcta}.
 Dado que la comunicación no está protegida, y se puede capturar, es posible saber la respuesta a cualquier pregunta antes de que se realice.
-A parte de los problemas de seguridad y confidencialidad que esto implica, esto permitiría crear un programa que responda automática a las preguntas.
+A parte de los problemas de seguridad y confidencialidad que esto implica, esto permitiría crear un programa que responda automáticamente a las preguntas.
 
 \includefigure{fig:mp-preguntados}{Captura de tráfico con las preguntas y respuestas de una partida de Preguntados.}{imgs/MP-Preguntados.png}
 
-Una buena implementación hubiese sido que el servidor enviase solo las preguntas con sus posibles respuestas, y que la respuesta escogida se envíe al servidor donde se comprobaría, además de usar \texttt{HTTPS}.
+Una posible solución a parte de usar \texttt{HTTPS} sería, que el servidor envíe solo las preguntas con sus posibles respuestas, y que la respuesta escogida se comunique al servidor donde se comprobaría.
 
 \section{Contenido descargable}
 \subsection{100 Classic Books Collection}
 \label{sec:mp-dlc-books}
-\textit{100 Classic Books Collection} se trata de un juego que como se analizó en la sección~\ref{sec:cr-100-books} ofrece al usuario un lector de libros electrónicos.
+\textit{100 Classic Books Collection} se trata de un juego que, como se ha visto en la sección~\ref{sec:cr-100-books}, ofrece al usuario un lector de libros electrónicos.
 Este juego provee además de una opción de comunicación inalámbrica para descargar alrededor de 20 nuevos libros.
 Estos se almacenarían en el archivo de guardado del usuario.
-Tras analizar las comunicaciones usando la versión modificada de \textit{DeSmuME}, se pudo observar que estos ficheros descargados no estaban cifrados, teniendo el mismo formato que aquellos que se encuentran dentro del juego. % TODO: Verificar
+Tras analizar las comunicaciones, usando la versión modificada de \textit{DeSmuME}, se pudo observar que estos ficheros descargados no estaban cifrados, teniendo el mismo formato que aquellos que se encuentran dentro del juego. % TODO: Verificar
 
 Reproducir contenido desde un archivo de guardado, teniendo en cuenta que se añade mediante descarga externa, es una vulnerabilidad a explotar para ejecutar código no autorizado.
 Se podría encontrar un fallo de seguridad como un desbordamiento de buffer al insertar un texto muy largo, y obtener el control de la consola.
