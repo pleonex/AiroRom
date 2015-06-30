@@ -5,18 +5,18 @@
 
 \chapter{Conclusiones}
 % De qué va el capítulo
-A lo largo del trabajo se han analizado una serie de juegos, estudiando los mecanismos de protección que implementan y señalando sus carencias y debilidades.
-Todos los objetivos propuestos han sido alcanzados, analizando así un total de 23 juegos de los 20 previstos.
-De estos, se han mencionado en esta memoria un total de 14 y documentando el resto en la wiki del repositorio del trabajo\footnote{\url{https://github.com/pleonex/airorom/wiki/Mecanismos-a-investigar}}.
+A lo largo del trabajo se han analizado una serie de juegos, estudiando los mecanismos de protección que implementan y, señalando sus carencias y debilidades.
+Todos los objetivos propuestos han sido alcanzados, estudiando un total de 23 juegos de los 20 previstos.
+De estos, se han mencionado en esta memoria un total de 14 y documentando el resto en la \textit{wiki} del repositorio del trabajo\footnote{\url{https://github.com/pleonex/airorom/wiki/Mecanismos-a-investigar}}.
 
-Se plantearon dos objetivos opcionales que por falta de tiempo no se han podido cumplir.
+Se plantearon dos objetivos opcionales que, por falta de tiempo, no se han podido cumplir.
 El primero de ellos fue desarrollar un nuevo programa de exploración de juegos.
 Tras analizar las necesidades de este trabajo y el tiempo previsto, se decidió optar por usar \textit{Tinke}\footnote{\url{https://github.com/pleonex/tinke}} que cumplía los requerimientos básicos (explorar archivos, reconocer formatos y visualizar imágenes en formatos estándar).
 El segundo fue crear un depurador de código para \acl{NDS} llamado \textit{NitroDebugger}\footnote{\url{https://github.com/pleonex/NitroDebugger}} del cual, se ha terminado su núcleo y faltaría crear una interfaz gráfica y desensamblador.
 Este proyecto se presentó al \textit{Certamen de Proyectos Libres de la UGR 2014}, a pesar de no estar entre los finalistas debido al estado de completitud, recibió buenas críticas del jurado\footnote{\url{https://goo.gl/g8xdWZ}}.
 
-En cuanto a objetivos académicos, se ha sido capaz de identificar un problema sin tratado (no existen publicaciones en revistas científicas), realizar una selección de objetivos e investigarlos.
-Se ha realizado \textit{software} adicional en los lenguajes \texttt{C\#} y \texttt{python} para complementar la investigación y se ha usado un control de versiones (\texttt{git}).
+En cuanto a objetivos académicos, se ha sido capaz de identificar un problema no tratado (no existen publicaciones en revistas científicas), organizar un trabajo en tareas e investigar.
+Se ha realizado \textit{software} adicional en los lenguajes \texttt{C\#} y \texttt{python} para complementar la investigación y, se ha usado un control de versiones (\texttt{git}).
 Durante el trabajo se han tocado conceptos de bajo nivel de \textit{software} y \textit{hardware}, estudiando protocolos y componentes de la \acl{NDS}, así como su lenguaje ensamblador, \texttt{ARM}.
 Además, se han diseñado estrategias para estudiar las comunicaciones inalámbricas como han sido modificar el emulador DeSmuME para guardar los paquetes y, realizar un diseño \textit{man-in-the-middle} para capturar el tráfico de las aplicaciones móviles.
 Finalmente, se ha aprendido el lenguaje \LaTeX para la redacción de esta memoria.
@@ -30,11 +30,11 @@ A los largo de la memoria se han analizado una serie de juegos y sus algoritmos.
 En esta sección se resumirán los más importantes y se propondrán mejoras en algunos casos.
 
 \subsubsection{Seguridad sobre ficheros}
-Los capítulos~\ref{sec:translations} y~\ref{sec:copyright} muestran los procedimientos de seguridad aplicados de ficheros para, evitar su modificación y distribución.
-A continuación se enumeran los algoritmos por tipo de formato y se proponen soluciones para mejorar.
+Los capítulos~\ref{sec:translations} y~\ref{sec:copyright} muestran los procedimientos de seguridad aplicados sobre ficheros para evitar su modificación y distribución.
+A continuación, se enumeran los algoritmos por tipo de formato y se proponen soluciones para mejorar.
 
 Comenzando por el acceso a ficheros, se ha observado dos tipos de protecciones.
-La primera consiste en comprimir todos los archivos en uno único, con un formato propietario.
+La primera consiste en comprimir todos los archivos en uno, con un formato propietario.
 De esta forma, utilizando programas genéricos de exploración de juegos no se pueden extraer los recursos.
 Esto se ha visto implementando en el juego \textit{El Profesor Layton y la Llamada del Espectro}\footnote{\url{https://github.com/pleonex/airorom/wiki/Professor-Layton-and-The-Last-Specter}} y \textit{Guitar Hero: On Tours} (sección~\ref{sec:cr-guitarhero}).
 En este caso, al utilizar la implementación de \texttt{zlib} para comprimir los datos, el algoritmo visto en ensamblador ocupaba 1900 líneas de código y hacía inviable su investigación.
@@ -45,24 +45,26 @@ Esto provee de un buen mecanismo a nivel de eficiencia y ofuscación, requiriendo
 El principal problema es usar la operación \texttt{XOR} con una clave estática en un fichero que tiene varios bytes nulos seguidos, ya que se estaría guardando la contraseña en texto plano dentro del fichero cifrado (caso de \textit{Pokémon Perla} en la tabla de contenidos~\ref{sec:tr-pok-pearl-text} y \textit{Ninokuni}~\ref{sec:tr-nino-text}).
 La solución es usar una clave variable, por ejemplo como se hace en los juegos de Pokémon, sumando una constante a esta.
 
-Además, usa una codificación no estándar para los caracteres dificulta la depuración, ya que no se puede encontrar texto ni en archivo binario del juego ni en la memoria RAM.
+Además, usar una codificación no estándar para los caracteres dificulta la depuración, ya que no se puede encontrar texto ni en archivo binario del juego ni en la memoria RAM.
 En este caso, para evitar poder usar técnicas de búsqueda diferencia (programa \textit{RelativeSearch}), se deben desordenar los caracteres mezclando en un mismo rango símbolos y letras.
 Finalmente, para evitar que la nueva codificación se pueda obtener a través de la fuente, se debería cifrar este fichero también.
 
 Respecto a las imágenes se encontró en \textit{Pokémon Perla y Diamante} un cifrado basado en la operación \texttt{XOR} con una clave dinámica (sección~\ref{sec:tr-pok-pearl-img}).
 A pesar de cifrar un archivo es un buen método para proteger su contenido, en el caso de archivos multimedia debido a la complejidad de implementación para tratar estos contenidos, es mejor crear un nuevo formato.
-De esta forma, si se hubiese utilizado otra codificación para los píxeles como representar un color en otro espacio o usando un número variable de bits, se hubiese necesitado crear nuevos programas para procesarlos, más complejos que realizar un bucle que descifre.
+De esta forma, si se hubiese utilizado otra codificación para los píxeles como representar un color en otro espacio o usando un número variable de bits, se hubiese necesitado crear nuevos programas para procesarlos.
+Esta tarea es más compleja que realizar un bucle que descifre.
 
 Finalmente, tras analizar los archivos con contenido de con derechos de autor como libros digitales (sección~\ref{sec:cr-ebook}), música (sección~\ref{sec:cr-ost}) y vídeos (sección~\ref{sec:cr-video}), no se encontraron mecanismos específico de protección.
 A parte de usar codificaciones propietarias como en el caso del sonido \texttt{SADL} (sección~\ref{sec:cr-level5}) y vídeos de \acl{NDS}, los ficheros no estaban cifrados, ni incluían mecanismos de integridad.
+Estos podrían cifrarse y ofuscarse usando las técnicas anteriormente descritas.
 
 \subsubsection{Seguridad en comunicaciones}
 Los protocolos de comunicación y seguridad implementada sobe los archivos descargados se analizó en el capítulo~\ref{sec:multiplayer}.
 
-Respecto al protocolo de Nintendo para juegos en línea en \acl{NDS} (sección~\ref{sec:mp-nintendo-server}), ofrece mecanismos de autenticación usando \texttt{CHAP} y cifrando la comunicación en \texttt{HTTPS}.
-Sin embargo, una mala configuración de los servidores permitía que cambiando la \texttt{URL} de acceso en el juego, se pudiese usar \texttt{HTTP} quitando la capa de cifrado.
+Respecto al protocolo de Nintendo para juegos en línea en \acl{NDS} (sección~\ref{sec:mp-nintendo-server}), ofrece mecanismos de autenticación usando \ac{CHAP} y cifrando la comunicación en \texttt{HTTPS}.
+Sin embargo, una mala configuración de los servidores permitía que cambiando la \texttt{URL} de acceso en el juego, se pudiese usar \texttt{HTTP}, quitando la capa de cifrado.
 En cuanto al acceso a los servidores de contenido descargable, estos tenían cerrado el puerto 80, bloqueando un acceso no cifrado.
-Sin embargo, la forma de autenticación es mediante una contraseña incluida en texto plano en el juego (mecanismo~\texttt{PAP}).
+Sin embargo, la forma de autenticación es mediante una contraseña incluida en texto plano en el juego (mecanismo~\ac{PAP}).
 Los ficheros descargados de estos servidores, en el caso de \textit{Ninokuni} (sección~\ref{sec:mp-dlc-nino}) estaban cifrados mediante \texttt{RC4} e incluían integridad con \texttt{CRC32}.
 No pasaba lo mismo con \textit{100 Classic Books Collection} (sección~\ref{sec:mp-dlc-books}) donde no se aplicaba ninguna protección al descargar libros digitales.
 
@@ -70,17 +72,17 @@ Se analizaron también dos juegos de plataformas móviles.
 En \textit{Preguntados} (sección~\ref{sec:mp-mp-preg}) se comprobó que al no usar un protocolo seguro de comunicación, esta podía ser interceptada mediante una configuración \textit{man-in-the-middle}, obteniendo las respuestas correctas a las preguntadas planteadas en el juego.
 En dicho apartado se proponía tanto cifrar la comunicación como cambiar el diseño del protocolo para no enviar las soluciones al cliente.
 En el caso de \textit{Duet} (sección~\ref{sec:mp-dlc-duet}), el contenido descargable de pago se podía activar manualmente cambiando un valor de una base de datos.
-Cifrando la base de datos o incluso comprobando que el usuario había realizado dicha compra se podría evitar este caso.
+Cifrando la base de datos o inclus,o comprobando que el usuario había realizado dicha compra con un servidor externo, se podría evitar.
 
 Finalmente, se estudió el caso de transmisión de código ejecutable en las demos para \acl{NDS} (sección~\ref{sec:mp-sign}).
 El problema se solucionaba firmando digitalmente el archivo con el código principal durante el envío, y realizando el algoritmo \texttt{HMAC} sobre los archivos secundarios de código.
 Esta configuración evitaba ejecutar código alterado durante un ataque de \textit{man-in-the-middle}.
-Sin embargo, si se modificaba el juego de original, en la segunda consola se podía ejecutar código cambiado también.
+Sin embargo, si se modificaba el juego de original, en la segunda consola se podía ejecutar código alterado también.
 Esto se podría evitar firmando digitalmente el binario principal durante la compilación del juego, en lugar de solo durante el envío inalámbrico.
 De esta forma se evitaría poder ejecutar código no autorizado\footnote{Esto se realiza en la consola \acl{DSi}.}.
 
 \section{Trabajo futuro}
-Los estudios de este trabajo han pretendido resumir los mecanismos más frecuentes encontrados en los juegos de \ac{NDS} así como, señalas las carencias de las plataformas móviles.
+Los estudios de este trabajo han pretendido resumir los mecanismos más frecuentes encontrados en los juegos de \ac{NDS} así como, señalar las carencias en plataformas móviles.
 A continuación se ofrece una lista sobre tópicos en los que los que se podría profundizar.
 
 \begin{itemize}
