@@ -94,13 +94,13 @@ Juegos famosos:
 ✘ Babyz @cancelled(2015-06-30 00:04)
 
 Resultados:
-☐ Resumen de los fallos de seguridad visto.
-☐ Recomendar soluciones.
+✔ Resumen de los fallos de seguridad visto. @done(2015-06-30 04:04)
+✔ Recomendar soluciones. @done(2015-06-30 04:04)
 ✘ Encriptar ficheros usando nombre del fichero. @cancelled(2015-06-30 03:38)
 ✘ Ocultar el nombre de los ficheros con CRC32 por rapidez. @cancelled(2015-06-30 03:38)
 ✘ Explicar algoritmo pensado -- Contenedor + Identificador de archivo almacenador en código fuente escrito mediante #define de preprocesador + Acceso a subarchivos por transformación de código (CRC32) + Cifrado de archivos usando ese código. @cancelled(2015-06-30 00:05)
 ✘ No se puede parar solo retrasar hasta la llegada de la traducción. @cancelled(2015-06-30 00:05)
-☐ Cifrado no asimétrico sin poder alterar el código.
+✔ Cifrado no asimétrico sin poder alterar el código. @done(2015-06-30 04:04)
 ✔ Desordenar caracteres fuente para no realizar búsqueda diferencial. @done(2015-06-30 03:29)
 ✔ Cifrar fuente pues es un punto de entrada. @done(2015-06-30 03:29)
 ✔ No utilizar formato estándar como en las imágenes (más complicado software de procesado que de descifrado). @done(2015-06-30 03:42)
@@ -111,5 +111,5 @@ Bibilografía:
 ☐ Añadir pequeño comentario.
 
 Conclusiones:
-☐ Resultados.
+✔ Resultados. @done(2015-06-30 04:05)
 ✔ Trabajo futuro (pokemon 2, seguridad en consolas, integridad en saves dsi flashcards lo usan) @done(2015-06-30 02:39)

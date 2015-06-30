@@ -57,7 +57,27 @@ Finalmente, tras analizar los archivos con contenido de con derechos de autor co
 A parte de usar codificaciones propietarias como en el caso del sonido \texttt{SADL} (sección~\ref{sec:cr-level5}) y vídeos de \acl{NDS}, los ficheros no estaban cifrados, ni incluían mecanismos de integridad.
 
 \subsubsection{Seguridad en comunicaciones}
+Los protocolos de comunicación y seguridad implementada sobe los archivos descargados se analizó en el capítulo~\ref{sec:multiplayer}.
 
+Respecto al protocolo de Nintendo para juegos en línea en \acl{NDS} (sección~\ref{sec:mp-nintendo-server}), ofrece mecanismos de autenticación usando \texttt{CHAP} y cifrando la comunicación en \texttt{HTTPS}.
+Sin embargo, una mala configuración de los servidores permitía que cambiando la \texttt{URL} de acceso en el juego, se pudiese usar \texttt{HTTP} quitando la capa de cifrado.
+En cuanto al acceso a los servidores de contenido descargable, estos tenían cerrado el puerto 80, bloqueando un acceso no cifrado.
+Sin embargo, la forma de autenticación es mediante una contraseña incluida en texto plano en el juego (mecanismo~\texttt{PAP}).
+Los ficheros descargados de estos servidores, en el caso de \textit{Ninokuni} (sección~\ref{sec:mp-dlc-nino}) estaban cifrados mediante \texttt{RC4} e incluían integridad con \texttt{CRC32}.
+No pasaba lo mismo con \textit{100 Classic Books Collection} (sección~\ref{sec:mp-dlc-books}) donde no se aplicaba ninguna protección al descargar libros digitales.
+
+Se analizaron también dos juegos de plataformas móviles.
+En \textit{Preguntados} (sección~\ref{sec:mp-mp-preg}) se comprobó que al no usar un protocolo seguro de comunicación, esta podía ser interceptada mediante una configuración \textit{man-in-the-middle}, obteniendo las respuestas correctas a las preguntadas planteadas en el juego.
+En dicho apartado se proponía tanto cifrar la comunicación como cambiar el diseño del protocolo para no enviar las soluciones al cliente.
+En el caso de \textit{Duet} (sección~\ref{sec:mp-dlc-duet}), el contenido descargable de pago se podía activar manualmente cambiando un valor de una base de datos.
+Cifrando la base de datos o incluso comprobando que el usuario había realizado dicha compra se podría evitar este caso.
+
+Finalmente, se estudió el caso de transmisión de código ejecutable en las demos para \acl{NDS} (sección~\ref{sec:mp-sign}).
+El problema se solucionaba firmando digitalmente el archivo con el código princial durante el envío, y realizando el algoritmo \texttt{HMAC} sobre los archivos secundarios de código.
+Esta configuración evitaba ejecutar código alterado durante un ataque de \textit{man-in-the-middle}.
+Sin embargo, si se modificaba el juego de original, en la segunda consola se podía ejecutar código cambiado también.
+Esto se podría evitar firmando digitalmente el binario principal durante la compilación del juego, en lugar de solo durante el envío inalámbrico.
+De esta forma se evitaría poder ejecutar código no autorizado\footnote{Esto se realiza en la consola \acl{DSi}.}.
 
 \section{Trabajo futuro}
 Los estudios de este trabajo han pretendido resumir los mecanimos más frecuentes encontrados en los juegos de \ac{NDS} así como, señalas las carencias de las plataformas móviles.

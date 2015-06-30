@@ -123,6 +123,7 @@ La configuración de la consola permite configurar servidores alternativos de DNS
 \includefigure{fig:mp-nintendodns}{Conexión a los servidores alternativos de Nintendo.}{imgs/MP-NintendoDNS.eps}
 
 \subsection{Preguntados}
+\label{sec:mp-mp-preg}
 % Introducir juego -> escenario man-in-the-middle -> mostrar trazas wireshark
 \textit{Preguntados} es un juego desarrollado por \textit{Etermax} en el año \textit{2013} para las plataformas iOS, Android y Windows Phone.
 La aplicación encuentra adversarios de forma aleatoria y muestra una serie de preguntas con posibles opciones.
@@ -150,7 +151,7 @@ sudo iptables -t filter -I FORWARD -d 10.42.0.0/24 -j ACCEPT
 \end{verbatim}
 
 Los paquetes capturados con \textit{Wireshark} muestran que no se usa una conexión segura ya que se transmite todo por \texttt{HTTP}.
-Además, como se ve en la figura ~\ref{fig:mp-preguntados}, tras analizar la transmisión de datos con el servidor del juego se encuentra una mala implementación del protocolo.
+Además, como se ve en la figura~\ref{fig:mp-preguntados}, tras analizar la transmisión de datos con el servidor del juego se encuentra una mala implementación del protocolo.
 Cada vez que una partida comienza, el servidor le envía al usuario una lista de preguntas y respuestas a usar \textbf{junto a la respuesta correcta}.
 Dado que la comunicación no está protegida, y es fácil capturarla, es fácil saber la respuesta a cualquier pregunta antes de la misma.
 A parte de los problemas de seguridad y confidencialidad que esto implica, esto permitiría crear un programa que responda automática a las preguntas.
@@ -161,6 +162,7 @@ Una buena implementación hubiese sido que el servidor enviase solo las preguntas
 
 \section{Contenido descargable}
 \subsection{100 Classic Books Collection}
+\label{sec:mp-dlc-books}
 \textit{100 Classic Books Collection} se trata de un juego que como se analizó en la sección~\ref{sec:cr-100-books} ofrece al usuario un lector de libros electrónicos. En esta sección se pudo observa como los ficheros no vienen protegidos de ninguna manera a parte de usar un formato diferente.
 
 Este juego provee además de una opción de comunicación inalámbrica para descargar alrededor de 20 nuevos libros. Estos se almacenarían en el archivo de guardado del usuario. Tras analizar las comunicaciones usando la versión modificada de \textit{DeSmuME} anteriormente descrita se pudo observar que estos ficheros descargados tampoco estaban cifrados, teniendo el mismo formato que aquellos que se encuentran dentro del juego. % TODO: Verificar
@@ -170,6 +172,7 @@ A pesar de que todavía no se conoce públicamente de usuarios que hayan modificad
 Además, reproducir contenido desde un archivo de guardado y más teniendo en cuenta que este se añade mediante descarga externa es una vulnerabilidad en cuenta a la posibilidad de ejecutar código malicioso. Si se diese el caso de encontrar un fallo de seguridad en el código como puede ser un desbordamiento de buffer al insertar un texto muy largo, se podría ejecutar código no autorizado.
 
 \subsection{Ninokuni: El Mago de las Tinieblas}
+\label{sec:mp-dlc-nino}
 % Decir que archivos se bajan -> desmume -> cifrado RC4 -> integridad
 \textit{Ninokuni} es un juego que como se comentó en la sección~\ref{sec:tr-nino} es para la \textit{Nintendo DS}.
 \textit{Level-5} ofrecía dos servicios adicionales para el juego mediante la conectividad inalámbrica.
@@ -186,6 +189,7 @@ A parte del cifrado, se encontró un algoritmo de integridad en la posición \text
 Concretamente se aplica el algoritmo \texttt{CRC32} sobre el resto de datos que aunque, dado que la comunicación va por \texttt{TCP} no son necesarios, asegura que el juego no procese datos no esperados.
 
 \subsection{Duet}
+\label{sec:mp-dlc-duet}
 Por último se verá el caso del juego \textit{Duet} para \textit{iOS} y sus niveles extras.
 Se trata de una compra integrada en la aplicación por 0.99 euros que añade un nuevo conjunto de pruebas.
 Analizando de nuevo el contenido de la carpeta centrándose en estos niveles, se averigua que estos están presentes en el juego y que mediante la compra se activan.
@@ -205,6 +209,7 @@ Se trata de un mecanismo que está implementado nativamente\footnote{\url{http://
 La contraseña se puede almacenar en texto plano en la aplicación, pues dificultará la tarea de conocerla y al valer el contenido tan poco (menos de 1 euro) no compensará el esfuerzo dedicado como se ha discutido en capítulos anteriores.
 
 \section{Ejecutables firmados}
+\label{sec:mp-sign}
 % Introducir DWP -> seguridad para ejecutar codigo no autoridazo -> paquete integridad de arm9 -> este integridad de datos -> no se puede man-in-the-middle -> se puede editar de flashcard.
 Una de las posibilidades de comunicación inalámbrica que ofrece la \ac{NDS} es que un juego envía una \textit{demo} a otra consola, en algunos casos incluso para poder jugar en multijugador teniendo un único juego, denominado \textit{Download Play}.
 
