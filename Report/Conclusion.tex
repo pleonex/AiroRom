@@ -5,9 +5,28 @@
 
 \chapter{Conclusiones}
 % De qué va el capítulo
+A lo largo del trabajo se han analizado una serie de juegos, estudiando los mecanismos de protección que implementan y señalando sus carencias y debilidades.
+Todos los objetivos propuestos han sido alcanzos, analizando así un total de 23 juegos de los 20 previstos.
+De estos, se han mencionado en esta memoria un total de 14 y documentando el resto en la wiki del repositorio del trabajo\footnote{\url{https://github.com/pleonex/airorom/wiki/Mecanismos-a-investigar}}.
 
+Se plantearon dos objetivos opcionales que por falta de tiempo no han podido cumplir.
+El primero de ellos fue desarrollar un nuevo programa de exploración de juegos.
+Tras analizar las necesidades de este trabajo y el tiempo previsto, se decidió optar por usar \textit{Tinke} que cumplía los requirimientos básicos (explorar archivos, reconocer formatos y visualizar imágenes en formatos estándar).
+El segundo fue crear un depurador de código para \acl{NDS} llamado \textit{NitroDebugger}\footnote{\url{https://github.com/pleonex/NitroDebugger}} del cual, se ha terminado su núcleo y faltaría crear una interfaz gráfica y desensamblador.
+Este proyecto se presentó al \textit{Certamen de Proyectos Libres de la UGR 2014}, a pesar de no estar entre los finalistas debido a estado de completitud, recibió buenas críticas del jurado\footnote{\url{https://goo.gl/g8xdWZ}}.
+
+En cuanto a objetivos académicos, se ha sido capaz de identificar un programa no tratado, realizar una selección de objetivos e investigarlos.
+Se ha realizado \textit{software} adicional para complementar la investigación y se ha usado un control de versiones.
+Durante el trabajo se han tocado conceptos de bajo nivel de \textit{software} y \textit{hardware} estudiando protocolos y componentes de la \acl{NDS}, así como su lenguaje ensamblador, \texttt{ARM}.
+Además, se han diseñado estrategias para estudiar las comunicaciones inalámbricas como ha sido modificar el emulador DeSmuME para guardar los paquetes capturados y realizar un diseño \textit{man-in-the-middle} para capturar el tráfico de las aplicaciones móviles.
+Finalmente, se ha aprendido el lenguaje \LaTeX para la redacción de esta memoria.
+
+En este capítulo se mencionarán y resumirán, propiendo en algunos casos métodos para fortalecerlas.
+En la segunda sección se mencionan temas en los que este trabajo podría profundizar en el futuro.
 
 \section{Resultados y recomendaciones}
 % Resumir cada fallo / seguridad y añadir recomendación
 
 \section{Trabajo futuro}
+Los estudios de este trabajo han pretendido resumir los mecanimos más frecuentes encontrados en los juegos de \ac{NDS} así como, señalas las carencias de las plataformas móviles.
+A continuación se ofrece una lista sobre tópicos en los que los que se podría profundizar.

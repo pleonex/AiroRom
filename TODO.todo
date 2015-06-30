@@ -22,6 +22,7 @@ Estado del arte:
 ☐ Guías de romhacking.
 ☐ ¡Esto es legal!: http://www.bloomberg.com/news/articles/2012-05-02/copyright-can-t-block-software-reverse-engineering-court Y http://www.woodmann.com/fravia/legal.htm
 ☐ Hasta qué punto el esfuerzo vale el producto.
+☐ Mencionar fuentes principales.
 
 Requisitos, planificación y costes:
 ☐ Objetivos específicos y tareas para llevarlos a cabo. Repo y wiki.
@@ -29,6 +30,9 @@ Requisitos, planificación y costes:
 ☐ Recursos y costes (desmume).
 ☐ Explicar RelativeSearch.
 ☐ Explicar métodos y procedimientos.
+
+Metodología:
+☐ Hacer.
 
 Traducciones:
 ✔ Mods (http://es.wikipedia.org/wiki/Mod_%28videojuegos%29) @done(2015-06-24 02:46)
@@ -104,6 +108,9 @@ Resultados:
 ☐ Codificación propia y de 16 bits mejor.
 ☐ Ofuscar archivos y carpetas.
 
+Bibilografía:
+☐ Añadir pequeño comentario.
+
 Conclusiones:
-☐ Conclusiones.
+☐ Resultados.
 ☐ Trabajo futuro (pokemon 2, seguridad en consolas, integridad en saves dsi flashcards lo usan)
