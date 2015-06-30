@@ -26,6 +26,38 @@ En la segunda sección se indicarán temas en los que este trabajo podría continua
 
 \section{Resultados y recomendaciones}
 % Resumir cada fallo / seguridad y añadir recomendación
+A los largo de la memoria se han analizado una serie de juegos y sus algoritmos.
+En esta sección se resumirán los más importantes y se propondrán mejoras en algunos casos.
+
+\subsubsection{Seguridad sobre ficheros}
+Los capítulos~\ref{sec:translations} y~\ref{sec:copyright} muestran los procedimientos de seguridad aplicados de ficheros para, evitar su modificación y distribución.
+A continuación se enumeran los algoritmos por tipo de formato y se proponen soluciones para mejorar.
+
+Comenzando por el acceso a ficheros, se ha observado dos tipos de protecciones.
+La primera consiste en comprimir todos los archivos en uno único, con un formato propietario.
+De esta forma, utilizando programas genéricos de exploración de juegos no se pueden extraer los recursos.
+Esto se ha visto implementando en el juego \textit{El Profesor Layton y la Llamada del Espectro}\footnote{\url{https://github.com/pleonex/airorom/wiki/Professor-Layton-and-The-Last-Specter}} y \textit{Guitar Hero: On Tours} (sección~\ref{sec:cr-guitarhero}).
+En este caso, al utilizar la implementación de \texttt{zlib} para comprimir los datos, el algoritmo visto en ensamblador ocupaba 1900 líneas de código y hacía inviable su investigación.
+La segunda técnica consiste en ofuscar el nombre y clasificación de los ficheros como se vio en \textit{Pokémon Blanco y Negro} (sección~\ref{sec:tr-pok-black}).
+
+En cuanto a archivos con contenido de texto, se ha observado que el algoritmo común es realizar un cifrado sobre cada caracter mediante una clave que cambia (juegos de \textit{Pokémon}~\ref{sec:tr-pok}).
+Esto provee de un buen mecanismo a nivel de eficiencia y ofuscación, requiriendo conocimientos de depuración para encontrar la clave.
+El principal problema es usar la operación \texttt{XOR} con una clave estática en un fichero que tiene varios bytes nulos seguidos, ya que se estaría guardando la contraseña en texto plano dentro del fichero cifrado (caso de \textit{Pokémon Perla} en la tabla de contenidos~\ref{sec:tr-pok-pearl-text} y \textit{Ninokuni}~\ref{sec:tr-nino-text}).
+La solución es usar una clave variable, por ejemplo como se hace en los juegos de Pokémon, sumando una constante a esta.
+
+Además, usa una codificación no estándar para los caracteres dificulta la depuración, ya que no se puede encontrar texto ni en archivo binario del juego ni en la memoria RAM.
+En este caso, para evitar poder usar técnicas de búsqueda diferencia (programa \textit{RelativeSearch}), se deben desordenar los caracteres mezclando en un mismo rango símbolos y letras.
+Finalmente, para evitar que la nueva codificación se pueda obtener a través de la fuente, se debería cifrar este fichero también.
+
+Respecto a las imágenes se encontró en \textit{Pokémon Perla y Diamante} un cifrado basado en la operación \texttt{XOR} con una clave dinámica (sección~\ref{sec:tr-pok-pearl-img}).
+A pesar de cifrar un archivo es un buen método para proteger su contenido, en el caso de archivos multimedia debido a la complejidad de implementación para tratar estos contenidos, es mejor crear un nuevo formato.
+De esta forma, si se hubiese utilizado otra codificación para los píxeles como representar un color en otro espacio o usando un número variable de bits, se hubiese necesitado crear nuevos programas para procesarlos, más complejos que realizar un bucle que descifre.
+
+Finalmente, tras analizar los archivos con contenido de con derechos de autor como libros digitales (sección~\ref{sec:cr-ebook}), música (sección~\ref{sec:cr-ost}) y vídeos (sección~\ref{sec:cr-video}), no se encontraron mecanismos específico de protección.
+A parte de usar codificaciones propietarias como en el caso del sonido \texttt{SADL} (sección~\ref{sec:cr-level5}) y vídeos de \acl{NDS}, los ficheros no estaban cifrados, ni incluían mecanismos de integridad.
+
+\subsubsection{Seguridad en comunicaciones}
+
 
 \section{Trabajo futuro}
 Los estudios de este trabajo han pretendido resumir los mecanimos más frecuentes encontrados en los juegos de \ac{NDS} así como, señalas las carencias de las plataformas móviles.

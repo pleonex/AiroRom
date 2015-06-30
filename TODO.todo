@@ -96,17 +96,16 @@ Juegos famosos:
 Resultados:
 ☐ Resumen de los fallos de seguridad visto.
 ☐ Recomendar soluciones.
-☐ Encriptar ficheros usando nombre del fichero.
-☐ Ocultar el nombre de los ficheros con CRC32 por rapidez.
+✘ Encriptar ficheros usando nombre del fichero. @cancelled(2015-06-30 03:38)
+✘ Ocultar el nombre de los ficheros con CRC32 por rapidez. @cancelled(2015-06-30 03:38)
 ✘ Explicar algoritmo pensado -- Contenedor + Identificador de archivo almacenador en código fuente escrito mediante #define de preprocesador + Acceso a subarchivos por transformación de código (CRC32) + Cifrado de archivos usando ese código. @cancelled(2015-06-30 00:05)
 ✘ No se puede parar solo retrasar hasta la llegada de la traducción. @cancelled(2015-06-30 00:05)
 ☐ Cifrado no asimétrico sin poder alterar el código.
-☐ Desordenar caracteres fuente para no realizar búsqueda diferencial.
-☐ Cifrar fuente pues es un punto de entrada.
-☐ No utilizar formato estándar como en las imágenes (más complicado software de procesado que de descifrado).
-☐ No reutilizar algoritmos y menos aún claves de cifrado entre juegos.
-☐ Codificación propia y de 16 bits mejor.
-☐ Ofuscar archivos y carpetas.
+✔ Desordenar caracteres fuente para no realizar búsqueda diferencial. @done(2015-06-30 03:29)
+✔ Cifrar fuente pues es un punto de entrada. @done(2015-06-30 03:29)
+✔ No utilizar formato estándar como en las imágenes (más complicado software de procesado que de descifrado). @done(2015-06-30 03:42)
+✔ Codificación propia y de 16 bits mejor. @done(2015-06-30 03:30)
+✔ Ofuscar archivos y carpetas. @done(2015-06-30 03:37)
 
 Bibilografía:
 ☐ Añadir pequeño comentario.
