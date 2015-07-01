@@ -20,8 +20,8 @@ Los juegos en línea, torneos, contenido descargable e intercambio de objetos se 
 Por ello, un grupo de usuarios investigó el protocolo de comunicación entre la consola y el servidor, creando una aplicación web que replicase el funcionamiento\footnote{\url{https://github.com/polaris-/dwc_network_server_emulator}}.
 En este apartado se estudiará el protocolo.
 
-La sección~\ref{sec:met-nds-desmume} del capítulo de metodologías explica cómo modificar el emulador DeSmuME de \acl{NDS} para capturar tráfico.
-Tras conseguir una captura (figura~\ref{fig:mp-nintendo-encry}), se pudo ver que, a parte de una primera comunicación \texttt{HTTP}, el resto se cifra mediante \texttt{HTTPS}.
+La Sección~\ref{sec:met-nds-desmume} del capítulo de metodologías explica cómo modificar el emulador DeSmuME de \acl{NDS} para capturar tráfico.
+Tras conseguir una captura (Figura~\ref{fig:mp-nintendo-encry}), se pudo ver que, aparte de una primera comunicación \texttt{HTTP}, el resto se cifra mediante \texttt{HTTPS}.
 Para poder eludir la capa de seguridad de \texttt{TLS}, se descubrieron dos mecanismos: capturar la función de cifrado y forzar el uso de \texttt{HTTP}.
 
 \includefigure{fig:mp-nintendo-encry}{Primeros paquetes de una comunicación entre una \acl{NDS} y los servidores de Nintendo.}{imgs/MP-NintendoEncry.png}
@@ -44,8 +44,8 @@ Además, con solo cambiar la parte de protocolo de la \texttt{URL} en el código d
 El procedimiento de editar todas las direcciones para usar una conexión sin cifrar se ha implementado en el programa \textit{SslPatcher} incluido en el repositorio del trabajo\footnote{\url{https://github.com/pleonex/AiroRom/tree/master/Programs/SslPatcher}}.
 Solo los servidores de contenido descargable denegaban conexiones al puerto 80 (el usado en \texttt{HTTP}).
 
-Una vez capturados los paquetes sin cifrar (figura~\ref{fig:mp-nintendowifi}), se pudo analizar la comunicación entre un total de tres servidores.
-En el diagrama~\ref{fig:mp-nintendo-comm} se describen los mensajes con los
+Una vez capturados los paquetes sin cifrar (Figura~\ref{fig:mp-nintendowifi}), se pudo analizar la comunicación entre un total de tres servidores.
+En el diagrama de la Figura~\ref{fig:mp-nintendo-comm} se describen los mensajes con los
 parámetros más importantes.
 
 \includefigure{fig:mp-nintendo-comm}{Comunicación entre \acl{NDS} y servidor de Nintendo para descargar un fichero.}{diagrams/nds_dwc.eps}
@@ -100,7 +100,7 @@ El juego comprueba que el certificado no haya expirado, no tenga problemas de fo
 Sin embargo, comprueba el campo del nombre del servidor.
 Por defecto, los juegos incluyen un certificado a nombre de Nintendo, dos de VeriSign, tres de CyberTrust, dos de Thawte y dos de GlobalSign.
 
-Para finalizar, se investigó el algoritmo usado para generar un \textit{token} de autenticación en los juegos en línea (figura~\ref{fig:mp-nintendotoken}).
+Para finalizar, se investigó el algoritmo usado para generar un \textit{token} de autenticación en los juegos en línea (Figura~\ref{fig:mp-nintendotoken}).
 En ese caso, después de la primera conexión con el \ac{NAS}, se inicia una comunicación con el servidor multijugador cuyo protocolo está basado en \textit{GameSpy}.
 Para contactar, es necesario que los \textit{tokens} generados por la consola y servidor coincidan.
 Iniciada la conexión \texttt{TCP}, este le enviará un primer mensaje con un segundo \textit{challenge}.
@@ -120,7 +120,7 @@ De esta forma solo aquellos dispositivos que reunan tanto los códigos devueltos 
 Esta parte fue clave a la hora de realizar un servidor alternativo.
 
 Dado que no se conocen las claves privadas de Nintendo, no se puede realizar una conexión segura con el juego y el servidor alternativo.
-Para solventar el problema sin tener que modificar los certificados existentes se usa un servidor \textit{proxy} de \texttt{DNS} como se explica en el diagrama de la figura~\ref{fig:mp-nintendodns}.
+Para solventar el problema sin tener que modificar los certificados existentes se usa un servidor \textit{proxy} de \texttt{DNS} como se explica en el diagrama de la Figura~\ref{fig:mp-nintendodns}.
 Este servidor DNS resuelve los dominios de Nintendo apuntando a los alternativos.
 
 \includefigure{fig:mp-nintendodns}{Conexión a los servidores alternativos de Nintendo.}{imgs/MP-NintendoDNS.eps}
@@ -155,19 +155,19 @@ sudo iptables -t filter -I FORWARD -d 10.42.0.0/24 -j ACCEPT
 \end{verbatim}
 
 Los paquetes capturados con \textit{Wireshark} muestran que no se usa una conexión segura ya que se transmite todo por \texttt{HTTP}.
-Como se ve en la figura~\ref{fig:mp-preguntados}, tras analizar la transmisión de datos con el servidor del juego se encuentra una mala implementación del protocolo.
+Como se ve en la Figura~\ref{fig:mp-preguntados}, tras analizar la transmisión de datos con el servidor del juego se encuentra una mala implementación del protocolo.
 Cada vez que una partida comienza, el servidor le envía al usuario una lista de preguntas y respuestas a usar \textbf{junto a la respuesta correcta}.
 Dado que la comunicación no está protegida, y se puede capturar, es posible saber la respuesta a cualquier pregunta antes de que se realice.
-A parte de los problemas de seguridad y confidencialidad que esto implica, esto permitiría crear un programa que responda automáticamente a las preguntas.
+Aparte de los problemas de seguridad y confidencialidad que esto implica, esto permitiría crear un programa que responda automáticamente a las preguntas.
 
-\includefigure{fig:mp-preguntados}{Captura de tráfico con las preguntas y respuestas de una partida de Preguntados.}{imgs/MP-Preguntados.png}
+\includefigure{fig:mp-preguntados}{Captura de tráfico con las preguntas y respuestas de una partida de \textit{Preguntados}.}{imgs/MP-Preguntados.png}
 
-Una posible solución a parte de usar \texttt{HTTPS} sería, que el servidor envíe solo las preguntas con sus posibles respuestas, y que la respuesta escogida se comunique al servidor donde se comprobaría.
+Una posible solución aparte de usar \texttt{HTTPS} sería, que el servidor envíe solo las preguntas con sus posibles respuestas, y que la respuesta escogida se comunique al servidor donde se comprobaría.
 
 \section{Contenido descargable}
 \subsection{100 Classic Books Collection}
 \label{sec:mp-dlc-books}
-\textit{100 Classic Books Collection} se trata de un juego que, como se ha visto en la sección~\ref{sec:cr-100-books}, ofrece al usuario un lector de libros electrónicos.
+\textit{100 Classic Books Collection} se trata de un juego que, como se ha visto en la Sección~\ref{sec:cr-100-books}, ofrece al usuario un lector de libros electrónicos.
 Este juego provee además de una opción de comunicación inalámbrica para descargar alrededor de 20 nuevos libros.
 Estos se almacenarían en el archivo de guardado del usuario.
 Tras analizar las comunicaciones, usando la versión modificada de \textit{DeSmuME}, se pudo observar que estos ficheros descargados no estaban cifrados, teniendo el mismo formato que aquellos que se encuentran dentro del juego. % TODO: Verificar
@@ -179,17 +179,17 @@ Esta es la técnica que se utiliza para ejecutar copias de seguridad de juegos en
 \subsection{Ninokuni: El Mago de las Tinieblas}
 \label{sec:mp-dlc-nino}
 % Decir que archivos se bajan -> desmume -> cifrado RC4 -> integridad
-\textit{Ninokuni} es un juego que como se comentó en la sección~\ref{sec:tr-nino} es para la \textit{Nintendo DS}.
+\textit{Ninokuni} es un juego que como se comentó en la Sección~\ref{sec:tr-nino} es para la \textit{Nintendo DS}.
 \textit{Level-5} ofrecía dos servicios adicionales para el juego mediante la conectividad inalámbrica.
 El primero se trataba de una lista de noticias cortas relacionadas con la historia que salían una vez al día y, la segunda era contenido adicional como objetos o misiones.
-Ambas se obtenían descargando unos archivos de los servidores de Nintendo con el protocolo descrito en el apartado~\ref{sec:mp-nintendo-server}.
+Ambas se obtenían descargando unos archivos de los servidores de Nintendo con el protocolo descrito en el Apartado~\ref{sec:mp-nintendo-server}.
 
 Usando la versión modificada de DeSmuME se pudo obtener los paquetes descifrados, pero no se encontró texto dentro de los binarios que se descargaban.
-Tras investigar las instrucciones máquinas que procesaban el fichero se vio que se usaba el algoritmo \texttt{RC4} para descifrar los archivos.
+Tras investigar las instrucciones máquina que procesaban el fichero se vio que se usaba el algoritmo \texttt{RC4} para descifrar los archivos.
 Por tanto, en una comunicación normal, este algoritmo se usaba dos veces, una para la capa de sesión \texttt{TLS} y otro en la capa de aplicación.
 Las claves en esos dos casos son diferentes, pues en la última es una constante almacenada en el juego mientras en la primera se crea para cada conexión.
 
-A parte del cifrado, se encontró un algoritmo de integridad en la posición \texttt{0x04} de ambos ficheros.
+Aparte del cifrado, se encontró un algoritmo de integridad en la posición \texttt{0x04} de ambos ficheros.
 Concretamente se aplica el algoritmo \texttt{CRC32} que, aunque no son necesarios porque se usa \texttt{TCP}, asegura que el juego no procese datos no esperados.
 
 \subsection{Duet}
@@ -204,7 +204,7 @@ La búsqueda se centra en saber dónde se guarda la configuración del juego para v
 {imgs/MP-Duet.png}
 
 En la carpeta \textit{Documents} de la aplicación existen tres bases de datos \textit{sqlite}.
-Abriendo la de mayor tamaño, \textit{persistent-data.db} nos encontramos las filas de la figura~\ref{fig:mp-duet}.
+Abriendo la de mayor tamaño, \textit{persistent-data.db} nos encontramos las filas de la Figura~\ref{fig:mp-duet}.
 En ella se ve como los valores que activan el contenido extra, el contenido de pago, están puestos a \texttt{0}, el valor que corresponde a \textit{desactivado}.
 Si se cambia a \texttt{1} y se inicia la aplicación de nuevo nos encontraremos con este contenido activado.
 

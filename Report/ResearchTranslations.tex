@@ -180,7 +180,7 @@ Como se observa en la Figura~\ref{fig:tr-heartfiles}, todos los archivos princip
 Además, el contenido de estas carpetas no relaciona a los archivos entre sí generando una organización aleatoria.
 En total hay 275 archivos que, a su vez, son contenedores de 1000 ficheros sin nombre pero relacionados en contenido, como son los textos o \textit{sprites} de los \textit{Pokémons}.
 
-\includefigure{fig:tr-heartfiles}{Carpetas y ficheros ofuscados en Pokémon HeartGold}{imgs/TR-HeartFiles.png}
+\includefigure{fig:tr-heartfiles}{Carpetas y ficheros ofuscados en Pokémon HeartGold.}{imgs/TR-HeartFiles.png}
 
 Analizando el código en ensamblador se pudo encontrar la forma interna en la que se accede a estos ficheros.
 Se realiza llamando a varias funciones de similares, el primer parámetro es un ID que identifica al archivo y el segundo el índice del fichero dentro del contenedor.
@@ -238,7 +238,7 @@ Los archivos y carpetas fueron ofuscados al igual que pasó con la generación ant
 En este caso, se protegieron todos los archivos en lugar de los principales como se ve en la Figura~\ref{fig:tr-blackheartfiles}.
 Los únicos archivos que se dejaron fuera fueron el de sonido y la demo.
 
-\includefigure{fig:tr-blackheartfiles}{Comparación de carpetas entre Pokémon Blanco (izq.) y Pokémon HeartGold (der.)}{imgs/TR-BlackHeartFiles.png}
+\includefigure{fig:tr-blackheartfiles}{Comparación de carpetas entre Pokémon Blanco (izq.) y Pokémon HeartGold (der.).}{imgs/TR-BlackHeartFiles.png}
 
 A pesar de usar internamente la misma forma de acceso que se describió en el apartado de archivos de la Sección~\ref{sec:tr-pok-heart-file}, los identificadores, y por tanto localización de estos, cambió.
 Por ejemplo, el archivo con los textos pasa a estar en \texttt{a/0/0/2} en lugar de \texttt{a/0/2/7}.
@@ -364,7 +364,7 @@ for (int i = 0; i < data.Length; i++)
 ]{ccl}{
     \tnote[a]{Se especifica solo la primera entrada.}
     \tnote[b]{Existen 33 bloques.}
-    \tnote[c]{Campo cifrado descrito en la sección~\ref{sec:tr-pok-conquest-text}.}
+    \tnote[c]{Campo cifrado descrito en la Sección~\ref{sec:tr-pok-conquest-text}.}
 }{                                                                          \FL
     Posición      & Tamaño        & Descripción                             \ML
     \multicolumn{3}{c}{\acl{TOC}\tmark[a]\tmark[b]}                         \NN
@@ -376,7 +376,7 @@ for (int i = 0; i < data.Length; i++)
 \subsubsection{Imágenes}
 \label{sec:tr-pok-conquest-img}
 Tanto los fondos como los \textit{sprites} del juego no se han hallado cifrados.
-Sin embargo, se usan formatos de codificación específicos que suponen crear nuevo \textit{software} para poder editarlos\footnote{\url{https://github.com/pleonex/tinke/tree/master/Plugins/PSL}}.
+Sin embargo, se usan formatos de codificación específicos que suponen crear nuevo software para poder editarlos\footnote{\url{https://github.com/pleonex/tinke/tree/master/Plugins/PSL}}.
 
 \subsubsection{Conclusión}
 
@@ -426,9 +426,9 @@ Solo existe un software que no ha sido publicado, desarrollado para la traducció
 Respecto al segundo tipo, se trata de archivos con características de personajes, monstruos, objetos y ataques, con un campo de texto.
 El cifrado que se ha encontrado es básico, pero eficiente para evitar que en la mayoría de los casos pueda ser editado.
 Para descubrir el algoritmo no hizo falta analizar el código ensamblador, pues observando el fichero destacan las repeticiones del byte \texttt{0xFF} (Figura~\ref{fig:tr-nino-minitext}).
-Esto es un indicio (sección~\ref{sec:met-xor-key}) de que se trata de la operación \texttt{XOR} con el byte (clave) \texttt{0xFF} o lo que es lo mismo, aplicar la operación \texttt{NOT} sobre cada byte.
+Esto es un indicio (Sección~\ref{sec:met-xor-key}) de que se trata de la operación \texttt{XOR} con el byte (clave) \texttt{0xFF} o lo que es lo mismo, aplicar la operación \texttt{NOT} sobre cada byte.
 
-\includefigure{fig:tr-nino-minitext}{Archivo cifrado (arr.) y descifrado (ab.) de Ninokuni: El Mago de las Tinieblas}{imgs/TR-NinoMiniText.png}
+\includefigure{fig:tr-nino-minitext}{Archivo cifrado (arr.) y descifrado (ab.) de \textit{Ninokuni: El Mago de las Tinieblas}.}{imgs/TR-NinoMiniText.png}
 
 \subsubsection{Imágenes}
 \label{sec:tr-nino-img}
