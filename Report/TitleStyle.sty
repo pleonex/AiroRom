@@ -32,27 +32,11 @@
 % Style for the first page
 \newcommand\makefirstpage{%
     \thispagestyle{empty} \vbox to \vsize{%
-        \vspace{20mm}
-        \topBox{\Large \@author}
-        \vfill
-        \centerBox{\Huge \textsc{\@title}}
-        \vspace{5mm}
-        \centerBox{\large \@docType}
-        \vfill
-        \vfill
-        \centerBox{\@university \\ \@date}
-    }
-    \clearpage
-}
-
-% Style for the second page
-\newcommand\makesecondpage{%
-    \thispagestyle{empty} \vbox to \vsize{%
         % Top
         \vspace{5mm}
         \topBox{\includegraphics{\@logo}}
         \vspace{5mm}
-        \centerBox{\Large \textsc{\@university} \\ \@faculty}
+        \centerBox{\Large \textsc{\@university} \\ \@faculty \\ \@departament}
         \hrulefill\par
         \vspace{5mm}
         \centerBox{\@course}
@@ -74,9 +58,25 @@
         % Bottom
         \vfill
         \vfill
-        \centerBox{\@sessionDate \\ \@date \\ \@academicDate}
+        \centerBox{\@date}
     }
-    \clearpage
+    \cleardoublepage
+}
+
+% Style for the second page
+\newcommand\makesecondpage{%
+    \thispagestyle{empty} \vbox to \vsize{%
+        \vspace{20mm}
+        \topBox{\Large \@author}
+        \vfill
+        \centerBox{\Huge \textsc{\@title}}
+        \vspace{5mm}
+        \centerBox{\large \@docType}
+        \vfill
+        \vfill
+        \centerBox{\@university}
+    }
+    \cleardoublepage
 }
 
 % Define the variables
@@ -86,12 +86,11 @@
 \def\tutorType#1{\def\@tutorType{#1}}
 \def\tutor#1{\def\@tutor{#1}}
 \def\docType#1{\def\@docType{#1}}
-\def\sessionDate#1{\def\@sessionDate{#1}}
-\def\academicDate#1{\def\@academicDate{#1}}
 
 \def\logo#1{\def\@logo{#1}}
 \def\university#1{\def\@university{#1}}
 \def\faculty#1{\def\@faculty{#1}}
+\def\departament#1{\def\@departament{#1}}
 \def\course#1{\def\@course{#1}}
 
 \endinput
