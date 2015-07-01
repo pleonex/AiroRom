@@ -5,12 +5,12 @@
 
 \chapter{Servicios en línea}
 \label{sec:multiplayer}
-Este capítulo tiene el objetivo de analizar y mostrar los protocolos de comunicación de algunas plataformas y juegos, así como la seguridad aplicada sobre los ficheros transmitidos.
+Este capítulo tiene como objetivo analizar y mostrar los protocolos de comunicación de algunas plataformas y juegos, así como la seguridad aplicada sobre los ficheros transmitidos.
 Este tipo de contenido se está volviendo más popular gracias a las tiendas virtuales, donde se venden pequeños extras.
 
-En la sección multijugador se explicará cómo funciona la autenticación en los servidores de Nintendo y cómo puede afectar a la jugabilidad no usar HTTPS en el caso del juego Preguntados.
-En la sección de contenido descargables se comentará la seguridad de tres juegos.
-Por último, la sección de transmisión segura de código explica cómo se implementan mecanismos de integridad para la enviar juegos entre consolas.
+En la sección multijugador se explicará cómo funciona la autenticación en los servidores de Nintendo y cómo puede afectar a la jugabilidad no usar \texttt{HTTPS} en el caso del juego \textit{Preguntados}.
+En la sección de contenidos descargables se comentará la seguridad de tres juegos.
+Por último, la sección de transmisión segura de código explica cómo se implementan mecanismos de integridad para enviar juegos entre consolas.
 
 \section{Multijugador}
 \subsection{Conexión segura en servidores de Nintendo}
@@ -21,32 +21,33 @@ Por ello, un grupo de usuarios investigó el protocolo de comunicación entre la c
 En este apartado se estudiará el protocolo.
 
 La Sección~\ref{sec:met-nds-desmume} del capítulo de metodologías explica cómo modificar el emulador DeSmuME de \acl{NDS} para capturar tráfico.
-Tras conseguir una captura (Figura~\ref{fig:mp-nintendo-encry}), se pudo ver que, aparte de una primera comunicación \texttt{HTTP}, el resto se cifra mediante \texttt{HTTPS}.
+Tras conseguir una captura (Figura~\ref{fig:mp-nintendo-encry}) se pudo ver que, aparte de una primera comunicación \texttt{HTTP}, el resto se cifra mediante \texttt{HTTPS}.
 Para poder eludir la capa de seguridad de \texttt{TLS}, se descubrieron dos mecanismos: capturar la función de cifrado y forzar el uso de \texttt{HTTP}.
 
 \includefigure{fig:mp-nintendo-encry}{Primeros paquetes de una comunicación entre una \acl{NDS} y los servidores de Nintendo.}{imgs/MP-NintendoEncry.png}
 
-El primero consiste en encontrar la función que cifra la comunicación, el algoritmo \texttt{RC4}, en el juego.
+El primero consiste en encontrar la función que cifra la comunicación en el juego, el algoritmo \texttt{RC4}.
 Dado que este código se incluye con la biblioteca que proporciona Nintendo a los desarrolladores, será igual en todos los juegos.
 Esta táctica es la que implementa el programa \textit{RC4Finder}\footnote{\url{https://github.com/pleonex/AiroRom/tree/master/Programs/RC4Finder}} para encontrar y devolver la posición de la función.
 
 Conociendo dónde se encuentra el algoritmo de cifrado y aprovechando las capacidades de depuración del emulador, se puede implementar una funcionalidad para que guarde en un fichero los datos que pasan por el algoritmo.
 Dado que el mismo algoritmo se usa para cifrado y descifrado (es un cifrado simétrico), hará falta controlar dos puntos de la función.
-Si se quiere obtener los datos que envía el juego, serán aquellos que se van a cifrar y que po tanto, será el contenido inicial al principio de la función.
+Si se quieren obtener los datos que envía el juego, serán aquellos que se van a cifrar y que, por tanto, será el contenido inicial al principio de la función.
 En el caso de querer guardar los datos que se reciben, los que se descifrarían, que estarán al final del algoritmo.
-El mecanismo se ha implementado usando el método \verb!HandleDebugEvent_Execute! del archivo \texttt{debug.cpp}, este se llama después de haber procesado una instrucción por lo que, se puede utilizar para realizar una acción al ejecutarse una parte concreta del juego.
+El mecanismo se ha implementado usando el método \verb!HandleDebugEvent_Execute! del archivo \texttt{debug.cpp}.
+Este se llama después de haber procesado una instrucción, por lo que se puede utilizar para realizar una acción al ejecutarse una parte concreta del juego.
 En el repositorio del proyecto se encuentra el archivo con la implementación\footnote{\url{https://github.com/pleonex/AiroRom/blob/master/Programs/DeSmuME PCAP/debug.cpp}}.
 Hay que tener en cuenta que necesita ser modificada para cada juego para poner el inicio y el final del algoritmo \texttt{RC4}.
 
 El segundo mecanismo se debe a un fallo de seguridad por parte de Nintendo.
-Los servidores están mal configurados y, \textbf{admiten tanto peticiones \texttt{HTTPS} como \texttt{HTTP}} ofreciendo la misma funcionalidad.
+Los servidores están mal configurados y \textbf{admiten tanto peticiones \texttt{HTTPS} como \texttt{HTTP}}, ofreciendo la misma funcionalidad.
 Además, con solo cambiar la parte de protocolo de la \texttt{URL} en el código del juego, se adapta automáticamente y deja de cifrar la comunicación.
 El procedimiento de editar todas las direcciones para usar una conexión sin cifrar se ha implementado en el programa \textit{SslPatcher} incluido en el repositorio del trabajo\footnote{\url{https://github.com/pleonex/AiroRom/tree/master/Programs/SslPatcher}}.
 Solo los servidores de contenido descargable denegaban conexiones al puerto 80 (el usado en \texttt{HTTP}).
 
 Una vez capturados los paquetes sin cifrar (Figura~\ref{fig:mp-nintendowifi}), se pudo analizar la comunicación entre un total de tres servidores.
 En el diagrama de la Figura~\ref{fig:mp-nintendo-comm} se describen los mensajes con los
-parámetros más importantes.
+parámetros más importantes:
 
 \includefigure{fig:mp-nintendo-comm}{Comunicación entre \acl{NDS} y servidor de Nintendo para descargar un fichero.}{diagrams/nds_dwc.eps}
 
@@ -63,24 +64,24 @@ parámetros más importantes.
 
     \item Localización de servidor externo.
     Esta conexión se realiza cuando se pide contactar con un servidor externo como de contenidos descargables (comando \texttt{svcloc}).
-    Se descarta los datos de la operación anterior (\textit{token} y \textit{challenge}) y se devuelve uno nuevo para ese servicio en concreto (\texttt{servicetoken}) junto con la dirección a la que contactar (\texttt{svchost}).
+    Se descartan los datos de la operación anterior (\textit{token} y \textit{challenge}) y se devuelve uno nuevo para ese servicio en concreto (\texttt{servicetoken}) junto con la dirección a la que contactar (\texttt{svchost}).
 
     \item Contacto con el servidor de contenidos.
     En primer lugar el juego envía siempre el comando \texttt{count} donde opcionalmente puede especificar un filtro.
-    El servidor devolvería el número de ficheros que coinciden con dicho filtro, como en este caso no se ha especificado ninguno, devuelve el valor cero.
-    Para autenticarse en este servidor usa tanto el \texttt{servicetoken} que devolvió el \ac{NAS} como el código del juego y una contraseña que es diferente a la usada en el servidor anterior.
+    El servidor devolvería el número de ficheros que coinciden con dicho filtro. Como en este caso no se ha especificado ninguno, devuelve el valor cero.
+    Para autenticarse en este servidor usa tanto el \texttt{servicetoken} que devolvió el \ac{NAS} como el código del juego, y una contraseña que es diferente a la usada en el servidor anterior.
 
     \item Obtención del nombre de los ficheros.
     El juego envía el comando \texttt{list} para obtener la lista de ficheros disponibles.
     Para realizar un filtro sobre esa lista, utiliza los campos \texttt{offset} (índice de la lista por el que comenzar) y \texttt{num} (número de elementos a devolver).
     El servidor envía en cada línea el nombre del fichero y su tamaño.
 
-    \item Finalmente el juego pide un fichero mediante el comando \texttt{content}.
+    \item Finalmente, el juego pide un fichero mediante el comando \texttt{content}.
 \end{enumerate}
 
 \includefigure{fig:mp-nintendowifi}{Petición respuesta descifrada entre \acl{NDS} y servidor de Nintendo.}{imgs/MP-NintendoWifi.png}
 
-Este protocolo tiene ciertos \textbf{fallos tanto de seguridad como de eficiencia}.
+Este protocolo tiene ciertos \textbf{fallos tanto de seguridad como de eficiencia}:
 
 \begin{itemize}
     \item En el caso de querer contactar con el servidor de descargas (caso descrito anteriormente), la primera comunicación con el \ac{NAS} es innecesaria.
@@ -120,7 +121,7 @@ De esta forma solo aquellos dispositivos que reunan tanto los códigos devueltos 
 Esta parte fue clave a la hora de realizar un servidor alternativo.
 
 Dado que no se conocen las claves privadas de Nintendo, no se puede realizar una conexión segura con el juego y el servidor alternativo.
-Para solventar el problema sin tener que modificar los certificados existentes se usa un servidor \textit{proxy} de \texttt{DNS} como se explica en el diagrama de la Figura~\ref{fig:mp-nintendodns}.
+Para solventar el problema sin tener que modificar los certificados existentes se usa un servidor \textit{proxy} de \texttt{DNS}, como se explica en el diagrama de la Figura~\ref{fig:mp-nintendodns}.
 Este servidor DNS resuelve los dominios de Nintendo apuntando a los alternativos.
 
 \includefigure{fig:mp-nintendodns}{Conexión a los servidores alternativos de Nintendo.}{imgs/MP-NintendoDNS.eps}
@@ -134,7 +135,7 @@ La aplicación encuentra adversarios de forma aleatoria y muestra una serie de pr
 El objeto de este estudio es comprobar si la seguridad en las comunicaciones es segura, evitando posibles trampas.
 Para ello se preparó un escenario para realizar un ataque \textit{man-in-the-middle}.
 Un punto de acceso adicional se conectó al ordenador mediante \textit{Ethernet} y este a su vez mediante conexión Wi-Fi con el punto de acceso original.
-Dado que el sistema operativo \textit{Fedora 20} por defecto tiene una configuración restrictiva de red, se tuvo que diseñar el siguiente \textit{script} para compartir la conexión.
+Dado que el sistema operativo \textit{Fedora 20} por defecto tiene una configuración restrictiva de red, se tuvo que diseñar el siguiente \textit{script} para compartir la conexión:
 
 \begin{verbatim}
 # El primer argumento es la IP de la interfaz que tiene conexión a Internet
@@ -154,15 +155,15 @@ sudo iptables -t filter -I FORWARD -s 192.168.3.0/24 -j ACCEPT
 sudo iptables -t filter -I FORWARD -d 10.42.0.0/24 -j ACCEPT
 \end{verbatim}
 
-Los paquetes capturados con \textit{Wireshark} muestran que no se usa una conexión segura ya que se transmite todo por \texttt{HTTP}.
-Como se ve en la Figura~\ref{fig:mp-preguntados}, tras analizar la transmisión de datos con el servidor del juego se encuentra una mala implementación del protocolo.
+Los paquetes capturados con \textit{Wireshark} muestran que no se usa una conexión segura, ya que se transmite todo por \texttt{HTTP}.
+Como se ve en la Figura~\ref{fig:mp-preguntados}, tras analizar la transmisión de datos con el servidor del juego, se concluye una mala implementación del protocolo.
 Cada vez que una partida comienza, el servidor le envía al usuario una lista de preguntas y respuestas a usar \textbf{junto a la respuesta correcta}.
-Dado que la comunicación no está protegida, y se puede capturar, es posible saber la respuesta a cualquier pregunta antes de que se realice.
+Dado que la comunicación no está protegida y se puede capturar, es posible saber la respuesta a cualquier pregunta antes de que se realice.
 Aparte de los problemas de seguridad y confidencialidad que esto implica, esto permitiría crear un programa que responda automáticamente a las preguntas.
 
 \includefigure{fig:mp-preguntados}{Captura de tráfico con las preguntas y respuestas de una partida de \textit{Preguntados}.}{imgs/MP-Preguntados.png}
 
-Una posible solución aparte de usar \texttt{HTTPS} sería, que el servidor envíe solo las preguntas con sus posibles respuestas, y que la respuesta escogida se comunique al servidor donde se comprobaría.
+Una posible solución aparte de usar \texttt{HTTPS} sería que el servidor enviase solo las preguntas con sus posibles respuestas, y que la respuesta escogida se comunique al servidor donde se comprobaría.
 
 \section{Contenido descargable}
 \subsection{100 Classic Books Collection}
@@ -173,67 +174,67 @@ Estos se almacenarían en el archivo de guardado del usuario.
 Tras analizar las comunicaciones, usando la versión modificada de \textit{DeSmuME}, se pudo observar que estos ficheros descargados no estaban cifrados, teniendo el mismo formato que aquellos que se encuentran dentro del juego. % TODO: Verificar
 
 Reproducir contenido desde un archivo de guardado, teniendo en cuenta que se añade mediante descarga externa, es una vulnerabilidad a explotar para ejecutar código no autorizado.
-Se podría encontrar un fallo de seguridad como un desbordamiento de buffer al insertar un texto muy largo, y obtener el control de la consola.
+Se podría encontrar un fallo de seguridad como un desbordamiento de \textit{buffer} al insertar un texto muy largo y obtener el control de la consola.
 Esta es la técnica que se utiliza para ejecutar copias de seguridad de juegos en \acl{DSi}.
 
 \subsection{Ninokuni: El Mago de las Tinieblas}
 \label{sec:mp-dlc-nino}
 % Decir que archivos se bajan -> desmume -> cifrado RC4 -> integridad
-\textit{Ninokuni} es un juego que como se comentó en la Sección~\ref{sec:tr-nino} es para la \textit{Nintendo DS}.
+\textit{Ninokuni} es un juego que, como se comentó en la Sección~\ref{sec:tr-nino}, es para la \textit{Nintendo DS}.
 \textit{Level-5} ofrecía dos servicios adicionales para el juego mediante la conectividad inalámbrica.
-El primero se trataba de una lista de noticias cortas relacionadas con la historia que salían una vez al día y, la segunda era contenido adicional como objetos o misiones.
+El primero se trataba de una lista de noticias cortas relacionadas con la historia que salían una vez al día, y la segunda era contenido adicional como objetos o misiones.
 Ambas se obtenían descargando unos archivos de los servidores de Nintendo con el protocolo descrito en el Apartado~\ref{sec:mp-nintendo-server}.
 
 Usando la versión modificada de DeSmuME se pudo obtener los paquetes descifrados, pero no se encontró texto dentro de los binarios que se descargaban.
-Tras investigar las instrucciones máquina que procesaban el fichero se vio que se usaba el algoritmo \texttt{RC4} para descifrar los archivos.
-Por tanto, en una comunicación normal, este algoritmo se usaba dos veces, una para la capa de sesión \texttt{TLS} y otro en la capa de aplicación.
+Tras investigar las instrucciones máquina que procesaban, se vio que se usaba el algoritmo \texttt{RC4} para descifrar los archivos.
+Por tanto, en una comunicación normal, este algoritmo se usaba dos veces, una para la capa de sesión \texttt{TLS} y otra en la capa de aplicación.
 Las claves en esos dos casos son diferentes, pues en la última es una constante almacenada en el juego mientras en la primera se crea para cada conexión.
 
 Aparte del cifrado, se encontró un algoritmo de integridad en la posición \texttt{0x04} de ambos ficheros.
-Concretamente se aplica el algoritmo \texttt{CRC32} que, aunque no son necesarios porque se usa \texttt{TCP}, asegura que el juego no procese datos no esperados.
+Concretamente se aplica el algoritmo \texttt{CRC32} que, aunque no es necesario porque se usa \texttt{TCP}, asegura que el juego no procese datos no esperados.
 
 \subsection{Duet}
 \label{sec:mp-dlc-duet}
 Por último se verá el caso del juego \textit{Duet} para \textit{iOS} y sus niveles extras.
-Se trata de una compra integrada en la aplicación por 0.99 euros que añade un nuevo conjunto de pruebas.
-Analizando de nuevo el contenido de la carpeta centrándose en estos niveles, se averigua que estos presentes y que mediante la compra se activan.
-La búsqueda se centra en saber dónde se guarda la configuración del juego para ver si está protegida o si se podría evitar la compra y activar manualmente.
+Se trata de una compra integrada en la aplicación por 0,99 euros que añade un nuevo conjunto de pruebas.
+Analizando el contenido de los documentos del juego, se pudo encontrar indicios de que estos niveles estaban presentes antes de realizar la compra, por lo que simplemente se activarían una vez el pago hubiese finalizado.
+La búsqueda se centró en saber dónde se guardaba la configuración del juego para ver si estaba protegida, de forma que no se pudiese evitar la compra activándolos manualmente.
 
 \includefigure{fig:mp-duet}%
 {Filas de la base de datos de \textit{Duet} que activan el contenido extra.}%
 {imgs/MP-Duet.png}
 
 En la carpeta \textit{Documents} de la aplicación existen tres bases de datos \textit{sqlite}.
-Abriendo la de mayor tamaño, \textit{persistent-data.db} nos encontramos las filas de la Figura~\ref{fig:mp-duet}.
-En ella se ve como los valores que activan el contenido extra, el contenido de pago, están puestos a \texttt{0}, el valor que corresponde a \textit{desactivado}.
-Si se cambia a \texttt{1} y se inicia la aplicación de nuevo nos encontraremos con este contenido activado.
+Abriendo la de mayor tamaño, \textit{persistent-data.db}, nos encontramos las filas de la Figura~\ref{fig:mp-duet}.
+En ella se ve cómo los valores que activan el contenido extra, el contenido de pago, están puestos a \texttt{0}, el valor que corresponde a \textit{desactivado}.
+Si se cambia a \texttt{1} y se inicia la aplicación, de nuevo nos encontraremos con este contenido activado.
 
 La protección ante este tipo de casos es tan sencilla como poner una contraseña a la base de datos.
-Se trata de un mecanismo que está implementado nativamente\footnote{\url{http://stackoverflow.com/a/24349415/3021815}} en las bibliotecas de \textit{sqlite} y muy sencillo de usar.
-La contraseña se puede almacenar en texto plano en la aplicación, pues dificultará la tarea de conocerla y al valer el contenido tan poco (menos de 1 euro) no compensará el esfuerzo dedicado como se ha discutido en capítulos anteriores.
+Se trata de un mecanismo que está implementado nativamente\footnote{\url{http://stackoverflow.com/a/24349415/3021815}} en las bibliotecas de \textit{sqlite} y es muy sencillo de usar.
+La contraseña se puede almacenar en texto plano en la aplicación, pues dificultará la tarea de conocerla y, al valer el contenido tan poco (menos de 1 euro), no compensará el esfuerzo dedicado como se ha discutido en capítulos anteriores.
 
 \section{Transmisión segura de código}
 \label{sec:mp-sign}
 % Introducir DWP -> seguridad para ejecutar codigo no autoridazo -> paquete integridad de arm9 -> este integridad de datos -> no se puede man-in-the-middle -> se puede editar de flashcard.
 Una de las posibilidades de comunicación inalámbrica que ofrece la \ac{NDS} es que un juego envíe una \textit{demo} a otra consola, en algunos casos incluso para poder jugar en multijugador teniendo un único juego, denominado \textit{Download Play}.
 
-En este contexto, dado que la transmisión de código se hace en un canal compartido (se usa el protocolo \textit{Wi-Fi}), son necesarios mecanismos que protegen la comunicación.
-De esta forma no sería posible realizar un ataque \textit{man-in-the-midle} para ejecutar código no autorizado introduciendo así una brecha de seguridad.
+En este contexto, dado que la transmisión de código, se hace en un canal compartido (se usa el protocolo \textit{Wi-Fi}), son necesarios mecanismos que protejan la comunicación.
+De esta forma, no sería posible realizar un ataque \textit{man-in-the-midle} para ejecutar código no autorizado introduciendo así una brecha de seguridad.
 
-El protocolo~\cite{GbaTek-MultiBoot} implementa varios mensaje, los más importantes en cuanto seguridad son \texttt{RSA signature} y \texttt{data}.
+El protocolo~\cite{GbaTek-MultiBoot} implementa varios mensaje, siendo los más importantes en cuanto seguridad \texttt{RSA signature} y \texttt{data}.
 Con el primero se envían los archivos binarios de código principales de la aplicación, uno por procesador.
 Este mensaje está además firmado usando \texttt{SHA-1} para que no se pueda alterar el código.
 El segundo mensaje sirve para transmitir el resto de datos del juego como imágenes, textos y sonidos.
 Sin embargo, en algunos casos, dado que el fichero principal de código es muy grande, este se divide en partes llamados \textit{overlays}.
 Estos archivos se tratan como ficheros normales y son transmitidos en el segundo paquete, que no está firmado.
 
-Para solventar este problema, Nintendo introdujo una comprobación de seguridad que a diferencia de la que se aplica sobre el archivo principal, esta se realizar durante la ejecución del juego.
+Para solventar este problema, Nintendo introdujo una comprobación de seguridad que, a diferencia de la que se aplica sobre el archivo principal, se realiza durante la ejecución del juego.
 A cada archivo de código secundario se le realiza un algoritmo de tipo \texttt{HMAC} (\texttt{SHA-1} para el \textit{hash}), con una clave que se guarda en el archivo de código principal.
-Este resultado se comprueba con uno almacenado y en caso de fallar se para la ejecución del juego.
+Este resultado se comprueba con uno almacenado y en caso de fallar se detiene la ejecución del juego.
 
-Este procedimiento, aunque implementado en la mayoría de juegos, solo se activa si se está ejecutando con el modo de \textit{Download Play}.
+Este procedimiento, aunque implementado en la mayoría de juegos, solo se activa si se está ejecutando con mediante \textit{Download Play}.
 En este modo, se activa un bit del \textit{firmware} (posición en la memoria RAM \texttt{0x27FFC40}), y durante la ejecución se comprueba para saber si hay que verificar los archivos.
-En otro caso, como el de un inicio normal desde el cartucho, se asume que no es necesario pues no han tenido modificación externas.
+En otro caso, como el de un inicio normal desde el cartucho, se asume que no es necesario pues no han sufrido modificación externa.
 
 Ese valor está desactivado en emuladores como DeSmuME y \textit{flashcards} para poder aplicar parches antipiratería y saltarse el mecanismo.
 De esta forma, una vez modificado el juego original, se puede enviar a otras consolas el juego editado, permitiendo ejecutar código no seguro.
