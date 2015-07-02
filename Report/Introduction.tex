@@ -22,17 +22,26 @@ En cuanto a España, en 2014 la industria creció un 21\% facturando 413 millones 
 % TODO: Enlazar con romhacking y foros
 
 \section{Objetivos}
-El objetivo que persigue este trabajo es el de ofrecer tres diferentes aspectos de seguridad sobre videojuegos no tan conocidos, del que no existe literatura al respecto.
-En cada uno se ofrecerá varios análisis de juegos, mostrando sus vulnerabilidades y puntos fuertes y ofreciendo recomendaciones.
+El objetivo que persigue este trabajo es el de analizar tres diferentes aspectos de seguridad sobre videojuegos.
+En cada uno se ofrecerá varios análisis de juegos, mostrando sus vulnerabilidades y puntos fuertes, y ofreciendo recomendaciones.
 
-Se ha escogido juegos de la \acl{NDS} para la mayoría de los casos, por la documentación sobre el hardware de la consola que existe y, emuladores avanzados.
-También se han analizado dos juegos de plataformas móviles.
-El objetivo será el de analizar los ficheros buscando, según la problemática, un algoritmo que proteja al recurso o su ausencia.
-Para ello se depurará el juego y desarrollará software para de ayuda.
+Para ello, se habrá de determinar el ámbito de las problemáticas, identificando qué tipo de contenido deben ser protegido y porqué.
+Sobre esto, habrá de realizarse un análisis del estado actual y en qué medida afecta a la industria.
 
-El primer aspecto serán las traducciones no oficiales realizadas por personas ajenas a una empresa.
-Realizadas de forma altruista por usuarios,
-% TODO
+Se han escogido juegos de la \acl{NDS} para la mayoría de los casos, por la documentación que existe sobre el hardware de la consola y emuladores con capacidades de depuración.
+Los resultados del análisis de estos juegos son el objetivo de la memoria, mostrando qué técnicas de protección de datos se han implementado y cómo se podría haber mejorado.
+Con este objetivo, se han clasificados los juegos en tres apartados según el tipo de estudio realizado:
+
+\begin{enumerate}
+    \item Las traducciones no oficiales son llevadas a cabo por personas externas a una empresa.
+    Editan los archivos del juego para ofrecer un parche que traduce el juego a un idioma.
+    Relacionado con este tema están los \textit{mods}, modificaciones sobre un juego para ofrecer una versión alternativa.
+
+    \item Los contenidos con derechos de autor será el otro tema a tratar.
+    Los videojuegos con contenido sobre el que típicamente se le aplican algoritmos de protección como libros electrónicos, música y vídeos.
+
+    \item El tercer aspecto será los servicios en línea, tales como los protocolos de comunicación entre consola y servidor y la seguridad sobre los ficheros transmitidos.
+\end{enumerate}
 
 \section{Organización}
 La memoria se ha organizado de forma que primero se presentará la metodología, a continuación los resultados de los análisis y finalmente una conclusión.
