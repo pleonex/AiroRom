@@ -6,13 +6,65 @@
 \chapter{Planificación y costes del proyecto}
 \label{sec:requirements}
 
+Este capítulo explicará cómo se ha estructurado y planificado el trabajo así como los costes que ha supuesto.
+Analizada la problemática y el contexto en el que se sitúa, el objetivo de este estudio es el de ofrecer un enfoque global en cuanto a diferentes aspectos pocos tratados en la literatura sobre videojuegos.
+
 \section{Requisitos}
 % Objetivos específicos y requisitos para ellos (tareas y pasos).
+El proyecto se ha estructura en cinco bloques principales explicados a continuación:
 
+\begin{enumerate}
+    \item Caracterización de algoritmos.
+    El objetivo es de introducirse en el tema, estudiando los mecanismos actuales para proteger datos en videojuegos.
+    También, se estudiaría qué problemáticas analizaría en profundidad el trabajo, así como qué características tenían.
+    \begin{itemize}
+        \item Buscar información sobre seguridad en videojuegos.
+        \item Buscar información sobre la algoritmos de \ac{DRM} actuales.
+        \item Identificar categorías sobre las que los algoritmos se centran.
+        \item Itendificar las características de cada categoría.
+    \end{itemize}
+
+    \item Escoger juegos para el estudio.
+    Una vez analizada la situación actual e identificados los algoritmos deseados para estudiar, el siguiente bloque estudiaría qué juegos serán el objeto del trabajo.
+    \begin{itemize}
+        \item Buscar información sobre proyectos de edición abandonados.
+        \item Identificar juegos con contenidos con derechos de autor.
+        \item Priorizar juegos por aquellos más vendidos.
+    \end{itemize}
+
+    \item Desarrollo de software de ayuda.
+    Antes de comenzar la investigación se planificó un periodo de tiempo para el desarrollo de utilidades que más tarde se utilizarían.
+    Se incluyó el estudio de un posible desarrollo de una utilidades opcional, que si bien, existían soluciones que podían usarse para el trabajo, estas no eran de código abierto.
+    \begin{itemize}
+        \item Crear \textit{script} para clasificar juegos por número de ventas.
+        \item Crear un gestor para una base de datos sobre algoritmos.
+        \item Crear programas de búsqueda y modificación binaria avanzada.
+        \item [Opcional] Desarrollar depurador de código remoto para \ac{NDS}. Se optó finalmente por usar el emulador \textit{freeware} \textit{No\$GBA}.
+    \end{itemize}
+
+    \item Análisis de juegos.
+    Creados los programas de ayuda, se comenzó con el análisis de los juegos.
+    Se dividieron en tres rondas para ir agrupando los resultados obtenidos.
+    \begin{itemize}
+        \item Reunir y complementar la información sobre juegos previamente estudiados.
+        \item Primera ronda de siete juegos.
+        \item Segunda ronda de siete juegos.
+        \item Tercera ronda de siete juegos.
+        \item Analizar servicios en línea.
+    \end{itemize}
+
+    \item Redacción de memoria.
+    Este apartado trata el desarrollo de un documento que explique todos los resultados del trabajo.
+    \begin{itemize}
+        \item Aprender \LaTeX.
+        \item Crear una plantilla para el trabajo.
+        \item Desarrollo de la memoria.
+    \end{itemize}
+\end{enumerate}
 
 \section{Planificación}
 % Diagrama de gant
-El trabajo se ha planificado para realizar los cuatro bloques descritos anteriormente, en el plazo de ocho meses descontando festivos.
+El trabajo se ha planificado para realizar los cinco bloques descritos anteriormente, en el plazo de ocho meses descontando festivos.
 Comenzando en octubre, el análisis del problema planteado, el estudio del arte ocuparía los dos primeros meses del trabajo.
 Juntando el desarrollo de software de ayuda, ambas partes se estimaron que tomarían hasta principios de 2015.
 
