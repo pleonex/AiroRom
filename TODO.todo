@@ -9,7 +9,7 @@ Abstract:
 Introducción (5-págs máximo):
 ☐ Contexto: Crecimiento de los videojuegos e importancia en seguridad.
 ☐ Objetivos de este trabajo.
-☐ Organización del trabajo.
+✔ Organización del trabajo. @done(2015-07-02 10:35)
 
 Estado del arte:
 ☐ Explicar plataformas y clasificarlas en cerrados o abiertos.
@@ -27,12 +27,14 @@ Estado del arte:
 Requisitos, planificación y costes:
 ☐ Objetivos específicos y tareas para llevarlos a cabo. Repo y wiki.
 ☐ Planificación.
-☐ Recursos y costes (desmume).
-☐ Explicar RelativeSearch.
-☐ Explicar métodos y procedimientos.
+☐ Recursos y costes.
+
 
 Metodología:
 ☐ Hacer.
+☐ Explicar RelativeSearch.
+☐ Explicar métodos y procedimientos.
+☐ Desmume.
 
 Traducciones:
 ✔ Mods (http://es.wikipedia.org/wiki/Mod_%28videojuegos%29) @done(2015-06-24 02:46)
@@ -120,7 +122,7 @@ Mejoras:
 ☐ Poner conclusiones del párrafo en negrita.
 ☐ Hacerlo al menos en la descripción del protocolo de Nintendo.
 ☐ Revisar todo el documento.
-☐ Comentarios de tutor.
+✔ Comentarios de tutor. @done(2015-07-02 10:35)
 ✔ Empezar a contar páginas en abstract. @done(2015-07-01 18:54)
 ✔ Cambiar formato de portada. @done(2015-07-01 19:49)
 ✔ Quitar cursiva a software y hardware @done(2015-07-01 21:14)

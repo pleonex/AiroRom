@@ -19,7 +19,7 @@ En 2014, se vendieron solo en Estados Unidos 135 millones de juegos, generando u
 Para 2015, la empresa \textit{Gartner} estima que la venta de videojuegos a nivel global será de en torno a 100 mil millones de euros.
 En cuanto a España, en 2014 la industria creció un 21\% facturando 413 millones de euros según la \textit{Asociación Española de Empresas Productoras y Desarrolladoras de Videojuegos y Software de Entretenimiento}~\cite{DEV}.
 
-% Enlazar con romhacking y foros
+% TODO: Enlazar con romhacking y foros
 
 \section{Objetivos}
 El objetivo que persigue este trabajo es el de ofrecer tres diferentes aspectos de seguridad sobre videojuegos no tan conocidos, del que no existe literatura al respecto.
@@ -32,5 +32,31 @@ Para ello se depurará el juego y desarrollará software para de ayuda.
 
 El primer aspecto serán las traducciones no oficiales realizadas por personas ajenas a una empresa.
 Realizadas de forma altruista por usuarios,
+% TODO
 
 \section{Organización}
+La memoria se ha organizado de forma que primero se presentará la metodología, a continuación los resultados de los análisis y finalmente una conclusión.
+
+En el Capítulo~\ref{sec:art} se introducirá sobre la edición de videojuegos, la seguridad que habitualmente se implementa y aspectos legales para realizar ingeniería inversa.
+
+En el Capítulo~\ref{sec:requirements} se mostrarán los apartados y tareas en los que se ha dividido y planificado el trabajo, además de los recursos y los costes estimados.
+
+El Capítulo~\ref{sec:met} explica las diferentes metodologías empleadas a la hora de analizar un aspecto de un videojuego.
+También se hará referencia a los programas desarrollados durante el trabajo para facilitar los análisis y se detallará su uso y funcionamiento.
+
+El Capítulo~\ref{sec:translations} comenta los resultados obtenidos tras analizar juegos que han sido objetivo de traducciones no oficiales.
+La investigación se concentró en averiguar los algoritmos empleados para ofuscas textos e imágenes.
+Incluye también un estudio sobre las causas de abandono de estos proyectos.
+
+En el Capítulo~\ref{sec:copyright} se habla sobre los contenidos con derecho de autor.
+Para ello, se han escogido una serie de juegos que incluyen libros electrónicos, canciones o vídeos; y se ha analizado los posibles algoritmos para proteger dicho contenido.
+
+El Capítulo~\ref{sec:multiplayer} muestra los resultados de analizar diferentes servicios en línea.
+Se explicará los mecanismos de seguridad de los servidores de Nintendo para \acl{NDS}, comentando la metodología seguida y los fallos de seguridad descubiertos.
+También se comentará la seguridad implementada sobre videojuegos para jugar en multijugador y descargar contenidos extras.
+El capítulo termina con un análisis sobre cómo en la \acl{NDS} se transmite código ejecutable de forma segura entre consolas.
+
+El Capítulo~\ref{sec:recomm} resume los algoritmos encontrados así como sus puntos débiles y fuertes y, se proponen nuevas técnicas para reforzar su seguridad.
+
+La memoria concluye con el Capítulo~\ref{sec:conclusion}, donde se detallan los conocimientos aprendidos y habilidades desarrolladas con este trabajo.
+Incluye una sección con líneas de trabajo sobre los que se podría continuar.
