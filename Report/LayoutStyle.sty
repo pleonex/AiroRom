@@ -22,11 +22,12 @@
 }
 
 \newcommand{\fncymain}{%
-    \fancyhead[RO]{{\footnotesize\rightmark}}
-    \fancyfoot[RO]{\thepage}
-    \fancyhead[LE]{{\footnotesize\leftmark}}
-    \fancyfoot[LE]{\thepage}
+    \fancyhead[LO]{{\footnotesize\rightmark}}
+    \fancyhead[RO]{\textbf{\thepage}}
+    \fancyhead[RE]{{\footnotesize\leftmark}}
+    \fancyhead[LE]{\textbf{\thepage}}
     \fancyfoot[C]{}
+    \fancyfoot[RO,LE]{}
     \renewcommand{\headrulewidth}{0.3pt}
 }
 
