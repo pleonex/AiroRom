@@ -19,8 +19,6 @@ En 2014, se vendieron solo en Estados Unidos 135 millones de juegos, generando u
 Para 2015, la empresa \textit{Gartner} estima que la venta de videojuegos a nivel global será de en torno a 100 mil millones de euros.
 En cuanto a España, en 2014 la industria creció un 21\% facturando 413 millones de euros según la \textit{Asociación Española de Empresas Productoras y Desarrolladoras de Videojuegos y Software de Entretenimiento}~\cite{DEV}.
 
-% TODO: Enlazar con romhacking y foros
-
 \section{Objetivos}
 El objetivo que persigue este trabajo es el de analizar tres diferentes aspectos de seguridad sobre videojuegos.
 En cada uno se ofrecerá varios análisis de juegos, mostrando sus vulnerabilidades y puntos fuertes, y ofreciendo recomendaciones.
@@ -30,7 +28,12 @@ Sobre esto, habrá de realizarse un análisis del estado actual y en qué medida af
 
 Se han escogido juegos de la \acl{NDS} para la mayoría de los casos, por la documentación que existe sobre el hardware de la consola y emuladores con capacidades de depuración.
 Los resultados del análisis de estos juegos son el objetivo de la memoria, mostrando qué técnicas de protección de datos se han implementado y cómo se podría haber mejorado.
-Con este objetivo, se han clasificados los juegos en tres apartados según el tipo de estudio realizado:
+
+Este estudio surge del reciente interés por la edición de videojuegos al que se llama \textit{romhacking}.
+El nombre proviene del inglés \textit{modificación no autorizada} (\textit{hack}) sobre un archivo que originalmente viene en dispositivos de solo lectura (\textit{Read Only Memory (ROM)}).
+Estas modificaciones se realizan aplicando conceptos de ingeniería inversa sobre los archivos, es decir, a partir del producto final se extraen sus recursos y se averigua cómo funciona.
+Existen comunidades en Internet dedicadas a este propósito\footnote{\url{http://romhacking.net/}}, donde se comparte información y utilidades.
+Los tres tipos de modificaciones y estudios más frecuentes en este movimiento, y sobre los que se basará este trabajo, son:
 
 \begin{enumerate}
     \item Las traducciones no oficiales son llevadas a cabo por personas externas a una empresa.
