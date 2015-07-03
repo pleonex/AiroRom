@@ -27,9 +27,53 @@ De esta forma, este mismo RFC define \textit{cracker} como:
 
 Este trabajo muestra la seguridad de los juegos con el único propósito educacional, como menciona Andew Huang~\cite{Xbox}: \textit{For every copyright protection scheme that is defeated by a hacker, there is someone who learned an important lesson about how to make a better protection scheme.} (\textit{Para cada esquema de protección copyright que un hacker rompe, hay alguien que aprende una importante lección sobre cómo hacer un esquema de protección más robusto.}).
 
-\section{Seguridad en videoconsolas}
-
 \section{Mecanismos de seguridad}
+
+
+\section{Seguridad en videoconsolas}
+La seguridad cada vez más se confía en la consola y la compañía que hay detrás de ella, en lugar, de sobre el propio juego.
+El principal problema que esto genera es que una vez que esta protección se consigue romper, todos los juegos quedan expuestos.
+
+A principios de la era de los videojuegos, la piratería era anecdótica principalmente por la dificultad en encontrar el hardware necesario para romper los sistemas de protección.
+Los juegos se distribuían en cartuchos, de solo lectura, no existían memorias se uso genérico como SD, ni protocolos como USB para poder transferir de manera rápida juegos descargados de un reciente Internet.
+
+A día de hoy ha cambiado, con la introducción de la \acl{NDS} en el mercado, los juegos se distribuyen en pequeños cartuchos de tamaño similar a una tarjeta SD.
+La tecnología ya permitía simular estos cartuchos en otros que, rompiendo la seguridad de la consola, podían ejecutar juegos no autorizados leídos desde una tarjeta MicroSD.
+Estos se conocen como \textit{flashcards} y se basan en \textit{exploits} que consiguen saltarse las limitaciones del sistema de la consola, para simulando ser un juego, comenzar la ejecución de otro.
+
+\subsection{\acl{NDS}}
+En el caso de la \acl{NDS}, el contenido de los cartuchos viene cifrado de fábrica.
+Los juegos no solo son memorias de sólo lectura si no que incorporan una pequeña lógica para para desencriptar su contenido `al vuelo' cada vez que la consola solicita un bloque de datos~\cite{GbaTek}.
+Este cifrado se basa en dos claves, la primera constante y la segunda aleatoria, los comandos que se envía al cartuchos se cifran también.
+Aparte del cifrado, la \textit{BIOS} y \textit{firmware} realizan una comprobación sobre la cabecera del juego.
+En concreto, hay una región en la cabecera del juego donde se encuentra el logo de Nintendo ofuscado~\footnote{\url{http://pleonet.blogspot.com.es/2013/08/logo-de-nintendo-en-gba-y-nds.html}}.
+El objetivo es que al contener datos con derechos de autor como es el logo de la compañía, los juegos no se podrían distribuir sin la autorización de Nintendo.
+Un caso similar fue llevado a juicio en Estados Unidos, perdiendo en este caso, la empresa que pretendía evitar estas actuaciones: Sony~\footnote{\url{http://en.wikipedia.org/wiki/Sega_v._Accolade}}.
+
+\enquote{Accolade, una empresa, puso en venta un videojuego para el cual tuvo que hacer ingeniería inversa y determinar que para que este funcionase tenía que contener el archivo del juego en una parte la palabra `SEGA' y si esa palabra no estaba el juego no se ejecutaba, exactamente como el logo de Nintendo, SEGA lo denunció por eso.  Finalmente, el juez determinó que no había cometido ninguna ilegalidad, no había copiado código de SEGA y solo había puesto esa palabra para poder ejecutar su propio código.}
+
+\subsection{\acl{DSi}}
+Un sistema más robusto introdujo \acl{DSi}.
+El formato de los juegos se mantenía, pero en los exclusivos para la nueva generación se añadía una firma digital \texttt{RSA}, firmada con la clave privada de Nintendo.
+De esta forma, el sistema operativo de la consola la comprobaba, y de ser inválida el juego no se ejecutaba.
+
+Mediante este procedimiento, las \textit{flaschard} dejaron de funcionar.
+No se podía ni generar una firma digital válida, ni utilizar una existente porque al modificar el código del juego, la firma sería inválida.
+
+El agujero de seguridad vino junto a los juegos.
+Modificando los archivos de guardado de ciertos juegos, se conseguía provocar un fallo del juego (\textit{buffer overflow}), de forma que el siguiente código que ejecutaba era el almacenado en el propio archivo de guardado.
+Esto significa que distribuyendo el juego comercial con este fallo junto a una partida preparada para explotarlo, se podían crear \textit{flashcard} que ejecutasen cualquier código contenido en el archivo de la partida.
+Mediante un algoritmo de integridad básico, incluso firmando digitalmente también los archivos de guardado se podría haber evitado esto.
+
+\subsection{\acl{3DS}}
+La siguiente generación de consolas de Nintendo fue un paso más respecto a la seguridad.
+Los juegos distribuidos vienen cifrados con un cifrado simétrico implementado sobre un módulo hardware de la consola.
+Cuando la consola pide datos al cartucho, estos pasan por el módulo de descifrado de la consola y se almacenan en la memoria RAM.
+Se trata de un módulo diseñado para la consola, y la clave está implementada sobre las pistas del chip por lo que no se puede averiguar.
+
+Para incrementar la seguridad se colocaron los componentes de la consola estratégicamente, de forma que era muy complicado extraer la memoria RAM para poder acceder a ella ya que se encontraba `pegada' debajo de la CPU.
+Apesar de ello, la gente que consiguo acceder a esta, pudo leer los datos descifrados del juego, incluso alterar las instrucciones almacenadas en la memoria para ejecutar código que descifrase el juego entero y permitir su estudio.
+Un proceso manual que permitió encontrar una serie de \textit{exploits}\footnote{\url{http://smealum.net/ninjhax/}} aprovechándose de nuevo de fallos de seguridad en los archivos de guardado pero también del sistema operativo.
 
 \section{Ingeniería inversa}
 % Historia y objetivos de REDO, a Esprit project
