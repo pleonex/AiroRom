@@ -65,13 +65,13 @@ Modificando los archivos de guardado de ciertos juegos, se conseguía provocar un
 Esto significa que distribuyendo el juego comercial con este fallo junto a una partida preparada para explotarlo, se podían crear \textit{flashcard} que ejecutasen cualquier código contenido en el archivo de la partida.
 Mediante un algoritmo de integridad básico, incluso firmando digitalmente también los archivos de guardado se podría haber evitado esto.
 
-\subsection{\acl{3DS}}
+\subsection{\acl{N3DS}}
 La siguiente generación de consolas de Nintendo fue un paso más respecto a la seguridad.
 Los juegos distribuidos vienen cifrados con un cifrado simétrico implementado sobre un módulo hardware de la consola.
-Cuando la consola pide datos al cartucho, estos pasan por el módulo de descifrado de la consola y se almacenan en la memoria RAM.
+Cuando la consola pide datos al cartucho, estos pasan por el módulo de descifrado de la consola y se almacenan en la memoria \texttt{RAM}.
 Se trata de un módulo diseñado para la consola, y la clave está implementada sobre las pistas del chip por lo que no se puede averiguar.
 
-Para incrementar la seguridad se colocaron los componentes de la consola estratégicamente, de forma que era muy complicado extraer la memoria RAM para poder acceder a ella ya que se encontraba `pegada' debajo de la CPU.
+Para incrementar la seguridad se colocaron los componentes de la consola estratégicamente, de forma que era muy complicado extraer la memoria \texttt{RAM} para poder acceder a ella ya que se encontraba `pegada' debajo de la \texttt{CPU}.
 Apesar de ello, la gente que consiguo acceder a esta, pudo leer los datos descifrados del juego, incluso alterar las instrucciones almacenadas en la memoria para ejecutar código que descifrase el juego entero y permitir su estudio.
 Un proceso manual que permitió encontrar una serie de \textit{exploits}\footnote{\url{http://smealum.net/ninjhax/}} aprovechándose de nuevo de fallos de seguridad en los archivos de guardado pero también del sistema operativo.
 
