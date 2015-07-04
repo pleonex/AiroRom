@@ -135,11 +135,23 @@ En caso contrario, probablemente se use una codificación propietaria, sin embarg
 
 \subsubsection{Búsqueda de la tipografía}
 El primero consiste en buscar el archivo con la tipografía del juego, pues la codificación será la misma que el orden con el que aparecen los caracteres en ella.
-
 El estandar de este formato tiene la cabecera \texttt{NTFR} y existen programas para extraer y editar este tipo de formatos\footnote{\url{https://github.com/pleonex/NerdFontTerminatoR}}.
 
 \subsubsection{Búsqueda diferencial}
-El segundo procedimiento posible es el de desarrollar un programa de búsqueda diferencial. Con motivo de este trabajo se explica el programa \textit{RelativeSearch} que se llevó a cabo. Este tipo de software se puede usar siempre y cuando el orden de los caracteres de un mismo grupo (por ejemplo letras minúsculas) corresponda a estándares como ASCII. Si se hubiese seguido un orden aleatorio en la codificación propietaria este no serviría quedando la primera opción como única alternativa.
+El segundo procedimiento se trata de desarrollar un programa de búsqueda diferencial.
+Una implementación se llevó a cabo para este estudio, denominado \textit{RelativeSearch} y disponible en el repositorio del trabajo\footnote{\url{https://github.com/pleonex/RelativeSearch}}.
+
+La ídea de este programa se basa en que un grupo de caracteres similares, tiene una numeración seguida.
+Por ejemplo, si la codificación indica que el carácter `a' tiene asociado el valor \texttt{0x0123}, el carácter `b' tendrá el siguiente, \texttt{0x0124}.
+Restando ambos valores, se encuentra su `distancia' en el abecedario.
+Esta distancia, en la mayoría de los casos, será la misma en cualquier codificación, incluso propietaria, a no ser que se hayan desordenado los caracteres.
+
+\textit{RelativeSearch} (Figura~\ref{fig:met-relative}), implementa esta idea, para ello dada una palabra como `hola', resta cada carácter sobre el anterior y guarda esa diferencia.
+A continuación, sobre un fichero binario, realiza esta misma operación, resta un byte sobre el anterior y compara la diferencia.
+Si la diferencia coincide, se muestra en pantalla la posición de la coincidencia.
+El programa soporta la búsqueda de codificaciones de 8 y 16 bits.
+
+\includefigure{fig:met-relative}{Frase con codificación no estándar encontrada por RelativeSearch en \textit{Pokémon}.}{imgs/MET-Relative.png}
 
 \subsection{Búsqueda de algoritmo sobre imágenes}
 \label{sec:met-search-img}
@@ -153,11 +165,51 @@ Una vez localizados, se ponde un punto de interrupción sobre ellos, este último,
 
 \section{Intercepción de comunicación}
 \label{sec:met-nds-desmume}
-% explicar desmume modificado para guardar datos
+La \acl{NDS} fue la primera portátil de Nintendo en soportar servicios en línea mediante una conexión Wi-Fi.
+Esta comunicación se ha estudiado en el Capítulo~\ref{sec:multiplayer}.
+En esta sección se explicará la metodología seguida para capturar los paquetes.
 
-% explicar rc4finder
+Para ello se preparó un escenario para realizar un ataque \textit{man-in-the-middle}.
+Un punto de acceso adicional se conectó al ordenador mediante \textit{Ethernet} y este a su vez mediante conexión Wi-Fi con el punto de acceso original.
+Dado que el sistema operativo \textit{Fedora 20} por defecto tiene una configuración restrictiva de red, se tuvo que diseñar el siguiente \textit{script} para configurar una subred mediante \textit{NAT} y permitir el redireccionamiento de paquetes.
 
-% explicar sslpatcher
+\begin{verbatim}
+# El primer argumento es la IP de la interfaz que tiene conexión a Internet
+# Crea la ruta hacia la subred
+sudo route add -net 192.168.3.0/24 gw 10.42.0.29 p35p1
+
+# Habilita SNAT para la segunda subred
+sudo iptables -t nat -I POSTROUTING -s 192.168.3.0/24 -o wlp4s0 -j SNAT --to $1
+
+# Permite los paquetes de destino la segunda subred
+sudo iptables -t filter -I FORWARD -d 192.168.3.0/24 -j ACCEPT
+
+# Permite los paquetes con origen la segunda subred
+sudo iptables -t filter -I FORWARD -s 192.168.3.0/24 -j ACCEPT
+
+# Permite sin restricción los paquetes con destino la primera subred
+sudo iptables -t filter -I FORWARD -d 10.42.0.0/24 -j ACCEPT
+\end{verbatim}
+
+Usando \textit{Wireshark} para capturar los paquetes sobre la interfaz de \textit{Ethernet} se pudo capturar todo el tráfico.
+Este escenario requería hardware y era complejo de cada vez que se quería analizar un juego.
+Es por ello, que aprovechando que el emulador DeSmuME soporta las comunicaciones Wi-Fi y es de código libre, se modificó para guardar los datos que transmitía y enviaba en formato \textit{PCAP}, compatible con \textit{Wireshark}.
+
+Se modificaron los archivos \texttt{wifi.cpp} y \texttt{wifi.h}\footnote{\url{https://github.com/pleonex/AiroRom/tree/master/Programs/DeSmuME\%20PCAP}}, añadiendo los siguientes métodos:
+
+\begin{itemize}
+    \item \verb!create_packet()!: inicializa un nuevo archivo \texttt{PCAP} para guardar los datos.
+    Esta función se llama cada vez que se realiza una petición de asociación con el punto de acceso, es decir, cuando se inicia una conexión.
+
+    \item \verb!save_packet(u8* packet, u32 len)!: guarda un paquete \textit{Ethernet} en el archivo.
+
+    \item \verb!save_adhocPacket(u8* packet, u32 len, void* addrGen, bool isSent)!: genera un paquete con cabeceras \textit{Ethernet}, \textit{IP} y \textit{UDP} y guarda los datos de la capa aplicación que se le pasa.
+    Esta función se llama cuando se envía un paquete mediante comunicación \textit{ad-hoc} a otra consola.
+    Dado que este paquete, solo contiene datos en formato del protocolo de Nintendo, para poder analizarlo con \textit{Wireshark} es necesario crear las cabeceras de la capa de enlace, red y transporte.
+\end{itemize}
+
+Esta comunicación sin embargo está cifrada.
+En la Sección~\ref{sec:mp-nintendo-server} sobre los resultados de los servicios en línea de Nintendo, se explica cómo utilizar los programas desarrollados \textit{RC4Finder} y \textit{SSLPatcher} para capturar una comunicación descifrada de la \acl{NDS}.
 
 \section{Documentación}
 

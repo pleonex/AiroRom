@@ -42,7 +42,7 @@ Hay que tener en cuenta que necesita ser modificada para cada juego para poner e
 El segundo mecanismo se debe a un fallo de seguridad por parte de Nintendo.
 Los servidores están mal configurados y \textbf{admiten tanto peticiones \texttt{HTTPS} como \texttt{HTTP}}, ofreciendo la misma funcionalidad.
 Además, con solo cambiar la parte de protocolo de la \texttt{URL} en el código del juego, se adapta automáticamente y deja de cifrar la comunicación.
-El procedimiento de editar todas las direcciones para usar una conexión sin cifrar se ha implementado en el programa \textit{SslPatcher} incluido en el repositorio del trabajo\footnote{\url{https://github.com/pleonex/AiroRom/tree/master/Programs/SslPatcher}}.
+El procedimiento de editar todas las direcciones para usar una conexión sin cifrar se ha implementado en el programa \textit{SSLPatcher} incluido en el repositorio del trabajo\footnote{\url{https://github.com/pleonex/AiroRom/tree/master/Programs/SslPatcher}}.
 Solo los servidores de contenido descargable denegaban conexiones al puerto 80 (el usado en \texttt{HTTP}).
 
 Una vez capturados los paquetes sin cifrar (Figura~\ref{fig:mp-nintendowifi}), se pudo analizar la comunicación entre un total de tres servidores.
@@ -133,29 +133,7 @@ Este servidor DNS resuelve los dominios de Nintendo apuntando a los alternativos
 La aplicación encuentra adversarios de forma aleatoria y muestra una serie de preguntas con posibles opciones.
 
 El objeto de este estudio es comprobar si la seguridad en las comunicaciones es segura, evitando posibles trampas.
-Para ello se preparó un escenario para realizar un ataque \textit{man-in-the-middle}.
-Un punto de acceso adicional se conectó al ordenador mediante \textit{Ethernet} y este a su vez mediante conexión Wi-Fi con el punto de acceso original.
-Dado que el sistema operativo \textit{Fedora 20} por defecto tiene una configuración restrictiva de red, se tuvo que diseñar el siguiente \textit{script} para compartir la conexión:
-
-\begin{verbatim}
-# El primer argumento es la IP de la interfaz que tiene conexión a Internet
-# Crea la ruta hacia la subred
-sudo route add -net 192.168.3.0/24 gw 10.42.0.29 p35p1
-
-# Habilita SNAT para la segunda subred
-sudo iptables -t nat -I POSTROUTING -s 192.168.3.0/24 -o wlp4s0 -j SNAT --to $1
-
-# Permite los paquetes de destino la segunda subred
-sudo iptables -t filter -I FORWARD -d 192.168.3.0/24 -j ACCEPT
-
-# Permite los paquetes con origen la segunda subred
-sudo iptables -t filter -I FORWARD -s 192.168.3.0/24 -j ACCEPT
-
-# Permite sin restricción los paquetes con destino la primera subred
-sudo iptables -t filter -I FORWARD -d 10.42.0.0/24 -j ACCEPT
-\end{verbatim}
-
-Los paquetes capturados con \textit{Wireshark} muestran que no se usa una conexión segura, ya que se transmite todo por \texttt{HTTP}.
+Los paquetes capturados con \textit{Wireshark} usando una metodología similar a la descrita en la Sección~\ref{sec:met-nds-desmume}, muestran que no se usa una conexión segura, ya que se transmite todo por \texttt{HTTP}.
 Como se ve en la Figura~\ref{fig:mp-preguntados}, tras analizar la transmisión de datos con el servidor del juego, se concluye una mala implementación del protocolo.
 Cada vez que una partida comienza, el servidor le envía al usuario una lista de preguntas y respuestas a usar \textbf{junto a la respuesta correcta}.
 Dado que la comunicación no está protegida y se puede capturar, es posible saber la respuesta a cualquier pregunta antes de que se realice.
