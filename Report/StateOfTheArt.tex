@@ -11,21 +11,21 @@ Este fenómeno va en aumento a día de hoy, esperando un crecimiento del 22\% para
 En esta misma fuente no solo trata la distribución ilícita de contenidos y programas para romper los mecanismos anti-copia, también habla sobre la ingeníera inversa y de como `\textit{usando herramientas genéricas, los hackers pueden convertir rápidamente binarios desprotegidos en código fuente, volver a empaquetarlos y distribuirlos}'.
 
 Comúnmente se asocia el término de \textit{hacker} a una persona que maliciosamente investiga un programa.
-Es una mala interpretación dada por medios y películas, realmente se habría de hablar de \textit{cracker}~\cite{Xbox}.
+Es una mala interpretación dada por medios y películas, realmente se habría de hablar de \textit{cracker}.
 El nombre de \textit{hacker} nació en 1961, en los laboratorios del \ac{MIT}, para denominar a los estudiantes que dominaban con destreza la programación.
 A día de hoy, según el RFC 1392\footnote{\url{https://tools.ietf.org/html/rfc1392}} se define \textit{hacker} como:
 
-\foreignquote{english}{Hacker: A person who delights in having an intimate understanding of the internal workings of a system, computers and computer networks in particular. The term is often misused in a pejorative context, where `cracker' would be the correct term.}
+\foreignquote{english}{\textit{Hacker: A person who delights in having an intimate understanding of the internal workings of a system, computers and computer networks in particular. The term is often misused in a pejorative context, where `cracker' would be the correct term.}}
 
 \foreignquote{spanish}{Hacker: Persona apasionada en entender cómo funciona, en detalle, internamente un conjunto de sistemas, ordenadores y redes de ordenadores. Generalmente se usa de forma incorrecta en un contexto peyorativo, en este caso el término correcto sería `cracker'.}
 
 De esta forma, este mismo RFC define \textit{cracker} como:
 
-\foreignquote{english}{Cracker: A cracker is an individual who attempts to access computer systems without authorization. These individuals are often malicious, as opposed to hackers, and have many means at their disposal for breaking into a system.}
+\foreignquote{english}{\textit{Cracker: A cracker is an individual who attempts to access computer systems without authorization. These individuals are often malicious, as opposed to hackers, and have many means at their disposal for breaking into a system.}}
 
 \foreignquote{spanish}{Cracker: Individuo que intenta acceder a un sistema de ordenadores sin autorización. Estos individuos son generalmente maliciosos, en oposicón a los `hackers', y tienen intereses ocultos en su intento por romper el sistema.}
 
-Este trabajo muestra la seguridad de los juegos con el único propósito educacional, como menciona Andew Huang~\cite{Xbox}: \textit{For every copyright protection scheme that is defeated by a hacker, there is someone who learned an important lesson about how to make a better protection scheme.} (\textit{Para cada esquema de protección copyright que un hacker rompe, hay alguien que aprende una importante lección sobre cómo hacer un esquema de protección más robusto.}).
+Este trabajo muestra la seguridad de los juegos con el único propósito educacional, como menciona Andew Huang~\cite[p.~7]{Xbox}: \textit{For every copyright protection scheme that is defeated by a hacker, there is someone who learned an important lesson about how to make a better protection scheme.} (\textit{Para cada esquema de protección copyright que un hacker rompe, hay alguien que aprende una importante lección sobre cómo hacer un esquema de protección más robusto.}).
 
 \section{Mecanismos de seguridad}
 
@@ -48,7 +48,7 @@ Este cifrado se basa en dos claves, la primera constante y la segunda aleatoria,
 Aparte del cifrado, la \textit{BIOS} y \textit{firmware} realizan una comprobación sobre la cabecera del juego.
 En concreto, hay una región en la cabecera del juego donde se encuentra el logo de Nintendo ofuscado~\footnote{\url{http://pleonet.blogspot.com.es/2013/08/logo-de-nintendo-en-gba-y-nds.html}}.
 El objetivo es que al contener datos con derechos de autor como es el logo de la compañía, los juegos no se podrían distribuir sin la autorización de Nintendo.
-Un caso similar fue llevado a juicio en Estados Unidos, perdiendo en este caso, la empresa que pretendía evitar estas actuaciones: Sony~\footnote{\url{http://en.wikipedia.org/wiki/Sega_v._Accolade}}.
+Un caso similar fue llevado a juicio en Estados Unidos, perdiendo en este caso, la empresa que pretendía evitar estas actuaciones: Sony~\cite[p.~18]{RevBlack}.
 
 \enquote{Accolade, una empresa, puso en venta un videojuego para el cual tuvo que hacer ingeniería inversa y determinar que para que este funcionase tenía que contener el archivo del juego en una parte la palabra `SEGA' y si esa palabra no estaba el juego no se ejecutaba, exactamente como el logo de Nintendo, SEGA lo denunció por eso.  Finalmente, el juez determinó que no había cometido ninguna ilegalidad, no había copiado código de SEGA y solo había puesto esa palabra para poder ejecutar su propio código.}
 
@@ -76,10 +76,32 @@ Apesar de ello, la gente que consiguo acceder a esta, pudo leer los datos descif
 Un proceso manual que permitió encontrar una serie de \textit{exploits}\footnote{\url{http://smealum.net/ninjhax/}} aprovechándose de nuevo de fallos de seguridad en los archivos de guardado pero también del sistema operativo.
 
 \section{Ingeniería inversa}
-% Historia y objetivos de REDO, a Esprit project
-
 % Definición de ingeniería inversa por REDO
+\foreignquote{english}{\textit{\textbf{Reverse engineering} is the process of analyzing a subject system to identify the system's components and their inter-relationships, and to create representations of the system in another form or at higher levels of abstraction.}}
+
+\foreignquote{spanish}{\textbf{La ingeniería inversa} es el proceso de analizar un sistema para indentificar sus componentes y relaciones y, crear una representación del sistema en otro formato o a un nivel más alto de abstración.}
+
+Con estas palabras el compendio del proyecto europeo REDO definió en 1993 el término de \textit{ingeniería inversa}~\cite[p.~17]{REDO}.
+Se trata de un proyecto enmarcado dentro del plan \ac{ESPRIT}.
+El trabajo realizado por 11 organizaciones de 7 países tenía como objetivo tratar el problema del mantenimiento de software mediante técnicas de ingniería inversa.
+Para ello se propusieron los siguientes objetivos:
+
+\begin{enumerate}
+    \item Validar el software existente.
+    \item Acoplamiento del software y su documentación.
+    \item Usar métodos formales en mantenimiento de software.
+    \item Mejorar la usabilidad del software existente mediante mejores interfaces de usuario.
+    \item Desarrollo y mejora de herramientas para restructura el código fuente y el control de trabajo.
+    \item Desarollo de un lenguaje genérico con el que se pueda expresar la semántica de diferentes lenguajes de programación y control de trabajo.
+\end{enumerate}
 
 % Objetivos de la ingeniería inversa por REDO
+
+% Problema de descompilar
+
+En cuanto a la ingeniería inversa en videojuegos, no es distinta a los procedimientos seguidos sobre aplicaciones.
+Esta sin embargo se centra más sobre los recursos y sus formatos que en el código y funcionalidad\footnote{En la siguiente dirección se encuentra una guía de introducción a la ingenería inversa para \acl{NDS}:
+
+\url{http://gbatemp.net/threads/gbatemp-rom-hacking-documentation-project-new-2014-edition-out.73394/}}.
 
 \subsection{Legalidad}
