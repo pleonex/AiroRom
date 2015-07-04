@@ -14,33 +14,35 @@ Benito Palacios Sánchez \\
 \end{center}
 
 \vspace{0.7cm}
-\noindent \textbf{Palabras clave:} seguridad, videojuegos, ingenería inversa, DRM, Nintendo DS.
+\noindent \textbf{Palabras clave:} seguridad, videojuegos, ingenería inversa, servicios en línea, Nintendo DS.
 
 \vspace{0.7cm}
 {\centering{}\textbf{Resumen}}
 
-Este documento expone los métodos y resultados del análisis de seguridad, realizado en diferentes juegos para las videoconsolas Nintendo DS, Play Station 3 y para las plataformas móviles Android y iOS.
-El interés de este trabajo yace de la implicación de los videojuegos sobre la cultura actual, sirviendo como entretenimiento e incluso con objetivos educativos.
-Esta industria está en continuo crecimiento, creando puestos de trabajo y generando mayores beneficios, siendo en estos momentos, la segunda mayor, detrás de la instrustria de libros.
+Los videojuegos son cada día más, un factor importante de nuestra cultura actual.
+Especialmente desde el boom que ha dado el mercado de los teléfonos inteligentes.
+A final de 2014 la compañía detrás del famoso juego \textit{Candy Crush} reportó tener 356 millones de usuarios únicos, con unas ganancias de 1.300 millones de dólares.
+La industria de los videojuegos es la segunda con mayor ganancias después de la de libros y, superando a la del cine y música.
+No solo forma parte de nuestro entretenimiento sino que, cada vez más, se incorpora al mundo de la enseñanza, especialmente para niños.
 
-Es por eso, que los mecanismos de seguridad asociados a estos juegos tienen una gran importancia, ya que mueven una gran catnidad de dinero.
-Pensados originalmente para combatir la piratería, distribución ilícita de copias de juegos, hoy en día abarcan más de eso.
-Tratan de evitar modificaciones sobre videojuegos, evitando realizar trampas durante las partidas en línea y, traducciones a idiomas donde la compañía piensa crear mercado.
+Por estas razones, los mecanismos de seguridad asociados a los juegos son importantes.
+Pensados originalmente para combatir la piratería, distribución ilícita de copias de juegos, hoy en día abarcan más campos a parte de estos.
+Tratan de evitar modificaciones, realizar acciones no autorizadas durante las partidas en línea y, traducciones a idiomas donde la empresa piensa crear mercado.
 
-Estas técnicas pretenden evitar en general, poder realizar ingeniería inversa sobre el producto final.
-En otras palabras, las compañías mediante mecanismos de ofuscación y aplicando algoritmos de cifrado e integridad, protegen sus productos para que se pueda entender cómo funcionar, extraer recursos y modificar archivos.
-El funcionamiento y análisis de la implementación de estos algoritmos será el objetivo de este trabajo.
+Este trabajo pretende ofrecer una perspectiva de seguridad sobre este creciente mercado, analizando juegos de las videoconsolas Nintendo DS, Play Station 3 y plataformas móviles como Android y iOS.
 Se verá cómo se han protegido textos, imágenes y archivos ante modificaciones, con cifrados.
 Así mismo, se analizarán protocolos de comunicación para servicios en línea, el cifrado en las descargas de archivos, la transmisión segura de código y la protección sobre contenidos con derechos de autor.
-El estudio se ha realizado mediante técnicas de ingeniería inversa, depurando el código de juegos y capturando paquetes de comunicación inalámbrica.
+Estas técnicas, en general, pretenden impedir poder realizar ingeniería inversa sobre el producto final.
+Entiéndose esta como el proceso de analizar una aplicación para entender cómo funciona y cómo integra cada uno de sus recursos.
 
-La ingenería inversa se lleva realizando desde el inicio de la computadoras, en su mayoría con motivos de entretenimiento y enseñanza, aprendiendo cómo funciona un sistema se podría crear uno más robusto y con más características.
-Existen diversas herramientas para llevarlo a cabo, tales como depuradores, desensambladores, aunque son específicas para cada plataforma.
-En este trabajo se ha utilizado el emulador de código abierto DeSmuME, para automatizar tareas de depuración, así como el emulador No\$GBA para analizar el código en ensamblador de los juegos.
-Para el desarrollo de este trabajo se han realizado una serie de programas, que ayudan al análisis de juegos, así como se explican las metodologías seguidas para el desarrollo de este proyecto.
-También, se ha modificado un emulador de Nintendo DS para añadir funcionalidades de depuración tales como guardar paquetes de red, exportar datos descifrados de rutinas de código y analizar los archivos cargados.
+La ingenería inversa se lleva realizando desde el inicio de la computadoras, en su mayoría con motivos de entretenimiento y enseñanza, aprendiendo cómo funciona un sistema se puede crear uno más robusto y con más características.
+Existen diversas herramientas para llevarla a cabo, tales como depuradores y desensambladores, aunque son específicas para cada plataforma.
+En este trabajo se ha utilizado un emulador de código abierto DeSmuME y otro privativo pero \textit{freeware}, No\$GBA, para Nintendo DS.
+Estos se han usado con el objetivo de analizar el código en ensamblador de los juegos y de automatizar tareas de depuración como guardar paquetes de red, exportar datos descifrados de rutinas de código y analizar los archivos cargados.
+Además, para el desarrollo de este proyecto se han realizado una serie de programas que ayudan al análisis de juegos.
+También se explican las metodologías seguidas para el desarrollo de los estudios.
 
-Este trabajo demuestra una ausencia general en cuanto a protección sobre los archivos con contenidos con copyright.
+Las conclusiones del estudio demuestran una ausencia general en cuanto a protección sobre los archivos con contenidos con copyright.
 Así mismo, expone las técnicas utilizadas por algunas compañía a la hora de ofuscar para evitar modificaciones de archivos, tales como cifrados mediante operaciones \texttt{XOR}, algoritmos \texttt{HMAC} y de firma digital.
 En cuanto a los servicios en línea, se han detectado fallos de seguridad a la hora de configurar servidores y fallos en el diseño de los protocolos, que permiten hacer trampas con facilidad.
 
