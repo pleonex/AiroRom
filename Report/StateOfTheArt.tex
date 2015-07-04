@@ -29,23 +29,42 @@ Este trabajo muestra la seguridad de los juegos con el único propósito educacion
 
 \section{Seguridad de la información}
 \label{sec:art-sec}
-En la Sección~\ref{sec:int-sec} se comentan los aspectos de seguridad que se buscan solventar.
-En las siguiente secciones se explicarán expondrán algunos algoritmos de uso común y a los que se hará referencia a lo largo del trabajo.
+En la Sección~\ref{sec:int-sec} se comentan el modelo de seguridad CIA con los problemas que debe resolver.
+Los mecanismos de seguridad se definen a este respecto, como los procedimientos para garantizar la seguridad.
+En los siguientes apartados se introduce a los más comunes y que se tratarán a lo largo del proyecto.
 
 \subsection{Cifrado simétrico y asimétrico}
 El cifrado es un técnica para garantizar la confidencialidad.
-Mediante un algoritmo, un bloque de datos original se transforma en otro, reversible, pero que a simple vista parece aleatorio.
-Existen dos tipos de cifrados: simétrico y asimétrico.
+Partiendo de un texto plano, es decir los datos originales de entrada, se aplica un algoritmo con una clave dada.
+El resultado es otra representación del texto original, de la cual no se puede recuperar la información original sin conocer los detalles del cifrado.
 
-% TODO: Leer SRC y meter rollo de estandares y tal e imagenes y tal
+Los algoritmos se basan en operaciones de sustitución y transposición, reordenación de bloques de datos.
+Estos se clasifican en dos tipos principalmente: simétricos y asimétricos.
 
 El cifrado simétrico hace referencia a que existe una misma clave tanto para cifrar como para descifrar.
-Esta clave ha de conocerse en los dos extremos para poder establecer una comunicación con éxito.
-El algoritmo más común en este tipo de cifrado es la operación \texttt{XOR} sobre cada byte.
-Esta operación tiene la particularidad de cumplir \verb!a XOR b = c; b XOR c = a!, de forma que siendo respectivamente, el byte descifrado, la clave y el byte cifrado, se puede revertir este aplicando la operación XOR de nuevo.
-Sin embargo, en determinadas situaciones esta propiedad presenta un fallo de seguridad, pues si el byte descifrado es cero, el byte cifrado sería igual a la clave, que se transmitiría o almacenaría.
+Esta clave ha de conocerse entre los dos extremos para poder establecer una comunicación con éxito.
+Los algoritmos más conocidos son \texttt{IDEA}, \texttt{3DES}, \texttt{AES} y \texttt{RC4}.
 
-% TODO: Añadir tabla de XOR
+Sin embargo no hacen falta aplicar operaciones tan complejas cuando solo se desea ofuscar el texto como el caso de los videojuegos.
+En estos casos la operación \texttt{XOR} sirve a este propósito (Tabla~\ref{tab:art-xor}).
+El primer operando sería el byte a cifrar y el segundo un valor de la clave.
+Esta operación en cambio tiene el problema de que si se aplica sobre un byte con valor cero, el resultado será el segundo operando, es decir, la clave.
+Otra desventaja de esta operación es que conociendo una sección del texto plano y teniendo el texto cifrado, el resultado de aplicar \texttt{XOR} sería la clave.
+Para evitar estos dos problemas, se suele combinar con una clave, que cambia tras cada ejecución de forma que mediante un conjunto de bytes nulos no se podría recuperar la misma.
+Este es el caso del algoritmo \texttt{RC4}.
+
+\ctable[
+    caption = Tabla de resultados de la operación \texttt{XOR}.,
+    label   = tab:art-xor,
+    pos     = tb
+]{ccc}{}{                                                                   \FL
+    Primer operando & Segundo operando & Resultado                          \ML
+    0               & 0                & 0                                  \NN
+    0               & 1                & 1                                  \NN
+    1               & 0                & 1                                  \NN
+    1               & 1                & 0                                  \LL
+}
+
 
 El cifrado asimétrico, a pesar de ser más lento que el simétrico, mejora la seguridad al utilizar claves diferentes para descifrar y cifrar.
 De esta forma, cada extremo posee una clave y no necesita conocer la otra.
