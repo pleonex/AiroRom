@@ -24,7 +24,7 @@ La Sección~\ref{sec:met-nds-desmume} del capítulo de metodologías explica cómo m
 Tras conseguir una captura (Figura~\ref{fig:mp-nintendo-encry}) se pudo ver que, aparte de una primera comunicación \texttt{HTTP}, el resto se cifra mediante \texttt{HTTPS}.
 Para poder eludir la capa de seguridad de \texttt{TLS}, se descubrieron dos mecanismos: capturar la función de cifrado y forzar el uso de \texttt{HTTP}.
 
-\includefigure{fig:mp-nintendo-encry}{Primeros paquetes de una comunicación entre una \acl{NDS} y los servidores de Nintendo.}{imgs/MP-NintendoEncry.png}
+\includefigure{fig:mp-nintendo-encry}{Primeros paquetes de una comunicación entre una \acl{NDS} y los servidores.}{imgs/MP-NintendoEncry.png}
 
 El primero consiste en encontrar la función que cifra la comunicación en el juego, el algoritmo \texttt{RC4}.
 Dado que este código se incluye con la biblioteca que proporciona Nintendo a los desarrolladores, será igual en todos los juegos.
@@ -79,7 +79,7 @@ parámetros más importantes:
     \item Finalmente, el juego pide un fichero mediante el comando \texttt{content}.
 \end{enumerate}
 
-\includefigure{fig:mp-nintendowifi}{Petición respuesta descifrada entre \acl{NDS} y servidor de Nintendo.}{imgs/MP-NintendoWifi.png}
+\includefigure{fig:mp-nintendowifi}{Petición respuesta descifrada entre \acl{NDS} y servidor.}{imgs/MP-NintendoWifi.png}
 
 Este protocolo tiene ciertos \textbf{fallos tanto de seguridad como de eficiencia}:
 
@@ -115,7 +115,7 @@ El \textit{token} que se calcula es el resultado de aplicar el algoritmo \texttt
     \item \texttt{MD5} del \textit{challenge} del servidor \ac{NAS}.
 \end{itemize}
 
-\includefigure{fig:mp-nintendotoken}{Mensajes descifrados entre los servidores multijugador para \ac{NDS}. En verde el \textit{token} generado.}{imgs/MP-NintendoToken.png}
+\includefigure{fig:mp-nintendotoken}{Mensajes descifrados del protocolo multijugador de \acl{NDS}. En verde el \textit{token}.}{imgs/MP-NintendoToken.png}
 
 De esta forma solo aquellos dispositivos que reunan tanto los códigos devueltos por el servidor que da acceso a la red como el algoritmo para calcularlo serán capaces de comunicarse con éxito.
 Esta parte fue clave a la hora de realizar un servidor alternativo.

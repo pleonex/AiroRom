@@ -55,10 +55,40 @@ En ellos, en la posición \texttt{0x08}, mediante los caracteres \texttt{ASCII} s
 \end{figure}
 
 \section{Depuración de código}
+En ocasiones, no solo analizando un fichero con un visor hexadecimal se puede estudiar un formato.
+Para codificaciones complejas y estudios de algoritmo como cifrados e integridad hace falta mirar en la implementación del juego.
+En estos casos, mediante depuración del juego se pueden analizar las instrucciones máquina que ejecuta la consola, para saber cómo procesa el juego los ficheros y poder estudiarlos así.
 
-% Debate entre ida y no5gba con captura
+Esto es posible gracias a los emuladores.
+Para la \acl{NDS} existen principalmente dos formas de llevar a cabo este objetivo (Figura~\ref{fig:met-dep}).
 
-% TODO: Boku y hebras GZIP
+\begin{figure}
+\centering
+\begin{subfigure}{.5\textwidth}
+    \centering
+    \includegraphics[width=.4\linewidth]{imgs/MET-IDAPro.png}
+    \caption{IDA Pro 6.1 con DeSmuME.}
+\label{fig:met-idapro}
+\end{subfigure}%
+\begin{subfigure}{.5\textwidth}
+    \centering
+    \includegraphics[width=.4\linewidth]{imgs/MET-Nosgba.png}
+    \caption{Emulador con depurador integrado No\$GBA.}
+\label{fig:met-nosgba}
+\end{subfigure}
+\caption{Programas para depurar juegos de \acl{NDS}.}
+\label{fig:met-dep}
+\end{figure}
+
+El primero es usar el emulador de código abierto DeSmuME y el depurador IDA Pro.
+Este emulador se puede compilar activando funciones de depuración remotas.
+Incluye una implementación de \textit{GDB Remote Serial Protocol}\footnote{\url{http://www.embecosm.com/appnotes/ean4/embecosm-howto-rsp-server-ean4-issue-2.html}} que permite que programas externos, controlen la ejecución del juego paso a paso y accedan a la memoria \texttt{RAM}.
+Esto es lo que hace IDA Pro, sirviendo como un depurador universal.
+De esta forma se puede visualizar el código en ensamblador, poner puntos de interrupición y ver y cambiar la memoria del juego.
+
+La alternativa es usar el emulador privativo No\$GBA.
+Existe una versión que incluye un depurador, originalmente de pago, pero que recientemente se liberó como \textit{freeware}.
+Incluye las mismas funciones descritas anteriormente, pero en este caso implementandas sobre el propio emulador, aumentando la eficiencia.
 
 \subsection{Búsqueda de archivos en RAM}
 % Explicar trauma center
