@@ -66,27 +66,25 @@ Este es el caso del algoritmo \texttt{RC4}.
 }
 
 
-El cifrado asimétrico, a pesar de ser más lento que el simétrico, mejora la seguridad al utilizar claves diferentes para descifrar y cifrar.
+El cifrado asimétrico, a pesar de ser más lento que el simétrico, soluciona el problema de compartir la misma clave usada para cifrar y descifrar.
 De esta forma, cada extremo posee una clave y no necesita conocer la otra.
 Un mensaje cifrado con la primera clave, solo podría ser descifrado con la segunda clave y viceversa.
 Este algoritmo se usa para las comunicaciones a través de redes inseguras como Internet.
 Cuando se genera el par de claves, una se suele mantener secreta (clave privada) y la otra se comparte entre varios emisores (clave pública).
-El algoritmo más utilizado es \texttt{RSA}.
-% TODO: Meter historia y conceptos basicos de SRC
+El algoritmo más utilizado es \texttt{RSA} que permite tanto cifrado y descifrado, como firma digital e intercambio de claves.
 
 \subsection{Algoritmos de integridad}
 Los algoritmos de integridad tienen como objetivo asegurar que el mensaje no ha sido modificado.
-Para ello, mediante una serie de operaciones, se ofrece un resumen de tamaño fijo de los datos de entrada con tamaño variable.
+Para ello, mediante una serie de operaciones, se ofrece un resumen de tamaño fijo, de los datos de entrada con tamaño variable.
 Los algoritmos deben de cumplir que las colisiones (coincidencias de resumen en dos bloques de datos) sean aleatorias, no reproducibles.
 Estos se clasifican por el número de bits del resumen, siendo los más frecuentes \texttt{MD5}\footnote{Este algoritmo es inseguro.} con 128 bits y \texttt{SHA-1} con 160 bits.
-% TODO: Meter rollo de SRC.
 
 \subsection{Firma digital}
 La firma digital es una técnica para proveer tanto autenticidad como integridad sobre el mensaje.
-Consiste en aplicar un algoritmo de integridad sobre un bloque de datos (integridad) y al resultado cifrarlo con la clave privada del emisor (autencidad).
-De esta forma, solo la clave pública podrá descifrar el resultado del algoritmo \textit{hash}, por lo que se asegura que ha sido esa persona quien ha realizado la operación, y comprobar que el mensaje no ha sido modificado.
-El algoritmo emplea \texttt{SHA-1} para la integridad y \texttt{RSA} para el cifrado.
-% TODO: Meter rollo de SRC.
+Consiste en aplicar un algoritmo de integridad sobre un bloque de datos y, el resultado cifrarlo con la clave privada del emisor.
+De esta forma, solo la clave pública correspondiente al emisor podrá descifrar el resultado del algoritmo de integridad, por lo que se asegura que ha sido esa entidad quien ha realizado la operación.
+Además, al tener el resumen se puede comprobar que el mensaje no ha sido modificado.
+Lo frecuente es emplear \texttt{SHA-1} para la integridad y \texttt{RSA} para cifrar y compartir claves.
 
 \section{Seguridad en videoconsolas}
 \label{sec:art-video}
