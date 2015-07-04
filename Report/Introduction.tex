@@ -6,18 +6,18 @@
 \chapter{Introducción}
 \section{Motivación}
 % Historia de los videojuegos -> día de hoy y millones -> seguridad en mecanismos en anticopia
-El primer videojuego se remonta al año 1952~\cite{VG-History}, cuando el profesor de informática Alexander S. Douglas creo un juego con gráficos para ordenador.
-Llamado \textit{Nought and crosses} u \textit{OXO}, se trata de un tres en rayas implementado para la computadora \textit{EDSAC} de la Universidad de Cambridge.
+El primer videojuego se remonta al año 1952~\cite{VG-History}, cuando el profesor de informática Alexander S. Douglas creó un juego con gráficos para ordenador.
+Llamado \textit{Nought and crosses} u \textit{OXO}, se trata de un `tres en raya' implementado para la computadora \textit{EDSAC} de la Universidad de Cambridge.
 Este permitía enfrentar a una persona contra la máquina.
 Seis años más tarde, William Higginbotham desarrolló el juego \textit{Tennis for Two} sobre un oscilosopicio, inventando el primer videojuego multijugador.
-Cuatro años después, un estudiante del \ac{MIT} creo el juego un juego con gráficos vectoriales donde dos naves se enfrentabas, denominado \textit{Spacewar}.
+Cuatro años después, un estudiante del \ac{MIT} creó un juego con gráficos vectoriales donde dos naves se enfrentaban, denominado \textit{Spacewar}.
 
-Desde entonces y 63 años más tarde, existen ocho generaciones de videoconsolas.
+Desde entonces, y 63 años más tarde, existen ocho generaciones de videoconsolas.
 Las últimas permiten jugar en alta calidad y 60 fps, consiguendo un alto nivel de detalle y realismo.
-La industria de los videojuegos ha evolucionado a un ritmo imparable siendo en Estados Unidos uno de los sectores que más rápido ha crecido~\cite{ESA}.
+La industria de los videojuegos ha evolucionado a un ritmo imparable, siendo uno de los sectores que más rápido ha crecido en Estados Unidos~\cite{ESA}.
 En 2014, se vendieron solo en Estados Unidos 135 millones de juegos, generando unas ganancias de 22 mil millones de dólares.
 Para 2015, la empresa \textit{Gartner} estima que la venta de videojuegos a nivel global será de en torno a 100 mil millones de euros.
-En cuanto a España, en 2014 la industria creció un 21\% facturando 413 millones de euros según la \textit{Asociación Española de Empresas Productoras y Desarrolladoras de Videojuegos y Software de Entretenimiento}~\cite{DEV}.
+En cuanto a España, en 2014 la industria creció un 21\%, facturando 413 millones de euros según la \textit{Asociación Española de Empresas Productoras y Desarrolladoras de Videojuegos y Software de Entretenimiento}~\cite{DEV}.
 
 \section{Conceptos de seguridad}
 \label{sec:int-sec}
@@ -49,17 +49,17 @@ A este modelo se le suele añdir cuatro puntos más, resultando todos ellos en la 
 \end{itemize}
 
 \section{Objetivos}
-El objetivo que persigue este trabajo es el de analizar tres diferentes aspectos de seguridad sobre videojuegos.
+El objetivo que persigue este trabajo es analizar tres diferentes aspectos de seguridad sobre videojuegos.
 En cada uno se ofrecerá varios análisis de juegos, mostrando sus vulnerabilidades y puntos fuertes, y ofreciendo recomendaciones.
 
-Para ello, se habrá de determinar el ámbito de las problemáticas, identificando qué tipo de contenido deben ser protegido y porqué.
+Para ello se habrá de determinar el ámbito de las problemáticas, identificando qué tipo de contenido deben ser protegido y por qué.
 Sobre esto, habrá de realizarse un análisis del estado actual y en qué medida afecta a la industria.
 
 Se han escogido juegos de la \acl{NDS} para la mayoría de los casos, por la documentación que existe sobre el hardware de la consola y emuladores con capacidades de depuración.
 Los resultados del análisis de estos juegos son el objetivo de la memoria, mostrando qué técnicas de protección de datos se han implementado y cómo se podría haber mejorado.
 
 Este estudio surge del reciente interés por la edición de videojuegos al que se llama \textit{romhacking}.
-El nombre proviene del inglés \textit{modificación no autorizada} (\textit{hack}) sobre un archivo que originalmente viene en dispositivos de solo lectura (\textit{Read Only Memory (ROM)}).
+El nombre proviene del inglés \textit{modificación no autorizada} (\textit{hack}) sobre un archivo que originalmente viene en dispositivos de solo lectura (\textit{Read Only Memory, ROM}).
 Estas modificaciones se realizan aplicando conceptos de ingeniería inversa sobre los archivos, es decir, a partir del producto final se extraen sus recursos y se averigua cómo funciona.
 Existen comunidades en Internet dedicadas a este propósito\footnote{\url{http://romhacking.net/}}, donde se comparte información y utilidades.
 Los tres tipos de modificaciones y estudios más frecuentes en este movimiento, y sobre los que se basará este trabajo, son:
@@ -76,28 +76,28 @@ Los tres tipos de modificaciones y estudios más frecuentes en este movimiento, y
 \end{enumerate}
 
 \section{Organización}
-La memoria se ha organizado de forma que primero se presentará la metodología, a continuación los resultados de los análisis y finalmente una conclusión.
+La memoria se ha organizado de forma que primero se presentará la metodología a seguir en el análisis de los videojuegos, a continuación los resultados de los análisis y finalmente una conclusión.
 
-En el Capítulo~\ref{sec:art} se introducirá sobre la edición de videojuegos, la seguridad que habitualmente se implementa y aspectos legales para realizar ingeniería inversa.
+En el Capítulo~\ref{sec:art} se introducirá la edición de videojuegos, la seguridad que habitualmente se implementa y aspectos legales para realizar ingeniería inversa.
 
 En el Capítulo~\ref{sec:requirements} se mostrarán los apartados y tareas en los que se ha dividido y planificado el trabajo, además de los recursos y los costes estimados.
 
 El Capítulo~\ref{sec:met} explica las diferentes metodologías empleadas a la hora de analizar un aspecto de un videojuego.
 También se hará referencia a los programas desarrollados durante el trabajo para facilitar los análisis y se detallará su uso y funcionamiento.
 
-El Capítulo~\ref{sec:translations} comenta los resultados obtenidos tras analizar juegos que han sido objetivo de traducciones no oficiales.
-La investigación se concentró en averiguar los algoritmos empleados para ofuscas textos e imágenes.
+El Capítulo~\ref{sec:translations} comenta los resultados obtenidos tras analizar juegos que han sido objeto de traducciones no oficiales.
+La investigación se concentró en averiguar los algoritmos empleados para ofuscar textos e imágenes.
 Incluye también un estudio sobre las causas de abandono de estos proyectos.
 
 En el Capítulo~\ref{sec:copyright} se habla sobre los contenidos con derecho de autor.
-Para ello, se han escogido una serie de juegos que incluyen libros electrónicos, canciones o vídeos; y se ha analizado los posibles algoritmos para proteger dicho contenido.
+Para ello, se han escogido una serie de juegos que incluyen libros electrónicos, canciones o vídeos; y se han analizado los posibles algoritmos para proteger dichos contenidos.
 
 El Capítulo~\ref{sec:multiplayer} muestra los resultados de analizar diferentes servicios en línea.
-Se explicará los mecanismos de seguridad de los servidores de Nintendo para \acl{NDS}, comentando la metodología seguida y los fallos de seguridad descubiertos.
+Se explicarán los mecanismos de seguridad de los servidores de Nintendo para \acl{NDS}, comentando la metodología seguida y los fallos de seguridad descubiertos.
 También se comentará la seguridad implementada sobre videojuegos para jugar en multijugador y descargar contenidos extras.
-El capítulo termina con un análisis sobre cómo en la \acl{NDS} se transmite código ejecutable de forma segura entre consolas.
+El capítulo termina con un análisis sobre cómo se transmite código ejecutable en la \acl{NDS} de forma segura entre consolas.
 
-El Capítulo~\ref{sec:recomm} resume los algoritmos encontrados así como sus puntos débiles y fuertes y, se proponen nuevas técnicas para reforzar su seguridad.
+El Capítulo~\ref{sec:recomm} resume los algoritmos encontrados así como sus puntos débiles y fuertes y se proponen algunas técnicas para reforzar su seguridad.
 
 La memoria concluye con el Capítulo~\ref{sec:conclusion}, donde se detallan los conocimientos aprendidos y habilidades desarrolladas con este trabajo.
-Incluye una sección con líneas de trabajo sobre los que se podría continuar.
+Incluye una sección con líneas de trabajo sobre los que se podría continuar desarrollando el trabajo aquí realizado.
