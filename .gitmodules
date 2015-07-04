@@ -25,3 +25,6 @@
 [submodule "Programs/RC4Finder/modime"]
 	path = Programs/RC4Finder/modime
 	url = http://github.com/pleonex/modime
+[submodule "Programs/RelativeSearch"]
+	path = Programs/RelativeSearch
+	url = git@github.com:pleonex/RelativeSearch
