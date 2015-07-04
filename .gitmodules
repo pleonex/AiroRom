@@ -28,3 +28,6 @@
 [submodule "Programs/RelativeSearch"]
 	path = Programs/RelativeSearch
 	url = git@github.com:pleonex/RelativeSearch
+[submodule "Programs/tinke"]
+	path = Programs/tinke
+	url = http://github.com/pleonex/tinke
