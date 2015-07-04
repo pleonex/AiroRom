@@ -211,10 +211,22 @@ Se modificaron los archivos \texttt{wifi.cpp} y \texttt{wifi.h}\footnote{\url{ht
 Esta comunicación sin embargo está cifrada.
 En la Sección~\ref{sec:mp-nintendo-server} sobre los resultados de los servicios en línea de Nintendo, se explica cómo utilizar los programas desarrollados \textit{RC4Finder} y \textit{SSLPatcher} para capturar una comunicación descifrada de la \acl{NDS}.
 
-\section{Documentación}
+\section{Documentación y repositorio}
+Los programas y documentación de este trabajo se ha ido publicando en un repositorio, gestionado por \textit{git}, y subido a la página \textit{GitHub}, con el siguiente enlace:
 
-% Explicar databrithm
+\begin{center}
+\url{https://github.com/pleonex/AiroRom}\footnote{El nombre \textit{AiroRom} es un juego de palabras entre \textit{airo}, del junto de herramientas \textit{aircrack} y \textit{ROM}, que es como se denomina al archivo de un videojuego.}
+\end{center}
 
-% Comentar programas de los juegos
+La documentación se fue redactando en formato \textit{Markdown} en la wiki\footnote{\url{https://github.com/pleonex/AiroRom/wiki}} del repositorio.
+En la página de \textit{Mecanismos a investigar}, se muestran los juegos ordenados por desarrollador con más juegos lanzados.
+Para crear esta clasificación se hizo el \textit{script} en \textit{python} llamado \textit{Scenadvorter}.
+Este programa, lee un XML con una base de datos de todos los juegos para \acl{NDS} que proporciona la página ADVANsCEne\footnote{\url{http://www.advanscene.com}}, y clasifica los juegos por desarrollador mostrando los diez primeros con más juegos.
 
-% explicar script de organización
+Para guardar la información sobre los algoritmos descubiertos, se desarrolló un programa que permitía guardar y editar dicha información en ficheros XML.
+Este programa (Figura~\ref{fig:met-databrithm}) se llamó \textit{DataBrithm} y se encuentra todo su código en el repositorio también.
+
+\includefigure{fig:met-databrithm}{Programa de gestión de algoritmos de juegos DataBrithm}{imgs/MET-DataBrithm.png}
+
+En la carpeta \texttt{Games} del repositorio se encuentran programas y enlaces a repositorios con programas desarrollados para analizar los contenidos de cuatro juegos.
+De forma similar, en la carpeta \texttt{Programs}, se incluye enlace a los repositorios y programas desarrollados para el análisis.
