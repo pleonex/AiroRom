@@ -19,11 +19,34 @@ En 2014, se vendieron solo en Estados Unidos 135 millones de juegos, generando u
 Para 2015, la empresa \textit{Gartner} estima que la venta de videojuegos a nivel global será de en torno a 100 mil millones de euros.
 En cuanto a España, en 2014 la industria creció un 21\% facturando 413 millones de euros según la \textit{Asociación Española de Empresas Productoras y Desarrolladoras de Videojuegos y Software de Entretenimiento}~\cite{DEV}.
 
-% TODO: Añadir noticias sobre crecimiento en seguridad
-
 \section{Conceptos de seguridad}
 \label{sec:int-sec}
-% TODO: Introducir a concepto sobre seguridad como lo confidencialidad y to eso.
+La seguridad se puede definir en tres puntos: la condición de un sistema como resultado del establecimiento y mantenimiento de medidas de protección del sistema; la condición de un sistema en el cual sus recursos están libres de acceso no autorizados y de cambios accidentales o no autorizados, destrucción o, pérdida; medidas tomadas para proteger un sistema.\footnote{\url{https://tools.ietf.org/html/rfc4949}}.
+A su vez, esta puede estar referida a tres ámbitos:
+
+\begin{itemize}
+    \item La seguridad de la información trata sobre la protección de datos guardados.
+    \item La seguridad en las comunicaciones se refiere a la protección en la transmisión de datos
+    \item La seguridad de sistema se centra en la protección de sistemas por los que pasa la información.
+\end{itemize}
+
+Este trabajo abarca los dos primeros puntos, habiendo una pequeña introducción sobre el tercero en el Apartado~\ref{sec:art-video} de seguridad en videconsolas.
+
+Max Kilger, investigador de ciberseguridad, resume la motivación de las amenazas con las siglas \texttt{MEECES} del inglés dinero, ego, entretenimiento, ideología, entrada en grupos sociales y estatus social.
+
+Con el objetivo de hacer frente a estas amenazas, existen varios modelos de seguridad con aspectos que debe cumplir un sistema protegido.
+El más conocido denominado CIA por las iniciales de los tres principales puntos recogidos a continuación.
+A este modelo se le suele añdir cuatro puntos más, resultando todos ellos en la siguiente lista:
+
+\begin{itemize}
+    \item Confidencialidad: la información solo puede estar accesible por los entes autorizados.
+    \item Integridad: se ha de garantizar que la información no ha sido modificada de manera no autorizada.
+    \item Disponibilidad (\textit{Availability}): la información ha de estar disponible cuando se solicita.
+    \item Autenticación: se ha de garantizar quién es el otro extremo.
+    \item Disuasión: se ha de evitar cualquier motivación para realizar ataques.
+    \item No repudio: se ha de garantizar que la operación se realizó.
+    \item Recuperación: el sistema puede ser devuelto a su estado inicial tras un ataque.
+\end{itemize}
 
 \section{Objetivos}
 El objetivo que persigue este trabajo es el de analizar tres diferentes aspectos de seguridad sobre videojuegos.
