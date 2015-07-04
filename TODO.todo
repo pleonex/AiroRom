@@ -11,18 +11,20 @@ Introducción (5-págs máximo):
 ✔ Objetivos de este trabajo. @done(2015-07-02 10:56)
 ✔ Organización del trabajo. @done(2015-07-02 10:35)
 ✔ Resumir aspectos interesantes a tratar. @done(2015-07-04 01:20)
+☐ Conceptos básicos de seguridad.
 
 Estado del arte:
 ✘ Explicar plataformas y clasificarlas en cerrados o abiertos. @cancelled(2015-07-04 02:05)
 ✔ Introducción a la ingeniería inversa de REDO. @done(2015-07-04 02:40)
-☐ Aspectos legales de ingeniería inversa (cap. 12 xbox y pág. 17 negro).
-☐ Problema de siempre poder descompilar (cap. 13 negro).
+✔ Aspectos legales de ingeniería inversa (cap. 12 xbox y pág. 17 negro). @done(2015-07-04 04:00)
+✔ Problema de siempre poder descompilar (cap. 13 negro). @done(2015-07-04 03:17)
 ✘ Diferencia codificar y cifrar. @cancelled(2015-07-04 02:06)
 ✔ Prologo xbox @done(2015-07-04 02:06)
 ✔ Guías de romhacking. @done(2015-07-04 02:40)
-☐ ¡Esto es legal!: http://www.bloomberg.com/news/articles/2012-05-02/copyright-can-t-block-software-reverse-engineering-court Y http://www.woodmann.com/fravia/legal.htm
-☐ Hasta qué punto el esfuerzo vale el producto.
+✔ ¡Esto es legal!: http://www.bloomberg.com/news/articles/2012-05-02/copyright-can-t-block-software-reverse-engineering-court Y http://www.woodmann.com/fravia/legal.htm @done(2015-07-04 03:49)
+✔ Hasta qué punto el esfuerzo vale el producto. @done(2015-07-04 03:49)
 ✘ Mencionar fuentes principales. @cancelled(2015-07-04 02:06)
+☐ Conceptos básicos de seguridad.
 
 Requisitos, planificación y costes:
 ✔ Objetivos específicos y tareas para llevarlos a cabo. Repo y wiki. @done(2015-07-02 14:51)
