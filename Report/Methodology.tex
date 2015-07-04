@@ -90,43 +90,66 @@ La alternativa es usar el emulador privativo No\$GBA.
 Existe una versión que incluye un depurador, originalmente de pago, pero que recientemente se liberó como \textit{freeware}.
 Incluye las mismas funciones descritas anteriormente, pero en este caso implementandas sobre el propio emulador, aumentando la eficiencia.
 
+Dado que IDA Pro es un programa con una licencia básica de \$500, este trabajo se realizó con el emulador No\$GBA que a pesar de no tener tantas funcionalidad, sí provee de las necesarias para realizar el trabajo.
+Además, se comenzó a implementar un depurador remoto, una versión de IDA Pro de código abierto, denominada NitroDebugger\footnote{\url{https://github.com/pleonex/nitrodebugger}}.
+Aunque no llega es funcional todavía, la base de la aplicación está terminada.
+
 \subsection{Búsqueda de archivos en RAM}
-% Explicar trauma center
+Esta subsección explicará el procedimiento seguido para, mediante depuración, averiguar cómo el juego procesa un fichero.
+Para ello, hace falta conocer cómo el juego obtiene datos de la cartucho del juego.
+El protocolo de comunicación es sencillo, cuando se necesitan datos se envía un comando, que el hardware cifra (esa parte, al usar un emulador, no se realiza), y al cual al cartucho responde con los datos solicitados.
+El código de este comando es \texttt{0xB7} y se envía escribiéndolo en el puerto virtual \texttt{0x040001A8}~\cite{GbaTek}.
+
+Conociendo la función de código que se encarga de envíar este comando, solicitando bloques de datos, y poniendo un punto de interrupción, de forma que la ejecución del juego se para pudiendo ver qué dirección se ha solicitado, se podría determinar qué archivo acaba de ser solicitado.
+Dado que continuamente se están cargando datos, realizar esto manualmente no es viable, es por ello, que aprovechando que el emulador DeSmuME es de código abierto, se puede modificar para automatizarlo.
+
+Esta mecánica se implementó para realizar los análisis de este trabajo con el programa \textit{NitroFilcher}\footnote{\url{https://github.com/pleonex/AiroRom/tree/master/Programs/NitroFilcher}}.
+En el emulador se añadieron las siguientes líneas de código a la función \texttt{HandleDebugEvent\_Execute} del archivo \texttt{debug.cpp}, consiguiendo que cada vez que se ejecutara las instrucciones que solicitan datos, guardase en un fichero de texto la posición que se pedía junto al tamaño.
+
+\begin{verbatim}
+// 0x02016DE0 es la dirección de la función que solicita datos.
+if (DebugEventData.addr == 0x02016DE0 && log_ptr != NULL) {
+    u32 addr = DebugEventData.cpu()->R[2];
+    u32 size = DebugEventData.cpu()->R[3];
+    fprintf(log_ptr, "%08X,%08X,%08X\n", addr, size, addr + size);
+}
+\end{verbatim}
+
+Este fichero luego lo procesaría el programa \textit{NitroFilcher}, escribiendo en otro fichero de texto las rutas a los archivos que correspondían esas direcciones.
 
 \subsection{Búsqueda de algoritmos sobre textos}
 \label{sec:met-search-text}
-% TODO:
 En el Capítulo~\ref{sec:translations} se mostrarán algoritmos para ofuscar y cifrar textos.
-El procedimiento para realizar este estudio se basa tanto en depuración de código, como en el conocimiento de malas prácticas empleadas.
+El procedimiento para realizar este estudio se basa en depuración de código.
 
-El primer paso consiste en mirar el archivo cifrado y realizar un estudio de los bytes más frecuentes.
-Tras una búsqueda de las frases de diálogos iniciales sobre todo el archivo binario del juego no se encuentran resultados.
-Se probó en las codificaciones más frecuentes de esta consola como son ASCII y UNICODE sin resultado.
-Esto indica que bien el archivo que contiene los textos está comprimido o cifrado.
+El primer paso es buscar la frase en texto plano sobre el binario del juego.
+Tras determinar que no aparece, se puede confirmar que puede estar codificada en una codificación no estándar, comprimida o cifrada.
+Se suele probar con las codificaciones soportadas nativamente por las fuentes de \acl{NDS} como son \texttt{UTF-8}, \texttt{UTF-16}, \texttt{SHIFT-JIS} y \texttt{CP1252}.
 
-El siguiente procedimiento fue extraer la memoria RAM del juego justo en el momento de mostrar ese diálogo, pues debería estar almacenada esa frase para poder ser mostrada en pantalla.
-Esto se puede realizar gracias al emulador DeSmuME.
-Una vez extraído el archivo binario con la memoria RAM, mediante visores hexadecimales se buscó la frase que aparecía en pantalla usando las codificaciones estándar y sin obtener resultado de nuevo.
-Dado que la frase ha de estar en la memoria RAM, el problema era por tanto que no estaba usando una codificación estándar.
-Existen dos procedimientos básicos para realizar una búsqueda en estos casos.
+Confirmado que hay un algoritmo que se aplica sobre el texto, el objetivo es encontrar este texto en la memoria \texttt{RAM} del juego, para poder poner un punto de interrupción y ver qué transformaciones se aplican hasta llegar al texto descifrado.
+Para ello, se extrae la memoria, justo en el momento de mostrar ese diálogo, pues debería estar la frase guardad para poder mostrarla en pantalla.
+Esto se puede realizar con cualquier emulador de \acl{NDS}.
+Una vez extraído el archivo binario con la memoria, mediante visores hexadecimales se busca el texto usando de nuevo codificaciones estándar.
+Si la frase se encuentra, se pondría un punto de interrupción en dicha posición y se estudiaría el algoritmo.
+En caso contrario, probablemente se use una codificación propietaria, sin embargo se puede encontrar siguiendo la metodología explicada en los siguientes apartados.
 
+\subsubsection{Búsqueda de la tipografía}
 El primero consiste en buscar el archivo con la tipografía del juego, pues la codificación será la misma que el orden con el que aparecen los caracteres en ella.
 
+El estandar de este formato tiene la cabecera \texttt{NTFR} y existen programas para extraer y editar este tipo de formatos\footnote{\url{https://github.com/pleonex/NerdFontTerminatoR}}.
+
+\subsubsection{Búsqueda diferencial}
 El segundo procedimiento posible es el de desarrollar un programa de búsqueda diferencial. Con motivo de este trabajo se explica el programa \textit{RelativeSearch} que se llevó a cabo. Este tipo de software se puede usar siempre y cuando el orden de los caracteres de un mismo grupo (por ejemplo letras minúsculas) corresponda a estándares como ASCII. Si se hubiese seguido un orden aleatorio en la codificación propietaria este no serviría quedando la primera opción como única alternativa.
-
-Tras usar cualquiera de los dos procedimientos anteriormente descritos, se puedo encontrar una coincidencia en la memoria RAM del diálogo. El siguiente paso consistió en depurar el juego para hallar el algoritmo de descifrado o descompresión de textos. Para ello usando los programas de depuración, se puso un punto de interrupción en dicha posición.
-
-Cabe destacar que esta posición es dinámica por lo que cambia cada vez que se inicia el juego pues depende de muchas variables. Para sortear este problema se hizo uso de los \textit{savestates} del emulador, es decir guardados de memoria del juego que permiten ir a cualquier momento de una ejecución. Gracias a esta característica se puede realizar un guardado justo antes de que el juego guarde un juego de forma que siempre que se use ese \textit{savestate} encontraremos el texto en la misma posición. El punto de interrupción hizo parar el emulador justo en las instrucciones máquinas que estaban realizando, en este caso, el descifrado.
 
 \subsection{Búsqueda de algoritmo sobre imágenes}
 \label{sec:met-search-img}
 El procedimiento para encontrar el algoritmo de cifrado en este caso es distinto al realizado con texto.
-No se puede partir de datos conocidos como anteriormente se partía de una frase que se veía en la pantalla.
-Sin embargo, dado que las cabeceras de la imagen no están cifradas se pudo buscar sobre el código en ensamblador la función que procesa esta cabecera.
-En concreto se buscó la palabra mágica \texttt{CHAR} que se procesa para determinar el comienzo de una sección del archivo.
+No se puede partir de datos conocidos como anteriormente se hacía con una frase que se veía en la pantalla.
+Sin embargo, dado que las cabeceras de la imagen suelen ser estandar, se puede buscar sobre el código en ensamblador la función que procesa esta cabecera.
+En concreto se busca el identificador \texttt{CHAR}, que se procesa para determinar el comienzo de una sección del archivo.
 
-Una vez encontrado la función que lee una imagen, solo habría que acceder a una parte del juego donde se esperaba que se cargase una imagen como durante una batalla y poner un punto de interrupción sobre esta función.
-Tras omitir imágenes que no estaban cifradas\footnote{Dado que una imagen contiene suele tener píxeles cercanos de igual colores, siempre que en los datos se observara patrones se podía determinar que no estaba cifrada.}, se llegó a una que sí lo estaba donde se puso un punto de interrupción.
+Una vez encontrada la función que lee una imagen, se puede poner un punto de interrupción sobre ella, para tener acceso a los datos cifrados cuando el juego procese un archivo.
+Una vez localizados, se ponde un punto de interrupción sobre ellos, este último, llevará al código que procesa estos datos, por tanto el algoritmo que los descifra.
 
 \section{Intercepción de comunicación}
 \label{sec:met-nds-desmume}
