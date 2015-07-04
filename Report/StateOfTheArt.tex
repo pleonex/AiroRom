@@ -29,6 +29,45 @@ Este trabajo muestra la seguridad de los juegos con el único propósito educacion
 
 \section{Mecanismos de seguridad}
 \label{sec:art-sec}
+En la Sección~\ref{sec:int-sec} se comentan los aspectos de seguridad que se buscan solventar.
+En las siguiente secciones se explicarán expondrán algunos algoritmos de uso común y a los que se hará referencia a lo largo del trabajo.
+
+\subsection{Cifrado simétrico y asimétrico}
+El cifrado es un técnica para garantizar la confidencialidad.
+Mediante un algoritmo, un bloque de datos original se transforma en otro, reversible, pero que a simple vista parece aleatorio.
+Existen dos tipos de cifrados: simétrico y asimétrico.
+
+% TODO: Leer SRC y meter rollo de estandares y tal e imagenes y tal
+
+El cifrado simétrico hace referencia a que existe una misma clave tanto para cifrar como para descifrar.
+Esta clave ha de conocerse en los dos extremos para poder establecer una comunicación con éxito.
+El algoritmo más común en este tipo de cifrado es la operación \texttt{XOR} sobre cada byte.
+Esta operación tiene la particularidad de cumplir \verb!a XOR b = c; b XOR c = a!, de forma que siendo respectivamente, el byte descifrado, la clave y el byte cifrado, se puede revertir este aplicando la operación XOR de nuevo.
+Sin embargo, en determinadas situaciones esta propiedad presenta un fallo de seguridad, pues si el byte descifrado es cero, el byte cifrado sería igual a la clave, que se transmitiría o almacenaría.
+
+% TODO: Añadir tabla de XOR
+
+El cifrado asimétrico, a pesar de ser más lento que el simétrico, mejora la seguridad al utilizar claves diferentes para descifrar y cifrar.
+De esta forma, cada extremo posee una clave y no necesita conocer la otra.
+Un mensaje cifrado con la primera clave, solo podría ser descifrado con la segunda clave y viceversa.
+Este algoritmo se usa para las comunicaciones a través de redes inseguras como Internet.
+Cuando se genera el par de claves, una se suele mantener secreta (clave privada) y la otra se comparte entre varios emisores (clave pública).
+El algoritmo más utilizado es \texttt{RSA}.
+% TODO: Meter historia y conceptos basicos de SRC
+
+\subsection{Algoritmos de integridad}
+Los algoritmos de integridad tienen como objetivo asegurar que el mensaje no ha sido modificado.
+Para ello, mediante una serie de operaciones, se ofrece un resumen de tamaño fijo de los datos de entrada con tamaño variable.
+Los algoritmos deben de cumplir que las colisiones (coincidencias de resumen en dos bloques de datos) sean aleatorias, no reproducibles.
+Estos se clasifican por el número de bits del resumen, siendo los más frecuentes \texttt{MD5}\footnote{Este algoritmo es inseguro.} con 128 bits y \texttt{SHA-1} con 160 bits.
+% TODO: Meter rollo de SRC.
+
+\subsection{Firma digital}
+La firma digital es una técnica para proveer tanto autenticidad como integridad sobre el mensaje.
+Consiste en aplicar un algoritmo de integridad sobre un bloque de datos (integridad) y al resultado cifrarlo con la clave privada del emisor (autencidad).
+De esta forma, solo la clave pública podrá descifrar el resultado del algoritmo \textit{hash}, por lo que se asegura que ha sido esa persona quien ha realizado la operación, y comprobar que el mensaje no ha sido modificado.
+El algoritmo emplea \texttt{SHA-1} para la integridad y \texttt{RSA} para el cifrado.
+% TODO: Meter rollo de SRC.
 
 \section{Seguridad en videoconsolas}
 La seguridad cada vez más se confía en la consola y la compañía que hay detrás de ella, en lugar, de sobre el propio juego.
@@ -145,7 +184,7 @@ En el caso de España, se recoge en número 97 del BOE\footnote{\url{http://boe.es
 
 \noindent donde se recoge el mismo contenido que la directiva europea recomienda.
 Esto además está respaldado por la resolución de un juicio en la Corte Suprema de la Unión Europa en esta materia\footnote{\url{http://www.bloomberg.com/news/articles/2012-05-02/copyright-can-t-block-software-reverse-engineering-court}}.
-En él, la compañía \textit{World Programming Ltd} fue demandada por \textit{SaaS Institute Inc.} al desarrollar un software, apartir de conocimientos adquiridos mediante ingeniería inversa, que replicaba el funcionamiento del programa de la compañía demandante. La corte señaló que `\textit{There is no copyright infringement [when a software company without access to a program's source code] studied, observed and tested that program in order to reproduce its functionality in a second program. (No se infringe el copyright [cuando una compañía de software sin acceso al código fuente del programa] estudia, observa y prueba el problema para reproducir su funcionalidad en un segundo programa).}'
+En él, la compañía \textit{World Programming Ltd} fue demandada por \textit{SaaS Institute Inc.} al desarrollar un software, apartir de conocimientos adquiridos mediante ingeniería inversa, que replicaba el funcionamiento del programa de la compañía demandante. La corte señaló que `\textit{There is no copyright infringement [when a software company without access to a program's source code] studied, observed and tested that program in order to reproduce its functionality in a second program. (No se infringe el copyright [cuando una compañía de software sin acceso al código fuente del programa] estudia, observa y prueba el problema para reproducir su funcionalidad en un segundo programa)}'.
 
 En el caso de los Estados Unidos, debido a la ley \ac{DMCA}, no está claro la legalidad, prohibiéndose en un principio a no ser que se contara con los permisos del autor.
 El Capítulo 12 del libro \textit{Hacking the Xbox}, escrito por Lee Tien, abogado de la \ac{EFF}, contiene un completo análisis al respecto.
