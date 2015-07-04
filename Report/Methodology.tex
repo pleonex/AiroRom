@@ -5,18 +5,63 @@
 
 \chapter{Metodología}
 \label{sec:met}
+Este capítulo explicará las diferentes metodologías llevadas a cabo durante la realización del proyecto.
+No existe un método único a la hora de realizar un trabajo de ingeniería inversa, cada juego es diferente, programado por diferentes compañías en distintos instantes de tiempo.
+Al trabajar con formatos, estos van evolucionando, añadiendo más campos o siendo reemplazados por nuevos con mayor funcionalidad.
+Analizando instrucciones máquina, estas cambian en cada compilación del juego, especialmente los registros usados.
+Aunque la funcionalidad del código sea la misma, problablemente no se usen los mismos registros, valores de pila, haciendo difícil poder reconocer un mismo algoritmo en dos juegos distintos.
 
+El objetivo de las siguiente secciones es mostrar qué técnicas, programas y pasos se han realizado a la hora de analizar los juegos de este trabajo.
+Apartir de ellos, y con pequeñas modificaciones, se pueden analizar aspectos de seguridad para otro conjunto de videojuegos.
+
+\section{Análisis de ficheros}
+Una vez decidido un juego objetivo se debe reunir información sobre él.
+Conocer el desarrollador, el año de lanzamiento y género del juego pueden ser útiles pues, proporcionan indicios sobre el tipo de ficheros que contiene.
+Usando programas de exploración de ficheros como Tinke\footnote{\url{https://github.com/pleonex/tinke}}, se pueden reconocer los tipos de formato estándar y comenzar a trabajar sobre ellos.
+
+El interés sin embargo es analizar aquellos formatos nuevos, que codifican recursos como imágenes y textos.
+Los nombres y directos de los archivos son la primera referencia sobre el tipo de contenido.
+Por ejemplo, tomando el juego de \textit{Ninokuni} para \acl{NDS}, el archivo \texttt{/data/UI/Menu/Skin/2/CheckShee\allowbreak{}t/bg\_a.n2d} debe contenido elementos de la interfaz gráfica (\textit{UI}) del menú (\textit{Menu}) del juego.
+Además, la abreviatura \textit{bg} se utiliza para describir imágenes de fondo de pantalla (\textit{background}).
+Mirando el contenido de este archivo con un visor hexadecimal se puede ver en la posición \texttt{0x54} se encuentran los caracteres \texttt{RLCN}, correspondientes a la cabecera de un formato estándar en la \acl{NDS} (Figura~\ref{fig:met-bg1}).
+
+\includefigure{fig:met-bg1}{Contenido de un fichero con imágenes de \textit{Ninokuni}.}{imgs/MET-Bg1.png}
+
+Al contrar esa cabecera, indica que este archivo contiene varios ficheros, en un formato similar a \texttt{zip}.
+El análisis se centraría en saber cómo extraer los ficheros para luego determinar qué datos tienen cada uno de ellos.
+Como dato indicativo se tiene que los datos del primer fichero empiezan en la posición \texttt{0x54}, por lo que habrá que buscar un valor qué indique esta posición.
+En la posición \texttt{0x0C}, se observa justo ese valor, seguido de \texttt{0x228}.
+Frecuentemente, después de la posición de un fichero se indica su tamaño, por lo que habrá que comprobar si el primer fichero termina en la posición \verb!0x54 + 0x228 = 0x27C!. En la Figura~\ref{fig:met-bg2} se ve que en esa posición aparece la cabecera \texttt{RGCN}, estándar para otro formato de archivo.
+
+\includefigure{fig:met-bg2}{Contenido de un fichero comprimido de \textit{Ninokuni}.}{imgs/MET-Bg2.png}
+
+Esto corrobora la estructura que se intuía, por lo que por cada fichero hay 8 bytes indicando posición y tamaño.
+Para determinar el número de ficheros se puede calcular cuantos archivos especifica esa \textit{tabla de contenidos}, restando el principio del primer fichero a la posición de la primera entrada y diviendo por el número de bytes dedicado a cada fichero: \verb!(0x54 - 0x0C) / 0x08 = 9!.
+El resultado es que se han especificado 9 ficheros, valor que coincide con el encontrado en la posición \texttt{0x08} (Figura~\ref{fig:met-bg1}).
+
+Esta forma de razonar es la que se ha empleado para averiguar de los formatos estudiados en el trabajo.
+Faltaría averiguar el contenido de cada fichero.
+Estudiando los formatos más comunes, se puede identificar (Figura~\ref{fig:met-bg2}) que al principio hay colores, pues cada valor de 16 bits está próximo al siguiente.
+Al final hay información sobre cada píxel, índice al color de la paleta, pues se repiten muchos valores que están próximos, esto concuerda con el hecho de que un píxel en una imagen suele tener a su alrededor píxeles de similar color.
+
+Otro ejemplo se encuentra en los archivos de tipo \texttt{PSAR} (Figura~\ref{fig:met-psar}) analizados en la Sección~\ref{sec:cr-nino}.
+En ellos, en la posición \texttt{0x08}, mediante los caracteres \texttt{ASCII} se indica el tipo de compresión que se usa sobre los datos, \texttt{zlib}.
+
+\begin{figure}[bh]
+\centering
+\includegraphics{imgs/CR-PSAR.png}
+\caption{Primeros bytes del fichero \texttt{PSAR}.}
+\label{fig:met-psar}
+\end{figure}
 
 \section{Depuración de código}
 
-\includefigure{fig:met-psar}%
-{Primeros bytes del fichero \texttt{PSAR}.}%
-{imgs/CR-PSAR.png}
+% Debate entre ida y no5gba con captura
 
 % TODO: Boku y hebras GZIP
 
-\subsection{Claves XOR en texto plano}
-\label{sec:met-xor-key}
+\subsection{Búsqueda de archivos en RAM}
+% Explicar trauma center
 
 \subsection{Búsqueda de algoritmos sobre textos}
 \label{sec:met-search-text}
@@ -53,8 +98,18 @@ En concreto se buscó la palabra mágica \texttt{CHAR} que se procesa para determi
 Una vez encontrado la función que lee una imagen, solo habría que acceder a una parte del juego donde se esperaba que se cargase una imagen como durante una batalla y poner un punto de interrupción sobre esta función.
 Tras omitir imágenes que no estaban cifradas\footnote{Dado que una imagen contiene suele tener píxeles cercanos de igual colores, siempre que en los datos se observara patrones se podía determinar que no estaba cifrada.}, se llegó a una que sí lo estaba donde se puso un punto de interrupción.
 
-\section{Intercepción de comunicación en \acl{NDS}}
+\section{Intercepción de comunicación}
 \label{sec:met-nds-desmume}
+% explicar desmume modificado para guardar datos
 
+% explicar rc4finder
+
+% explicar sslpatcher
 
 \section{Documentación}
+
+% Explicar databrithm
+
+% Comentar programas de los juegos
+
+% explicar script de organización
