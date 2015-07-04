@@ -14,7 +14,7 @@ Benito Palacios Sánchez \\
 \end{center}
 
 \vspace{0.7cm}
-\noindent \textbf{Palabras clave:} seguridad, videojuegos, ingenería inversa, servicios en línea, DRM, Nintendo DS.
+\noindent \textbf{Palabras clave:} seguridad, videojuegos, ingeniería inversa, servicios en línea, DRM, Nintendo DS.
 
 \vspace{0.7cm}
 {\centering{}\textbf{Resumen}}
@@ -33,9 +33,9 @@ Este trabajo pretende ofrecer una perspectiva de seguridad sobre este creciente 
 Se verá cómo se han protegido textos, imágenes y archivos ante modificaciones, con cifrados.
 Así mismo, se analizarán protocolos de comunicación para servicios en línea, el cifrado en las descargas de archivos, la transmisión segura de código y la protección sobre contenidos con derechos de autor.
 Estas técnicas, en general, pretenden impedir poder realizar ingeniería inversa sobre el producto final.
-Entiéndose esta como el proceso de analizar una aplicación para entender cómo funciona y cómo integra cada uno de sus recursos.
+Entendiéndose esta como el proceso de analizar una aplicación para entender cómo funciona y cómo integra cada uno de sus recursos.
 
-La ingenería inversa se lleva realizando desde el inicio de la computadoras, en su mayoría con motivos de entretenimiento y enseñanza, aprendiendo cómo funciona un sistema se puede crear uno más robusto y con más características.
+La ingeniería inversa se lleva realizando desde el inicio de la computadoras, en su mayoría con motivos de entretenimiento y enseñanza, aprendiendo cómo funciona un sistema se puede crear uno más robusto y con más características.
 Existen diversas herramientas para llevarla a cabo, tales como depuradores y desensambladores, aunque son específicas para cada plataforma.
 En este trabajo se ha utilizado un emulador de código abierto DeSmuME y otro privativo pero \textit{freeware}, No\$GBA, para Nintendo DS.
 Estos se han usado con el objetivo de analizar el código en ensamblador de los juegos y de automatizar tareas de depuración como guardar paquetes de red, exportar datos descifrados de rutinas de código y analizar los archivos cargados.
@@ -66,29 +66,29 @@ Video games are getting one of the most important elements of our culture.
 The mobile market boom has made companies behind games like \textit{Candy Crush} very successful.
 In that specific case, the game has about 356 millions of unique users and 1.300 millions of dollars in benefits.
 The video game industry is in fact only before the book's one in top of profits and it gets over music and cinema.
-It is not only about entertenaiment but education, specially for childrens, for instance, to learn new languages and help with mathematics.
+It is not only about entertainment but education, specially for children, for instance, to learn new languages and help with mathematics.
 
 All that benefit makes to think about how to protect against possible `attacks'.
-They started fighting piracy with Digital Rights Management techniques, that is, releasing copy of games without permissions from the author, but nowadays it touchs more fields.
+They started fighting piracy with Digital Rights Management techniques, that is, releasing copy of games without permissions from the author, but nowadays it touches more fields.
 Mods, cheats in online plays and translations made by fans to languages where the company is going to release a port of the game are only some examples.
 
 This project aims to offer a new perspective about game security.
 It analyzes products from Nintendo DS and Play Station 3 devices and mobile platforms like Android and iOS, to show what kind of techniques has been used to protect text and images files.
-Communication protocols for online services, download content protection and wireless code transmission will be dealed with too.
-The general purpose of all these protection is to avoid doing reverse engineering, that is, dissamble the product to study all its pieces and resources.
+Communication protocols for online services, download content protection and wireless code transmission will be dealt with too.
+The general purpose of all these protection is to avoid doing reverse engineering, that is, disassemble the product to study all its pieces and resources.
 
 Reverse engineering will be one of the main topics of this dissertation.
-Usually it is done as a hobby but, with the rights tools and knowledge it is a powerfull way to test the security of a system.
-Refered to video games, it is called \textit{romhacking}, since it is about modify (\textit{hack}) a game (usually distributed in \textit{Read Only Memories}).
+Usually it is done as a hobby but, with the rights tools and knowledge it is a powerful way to test the security of a system.
+Related to video games, it is called \textit{romhacking}, since it is about modify (\textit{hack}) a game (usually distributed in \textit{Read Only Memories}).
 These project will use common tools like disassemblers and debuggers.
 For instance, for Nintendo DS games two emulators will be used.
-The first one, DeSmuME, since it is open source, it will allow to hack its code to automatize taks and save network packets.
+The first one, DeSmuME, since it is open source, it will allow to hack its code to automatize task and save network packets.
 The second one, No\$GBA, freeware, includes a built-in debugger so it will be used to analyze code and algorithms.
 Some tools has been developed to help with the task of studying games, like binary searcher, database manager and some game specific exporters.
 Furthermore, all the methodology followed to figure out formats and algorithms will be explained in detail.
 
-This project concludes with a summary of the mechanims analyzed, with recommendations to improve them.
+This project concludes with a summary of the mechanism analyzed, with recommendations to improve them.
 Most copyright content, that usually contains DRM in virtual stores, are not protected in games.
 That refers to music, electronic books and videos.
-However, text and images are usually protected with encryptions by using \texttt{XOR} operand, \texttt{HMAC} algorithm or a digital signature.
+However, text and images are usually protected with encryption by using \texttt{XOR} operand, \texttt{HMAC} algorithm or a digital signature.
 About the online services, it will show how bad protocol designs has been found, with some vulnerabilities that allow to users to cheat, but also how in some games the download content has a good protection against external modifications and man-in-the-middle attacks.
