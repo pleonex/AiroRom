@@ -41,6 +41,7 @@
 \usepackage{ctable}             % For tables
 \usepackage{float}              % For table positions
 \usepackage{subcaption}         % For subfigures
+\usepackage{fancyhdr}           % For headers and footers
 
 % My packages
 \usepackage{TitleStyle}
@@ -59,14 +60,6 @@ pdfkeywords = {seguridad, videojuegos, ingeniería inversa, DRM, Nintendo DS},
 pdfcreator  = {LaTeX con distribución TeXLive y editor Atom},
 pdfproducer = {pdflatex}
 }
-
-% Create abstract type
-\usepackage{fancyhdr}
-\pagestyle{empty}
-\newenvironment{abstract}%
-{\cleardoublepage\null\vfill\begin{center}%
- \bfseries \abstractname\end{center}}%
-{\vfill\null}
 
 \begin{document}
     \pagestyle{fancy}
