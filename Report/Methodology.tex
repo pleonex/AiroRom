@@ -32,7 +32,7 @@ Frecuentemente, después de la posición de un fichero se indica su tamaño, por lo
 \includefigure{fig:met-bg2}{Contenido de un fichero comprimido de \textit{Ninokuni}.}{imgs/MET-Bg2.png}
 
 Esto corrobora la estructura que se intuía, por cada fichero hay 8 bytes indicando posición y tamaño.
-Para determinar el número de ficheros se puede calcular cuantos archivos especifica esa \textit{tabla de contenidos}, restando el principio del primer fichero a la posición de la primera entrada y diviendo por el número de bytes dedicado a cada entrada: \verb!(0x54 - 0x0C) / 0x08 = 9!.
+Para determinar el número de ficheros se puede calcular cuantos archivos especifica esa \textit{tabla de contenidos}, restando el principio del primer fichero a la posición de la primera entrada y dividiendo por el número de bytes dedicado a cada entrada: \verb!(0x54 - 0x0C) / 0x08 = 9!.
 El resultado es que se han especificado 9 ficheros, valor que coincide con el encontrado en la posición \texttt{0x08} (Figura~\ref{fig:met-bg1}).
 
 Esta forma de razonar es la que se ha empleado para averiguar de los formatos estudiados en el trabajo.
@@ -78,11 +78,11 @@ El primer método es usar el emulador DeSmuME y el depurador IDA Pro.
 Este emulador se puede compilar activando funciones de depuración remotas.
 Incluye una implementación de \textit{GDB Remote Serial Protocol}\footnote{\url{http://www.embecosm.com/appnotes/ean4/embecosm-howto-rsp-server-ean4-issue-2.html}} que permite que programas externos controlen la ejecución del juego paso a paso y accedan a la memoria \texttt{RAM}.
 Esto es lo que hace IDA Pro, sirviendo como un depurador universal.
-De esta forma se puede visualizar el código en ensamblador, poner puntos de interrupición y ver y cambiar la memoria del juego.
+De esta forma se puede visualizar el código en ensamblador, poner puntos de interrupción y ver y cambiar la memoria del juego.
 
 La alternativa es usar el emulador privativo No\$GBA.
 Existe una versión que incluye un depurador, originalmente de pago, pero que recientemente se liberó como \textit{freeware}.
-Incluye las mismas funciones descritas anteriormente, pero en este caso implementandas sobre el propio emulador, aumentando la eficiencia.
+Incluye las mismas funciones descritas anteriormente, pero en este caso implementadas sobre el propio emulador, aumentando la eficiencia.
 
 Dado que IDA Pro es un programa con una licencia básica de coste \$500, este trabajo se realizó con el emulador No\$GBA que, a pesar de no tener tantas funcionalidad, sí provee de las necesarias para realizar el trabajo sin coste.
 
@@ -129,7 +129,7 @@ En esos casos, se puede encontrar siguiendo la metodología explicada en los sigu
 
 \subsubsection{Búsqueda de la tipografía}
 El primero consiste en buscar el archivo con la tipografía del juego, pues la codificación será la misma que el orden con el que aparecen los caracteres en ella.
-El estandar de este formato tiene la cabecera \texttt{NTFR} y existen programas para extraer y editar este tipo de formatos\footnote{\url{https://github.com/pleonex/NerdFontTerminatoR}}.
+El estándar de este formato tiene la cabecera \texttt{NTFR} y existen programas para extraer y editar este tipo de formatos\footnote{\url{https://github.com/pleonex/NerdFontTerminatoR}}.
 
 \subsubsection{Búsqueda diferencial}
 El segundo procedimiento se trata de desarrollar un programa de búsqueda diferencial.
@@ -151,13 +151,13 @@ El programa soporta la búsqueda de codificaciones de 8 y 16 bits.
 \label{sec:met-search-img}
 El procedimiento para encontrar el algoritmo de cifrado en este caso es distinto al realizado con texto.
 No se puede partir de datos conocidos como anteriormente se hacía con una frase que se veía en la pantalla.
-Sin embargo, dado que las cabeceras de la imagen suelen ser estandar, se puede buscar sobre el código en ensamblador la función que la procesa.
+Sin embargo, dado que las cabeceras de la imagen suelen ser estándar, se puede buscar sobre el código en ensamblador la función que la procesa.
 En concreto se busca el identificador \texttt{CHAR}, que se lee para determinar el comienzo de una sección del archivo.
 
 Una vez encontrada la función que carga una imagen, se puede poner un punto de interrupción sobre ella, para tener acceso a los datos cifrados cuando el juego procese un archivo.
 Una vez localizados, se añade un punto de interrupción sobre los datos cifrados de la imagen, este último, llevará al código que los procesa, y por tanto el algoritmo que los descifra.
 
-\section{Intercepción de comunicación}
+\section{Interceptación de comunicación}
 \label{sec:met-nds-desmume}
 La \acl{NDS} fue la primera portátil de Nintendo en soportar servicios en línea mediante una conexión Wi-Fi.
 Esta comunicación se ha estudiado en el Capítulo~\ref{sec:multiplayer}.
