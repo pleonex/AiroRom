@@ -6,17 +6,17 @@
 \chapter{Seguridad en videojuegos}
 \label{sec:art}
 Este trabajo explora los conceptos de seguridad y videojuegos.
-Unos términos que en principio no se suelen relacionar a no ser que se hable sobre la piratería, fenómeno que aumenta cada día más, esperando un crecimiento del 22\% para 2015~\cite{Arxan}.
-En esta misma fuente no solo se trata la distribución ilícita de contenidos y programas para romper los mecanismos anti-copia, también se habla sobre la ingeníera inversa y de como `\textit{usando herramientas genéricas, los hackers pueden convertir rápidamente binarios desprotegidos en código fuente, volver a empaquetarlos y distribuirlos}'.
+Unos términos que en principio no se suelen relacionar, a no ser que se hable sobre la piratería, fenómeno que aumenta cada día más, esperando un crecimiento del 22\% para 2015~\cite{Arxan}.
+Esta fuente menciona también la ingeníera inversa como `\textit{usando herramientas genéricas, los hackers pueden convertir rápidamente binarios desprotegidos en código fuente, volver a empaquetarlos y distribuirlos}'.
 
 Comúnmente se asocia el término de \textit{hacker} a una persona que maliciosamente investiga un programa.
-Es una mala interpretación dada por medios y películas, realmente se habría de hablar de \textit{cracker}.
+Es una mala interpretación dada por medios y películas, ya que realmente se habría de hablar de \textit{cracker}.
 El nombre de \textit{hacker} nació en 1961, en los laboratorios del \ac{MIT}, para denominar a los estudiantes que dominaban con destreza la programación.
 A día de hoy, según el RFC 1392\footnote{\url{https://tools.ietf.org/html/rfc1392}} se define \textit{hacker} como:
 
 \foreignquote{english}{\textit{Hacker: A person who delights in having an intimate understanding of the internal workings of a system, computers and computer networks in particular. The term is often misused in a pejorative context, where `cracker' would be the correct term.}}
 
-\foreignquote{spanish}{Hacker: Persona apasionada en entender cómo funciona, en detalle, internamente un conjunto de sistemas, ordenadores y redes de ordenadores. Generalmente se usa de forma incorrecta en un contexto peyorativo, en este caso el término correcto sería `cracker'.}
+\foreignquote{spanish}{Hacker: Persona apasionada por entender cómo funciona internamente y en detalle, un conjunto de sistemas, ordenadores y redes de ordenadores. Generalmente se usa de forma incorrecta en un contexto peyorativo, en este caso el término correcto sería `cracker'.}
 
 De esta forma, este mismo RFC define \textit{cracker} como:
 
@@ -24,13 +24,13 @@ De esta forma, este mismo RFC define \textit{cracker} como:
 
 \foreignquote{spanish}{Cracker: Individuo que intenta acceder a un sistema de ordenadores sin autorización. Estos individuos son generalmente maliciosos, en oposicón a los `hackers', y tienen intereses ocultos en su intento por romper el sistema.}
 
-Este trabajo muestra la seguridad de los juegos con el único propósito educacional, como menciona Andew Huang~\cite[p.~7]{Xbox}: \textit{For every copyright protection scheme that is defeated by a hacker, there is someone who learned an important lesson about how to make a better protection scheme.} (\textit{Para cada esquema de protección copyright que un hacker rompe, hay alguien que aprende una importante lección sobre cómo hacer un esquema de protección más robusto.}).
+Este trabajo muestra la seguridad de los juegos con el único propósito de enseñanza, como menciona Andew Huang~\cite[p.~7]{Xbox}: \textit{For every copyright protection scheme that is defeated by a hacker, there is someone who learned an important lesson about how to make a better protection scheme.} (\textit{Para cada esquema de protección con copyright que un hacker rompe, hay alguien que aprende una importante lección sobre cómo hacer un esquema de protección más robusto.}).
 
 \section{Seguridad de la información}
 \label{sec:art-sec}
 En la Sección~\ref{sec:int-sec} se comentan el modelo de seguridad CIA con los problemas que debe resolver.
 Los mecanismos de seguridad se definen como los procedimientos para garantizar la seguridad.
-En los siguientes apartados se introduce a los más comunes, tratados a lo largo del proyecto.
+En los siguientes apartados se introduce los más comunes, tratados a lo largo del proyecto.
 
 \subsection{Cifrado simétrico y asimétrico}
 La técnica de cifrado se emplea para garantizar la confidencialidad.
@@ -38,19 +38,18 @@ En líneas generales se basa en aplicar un algoritmo con una clave sobre un bloqu
 El resultado es otra representación del texto plano de manera que, no se puede recuperar la información original sin conocer los detalles del cifrado.
 
 Estos algoritmos se basan en operaciones de sustitución y transposición, reordenación de bloques de datos.
-Estos se clasifican en dos tipos principalmente: simétricos y asimétricos.
+Se clasifican en dos tipos principalmente: simétricos y asimétricos.
 
-El cifrado simétrico hace referencia a que existe una misma clave tanto para cifrar como para descifrar.
-Esta clave ha de conocerse entre los dos extremos para poder establecer una comunicación con éxito.
+El cifrado simétrico hace referencia a que existe una misma clave para cifrar y descifrar.
+Esta clave la tienen que conocer los dos extremos para poder establecer una comunicación con éxito.
 Los algoritmos más conocidos son \texttt{IDEA}, \texttt{3DES}, \texttt{AES} y \texttt{RC4}.
 
-Sin embargo no hacen falta aplicar operaciones tan complejas cuando solo se desea ofuscar el texto como el caso de los videojuegos.
+Sin embargo no hacen falta aplicar operaciones tan complejas cuando solo se desea ofuscar el texto como sucede en los videojuegos.
 En estos casos la operación \texttt{XOR} sirve a este propósito (Tabla~\ref{tab:art-xor}).
 El primer operando sería el byte a cifrar y el segundo un valor de la clave.
-Esta operación en cambio tiene el problema de que si se aplica sobre un byte con valor cero, el resultado será el segundo operando, es decir, la clave.
-Otra desventaja de esta operación es que conociendo una sección del texto plano y teniendo el texto cifrado, el resultado de aplicar \texttt{XOR} sería la clave.
-Para evitar estos dos problemas, se suele combinar con una clave, que cambia tras cada ejecución de forma que mediante un conjunto de bytes nulos no se podría recuperar la misma.
-Este es el caso del algoritmo \texttt{RC4}.
+Esta operación tiene el problema de que si se aplica sobre un byte con valor cero, el resultado será el segundo operando, es decir, la clave.
+Otra desventaja es que, conociendo una sección del texto plano y teniendo el texto cifrado, el resultado de aplicar \texttt{XOR} entre ambos sería la clave.
+Para evitar estos dos problemas, se usa una clave que cambia tras cada ejecución, de forma que mediante un conjunto de bytes nulos solo se recuperaría un estado temporal de la misma.
 
 \ctable[
     caption = Tabla de resultados de la operación \texttt{XOR}.,
@@ -67,73 +66,73 @@ Este es el caso del algoritmo \texttt{RC4}.
 
 El cifrado asimétrico, a pesar de ser más lento que el simétrico, soluciona el problema de compartir la misma clave usada para cifrar y descifrar.
 De esta forma, cada extremo posee una clave y no necesita conocer la otra.
-Un mensaje cifrado con la primera clave, solo podría ser descifrado con la segunda clave y viceversa.
-Este algoritmo se usa para las comunicaciones a través de redes inseguras como Internet.
-Cuando se genera el par de claves, una se suele mantener secreta (clave privada) y la otra se comparte entre varios emisores (clave pública).
-El algoritmo más utilizado es \texttt{RSA} que permite tanto cifrado y descifrado, como firma digital e intercambio de claves.
+Un mensaje cifrado con la primera clave, solo podría ser descifrado con la segunda y viceversa.
+Este tipo de algoritmo se usa en las comunicaciones a través de redes inseguras como Internet.
+Cuando se genera el par de claves, una se suele mantener secreta (clave privada) y la otra se comparte entre varias entidades (clave pública).
+El algoritmo más utilizado es \texttt{RSA} que soporta tanto cifrado y descifrado, como firma digital e intercambio de claves.
 
 \subsection{Algoritmos de integridad}
 Los algoritmos de integridad tienen como objetivo asegurar que el mensaje no ha sido modificado.
-Para ello, mediante una serie de operaciones, se ofrece un resumen de tamaño fijo, de los datos de entrada con tamaño variable.
-Los algoritmos deben de cumplir que las colisiones (coincidencias de resumen en dos bloques de datos) sean aleatorias, no reproducibles.
-Estos se clasifican por el número de bits del resumen, siendo los más frecuentes \texttt{MD5}\footnote{Este algoritmo es inseguro.} con 128 bits y \texttt{SHA-1} con 160 bits.
+Para ello, mediante una serie de operaciones, se ofrece un resumen de tamaño fijo, de los datos de entrada.
+Los algoritmos deben de cumplir que las colisiones (coincidencias de resumen entre dos bloques de datos distintos) sean no reproducibles.
+Estos se clasifican por el número de bits del resultado, siendo los más frecuentes \texttt{MD5}\footnote{Este algoritmo es inseguro.} con 128 bits y \texttt{SHA-1} con 160 bits.
 
 \subsection{Firma digital}
-La firma digital es una técnica para proveer tanto autenticidad como integridad sobre el mensaje.
+La firma digital es una técnica para proveer tanto autenticidad como integridad sobre un mensaje.
 Consiste en aplicar un algoritmo de integridad sobre un bloque de datos y, el resultado cifrarlo con la clave privada del emisor.
-De esta forma, solo la clave pública correspondiente al emisor podrá descifrar el resultado del algoritmo de integridad, por lo que se asegura que ha sido esa entidad quien ha realizado la operación.
+De esta forma, solo la clave pública correspondiente a esta entidad podrá descifrarlo asegurando que ha sido esta quien ha realizado la operación.
 Además, al tener el resumen se puede comprobar que el mensaje no ha sido modificado.
-Lo frecuente es emplear \texttt{SHA-1} para la integridad y \texttt{RSA} para cifrar y compartir claves.
+Lo frecuente es emplear \texttt{SHA-1} para la integridad y \texttt{RSA} para cifrar.
 
 \section{Seguridad en videoconsolas}
 \label{sec:art-video}
-La seguridad cada vez más se confía en la consola y la compañía que hay detrás de ella, en lugar, de sobre el propio juego.
+La seguridad cada vez más se confía en la consola, en lugar de sobre el propio juego.
 El principal problema que esto genera es que una vez que esta protección se consigue romper, todos los juegos quedan expuestos.
 
-A principios de la era de los videojuegos, la piratería era anecdótica principalmente por la dificultad en encontrar el hardware necesario para romper los sistemas de protección.
-Los juegos se distribuían en cartuchos, de solo lectura, no existían memorias se uso genérico como SD, ni protocolos como USB para poder transferir de manera rápida juegos descargados de un reciente Internet.
+A principios de la era de los videojuegos, la piratería era poco común, principalmente por la dificultad en encontrar el hardware necesario para romper los sistemas de protección.
+Los juegos se distribuían en cartuchos de solo lectura, ya que no existían memorias se uso genérico como SD, ni protocolos de comunicación como USB.
 
-A día de hoy ha cambiado, con la introducción de la \acl{NDS} en el mercado, los juegos se distribuyen en pequeños cartuchos de tamaño similar a una tarjeta SD.
-La tecnología ya permitía simular estos cartuchos en otros que, rompiendo la seguridad de la consola, podían ejecutar juegos no autorizados leídos desde una tarjeta MicroSD.
+Con la introducción de la \acl{NDS} esto cambió.
+Los juegos se distribuyen en pequeños cartuchos de tamaño similar a una tarjeta SD.
+Debido a la existencia de tarjetas MicroSD, se pudo crear dispositivos que simulan ser un juego comercial y que, permiten ejecutar código no autorizado por Nintendo.
 Estos se conocen como \textit{flashcards} y se basan en \textit{exploits} que consiguen saltarse las limitaciones del sistema de la consola, para simulando ser un juego, comenzar la ejecución de otro.
 
 \subsection{\acl{NDS}}
-En el caso de la \acl{NDS}, el contenido de los cartuchos viene cifrado de fábrica.
-Los juegos no solo son memorias de solo lectura si no que incorporan una pequeña lógica para para desencriptar su contenido `al vuelo' cada vez que la consola solicita un bloque de datos~\cite{GbaTek}.
-Este cifrado se basa en dos claves, la primera constante y la segunda aleatoria.
-Se utilizan para cifrar tanto los comandos de enviados por la consola al cartucho, como su respuesta con los datos del juego.
+En el caso de la \acl{NDS}, los juegos incorporan una lógica para transmitir, mediante un protocolo, datos cifrados a la consola~\cite{GbaTek}.
+Este cifrado se basa en dos claves, la primera constante y la segunda generada en cada ejecución.
+Se cifran los comandos enviados por la consola al cartucho, y la respuesta con los datos del juego.
 Aparte del cifrado, la \textit{BIOS} y \textit{firmware} realizan una comprobación sobre la cabecera del juego.
-En concreto, hay una región en la cabecera del juego donde se encuentra el logo de Nintendo ofuscado~\footnote{\url{http://pleonet.blogspot.com.es/2013/08/logo-de-nintendo-en-gba-y-nds.html}}.
-El objetivo es que al contener datos con derechos de autor como es el logo de la compañía, los juegos no se podrían distribuir sin la autorización de Nintendo.
+En concreto, hay una región donde se encuentra el logo de Nintendo ofuscado~\footnote{\url{http://pleonet.blogspot.com.es/2013/08/logo-de-nintendo-en-gba-y-nds.html}}.
+El propósito es que al contener datos con derechos de autor como es el logo de la compañía, los juegos no se podrían distribuir sin la autorización de Nintendo.
 Un caso similar fue llevado a juicio en Estados Unidos, perdiendo Sony, la empresa que pretendía evitar estas actuaciones~\cite[p.~18]{RevBlack}.
 
-El caso descrito sucedió con la consola Sega Genesis, cuando la empresa Accolade en lugar de afiliarse con Sega para desarrollar juegos, decidió realizar ingeniería inversa y crear sus productos en base a esa información.
-Determinó que la palabra `SEGA' tenía que estar contenida en la cabecera del juego para hacerlo funcionar.
-Sin embargo, esos caracteres están protegidos con copyright por Sega y en base a esto crear la demanda.
-Finalmente la corte le dio la razón a Accolade ya que no había copiado código de Sega y, beneficiaba el mercado introduciendo competencia en el mercado.
+El caso descrito sucedió con la consola Sega Genesis, cuando la empresa Accolade, en lugar de afiliarse con Sega para desarrollar juegos, decidió realizar ingeniería inversa y crear sus productos en base a esa información.
+Esta compañía determinó que la palabra `SEGA' tenía que estar contenida en la cabecera del juego para hacerlo funcionar.
+Sin embargo, esos caracteres están protegidos con copyright por Sega y en base a esto, creó una demanda.
+Finalmente, la corte le dio la razón a Accolade ya que no había copiado código de Sega y, beneficiaba al mercado introduciendo competencia.
 
 \subsection{\acl{DSi}}
-Un sistema más robusto introdujo \acl{DSi}.
-El formato de los juegos se mantenía, pero en los exclusivos para la nueva generación se añadía una firma digital \texttt{RSA}, firmada con la clave privada de Nintendo.
+Un sistema más robusto se introdujo con la \acl{DSi}.
+El formato de los juegos se mantiene pero en aquellos juegos exclusivos para la nueva generaciónm se añade una firma digital usando la clave privada de Nintendo.
 El sistema operativo de la consola comprueba la firma y, de ser inválida el juego no se ejecuta.
 
 Mediante este procedimiento, las \textit{flaschard} dejaron de funcionar.
 No se podía ni generar una firma digital válida, ni utilizar una existente porque al modificar el código del juego, la firma sería inválida.
 
-El agujero de seguridad vino junto a los juegos.
+El agujero de seguridad vino junto a las malas implementaciones de algunos juegos.
 Modificando los archivos de guardado de ciertos juegos, se conseguía provocar un fallo del juego (\textit{buffer overflow}), de forma que el siguiente código que ejecutaba era el almacenado en el propio archivo de guardado.
-Esto significa que distribuyendo el juego comercial con este fallo junto a una partida preparada para explotarlo, se podían crear \textit{flashcard} que ejecutasen cualquier código contenido en el archivo de la partida.
+Esto implica que distribuyendo un juego comercial con este fallo junto a una partida preparada para explotarlo, se podían crear \textit{flashcard} que ejecutasen cualquier código contenido en el archivo de la partida.
 
 \subsection{\acl{N3DS}}
 \label{sec:art-dev-3ds}
-La siguiente generación de consolas de Nintendo fue un paso más respecto a la seguridad.
-Los juegos distribuidos vienen cifrados con un cifrado simétrico implementado sobre un módulo hardware de la consola.
-Cuando la consola pide datos al cartucho, estos pasan por el módulo de descifrado de la consola y se almacenan en la memoria \texttt{RAM}.
-Se trata de un módulo diseñado para la consola, y la clave está implementada sobre las pistas del chip por lo que no se puede averiguar.
+La siguiente generación de consolas de Nintendo aumentó aún más la seguridad.
+Los juegos distribuidos vienen protegidos con un cifrado simétrico implementado sobre un módulo hardware de la consola.
+Cuando se piden datos al cartucho, estos pasan por el módulo de descifrado de la consola y se almacenan en la memoria \texttt{RAM}.
+Se trata de un módulo diseñado específicamente para la consola y la clave está sobre las pistas del chip por lo que no se puede averiguar.
 
-Para incrementar la seguridad se colocaron los componentes de la consola estratégicamente, de forma que era muy complicado extraer la memoria \texttt{RAM} para poder acceder a ella ya que se encontraba `pegada' debajo de la \texttt{CPU}.
-A pesar de ello, se consiguió acceder a esta, pudiendo leer los datos descifrados del juego, incluso alterar las instrucciones almacenadas en la memoria para ejecutar código que forzara descifrar el juego entero y permitir su estudio.
-Un proceso manual que permitió encontrar una serie de \textit{exploits}\footnote{\url{http://smealum.net/ninjhax/}} aprovechándose de nuevo de fallos de seguridad en los archivos de guardado pero también del sistema operativo.
+Para incrementar la seguridad, se colocaron los componentes de la consola estratégicamente, de forma que era complicado extraer y acceder a la memoria \texttt{RAM}.
+A pesar de ello, hubo personas que consiguieron acceder, pudiendo leer los datos descifrados del juego e incluso alterar las instrucciones almacenadas en la memoria, para ejecutar código que forzara descifrar del juego completo.
+Un proceso manual que permitió encontrar una serie de \textit{exploits}\footnote{\url{http://smealum.net/ninjhax/}} y aprovechándose de nuevo, de fallos de seguridad en los archivos de guardado, para ejecutar código descifrado directamente.
 
 \section{Ingeniería inversa}
 % Definición de ingeniería inversa por REDO
@@ -156,55 +155,53 @@ Para ello se propusieron los siguientes objetivos:
 \end{enumerate}
 
 % Objetivos de la ingeniería inversa por REDO
-Este proyecto identificó dos tareas básicas a la hora de realizar un trabajo de ingeníera inversa~\cite[p.~17]{REDO}:
+Este proyecto identificó dos tareas principales a la hora de realizar un trabajo de ingeníera inversa~\cite[p.~17]{REDO}:
 
 \begin{itemize}
     \item \textit{Redocumentación}.
-    Proceso por el que se crea una representación semánticamente equivalente con el mismo nivel de abstracción relativo.
-    En este trabajo se ha llevado a cabo mediante el desarrollo de ciertos programas que procesaban ficheros de igual forma que lo hace un videojuego.
+    Proceso por el que se crea una representación semánticamente equivalente con el mismo nivel de abstracción.
+    En este trabajo se ha llevado a cabo mediante el desarrollo de ciertos programas que procesan ficheros de igual forma que lo hace un videojuego.
 
     \item \textit{Recuperación de diseño}.
-    Proceso que involucra identificar el diseño en significativamente niveles más altos de abstracción que aquellos se que pudieran ver examinando el sistema en sí.
-    Esta tarea se ha llevado documentando los algoritmos estudiados mediante esta memoria y la \textit{wiki} del trabajo.
+    Proceso que involucra identificar el diseño en niveles más altos de abstracción que aquellos se que pudieran ver, examinando el sistema en sí.
+    Esta tarea se ha llevado documentando los algoritmos estudiados.
 \end{itemize}
 
 % Problema de descompilar
-Un proceso de desarrollo común es el de programar una aplicación en un lenguaje de alto nivel y mediante software denominado \textit{compilador}, convertir el texto escrito en una serie de bytes que el ordenador es capaz de interpretar para ejecutar tareas de bajo nivel, a nivel de hardware.
-La tarea de depuración en el caso de la ingeniería inversa, trata sobre analizar esos bytes, esas instrucciones que el ordenador interpreta, y apartir de ellas entender el diseño original en alto nivel.
-Existen programas llamados \textit{descompiladores} que automatizan esta tarea para diferentes lenguajes de programación, como por ejemplo, el que incluye \textit{IDA Pro} para convertir ensamblador a lenguaje C.
+En proceso de desarrollo común es el de programar una aplicación en un lenguaje de alto nivel y mediante un software denominado \textit{compilador}, convertir el texto escrito en una serie de bytes que el ordenador es capaz de interpretar para ejecutar operaciones a nivel de hardware.
+La tarea de depuración, en el caso de la ingeniería inversa, trata sobre analizar esos bytes, instrucciones que el ordenador interpreta, y a partir de ellas entender el diseño original en alto nivel.
+Existen programas llamados \textit{descompiladores} que automatizan esta tarea para diferentes lenguajes de programación, como por ejemplo, el que incluye \textit{IDA Pro} para convertir lenguaje ensamblador en lenguaje C.
 
-La forma de evitar este proceso, a parte de aplicar cifrados a nivel de hardware como hace la \acl{N3DS} (Apartado~\ref{sec:art-dev-3ds}), es mediante ofuscación de código.
-Este proceso consiste en transformar el código de forma que es significativamente mucho menos leible pero manteniendo la funcionalidad~\cite[p.~344]{RevBlack}.
-Debe de cumplir además que las transformaciones aplicadas no sean inmediatas, de forma que no se pudiera crear un \textit{deofuscador} y que, el sobrecoste que este proceso conlleva no afecte mucho al rendimiento, ya que se está introduciendo código redundante e innecesario.
-El nivel de complejidad que añade esta técnica se llama \textit{potencia}, y se puede medir con software convencional que toma en cuenta factores como número de predicados y la profundidad de anidado que tiene una secuencia de código.
+La forma de evitar este proceso, aparte de aplicar cifrados a nivel de hardware como hace la \acl{N3DS} (Apartado~\ref{sec:art-dev-3ds}), es mediante ofuscación de código.
+Este proceso consiste en transformar el código de forma que es menos leíble, pero mantiene la funcionalidad~\cite[p.~344]{RevBlack}.
+Debe de cumplir además que las transformaciones aplicadas no sean sencillas de revertir, de forma que no se pudiera crear un \textit{desofuscador} y que, el sobrecoste que este proceso conlleva, no afecte al rendimiento.
+El nivel de complejidad que añade esta técnica se llama \textit{potencia}, y se puede medir con software convencional que toma en cuenta factores como el número de funciones y la profundidad de anidado que tiene una secuencia de código.
 
-Un sistema podría considerarse seguro una vez que el esfuerzo y tiempo que requiere romper la seguridad es mayor al valor del producto y su validez.
-Un ejemplo sería que el coste de distribuir copias no legales de un juego sea mayor al coste del mismo original, o que el tiempo empleado para averiguar una clave sea mayor a la frecuencia con la que el sistema cambiar la misma.
+Un sistema podría considerarse seguro una vez que el esfuerzo y tiempo que requiere romper su seguridad es mayor al valor del producto y su validez.
+Un ejemplo sería que el coste de distribuir copias no legales de un juego sea mayor al coste del mismo original, o que el tiempo empleado para averiguar una clave sea mayor a la frecuencia con la que el sistema la cambia.
 
 En cuanto a la ingeniería inversa en videojuegos, no es distinta a los procedimientos seguidos sobre aplicaciones.
-Esta sin embargo se centra más sobre los recursos y sus formatos que en el código y funcionalidad\footnote{En la siguiente dirección se encuentra una guía de introducción a la ingenería inversa para \acl{NDS}:
+Esta se centra más sobre los recursos y sus formatos que en el código y funcionalidad\footnote{En la siguiente dirección se encuentra una guía de introducción a la ingenería inversa para \acl{NDS}:
 
 \url{http://gbatemp.net/threads/gbatemp-rom-hacking-documentation-project-new-2014-edition-out.73394/}}.
 
 \subsection{Legalidad}
-La ingeniería inversa es, como se ha visto, una actividad que ni modifica un producto, ni crea uno nuevo basándose en el original.
-Es el proceso de examinar, estudiar y comprender (y documentar estos resultados), no un proceso de cambio o réplica~\cite[p.~17]{REDO}.
+La ingeniería inversa es el proceso de examinar, estudiar, comprender y documentar~\cite[p.~17]{REDO}.
 Esto sin embargo no está exento de controversia a la hora de determinar su legalidad.
-
 El punto 14 de la \textit{directiva 2009/24/CE sobre la protección jurídica de programas de ordenador}\footnote{\url{http://eur-lex.europa.eu/legal-content/ES/TXT/PDF/?uri=CELEX:32009L0024&from=EN}} dice:
 
 \enquote{No debe impedirse a la persona facultada para utilizar el programa de ordenador que realice los actos necesarios para observar, estudiar o verificar su funcionamiento, siempre que dichos actos no supongan infracción de los derechos del autor sobre el programa.}
 
 Es decir, siempre que se posea los derechos de acceder a un contenido, no se debe prohibir el derecho a estudiar este.
-Las directivas europeas sin recomendaciones que los países miembros implementan con sus propias leyes.
+Sin embargo, las directivas europeas son recomendaciones que los países miembros implementan con sus propias leyes.
 En el caso de España, se recoge en número 97 del BOE\footnote{\url{http://boe.es/buscar/act.php?id=BOE-A-1996-8930&tn=1&p=19980307&vd=\#a100}} en el título VII, \textit{Programas de ordenador}, artículo 100, \textit{límites a los derechos de explotación}:
 
 \enquote{El usuario legítimo de la copia de un programa estará facultado para observar, estudiar o verificar su funcionamiento, sin autorización previa del titular, con el fin de determinar las ideas y principios implícitos en cualquier elemento del programa, siempre que lo haga durante cualquiera de las operaciones de carga, visualización, ejecución, transmisión o almacenamiento del programa que tiene derecho a hacer.}
 
 \noindent donde se recoge el mismo contenido que la directiva europea recomienda.
 Esto además está respaldado por la resolución de un juicio en la Corte Suprema de la Unión Europa en esta materia\footnote{\url{http://www.bloomberg.com/news/articles/2012-05-02/copyright-can-t-block-software-reverse-engineering-court}}.
-En él, la compañía \textit{World Programming Ltd} fue demandada por \textit{SaaS Institute Inc.} al desarrollar un software, apartir de conocimientos adquiridos mediante ingeniería inversa, que replicaba el funcionamiento del programa de la compañía demandante. La corte señaló que `\textit{There is no copyright infringement [when a software company without access to a program's source code] studied, observed and tested that program in order to reproduce its functionality in a second program. (No se infringe el copyright [cuando una compañía de software sin acceso al código fuente del programa] estudia, observa y prueba el problema para reproducir su funcionalidad en un segundo programa)}'.
+En él, la compañía \textit{World Programming Ltd} fue demandada por \textit{SaaS Institute Inc.} al desarrollar un software, a partir de conocimientos adquiridos mediante ingeniería inversa, que replicaba el funcionamiento del programa de la compañía demandante. La corte señaló que `\textit{There is no copyright infringement [when a software company without access to a program's source code] studied, observed and tested that program in order to reproduce its functionality in a second program. (No se infringe el copyright [cuando una compañía de software sin acceso al código fuente del programa] estudia, observa y prueba el problema para reproducir su funcionalidad en un segundo programa)}'.
 
-En el caso de los Estados Unidos, debido a la ley \ac{DMCA}, no está claro la legalidad, prohibiéndose en un principio a no ser que se contara con los permisos del autor.
+En el caso de Estados Unidos, la ley \ac{DMCA} lo prohibe a no ser que se cuente con los permisos del autor.
 El Capítulo 12 del libro \textit{Hacking the Xbox}, escrito por Lee Tien, abogado de la \ac{EFF}, contiene un completo análisis al respecto.
 Incluye una cita de la Corte Suprema americana, refiriéndose a la ingeniería inversa como \textit{una parte esencial de la innovación}~\cite[p.~180]{Xbox}.

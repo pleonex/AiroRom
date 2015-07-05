@@ -36,5 +36,6 @@ CmdLine
 UserWarn
 {
     # I don't know I always write this instead of footnote
-    footenote
+    footenote,
+    apartir
 }
