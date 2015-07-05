@@ -6,8 +6,10 @@
 \chapter{Resultados y recomendaciones}
 \label{sec:recomm}
 % Resumir cada fallo / seguridad y añadir recomendación
-A lo largo de la memoria se han analizado una serie de juegos y sus algoritmos.
+A lo largo de la memoria se han analizado una serie de juegos y los algoritmos adaptados de cara a la provisión de seguridad.
 En esta sección se resumirán los más importantes y se propondrán mejoras en algunos casos.
+
+Es de señalar la relevancia de estas recomendaciones, puesto que hasta la fecha no existe reportado nada similar en la literatura.
 
 \section{Seguridad sobre ficheros}
 Los Capítulos~\ref{sec:translations} y~\ref{sec:copyright} muestran los procedimientos de seguridad aplicados sobre ficheros para evitar su modificación y distribución.
@@ -22,19 +24,19 @@ La segunda técnica consiste en ofuscar el nombre y clasificación de los ficheros
 
 En cuanto a archivos con contenido de texto, se ha observado que el procedimiento habitual es realizar un cifrado sobre cada carácter mediante una clave que cambia (juegos de \textit{Pokémon}~\ref{sec:tr-pok}).
 Esto provee de un buen mecanismo a nivel de eficiencia y ofuscación, requiriendo conocimientos de depuración para encontrar la clave.
-El principal problema es usar la operación \texttt{XOR} con una clave estática en un fichero que tiene varios bytes nulos seguidos, ya que se estaría guardando la contraseña en texto plano dentro del fichero cifrado (caso de \textit{Pokémon Perla} en la tabla de contenidos~\ref{sec:tr-pok-pearl-text} y \textit{Ninokuni}~\ref{sec:tr-nino-text}).
+El principal problema es usar la operación \texttt{XOR} con una clave estática en un fichero que tiene varios bytes nulos seguidos, ya que se estaría guardando la contraseña en texto plano dentro del fichero cifrado (caso de \textit{Pokémon Perla} en los campos de \textit{posición} y \textit{tamaño}, Apartado~\ref{sec:tr-pok-pearl-text} y \textit{Ninokuni}~\ref{sec:tr-nino-text}).
 La solución es usar una clave variable, por ejemplo como se hace en los juegos de Pokémon, sumando una constante a aquella.
 
 Además, usar una codificación no estándar para los caracteres dificulta la depuración, ya que no se puede encontrar texto ni en el archivo binario del juego ni en la memoria RAM.
-En este caso, para evitar poder usar técnicas de búsqueda diferencia (programa \textit{RelativeSearch}), se deben desordenar los caracteres mezclando en un mismo rango símbolos y letras.
+En este caso, para evitar poder usar técnicas de búsqueda diferencial (programa \textit{RelativeSearch}), se deben desordenar los caracteres mezclando en un mismo rango símbolos y letras.
 Finalmente, para evitar que la nueva codificación se pueda obtener a través de la fuente, se debería cifrar este fichero también.
 
 Respecto a las imágenes se encontró en \textit{Pokémon Perla y Diamante} un cifrado basado en la operación \texttt{XOR} con una clave dinámica (Sección~\ref{sec:tr-pok-pearl-img}).
-A pesar de cifrar un archivo es un buen método para proteger su contenido, en el caso de archivos multimedia debido a la complejidad de implementación para tratar estos contenidos, es mejor crear un nuevo formato.
+A pesar de cifrar un archivo es un buen método para proteger su contenido, en el caso de archivos multimedia, debido a la complejidad de implementación para tratar estos contenidos, es mejor crear un nuevo formato.
 De esta forma, si se hubiese utilizado otra codificación para los píxeles como representar un color en otro espacio o usando un número variable de bits, se hubiese necesitado crear nuevos programas para procesarlos.
 Esta tarea es más compleja que realizar un bucle que descifre.
 
-Finalmente, tras analizar los archivos con contenido de con derechos de autor como libros digitales (Sección~\ref{sec:cr-ebook}), música (Sección~\ref{sec:cr-ost}) y vídeos (Sección~\ref{sec:cr-video}), no se encontraron mecanismos específicos de protección.
+Finalmente, tras analizar los archivos con contenido de derechos de autor como libros digitales (Sección~\ref{sec:cr-ebook}), música (Sección~\ref{sec:cr-ost}) y vídeos (Sección~\ref{sec:cr-video}), no se encontraron mecanismos específicos de protección.
 Aparte de usar codificaciones propietarias como en el caso del sonido \texttt{SADL} (Sección~\ref{sec:cr-level5}) y vídeos de \acl{NDS}, los ficheros no estaban cifrados, ni incluían mecanismos de integridad.
 Estos podrían cifrarse y ofuscarse usando las técnicas anteriormente descritas.
 
@@ -49,7 +51,7 @@ Los ficheros descargados de estos servidores, en el caso de \textit{Ninokuni} (S
 No pasaba lo mismo con \textit{100 Classic Books Collection} (Sección~\ref{sec:mp-dlc-books}), donde no se aplicaba ninguna protección al descargar libros digitales.
 
 Se analizaron también dos juegos de plataformas móviles.
-En \textit{Preguntados} (Sección~\ref{sec:mp-mp-preg}) se comprobó que al no usar un protocolo seguro de comunicación, se podía hacer interceptación mediante una configuración \textit{man-in-the-middle}, obteniendo las respuestas correctas a las preguntadas planteadas en el juego.
+En \textit{Preguntados} (Sección~\ref{sec:mp-mp-preg}) se comprobó que, al no usar un protocolo seguro de comunicación, se podía hacer interceptación mediante una configuración \textit{man-in-the-middle}, obteniendo las respuestas correctas a las preguntadas planteadas en el juego.
 En dicho apartado se proponía tanto cifrar la comunicación como cambiar el diseño del protocolo para no enviar las soluciones al cliente.
 En el caso de \textit{Duet} (Sección~\ref{sec:mp-dlc-duet}), el contenido descargable de pago se podía activar manualmente cambiando un valor de una base de datos.
 Cifrando la base de datos, o incluso comprobando que el usuario había realizado dicha compra con un servidor externo, se podría evitar.
