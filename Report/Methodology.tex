@@ -11,13 +11,13 @@ Debido a esto, en lugar de proporcionar unos pasos exactos, se detallarán los ra
 
 
 \section{Análisis de ficheros}
-Una vez decidido el juego a analizar, se debe reunir información como el desarrollador, el año de lanzamiento y género del juego.
+Una vez decidido el juego a analizar, se debe reunir información como es el desarrollador, el año de lanzamiento y género del juego.
 Esta proporciona indicios sobre el tipo y versión del formato de los ficheros que contiene.
-A continuación, se puede usar programas de exploración de juegos como Tinke\footnote{\url{https://github.com/pleonex/tinke}}, para reconocer los tipos de formato estándar, analizar el contenido de las carpetas y exportar los archivos.
+A continuación se pueden usar programas de exploración de juegos como Tinke\footnote{\url{https://github.com/pleonex/tinke}}, para reconocer los tipos de formato estándar, analizar el contenido de las carpetas y exportar los archivos.
 
-El interés sin embargo, es analizar aquellos formatos nuevos que codifican recursos como imágenes y textos.
+El interés, sin embargo, es analizar aquellos formatos nuevos que codifican recursos como imágenes y textos.
 Los nombres y directorios de los archivos son la primera referencia sobre el tipo de contenido.
-Por ejemplo, tomando el juego de \textit{Ninokuni} para \acl{NDS} como referencia, el archivo \texttt{/data/UI/Menu/Skin/2/CheckShee\allowbreak{}t/bg\_a.n2d} debe contener elementos de la interfaz gráfica (\textit{UI}) del menú (\textit{Menu}) del juego.
+Por ejemplo, tomando el juego de \textit{Ninokuni} para \acl{NDS} como referencia, el archivo \texttt{/data/UI/Menu/Skin/2/CheckShee\allowbreak{}t/bg\_a.n2d} debe contener elementos de la interfaz gráfica (\textit{GUI}) del menú (\textit{Menu}) del juego.
 Además, la abreviatura \textit{bg} se utiliza para describir imágenes de fondo de pantalla (\textit{background}).
 Mirando el contenido de este archivo con un visor hexadecimal, se puede ver que en la posición \texttt{0x54} se encuentran los caracteres \texttt{RLCN}, correspondientes a la cabecera de un formato estándar en la \acl{NDS} (Figura~\ref{fig:met-bg1}).
 
@@ -32,13 +32,14 @@ Frecuentemente, después de la posición de un fichero se indica su tamaño, por lo
 \includefigure{fig:met-bg2}{Contenido de un fichero comprimido de \textit{Ninokuni}.}{imgs/MET-Bg2.png}
 
 Esto corrobora la estructura que se intuía, por cada fichero hay 8 bytes indicando posición y tamaño.
-Para determinar el número de ficheros se puede calcular cuantos archivos especifica esa \textit{tabla de contenidos}, restando el principio del primer fichero a la posición de la primera entrada y dividiendo por el número de bytes dedicado a cada entrada: \verb!(0x54 - 0x0C) / 0x08 = 9!.
+Para determinar el número de ficheros se puede calcular cuántos archivos especifica esa \textit{tabla de contenidos}, restando el principio del primer fichero a la posición de la primera entrada y dividiendo por el número de bytes dedicado a cada entrada: \verb!(0x54 - 0x0C) / 0x08 = 9!.
 El resultado es que se han especificado 9 ficheros, valor que coincide con el encontrado en la posición \texttt{0x08} (Figura~\ref{fig:met-bg1}).
 
-Esta forma de razonar es la que se ha empleado para averiguar de los formatos estudiados en el trabajo.
+Esta forma de razonar es la que se ha empleado para averiguar acerca de los formatos estudiados en el trabajo.
 Falta averiguar el contenido de cada fichero.
 Estudiando los formatos más comunes, se puede identificar (Figura~\ref{fig:met-bg2}) que al principio hay colores, pues cada valor de 16 bits está próximo al siguiente.
-Al final, hay información sobre píxeles, en concreto el índice al color de la paleta, ya que se repiten muchos valores que están próximos, esto concuerda con el hecho de que un píxel en una imagen suele tener a su alrededor píxeles de color similar.
+Al final, hay información sobre píxeles, en concreto el índice al color de la paleta, ya que se repiten muchos valores que están próximos.
+Esto concuerda con el hecho de que un píxel en una imagen suele tener a su alrededor píxeles de color similar.
 
 Otro ejemplo se encuentra en los archivos de tipo \texttt{PSAR} (Figura~\ref{fig:met-psar}) analizados en la Sección~\ref{sec:cr-nino}.
 En ellos, en la posición \texttt{0x08}, mediante los caracteres \texttt{ASCII} se indica el tipo de compresión que se usa sobre los datos, \texttt{zlib}.
@@ -54,7 +55,7 @@ En ellos, en la posición \texttt{0x08}, mediante los caracteres \texttt{ASCII} s
 En ocasiones, el análisis de un fichero hexadecimal no es suficiente para estudiar un formato.
 Este es el caso de codificaciones complejas y estudios de cifrado e integridad en los que hace falta mirar la implementación del juego.
 En estos casos, mediante depuración del juego se pueden analizar las instrucciones máquina que ejecuta la consola, para saber cómo procesa el juego los ficheros y así poder estudiarlos.
-La depuración de juegos de \acl{NDS} se puede realizar utilizando dos programas  (Figura~\ref{fig:met-dep}).
+La depuración de juegos de \acl{NDS} se puede realizar utilizando dos procedimientos  (Figura~\ref{fig:met-dep}).
 
 \begin{figure}
 \centering
@@ -82,7 +83,7 @@ De esta forma se puede visualizar el código en ensamblador, poner puntos de inte
 
 La alternativa es usar el emulador privativo No\$GBA.
 Existe una versión que incluye un depurador, originalmente de pago, pero que recientemente se liberó como \textit{freeware}.
-Incluye las mismas funciones descritas anteriormente, pero en este caso implementadas sobre el propio emulador, aumentando la eficiencia.
+Incluye las mismas funciones descritas anteriormente, pero en este caso implementadas sobre el propio emulador, aumentando así la eficiencia.
 
 Dado que IDA Pro es un programa con una licencia básica de coste \$500, este trabajo se realizó con el emulador No\$GBA que, a pesar de no tener tantas funcionalidad, sí provee de las necesarias para realizar el trabajo sin coste.
 
@@ -93,11 +94,12 @@ El protocolo de comunicación es sencillo: cuando se necesitan datos, se envía un
 El código de este comando es \texttt{0xB7} y se envía escribiéndolo en el puerto virtual \texttt{0x040001A8}~\cite{GbaTek}.
 
 Esta dirección se puede buscar en el código ensamblador, encontrando la función que solicita los datos.
-Gracias a esto, se puede poner un punto de interrupción y, comprobar qué direcciones se piden.
-Dado que continuamente se están cargando datos, realizar esto manualmente no es viable, es por ello, que aprovechando que el emulador DeSmuME es de código abierto, se puede modificar para automatizarlo.
+Gracias a esto se puede poner un punto de interrupción y comprobar qué direcciones se piden.
+Dado que continuamente se están cargando datos, realizar esto manualmente no es viable.
+Es por ello que, aprovechando que el emulador DeSmuME es de código abierto, se puede modificar para automatizarlo.
 
 Esta mecánica se implementó para realizar los análisis de este trabajo, desarrollando el programa \textit{NitroFilcher}\footnote{\url{https://github.com/pleonex/AiroRom/tree/master/Programs/NitroFilcher}}.
-En el emulador se añadieron las siguientes líneas de código a la función \texttt{HandleDebugEvent\_Execute} del archivo \texttt{debug.cpp}, consiguiendo que cada vez que se ejecutara las instrucciones que solicitan datos, guardase en un fichero de texto la posición que se pedía junto al tamaño.
+En el emulador se añadieron las siguientes líneas de código a la función \texttt{HandleDebugE\allowbreak{}vent\_Execute} del archivo \texttt{debug.cpp}, consiguiendo que cada vez que se ejecutara las instrucciones que solicitan datos, guardase en un fichero de texto la posición que se pedía junto al tamaño:
 
 \begin{verbatim}
 // 0x02016DE0 es la dirección de la función que solicita datos.
@@ -117,22 +119,22 @@ El procedimiento para realizar este estudio se basa en depuración de código.
 
 El primer paso es buscar la frase en texto plano sobre el binario del juego.
 Tras determinar que no aparece, se puede confirmar que puede estar codificada en una codificación no estándar, comprimida o cifrada.
-Se suele probar con las codificaciones soportadas nativamente por las fuentes de \acl{NDS} como son \texttt{UTF-8}, \texttt{UTF-16}, \texttt{SHIFT-JIS} y \texttt{CP1252}.
+Se suele probar con las codificaciones soportadas nativamente por las fuentes de \acl{NDS}, como son \texttt{UTF-8}, \texttt{UTF-16}, \texttt{SHIFT-JIS} y \texttt{CP1252}.
 
 Confirmado que hay un algoritmo que se aplica sobre el texto, el objetivo es encontrar este texto en la memoria \texttt{RAM} del juego, para poder poner un punto de interrupción y ver qué transformaciones se aplican hasta llegar al texto descifrado.
 Para ello, se extrae la memoria, justo en el momento de mostrar un diálogo de texto, pues debería estar la frase guardada para poder mostrarla en pantalla.
 Esto se puede realizar con cualquier emulador de \acl{NDS}.
-Una vez extraído el archivo binario con la memoria, mediante visores hexadecimales se busca el texto usando de nuevo codificaciones estándar.
+Una vez extraído el archivo binario con la memoria, se busca el texto mediante visores hexadecimales, usando de nuevo codificaciones estándar.
 Si la frase se encuentra, se pondría un punto de interrupción en dicha posición y se estudiaría el algoritmo.
 De no ser así, probablemente se use una codificación propietaria.
 En esos casos, se puede encontrar siguiendo la metodología explicada en los siguientes apartados.
 
 \subsubsection{Búsqueda de la tipografía}
-El primero consiste en buscar el archivo con la tipografía del juego, pues la codificación será la misma que el orden con el que aparecen los caracteres en ella.
+El primer procedimiento consiste en buscar el archivo con la tipografía del juego, pues la codificación será la misma que el orden con el que aparecen los caracteres en ella.
 El estándar de este formato tiene la cabecera \texttt{NTFR} y existen programas para extraer y editar este tipo de formatos\footnote{\url{https://github.com/pleonex/NerdFontTerminatoR}}.
 
 \subsubsection{Búsqueda diferencial}
-El segundo procedimiento se trata de desarrollar un programa de búsqueda diferencial.
+El segundo procedimiento pasa por desarrollar un programa de búsqueda diferencial.
 Una implementación se llevó a cabo para este estudio, denominado \textit{RelativeSearch} y disponible en el repositorio del trabajo\footnote{\url{https://github.com/pleonex/RelativeSearch}}.
 
 La idea de este programa se basa en que un grupo de caracteres similares, tiene una numeración seguida.
@@ -140,8 +142,9 @@ Por ejemplo, si la codificación indica que el carácter `a' tiene asociado el val
 Restando ambos valores, se encuentra su `distancia' en el abecedario.
 Esta distancia, en la mayoría de los casos, será la misma en cualquier codificación, incluso propietaria, a no ser que se hayan desordenado los caracteres.
 
-\textit{RelativeSearch} (Figura~\ref{fig:met-relative}), implementa esta idea, para ello dada una palabra como `hola', resta cada carácter sobre el anterior y guarda esa diferencia.
-A continuación, sobre un fichero binario, realiza esta misma operación, resta un byte sobre el anterior y compara la diferencia.
+\textit{RelativeSearch} (Figura~\ref{fig:met-relative}) implementa esta idea.
+Para ello dada una palabra como `hola' resta cada carácter sobre el anterior y guarda esa diferencia.
+A continuación, realiza esta misma operación sobre un fichero binario, resta un byte sobre el anterior y compara la diferencia.
 Si la diferencia coincide, se muestra en pantalla la posición de la coincidencia.
 El programa soporta la búsqueda de codificaciones de 8 y 16 bits.
 
@@ -155,17 +158,16 @@ Sin embargo, dado que las cabeceras de la imagen suelen ser estándar, se puede b
 En concreto se busca el identificador \texttt{CHAR}, que se lee para determinar el comienzo de una sección del archivo.
 
 Una vez encontrada la función que carga una imagen, se puede poner un punto de interrupción sobre ella, para tener acceso a los datos cifrados cuando el juego procese un archivo.
-Una vez localizados, se añade un punto de interrupción sobre los datos cifrados de la imagen, este último, llevará al código que los procesa, y por tanto el algoritmo que los descifra.
+Una vez localizados, se añade un punto de interrupción sobre los datos cifrados de la imagen, el cual llevará al código que los procesa y, por tanto, el algoritmo que los descifra.
 
-\section{Interceptación de comunicación}
+\section{Interceptación de la comunicación}
 \label{sec:met-nds-desmume}
 La \acl{NDS} fue la primera portátil de Nintendo en soportar servicios en línea mediante una conexión Wi-Fi.
-Esta comunicación se ha estudiado en el Capítulo~\ref{sec:multiplayer}.
-En esta sección se explicará la metodología seguida para capturar los paquetes.
+Esta comunicación se ha estudiado en el Capítulo~\ref{sec:multiplayer}, explicándose en esta sección la metodología seguida para capturar los paquetes.
 
 Para ello se preparó un escenario para realizar un ataque \textit{man-in-the-middle}.
-Un punto de acceso se conectó al ordenador mediante \textit{Ethernet} y este a su vez mediante conexión Wi-Fi con el punto de acceso original.
-Dado que el sistema operativo \textit{Fedora 20} por defecto tiene una configuración restrictiva de red, se tuvo que diseñar el siguiente \textit{script} para configurar una subred mediante \textit{NAT} y permitir el redireccionamiento de paquetes.
+Un punto de acceso se conectó al ordenador mediante \textit{Ethernet} y este, a su vez, mediante conexión Wi-Fi, con el punto de acceso original.
+Dado que el sistema operativo \textit{Fedora 20} tiene por defecto una configuración restrictiva de red, se tuvo que diseñar el siguiente \textit{script} para configurar una subred mediante \textit{NAT} y permitir el redireccionamiento de paquetes:
 
 \begin{verbatim}
 # El primer argumento es la IP de la interfaz que tiene conexión a Internet
@@ -187,7 +189,7 @@ sudo iptables -t filter -I FORWARD -d 10.42.0.0/24 -j ACCEPT
 
 Usando \textit{Wireshark} para capturar los paquetes sobre la interfaz de \textit{Ethernet} se pudo ver todo el tráfico.
 Este escenario requería hardware y era complejo de montar cada vez que se quería analizar un juego.
-Es por ello, que aprovechando que el emulador DeSmuME soporta las comunicaciones Wi-Fi y es de código libre, se modificó para guardar los datos que transmitía y enviaba en formato \textit{PCAP}, compatible con \textit{Wireshark}.
+Es por ello que, aprovechando que el emulador DeSmuME soporta las comunicaciones Wi-Fi y es de código libre, se modificó para guardar los datos que transmitía y enviaba en formato \textit{PCAP}, compatible con \textit{Wireshark}.
 
 Se modificaron los archivos \texttt{wifi.cpp} y \texttt{wifi.h}\footnote{\url{https://github.com/pleonex/AiroRom/tree/master/Programs/DeSmuME\%20PCAP}}, añadiendo los siguientes métodos:
 
@@ -203,10 +205,10 @@ Se modificaron los archivos \texttt{wifi.cpp} y \texttt{wifi.h}\footnote{\url{ht
 \end{itemize}
 
 Esta comunicación sin embargo está cifrada.
-En la Sección~\ref{sec:mp-nintendo-server} sobre los resultados de los servicios en línea de Nintendo, se explica cómo utilizar los programas desarrollados \textit{RC4Finder} y \textit{SSLPatcher} para capturar una comunicación descifrada.
+En la Sección~\ref{sec:mp-nintendo-server} se explica, sobre los resultados de los servicios en línea de Nintendo,  cómo utilizar los programas desarrollados \textit{RC4Finder} y \textit{SSLPatcher} para capturar una comunicación descifrada.
 
 \section{Documentación y repositorio}
-Los programas y documentación de este trabajo se ha ido publicando en un repositorio, gestionado por \textit{git}, y subido a la página \textit{GitHub}, con el siguiente enlace:
+Los programas y documentación de este trabajo se han ido publicando en un repositorio, gestionado por \textit{git}, y subido a la página \textit{GitHub}, con el siguiente enlace:
 
 \begin{center}
 \url{https://github.com/pleonex/AiroRom}
@@ -217,8 +219,8 @@ En la página de \textit{Mecanismos a investigar}, se muestran los juegos ordenad
 Para crear esta clasificación se hizo el \textit{script} en \textit{python} llamado \textit{Scenadvorter}.
 Este programa, lee un XML con una base de datos de todos los juegos para \acl{NDS} que proporciona la página ADVANsCEne\footnote{\url{http://www.advanscene.com}}, y clasifica los juegos por desarrollador mostrando los diez primeros con más juegos.
 
-Para guardar la información sobre los algoritmos descubiertos, se desarrolló un programa que permitía guardar y editar dicha información en ficheros XML.
-Este programa (Figura~\ref{fig:met-databrithm}) se llamó \textit{DataBrithm} y se encuentra su código en el repositorio también.
+Para guardar la información sobre los algoritmos descubiertos se desarrolló un programa que permitía guardar y editar dicha información en ficheros XML.
+Este programa (Figura~\ref{fig:met-databrithm}) se llamó \textit{DataBrithm} y su código se encuentra en el repositorio también.
 
 En la carpeta \texttt{Games} y \texttt{Programs} del repositorio se hallan los programas desarrollados para analizar los contenidos de los juegos.
 Esta memoria, realizada con \LaTeX~\cite{ThesisTex}, está en \texttt{Report}.
