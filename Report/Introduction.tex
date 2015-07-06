@@ -19,38 +19,9 @@ En 2014, se vendieron solo en Estados Unidos 135 millones de juegos, generando u
 Para 2015, la empresa \textit{Gartner} estima que la venta de videojuegos a nivel global será de en torno a 100 mil millones de euros.
 En cuanto a España, en 2014 la industria creció un 21\%, facturando 413 millones de euros según la \textit{Asociación Española de Empresas Productoras y Desarrolladoras de Videojuegos y Software de Entretenimiento}~\cite{DEV}.
 
-\section{Conceptos de seguridad}
-\label{sec:int-sec}
-El concepto de seguridad se puede definir en tres puntos: la condición de un sistema como resultado del establecimiento y mantenimiento de medidas de protección; la condición de un sistema en el cual sus recursos están libres de accesos no autorizados y de cambios accidentales no autorizados, destrucción o, pérdida; medidas tomadas para proteger un sistema.\footnote{\url{https://tools.ietf.org/html/rfc4949}}.
-Esta puede estar referida a tres ámbitos:
-
-\begin{itemize}
-    \item La seguridad de la información trata sobre la protección de datos guardados.
-    \item La seguridad en las comunicaciones se refiere a la protección en la transmisión de datos
-    \item La seguridad de sistemas se centra en la protección de entidades por los que pasa la información.
-\end{itemize}
-
-Este trabajo abarca los dos primeros puntos, habiendo una pequeña introducción sobre el tercero en el Apartado~\ref{sec:art-video} de seguridad en videconsolas.
-
-Max Kilger, investigador de ciberseguridad, resume la motivación de las amenazas con las siglas \texttt{MEECES} del inglés dinero, ego, entretenimiento, ideología, entrada en grupos sociales y estatus social.
-
-Con el objetivo de hacer frente a estas amenazas, existen varios modelos de seguridad con los aspectos que debe cumplir un sistema considerarse protegido.
-El más conocido se denomina CIA, por las iniciales de los tres principales puntos recogidos a continuación.
-A este modelo se añaden cuatro puntos más, resultando la siguiente lista:
-
-\begin{itemize}
-    \item Confidencialidad: la información solo puede estar accesible por los entes autorizados.
-    \item Integridad: se ha de garantizar que la información no ha sido modificada de manera no autorizada.
-    \item Disponibilidad (\textit{Availability}): la información ha de estar accesible cuando se solicita.
-    \item Autenticación: se ha de garantizar quién es el otro extremo.
-    \item Disuasión: se ha de evitar cualquier motivación para realizar ataques.
-    \item No repudio: se ha de garantizar que la operación se realizó.
-    \item Recuperación: se puede devolver el sistema su estado inicial tras un ataque.
-\end{itemize}
-
 \section{Objetivos}
-El objetivo que persigue este trabajo es analizar tres diferentes aspectos de seguridad sobre videojuegos.
-En cada uno se ofrecerá varios análisis de juegos, mostrando sus vulnerabilidades y puntos fuertes, y ofreciendo recomendaciones.
+En el contexto anteriormente planteado, el objetivo que persigue este trabajo es analizar tres diferentes aspectos de seguridad sobre videojuegos.
+En cada uno se ofrecerán varios análisis para mostrar vulnerabilidades y puntos fuertes de cada videojuego y, ofrecer recomendaciones para mejorar su seguridad.
 
 Para ello se habrá de determinar el ámbito de las problemáticas, identificando qué tipo de contenido deben ser protegido y por qué.
 Sobre esto, habrá de realizarse un análisis del estado actual y en qué medida afecta a la industria.
@@ -65,12 +36,10 @@ Existen comunidades en Internet dedicadas a este propósito\footnote{\url{http://
 Los tres tipos de modificaciones y estudios más frecuentes en este movimiento, y sobre los que se basará este trabajo, son:
 
 \begin{enumerate}
-    \item Las traducciones no oficiales son llevadas a cabo por personas externas a una empresa.
-    Editan los archivos del juego para ofrecer un parche que traduce el juego a un idioma.
+    \item Las traducciones no oficiales son llevadas a cabo por personas externas a una empresa, de manera que, editan los archivos del juego para ofrecer un parche que traduce el juego a un idioma.
     Relacionado con este tema están los \textit{mods}, modificaciones sobre un juego para ofrecer una versión alternativa.
 
-    \item Los contenidos con derechos de autor será el otro tema a tratar.
-    Los videojuegos con contenido sobre el que típicamente se le aplican algoritmos de protección como libros electrónicos, música y vídeos.
+    \item Los contenidos con derechos de autor será el otro tema a tratar, y en ello en relación a los videojuegos con contenido sobre el que típicamente se le aplican algoritmos de protección como libros electrónicos, música y vídeos.
 
     \item El tercer aspecto será los servicios en línea, tales como los protocolos de comunicación entre consola y servidor y la seguridad sobre los ficheros transmitidos.
 \end{enumerate}
@@ -97,7 +66,7 @@ Se explicarán los mecanismos de seguridad de los servidores de Nintendo para \ac
 También se comentará la seguridad implementada sobre videojuegos para jugar en multijugador y descargar contenidos extras.
 El capítulo termina con un análisis sobre cómo se transmite código ejecutable en la \acl{NDS} de forma segura entre consolas.
 
-El Capítulo~\ref{sec:recomm} resume los algoritmos encontrados así como sus puntos débiles y fuertes y se proponen algunas técnicas para reforzar su seguridad.
+El Capítulo~\ref{sec:recomm} resume los algoritmos encontrados así como sus puntos débiles y fuertes y se proponen algunas técnicas para reforzar la seguridad global en videojuegos.
 
 La memoria concluye con el Capítulo~\ref{sec:conclusion}, donde se detallan los conocimientos aprendidos y habilidades desarrolladas con este trabajo.
-Incluye una sección con líneas de trabajo sobre los que se podría continuar desarrollando el trabajo aquí realizado.
+Incluye una sección con líneas de trabajo sobre los que se podría continuar avanzando en el trabajo aquí realizado.

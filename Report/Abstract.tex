@@ -9,7 +9,7 @@
 \selectlanguage{spanish}
 
 \begin{center}
-{\large\bfseries Mecanismos de seguridad en videojuegos} \\
+{\large\bfseries Mecanismos de protección de datos en videojuegos} \\
 Benito Palacios Sánchez \\
 \end{center}
 
@@ -20,31 +20,31 @@ Benito Palacios Sánchez \\
 {\centering{}\textbf{Resumen}}
 
 Los videojuegos son cada día más, un factor importante de nuestra cultura actual.
-Especialmente desde el boom que ha dado el mercado de los teléfonos inteligentes.
+Especialmente desde el \textit{boom} que ha dado el mercado de los teléfonos inteligentes.
 A final de 2014 la compañía detrás del famoso juego \textit{Candy Crush} reportó tener 356 millones de usuarios únicos, con unas ganancias de 1.300 millones de dólares.
-La industria de los videojuegos es la segunda con mayor beneficios después de la de libros y, superando a la del cine y música.
-No solo forma parte de nuestro entretenimiento sino que, cada vez más, se incorpora al mundo de la enseñanza, especialmente para niños.
+La industria de los videojuegos es, así, la segunda con mayor beneficios después de la de libros y supera a la del cine y música.
+No solo forma parte de nuestro entretenimiento, sino que, cada vez más, se incorpora al mundo de la enseñanza, especialmente para niños.
 
 Por estas razones, los mecanismos de seguridad asociados a los juegos son importantes.
-Pensados originalmente para combatir la piratería, distribución ilícita de copias de juegos, hoy en día abarcan más campos a parte de estos.
-Tratan de evitar modificaciones, realizar acciones no autorizadas durante las partidas en línea y, traducciones a idiomas donde la empresa piensa crear mercado.
+Pensados originalmente para combatir la piratería, distribución ilícita de copias de juegos, hoy en día abarcan más campos aparte de estos.
+Son importantes para evitar modificaciones, realizar acciones no autorizadas durante las partidas en línea y traducciones a idiomas donde la empresa piensa crear mercado.
 
 Este trabajo pretende ofrecer una perspectiva de seguridad sobre este creciente mercado, analizando juegos de las videoconsolas Nintendo DS, Play Station 3 y plataformas móviles como Android y iOS.
 Se verá cómo se han protegido textos, imágenes y archivos ante modificaciones, con cifrados.
-Así mismo, se analizarán protocolos de comunicación para servicios en línea, el cifrado en las descargas de archivos, la transmisión segura de código y la protección sobre contenidos con derechos de autor.
-Estas técnicas, en general, pretenden impedir poder realizar ingeniería inversa sobre el producto final.
-Entendiéndose esta como el proceso de analizar una aplicación para entender cómo funciona y cómo integra cada uno de sus recursos.
+Así mismo, se analizarán protocolos de comunicación para servicios en línea, el cifrado en las descargas de archivos, la transmisión segura de código y la protección de contenidos con derechos de autor.
+En general, estas técnicas, pretenden impedir poder realizar ingeniería inversa sobre el producto final, entendiéndose esta como el proceso de analizar una aplicación para comprender cómo funciona y cómo integra cada uno de sus recursos.
 
-La ingeniería inversa se lleva realizando desde el inicio de la computadoras, en su mayoría con motivos de entretenimiento y enseñanza, aprendiendo cómo funciona un sistema se puede crear uno más robusto y con más características.
+La ingeniería inversa se lleva realizando desde el inicio de la computadoras, en su mayoría con motivos de entretenimiento y enseñanza; ¡aprendiendo cómo funciona un sistema se puede crear uno más robusto y con más características!
 Existen diversas herramientas para llevarla a cabo, tales como depuradores y desensambladores, aunque son específicas para cada plataforma.
 En este trabajo se ha utilizado un emulador de código abierto DeSmuME y otro privativo pero \textit{freeware}, No\$GBA, para Nintendo DS.
 Estos se han usado con el objetivo de analizar el código en ensamblador de los juegos y de automatizar tareas de depuración como guardar paquetes de red, exportar datos descifrados de rutinas de código y analizar los archivos cargados.
 Además, para el desarrollo de este proyecto se han realizado una serie de programas que ayudan al análisis de juegos.
 También se explican las metodologías seguidas para el desarrollo de los estudios.
 
-Las conclusiones del estudio demuestran una ausencia general en cuanto a protección sobre los archivos con contenidos con copyright.
-Así mismo, expone las técnicas utilizadas por algunas compañía a la hora de ofuscar para evitar modificaciones de archivos, tales como cifrados mediante operaciones \texttt{XOR}, algoritmos \texttt{HMAC} y de firma digital.
-En cuanto a los servicios en línea, se han detectado fallos de seguridad a la hora de configurar servidores y fallos en el diseño de los protocolos, que permiten hacer trampas con facilidad.
+Las conclusiones del estudio demuestran una ausencia general en cuanto a protección sobre los archivos con contenidos con \textit{copyright}.
+Así mismo, se evidencian las técnicas utilizadas por algunas compañías a la hora de ofuscar para evitar modificaciones de archivos, tales como cifrados mediante operaciones \texttt{XOR}, algoritmos \texttt{HMAC} y de firma digital.
+En cuanto a los servicios en línea, se han detectado fallos de seguridad a la hora de configurar servidores y fallos en el diseño de los protocolos, que permiten realizar acciones no autorizadas con facilidad.
+En suma, se deducen unas claras carencias en la provisión de seguridad en los videojuegos, que ponen de manifiesto la necesidad de mejorar los esquemas actualmente dispuestos para ellos.
 
 %% English abstract %%
 \cleardoublepage
@@ -52,7 +52,7 @@ En cuanto a los servicios en línea, se han detectado fallos de seguridad a la ho
 \selectlanguage{english}
 
 \begin{center}
-{\large\bfseries Security Mechanisms in Video Games} \\
+{\large\bfseries Data Protection Mechanisms in Video Games} \\
 Benito Palacios Sánchez \\
 \end{center}
 
@@ -66,29 +66,29 @@ Video games are getting one of the most important elements of our culture.
 The mobile market boom has made companies behind games like \textit{Candy Crush} very successful.
 In that specific case, the game has about 356 millions of unique users and 1.300 millions of dollars in benefits.
 The video game industry is in fact only before the book's one in top of profits and it gets over music and cinema.
-It is not only about entertainment but education, specially for children, for instance, to learn new languages and help with mathematics.
+It is not only about entertainment but also for education, specially for children, for instance, to learn new languages and help with mathematics.
 
 All that benefit makes to think about how to protect against possible `attacks'.
-They started fighting piracy with Digital Rights Management techniques, that is, releasing copy of games without permissions from the author, but nowadays it touches more fields.
+They started fighting piracy with Digital Rights Management techniques, that is, releasing copy of games without permissions from the author, but nowadays it deals with more fields.
 Mods, cheats in online plays and translations made by fans to languages where the company is going to release a port of the game are only some examples.
 
 This project aims to offer a new perspective about game security.
-It analyzes products from Nintendo DS and Play Station 3 devices and mobile platforms like Android and iOS, to show what kind of techniques has been used to protect text and images files.
-Communication protocols for online services, download content protection and wireless code transmission will be dealt with too.
+In it, we analyze products from Nintendo DS and Play Station 3 devices and mobile platforms like Android and iOS, to show what kind of techniques has been used to protect both text and images files, as well as sound archives.
+Communication protocols for online services, download content protection and wireless code transmission will be studied too.
 The general purpose of all these protection is to avoid doing reverse engineering, that is, disassemble the product to study all its pieces and resources.
 
-Reverse engineering will be one of the main topics of this dissertation.
+Reverse engineering is one of the main topics of this dissertation.
 Usually it is done as a hobby but, with the rights tools and knowledge it is a powerful way to test the security of a system.
 Related to video games, it is called \textit{romhacking}, since it is about modify (\textit{hack}) a game (usually distributed in \textit{Read Only Memories}).
 These project will use common tools like disassemblers and debuggers.
 For instance, for Nintendo DS games two emulators will be used.
 The first one, DeSmuME, since it is open source, it will allow to hack its code to automatize task and save network packets.
-The second one, No\$GBA, freeware, includes a built-in debugger so it will be used to analyze code and algorithms.
-Some tools has been developed to help with the task of studying games, like binary searcher, database manager and some game specific exporters.
+The second one, No\$GBA, \textit{freeware}, includes a built-in debugger so it will be used to analyze code and algorithms.
+Some tools have been developed to help with the task of studying games, like binary searcher, database manager and some game specific exporters.
 Furthermore, all the methodology followed to figure out formats and algorithms will be explained in detail.
 
 This project concludes with a summary of the mechanism analyzed, with recommendations to improve them.
-Most copyright content, that usually contains DRM in virtual stores, are not protected in games.
+Most copyright contents, that usually contains DRM in virtual stores, are not protected in games.
 That refers to music, electronic books and videos.
 However, text and images are usually protected with encryption by using \texttt{XOR} operand, \texttt{HMAC} algorithm or a digital signature.
 About the online services, it will show how bad protocol designs has been found, with some vulnerabilities that allow to users to cheat, but also how in some games the download content has a good protection against external modifications and man-in-the-middle attacks.
