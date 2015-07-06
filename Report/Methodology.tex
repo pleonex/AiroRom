@@ -26,7 +26,7 @@ Mirando el contenido de este archivo con un visor hexadecimal, se puede ver que 
 Encontrar esta cabecera indica que este archivo contiene varios ficheros, en un formato similar a \texttt{zip}, ya que de otro modo estaría al comienzo de los datos.
 El análisis se centra en saber cómo extraer los ficheros para luego determinar qué datos tienen cada uno de ellos.
 Se parte sabiendo que la posición del primer fichero es \texttt{0x54}, por lo que se buscará este valor en la cabecera del formato.
-En la posición \texttt{0x0C}, se observa ese valor, seguido de \texttt{0x228}.
+En la posición \texttt{0x0C} se observa ese valor, seguido de \texttt{0x228}.
 Frecuentemente, después de la posición de un fichero se indica su tamaño, por lo que habrá que comprobar si el primer fichero termina en la posición \verb!0x54 + 0x228 = 0x27C!. En la Figura~\ref{fig:met-bg2} se ve que en esa posición aparece la cabecera \texttt{RGCN}, estándar para otro formato de archivo, por lo que es el comienzo de otro fichero.
 
 \includefigure{fig:met-bg2}{Contenido de un fichero comprimido de \textit{Ninokuni}.}{imgs/MET-Bg2.png}
@@ -82,14 +82,14 @@ Esto es lo que hace IDA Pro, sirviendo como un depurador universal.
 De esta forma se puede visualizar el código en ensamblador, poner puntos de interrupción y ver y cambiar la memoria del juego.
 
 La alternativa es usar el emulador privativo No\$GBA.
-Existe una versión que incluye un depurador, originalmente de pago, pero que recientemente se liberó como \textit{freeware}.
+Existe una versión que incluye un depurador originalmente de pago, pero que recientemente se liberó como \textit{freeware}.
 Incluye las mismas funciones descritas anteriormente, pero en este caso implementadas sobre el propio emulador, aumentando así la eficiencia.
 
-Dado que IDA Pro es un programa con una licencia básica de coste \$500, este trabajo se realizó con el emulador No\$GBA que, a pesar de no tener tantas funcionalidad, sí provee de las necesarias para realizar el trabajo sin coste.
+Dado que IDA Pro es un programa con una licencia básica de coste \$500, este trabajo se realizó con el emulador No\$GBA que, a pesar de no tener tanta funcionalidad, sí provee de las necesarias para realizar el trabajo sin coste.
 
 \subsection{Búsqueda de archivos en memoria RAM}
 Esta subsección explicará el procedimiento seguido para, mediante depuración, averiguar cómo el juego procesa un fichero.
-Para ello, hace falta conocer cómo se obtienen datos del cartucho del juego.
+Para ello hace falta conocer cómo se obtienen datos del cartucho del juego.
 El protocolo de comunicación es sencillo: cuando se necesitan datos, se envía un comando que el hardware cifra (esa parte, al usar un emulador, no se realiza), y al cual al cartucho responde con los datos solicitados.
 El código de este comando es \texttt{0xB7} y se envía escribiéndolo en el puerto virtual \texttt{0x040001A8}~\cite{GbaTek}.
 
@@ -122,12 +122,12 @@ Tras determinar que no aparece, se puede confirmar que puede estar codificada en
 Se suele probar con las codificaciones soportadas nativamente por las fuentes de \acl{NDS}, como son \texttt{UTF-8}, \texttt{UTF-16}, \texttt{SHIFT-JIS} y \texttt{CP1252}.
 
 Confirmado que hay un algoritmo que se aplica sobre el texto, el objetivo es encontrar este texto en la memoria \texttt{RAM} del juego, para poder poner un punto de interrupción y ver qué transformaciones se aplican hasta llegar al texto descifrado.
-Para ello, se extrae la memoria, justo en el momento de mostrar un diálogo de texto, pues debería estar la frase guardada para poder mostrarla en pantalla.
+Para ello, se extrae la memoria justo en el momento de mostrar un diálogo de texto, pues debería estar la frase guardada para poder mostrarla en pantalla.
 Esto se puede realizar con cualquier emulador de \acl{NDS}.
 Una vez extraído el archivo binario con la memoria, se busca el texto mediante visores hexadecimales, usando de nuevo codificaciones estándar.
 Si la frase se encuentra, se pondría un punto de interrupción en dicha posición y se estudiaría el algoritmo.
 De no ser así, probablemente se use una codificación propietaria.
-En esos casos, se puede encontrar siguiendo la metodología explicada en los siguientes apartados.
+En esos casos se puede encontrar siguiendo la metodología explicada en los siguientes apartados.
 
 \subsubsection{Búsqueda de la tipografía}
 El primer procedimiento consiste en buscar el archivo con la tipografía del juego, pues la codificación será la misma que el orden con el que aparecen los caracteres en ella.
@@ -137,7 +137,7 @@ El estándar de este formato tiene la cabecera \texttt{NTFR} y existen programas 
 El segundo procedimiento pasa por desarrollar un programa de búsqueda diferencial.
 Una implementación se llevó a cabo para este estudio, denominado \textit{RelativeSearch} y disponible en el repositorio del trabajo\footnote{\url{https://github.com/pleonex/RelativeSearch}}.
 
-La idea de este programa se basa en que un grupo de caracteres similares, tiene una numeración seguida.
+La idea de este programa se basa en que un grupo de caracteres similares tiene una numeración seguida.
 Por ejemplo, si la codificación indica que el carácter `a' tiene asociado el valor \texttt{0x0123}, el carácter `b' tendrá el siguiente, \texttt{0x0124}.
 Restando ambos valores, se encuentra su `distancia' en el abecedario.
 Esta distancia, en la mayoría de los casos, será la misma en cualquier codificación, incluso propietaria, a no ser que se hayan desordenado los caracteres.
@@ -157,7 +157,7 @@ No se puede partir de datos conocidos como anteriormente se hacía con una frase 
 Sin embargo, dado que las cabeceras de la imagen suelen ser estándar, se puede buscar sobre el código en ensamblador la función que la procesa.
 En concreto se busca el identificador \texttt{CHAR}, que se lee para determinar el comienzo de una sección del archivo.
 
-Una vez encontrada la función que carga una imagen, se puede poner un punto de interrupción sobre ella, para tener acceso a los datos cifrados cuando el juego procese un archivo.
+Una vez encontrada la función que carga una imagen, se puede poner un punto de interrupción sobre ella para tener acceso a los datos cifrados cuando el juego procese un archivo.
 Una vez localizados, se añade un punto de interrupción sobre los datos cifrados de la imagen, el cual llevará al código que los procesa y, por tanto, el algoritmo que los descifra.
 
 \section{Interceptación de la comunicación}
@@ -201,7 +201,7 @@ Se modificaron los archivos \texttt{wifi.cpp} y \texttt{wifi.h}\footnote{\url{ht
 
     \item \verb!save_adhocPacket(u8* packet, u32 len, void* addrGen, bool isSent)!: genera un paquete con cabeceras \textit{Ethernet}, \textit{IP} y \textit{UDP} y guarda los datos de la capa aplicación que se le pasa.
     Esta función se llama cuando se envía un paquete mediante comunicación \textit{ad-hoc} a otra consola.
-    Dado que este paquete, solo contiene datos en formato del protocolo de Nintendo, para poder analizarlo con \textit{Wireshark} es necesario crear las cabeceras de la capa de enlace, red y transporte.
+    Dado que este paquete solo contiene datos en formato del protocolo de Nintendo, para poder analizarlo con \textit{Wireshark} es necesario crear las cabeceras de la capa de enlace, red y transporte.
 \end{itemize}
 
 Esta comunicación sin embargo está cifrada.
@@ -217,7 +217,7 @@ Los programas y documentación de este trabajo se han ido publicando en un reposi
 La documentación se fue redactando en formato \textit{Markdown} en la wiki\footnote{\url{https://github.com/pleonex/AiroRom/wiki}} del repositorio.
 En la página de \textit{Mecanismos a investigar}, se muestran los juegos ordenados por desarrollador con más juegos publicados.
 Para crear esta clasificación se hizo el \textit{script} en \textit{python} llamado \textit{Scenadvorter}.
-Este programa, lee un XML con una base de datos de todos los juegos para \acl{NDS} que proporciona la página ADVANsCEne\footnote{\url{http://www.advanscene.com}}, y clasifica los juegos por desarrollador mostrando los diez primeros con más juegos.
+Este programa lee un XML con una base de datos de todos los juegos para \acl{NDS} que proporciona la página ADVANsCEne\footnote{\url{http://www.advanscene.com}}, y clasifica los juegos por desarrollador mostrando los diez primeros con más juegos.
 
 Para guardar la información sobre los algoritmos descubiertos se desarrolló un programa que permitía guardar y editar dicha información en ficheros XML.
 Este programa (Figura~\ref{fig:met-databrithm}) se llamó \textit{DataBrithm} y su código se encuentra en el repositorio también.

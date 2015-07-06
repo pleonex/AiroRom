@@ -63,7 +63,7 @@ A este modelo se añaden cuatro puntos más, resultando la siguiente lista:
 \subsection{Cifrado simétrico y asimétrico}
 La técnica de cifrado se emplea para garantizar la confidencialidad.
 En líneas generales se basa en aplicar un algoritmo con una clave sobre un bloque de datos, denominado texto plano.
-El resultado es otra representación del texto plano de manera que, no se puede recuperar la información original sin conocer los detalles del cifrado.
+El resultado es otra representación del texto plano de manera que no se puede recuperar la información original sin conocer los detalles del cifrado.
 
 Estos algoritmos se basan en operaciones de sustitución y transposición, reordenación de bloques de datos.
 Se clasifican en dos tipos principalmente: simétricos y asimétricos.
@@ -94,14 +94,14 @@ Para evitar estos dos problemas, se usa una clave que cambia tras cada ejecución
 
 El cifrado asimétrico, a pesar de ser más lento que el simétrico, soluciona el problema de compartir la misma clave usada para cifrar y descifrar.
 De esta forma, cada extremo posee una clave y no necesita conocer la otra.
-Un mensaje cifrado con la primera clave, solo podría ser descifrado con la segunda, y viceversa.
+Un mensaje cifrado con la primera clave solo podría ser descifrado con la segunda, y viceversa.
 Este tipo de algoritmo se usa en las comunicaciones a través de redes inseguras como Internet.
 Cuando se genera el par de claves, una se suele mantener secreta (clave privada) y la otra se comparte entre varias entidades (clave pública).
-El algoritmo más utilizado es \texttt{RSA}, que soporta tanto cifrado y descifrado, como firma digital e intercambio de claves.
+El algoritmo más utilizado es \texttt{RSA}, que soporta tanto cifrado y descifrado como firma digital e intercambio de claves.
 
 \subsection{Algoritmos para integridad}
 Los algoritmos para integridad tienen como objetivo asegurar que el mensaje no ha sido modificado.
-Para ello, mediante una serie de operaciones, se ofrece un resumen de tamaño fijo, de los datos de entrada.
+Para ello, mediante una serie de operaciones, se ofrece un resumen de tamaño fijo de los datos de entrada.
 Los algoritmos deben cumplir que las colisiones (coincidencias de resumen entre dos bloques de datos distintos) sean no reproducibles.
 Estos se clasifican por el número de bits del resultado, siendo los más frecuentes \texttt{MD5}\footnote{Este algoritmo es inseguro.}, con 128 bits, y \texttt{SHA-1}, con 160 bits.
 
@@ -122,7 +122,7 @@ Los juegos se distribuían en cartuchos de solo lectura, ya que no existían memor
 
 Con la introducción de la \acl{NDS}, esto cambió.
 Los juegos se distribuyen en pequeños cartuchos de tamaño similar a una tarjeta SD.
-Debido a la existencia de tarjetas MicroSD, se pudieron crear dispositivos que simulan ser un juego comercial y que, permiten ejecutar código no autorizado por Nintendo.
+Debido a la existencia de tarjetas MicroSD, se pudieron crear dispositivos que simulan ser un juego comercial y que permiten ejecutar código no autorizado por Nintendo.
 Estos se conocen como \textit{flashcards} y se basan en \textit{exploits} que consiguen saltarse las limitaciones del sistema de la consola para, simulando ser un juego, comenzar la ejecución de otro.
 
 \subsection{\acl{NDS}}
@@ -159,8 +159,8 @@ Cuando se piden datos al cartucho, estos pasan por el módulo de descifrado de la
 Se trata de un módulo diseñado específicamente para la consola, encontrándose la clave sobre las pistas del chip, por lo que no se puede averiguar.
 
 Para incrementar la seguridad se colocaron los componentes de la consola estratégicamente, de forma que era complicado extraer y acceder a la memoria \texttt{RAM}.
-A pesar de ello, hubo personas que consiguieron acceder, pudiendo leer los datos descifrados del juego e incluso alterar las instrucciones almacenadas en la memoria, para ejecutar código que forzara descifrar del juego completo.
-Fue este, así, un proceso manual que permitió encontrar una serie de \textit{exploits}\footnote{\url{http://smealum.net/ninjhax/}} que se aprovechaban de nuevo, de fallos de seguridad en los archivos de guardado, para ejecutar código descifrado directamente.
+A pesar de ello, hubo personas que consiguieron acceder, pudiendo leer los datos descifrados del juego e incluso alterar las instrucciones almacenadas en la memoria para ejecutar código que forzara descifrar del juego completo.
+Fue este, así, un proceso manual que permitió encontrar una serie de \textit{exploits}\footnote{\url{http://smealum.net/ninjhax/}} que se aprovechaban de nuevo de fallos de seguridad en los archivos de guardado para ejecutar código descifrado directamente.
 
 \section{Ingeniería inversa}
 % Definición de ingeniería inversa por REDO
@@ -202,7 +202,7 @@ Existen programas llamados \textit{descompiladores} que automatizan esta tarea p
 
 La forma de evitar este proceso, aparte de aplicar cifrados a nivel de hardware como hace la \acl{N3DS} (Apartado~\ref{sec:art-dev-3ds}), es mediante ofuscación de código.
 Este proceso consiste en transformar el código de forma que es menos legible, pero mantiene la funcionalidad~\cite[p.~344]{RevBlack}.
-Debe de cumplir además que las transformaciones aplicadas no sean sencillas de revertir, de forma que no se pudiera crear un \textit{desofuscador} y que, el sobrecoste que este proceso conlleva, no afecte al rendimiento.
+Debe de cumplir además que las transformaciones aplicadas no sean sencillas de revertir, de forma que no se pudiera crear un \textit{desofuscador} y que el sobrecoste que este proceso conlleva no afecte al rendimiento.
 El nivel de complejidad que añade esta técnica se llama \textit{potencia}, y se puede medir con software convencional que toma en cuenta factores como el número de funciones y la profundidad de anidado que tiene una secuencia de código.
 
 Un sistema podría considerarse seguro una vez que el esfuerzo y tiempo que requiere romper su seguridad es mayor al valor del producto y su validez.
