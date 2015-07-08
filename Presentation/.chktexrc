@@ -1,0 +1,41 @@
+# Disable some warnings
+CmdLine
+{
+  # Disable warning if comment is found
+  -n22
+
+  # Disable multiple space detecting since I it's mainly used to put better code
+  -n30
+
+  # Disable detecting 'x' as replace for $\time$ since I am using for hex number
+  -n29
+
+  # Disable ending command with space since table cmd \FL will reduce line space
+  -n1
+
+  # Disable intersence space since it does not detect good with acros
+  -n13
+
+  # Disable warning about dash length since it's difference in Spanish
+  -n8
+
+  # Forget to add spaces before cite or figure should be error
+  -e2
+
+  # Invalid number of { and }
+  -e17
+
+  # Only found a }
+  -e10
+
+  # No match for{
+  -e15
+}
+
+# Warn about wrong commands
+UserWarn
+{
+    # I don't know I always write this instead of footnote
+    footenote,
+    apartir
+}
