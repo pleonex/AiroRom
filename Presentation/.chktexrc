@@ -30,6 +30,9 @@ CmdLine
 
   # No match for{
   -e15
+
+  # No valid match for end block
+  -e9
 }
 
 # Warn about wrong commands
@@ -37,5 +40,6 @@ UserWarn
 {
     # I don't know I always write this instead of footnote
     footenote,
-    apartir
+    apartir,
+    befin
 }
