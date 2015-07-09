@@ -8,7 +8,30 @@
 \RequirePackage[T1]{fontenc}        % Output font
 \RequirePackage[utf8]{inputenc}     % Input encoding
 
-\newenvironment{withoutheadline}{
+% An environment to remove header and foot for title
+\newenvironment{withoutheadfootline}{
     \setbeamertemplate{headline}[default]
+    \setbeamertemplate{footline}[default]
     \def\beamer@entrycode{\vspace*{-\headheight}}
 }{}
+
+% Remove navigation symbol at the bottom
+\setbeamertemplate{navigation symbols}{}
+
+% Add a footline, code copied from infolines outer theme
+\setbeamertemplate{footline}
+{
+  \leavevmode%
+  \hbox{%
+  \begin{beamercolorbox}[wd=.333333\paperwidth,ht=2.25ex,dp=1ex,center]{author in head/foot}%
+    \usebeamerfont{author in head/foot}\insertshortauthor\expandafter\beamer@ifempty\expandafter{\beamer@shortinstitute}{}{~~(\insertshortinstitute)}
+  \end{beamercolorbox}%
+  \begin{beamercolorbox}[wd=.333333\paperwidth,ht=2.25ex,dp=1ex,center]{title in head/foot}%
+    \usebeamerfont{title in head/foot}\insertshorttitle
+  \end{beamercolorbox}%
+  \begin{beamercolorbox}[wd=.333333\paperwidth,ht=2.25ex,dp=1ex,right]{date in head/foot}%
+    \usebeamerfont{date in head/foot}\insertshortdate{}\hspace*{2em}
+    \insertframenumber{} / \inserttotalframenumber\hspace*{2ex}
+  \end{beamercolorbox}}%
+  \vskip0pt%
+}
