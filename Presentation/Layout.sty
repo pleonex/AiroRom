@@ -1,0 +1,14 @@
+% Copyright (c) 2015 Benito Palacios Sánchez - All Rights Reserved.
+% Esta obra está licenciada bajo la Licencia Creative Commons Atribución 4.0
+% Internacional. Para ver una copia de esta licencia, visita
+% http://creativecommons.org/licenses/by/4.0/.
+
+\NeedsTeXFormat{LaTeX2e}
+\ProvidesPackage{LayoutStyle}[2015/06/09 Dissertation Presentation Layout Style]
+\RequirePackage[T1]{fontenc}        % Output font
+\RequirePackage[utf8]{inputenc}     % Input encoding
+
+\newenvironment{withoutheadline}{
+    \setbeamertemplate{headline}[default]
+    \def\beamer@entrycode{\vspace*{-\headheight}}
+}{}
