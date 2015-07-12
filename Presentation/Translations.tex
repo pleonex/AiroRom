@@ -32,16 +32,28 @@
   \end{column}
 
   \begin{column}{0.4\textwidth}
-    \includegraphics[width=\textwidth]{imgs/pokemon_cart.pdf}
+    \visible<2->{\includegraphics[width=\textwidth]{imgs/pokemon_cart.pdf}}
   \end{column}
 \end{columns}
 
 \end{frame}
 
 
-\begin{frame}{Metodología}
+\begin{frame}{Ficheros en Nintendo DS}
+\begin{columns}
 
+\begin{column}{0.5\textwidth}
+    \uncover<2->{Sistema de ficheros en NDS.}
+    \visible<2->{\includegraphics[width=\textwidth,keepaspectratio]{imgs/ds_files.png}}
+\end{column}
+\begin{column}{0.5\textwidth}
+    \uncover<3->{Archivo binario con textos.}
+    \visible<3->{\includegraphics[width=\textwidth,keepaspectratio]{imgs/pearl_text_enc.png}}
+\end{column}
+
+\end{columns}
 \end{frame}
+
 
 \begin{frame}[fragile]{Cifrado XOR en Pokémon Perla y Diamante}
 \begin{columns}
@@ -73,6 +85,7 @@ for (int i=data.Length - 1; i>=0; i--){
 \end{column}
 \end{columns}
 \end{frame}
+
 
 \begin{frame}[fragile]{Archivos ofuscados en Pokémon Blanco y Negro}
 \begin{columns}
@@ -113,6 +126,7 @@ for (int i=0; i<data.Length; i++){
 \end{column}
 \end{columns}
 \end{frame}
+
 
 \subsection{}
 \begin{frame}{Mecanismos en otros juegos}
