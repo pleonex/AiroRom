@@ -19,6 +19,15 @@
 {\itemize\addtolength{\itemsep}{10pt}}
 {\enditemize}
 
+% A graphic with caption
+\newcommand{\includefigure}[2]{%
+    \begin{figure}
+        \includegraphics[width=\textwidth,keepaspectratio]{#2}
+        \caption{#1}
+    \end{figure}
+}
+
+
 % Add a footline, code copied from infolines outer theme
 \setbeamertemplate{footline}
 {

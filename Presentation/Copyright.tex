@@ -33,12 +33,12 @@
 
 \begin{columns}
     \begin{column}{0.35\textwidth}
-        \visible<1->{\includegraphics[width=\textwidth,keepaspectratio]{imgs/guitar_grip.png}}
+        \visible<1->{\includefigure{\textit{Guitar Grip}}{imgs/guitar_grip.png}}
     \end{column}
 
     \begin{column}{0.65\textwidth}
     \begin{wideitemize}
-        \item<1-> Ficheros del juego comprimidos en formato propietario.
+        \item<1-> Ficheros comprimidos con formato propietario.
         \begin{itemize}
             \item<2-> El algoritmo ocupa 1.900 instrucciones máquina.
             \note<1>[item]{Se compiló en modo depuración por los errores.}
@@ -52,14 +52,31 @@
 \end{columns}
 
 \vfill
-\visible<2->{\includegraphics[width=\textwidth,keepaspectratio]{imgs/zlib_debug.png}}
+\visible<2->{\includefigure{Mensajes de error en el código.}{imgs/zlib_debug.png}}
 \note<1>[item]{Al incluir hardware adicional no se puede piratear.}
 \note<1>[item]{Se creó un parche para eliminar la dependencia de hardware.}
 
 \end{frame}
 
 \begin{frame}{Duet}
+\begin{columns}
+    \begin{column}{0.75\textwidth}
+    \begin{center}\includegraphics[width=0.15\textwidth,keepaspectratio]{imgs/duet_logo.png}\end{center}
 
+    \begin{wideitemize}
+        \item<1-> Juego para plataformas móviles (Android, iOS).
+
+        \item<2-> La banda sonora se vende en iTunes por 3.99€.
+
+        \item<3-> Se encuentra desprotegida en la carpeta del juego en formato estándar.
+    \end{wideitemize}
+    \end{column}
+
+    \begin{column}{0.25\textwidth}
+        \centering
+        \visible<3->{\includegraphics[width=\textwidth,keepaspectratio]{imgs/duet_music.png}}
+    \end{column}
+\end{columns}
 \end{frame}
 
 \subsection{}
