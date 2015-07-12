@@ -46,7 +46,7 @@
 \begin{frame}[fragile]{Cifrado XOR en Pokémon Perla y Diamante}
 \begin{columns}
 \begin{column}{0.75\textwidth}
-    Textos:
+    Textos: codificados y cifrados
     \begin{uncoverenv}<2->\begin{lstlisting}
 ushort clave = 0x91BD3 * (num + 1);
 for (int i=0; i<data.Length; i++){
@@ -54,8 +54,9 @@ for (int i=0; i<data.Length; i++){
   clave = (ushort)(clave + 0x493D);
 }
     \end{lstlisting}\end{uncoverenv}
+\note<1>[item]{En la memoria se comenta un fallo de seguridad en el formato.}
 
-    \uncover<3->{Imágenes:}
+    \uncover<3->{Imágenes: cifrado del bloque de datos}
     \begin{uncoverenv}<4->\begin{lstlisting}
 uint clave = data[data.Length - 1];
 for (int i=data.Length - 1; i>=0; i--){
@@ -73,8 +74,44 @@ for (int i=data.Length - 1; i>=0; i--){
 \end{columns}
 \end{frame}
 
-\begin{frame}{Pokémon Blanco y Negro}
+\begin{frame}[fragile]{Archivos ofuscados en Pokémon Blanco y Negro}
+\begin{columns}
+\begin{column}{0.25\textwidth}
+    \visible<2->{\includegraphics[width=\textwidth]{imgs/pearl_ofus_files.png}}
+    \vfill
+    \visible<3->{\includegraphics[width=\textwidth]{imgs/bw_ofus_files.png}}
+\end{column}
 
+\begin{column}{0.75\textwidth}
+    \begin{itemize}
+        \item<1-> Archivos ofuscados:
+        \begin{itemize}
+            \item<3-> Sin nombre ni clasificación.
+        \end{itemize}
+
+        \item<4-> Textos:
+        \begin{itemize}
+            \item<5-> Codificación \texttt{UTF-16}.
+            \item<6-> Cifrado \texttt{XOR}, moviendo 3 bits de la clave.
+        \end{itemize}
+
+    \begin{uncoverenv}<6->\begin{lstlisting}
+ushort clave = (num + 3) * 0x2983;
+for (int i=0; i<data.Length; i++){
+  data[i] = data[i] ^ clave;
+  ushort temp = clave & 0x1FFF;
+  clave = (temp<<3) | (clave>>13)
+}
+    \end{lstlisting}\end{uncoverenv}
+
+        \item<7-> Imágenes:
+            \begin{itemize}
+                \item<8-> Cambio de formato.
+            \end{itemize}
+        \visible<8->{\includegraphics[width=\textwidth,height=0.8\textheight,keepaspectratio]{imgs/bw_image.png}}
+    \end{itemize}
+\end{column}
+\end{columns}
 \end{frame}
 
 \subsection{}
