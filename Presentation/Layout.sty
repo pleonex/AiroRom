@@ -11,6 +11,11 @@
 % Remove navigation symbol at the bottom
 \setbeamertemplate{navigation symbols}{}
 
+% A list with more vertical separation between elements
+\newenvironment{wideitemize}
+{\itemize\addtolength{\itemsep}{10pt}}
+{\enditemize}
+
 % Add a footline, code copied from infolines outer theme
 \setbeamertemplate{footline}
 {
