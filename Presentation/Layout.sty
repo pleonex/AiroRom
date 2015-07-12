@@ -28,3 +28,76 @@
   \end{beamercolorbox}}%
   \vskip0pt%
 }
+
+% Define new variables
+\def\tutor#1{\def\@tutor{#1}}
+\def\titlelogo#1{\def\@titlelogo{#1}}
+\def\university#1{\def\@university{#1}}
+\def\faculty#1{\def\@faculty{#1}}
+\def\departament#1{\def\@departament{#1}}
+\def\course#1{\def\@course{#1}}
+
+% Title page customized from Beamer2Thesis package. More info:
+% https://github.com/cfiandra/Beamer2Thesis/blob/master/latex/beamerinnerthemetorinoth.sty
+\setbeamertemplate{title page}
+{
+   % University % Logo
+   \begin{centering}
+     % University
+     \begin{beamercolorbox}[rounded=true,shadow=true,ht=2.5ex,wd=.89\paperwidth,sep=3pt,center]{palette primary}
+       \@university\par%
+     \end{beamercolorbox}
+     \vskip0.5em%
+
+    % Logo
+    \includegraphics[height=.2\paperheight]{\@titlelogo}
+    \vfill
+
+  \end{centering}
+  \vskip0.25em
+
+  % Title
+  \begin{centering}
+     \begin{beamercolorbox}[wd=\paperwidth,sep=8pt,center]{palette primary}
+       \usebeamerfont{title}\inserttitle\par%
+     \end{beamercolorbox}%
+  \end{centering}
+
+  \vskip0.75em\par%
+
+  % Authors and tutors
+  \begin{columns}
+    % Tutor in first column
+    \column{.5\paperwidth}%
+      \vspace{\stretch{0.25}}%
+      \begin{beamercolorbox}[ht=0.075\paperheight,sep=8pt,center]{white}
+        \usebeamerfont{definition}Tutor:
+      \end{beamercolorbox}
+
+	  \begin{beamercolorbox}[ht=0.065\paperheight,sep=8pt,center]{white}
+        \usebeamerfont{person}\textit{\@tutor}
+      \end{beamercolorbox}
+      \vspace{\stretch{1}}%
+
+    % Author in second column
+    \column{.5\paperwidth}
+      \vspace{\stretch{0.25}}%
+	  \begin{beamercolorbox}[ht=0.075\paperheight,sep=8pt,center]{white}
+	    \usebeamerfont{definition}Candidato:
+	  \end{beamercolorbox}
+
+	  \begin{beamercolorbox}[ht=0.065\paperheight,sep=8pt,center]{white}
+	    \usebeamerfont{person}\textit{\insertauthor}
+	  \end{beamercolorbox}
+      \vspace{\stretch{1}}%
+  \end{columns}
+  \vfill
+
+  % Date
+  \begin{centering}
+    \begin{beamercolorbox}[sep=8pt,center]{white}
+      \usebeamerfont{date}\insertdate{}
+    \end{beamercolorbox}
+  \end{centering}
+  \vfill
+}
