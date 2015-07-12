@@ -55,6 +55,40 @@
 \end{frame}
 
 
+\begin{frame}{Depuración de juegos}
+    \centering
+    \uncover<2->{Emulador No\$gba para NDS.}
+    \visible<2->{\includegraphics[width=\textwidth,height=0.8\textheight,keepaspectratio]{imgs/nosgba_debug.png}}
+\end{frame}
+
+
+\begin{frame}{Búsqueda de textos con codificación no estándar}
+    \centering
+    \uncover<2->{\textit{RelativeSearch}.}
+    \visible<2->{\includegraphics[width=\textwidth,height=0.8\textheight,keepaspectratio]{imgs/relative_search.png}}
+\end{frame}
+
+
+\begin{frame}{Puntos de interrupción en código}
+    \centering
+
+    \only<1>{
+        Punto de interrupción.
+        \includegraphics[width=\textwidth,height=0.8\textheight,keepaspectratio]{imgs/pearl_xor_basic.png}
+    }
+
+    \only<2>{
+        Bucle de descifrado.
+        \includegraphics[width=\textwidth,height=0.8\textheight,keepaspectratio]{imgs/pearl_xor_loop.png}
+    }
+
+    \only<3>{
+        Inicialización de clave.
+        \includegraphics<3->[width=\textwidth,height=0.8\textheight,keepaspectratio]{imgs/pearl_xor_loop_key.png}
+    }
+\end{frame}
+
+
 \begin{frame}[fragile]{Cifrado XOR en Pokémon Perla y Diamante}
 \begin{columns}
 \begin{column}{0.75\textwidth}
