@@ -43,8 +43,34 @@
 
 \end{frame}
 
-\begin{frame}{Pokémon Perla y Diamante}
+\begin{frame}[fragile]{Cifrado XOR en Pokémon Perla y Diamante}
+\begin{columns}
+\begin{column}{0.75\textwidth}
+    Textos:
+    \begin{uncoverenv}<2->\begin{lstlisting}
+ushort clave = 0x91BD3 * (num + 1);
+for (int i=0; i<data.Length; i++){
+  data[i] = data[i] ^ clave;
+  clave = (ushort)(clave + 0x493D);
+}
+    \end{lstlisting}\end{uncoverenv}
 
+    \uncover<3->{Imágenes:}
+    \begin{uncoverenv}<4->\begin{lstlisting}
+uint clave = data[data.Length - 1];
+for (int i=data.Length - 1; i>=0; i--){
+  data[i] = data[i] ^ clave;
+  clave = (uint)(clave * 0x41C64E6D + 0x6073);
+}
+    \end{lstlisting}\end{uncoverenv}
+\end{column}
+
+\begin{column}{0.25\textwidth}
+    \visible<3->{\includegraphics[width=\textwidth]{imgs/pearl_img_enc.png}}
+    \vfill
+    \visible<5->{\includegraphics[width=\textwidth]{imgs/pearl_img_dec.png}}
+\end{column}
+\end{columns}
 \end{frame}
 
 \begin{frame}{Pokémon Blanco y Negro}

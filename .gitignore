@@ -17,6 +17,7 @@
 *.xmpi
 *.nav
 *.snm
+*.vrb
 
 Report/diagrams/*
 !Report/diagrams/*.msc

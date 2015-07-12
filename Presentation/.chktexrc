@@ -19,6 +19,9 @@ CmdLine
   # Disable warning about dash length since it's difference in Spanish
   -n8
 
+  # Disable warning of paranthesis since there are unknown beamer cmds.
+  -n36
+
   # Forget to add spaces before cite or figure should be error
   -e2
 
