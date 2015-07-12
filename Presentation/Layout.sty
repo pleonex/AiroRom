@@ -8,13 +8,6 @@
 \RequirePackage[T1]{fontenc}        % Output font
 \RequirePackage[utf8]{inputenc}     % Input encoding
 
-% An environment to remove header and foot for title
-\newenvironment{withoutheadfootline}{
-    \setbeamertemplate{headline}[default]
-    \setbeamertemplate{footline}[default]
-    \def\beamer@entrycode{\vspace*{-\headheight}}
-}{}
-
 % Remove navigation symbol at the bottom
 \setbeamertemplate{navigation symbols}{}
 
