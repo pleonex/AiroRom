@@ -44,6 +44,28 @@
 
 
 \subsection{Servicios en línea}
+\begin{frame}{Servidores de Nintendo}
+\textit{Token} generando aplicando \texttt{MD5} a:
+\begin{columns}
+
+\begin{column}{0.33\textwidth}\begin{itemize}
+    \item \texttt{MD5} del \textit{challenge}$_{NAS}$.
+    \item \textit{challenge}$_{consola}$.
+\end{itemize}\end{column}
+
+\begin{column}{0.33\textwidth}\begin{itemize}
+    \item 48 espacios en blanco.
+    \item \textit{challenge}$_{servidor}$.
+\end{itemize}\end{column}
+
+\begin{column}{0.33\textwidth}\begin{itemize}
+    \item \textit{token}$_{NAS}$.
+    \item \texttt{MD5} del \textit{challenge}$_{NAS}$.
+\end{itemize}\end{column}
+
+\end{columns}
+\end{frame}
+
 \begin{frame}{100 Classic Book Collection}
 
 \end{frame}
