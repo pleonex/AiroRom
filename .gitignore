@@ -18,6 +18,7 @@
 *.nav
 *.snm
 *.vrb
+*.dvi
 
 Report/diagrams/*
 !Report/diagrams/*.msc
