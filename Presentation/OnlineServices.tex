@@ -5,29 +5,62 @@
 
 \section{Servicios en línea}
 \subsection{Multijugador}
-\begin{frame}{Servidores para Nintendo DS}
+\begin{frame}[fragile]{Captura de paquetes}
 \begin{columns}
 
-\begin{column}{0.5\textwidth}
+\begin{column}{0.35\textwidth}
+Estrategia \textit{man-in-the-middle}
 \begin{center}
-    \visible<3->{\includefigure{Diagrama de conexión cliente-servidor}
-    {imgs/nds_dwc.eps}}
+    \includefigure{\textit{Man-in-the-middle}}{imgs/man_middle.eps}
 \end{center}
 \end{column}
 
 \begin{column}{0.5\textwidth}
+\uncover<2->{Modificación DeSmuME.}
 \begin{itemize}
-    \item<2-> Modificación de DeSmuME para guardar paquetes \texttt{PCAP} y cifrado \texttt{RC4}.
-
-    \item<4-> Vulnerabilidades:
-    \begin{itemize}
-        \item<5-> Puerto 80 del NAS abierto.
-
-        \item<6-> Contraseña para NAS no usada.
-
-        \item<7-> Autenticación para descargas es \texttt{PAP}.
-    \end{itemize}
+    \item<3-> Paquetes PCAP.
 \end{itemize}
+\begin{uncoverenv}<3->\begin{lstlisting}
+void create_packet();
+void save_packet(u8* packet,u32 len);
+void save_adhocPacket(u8* packet,
+  u32 len, void* addr, bool isSent);
+\end{lstlisting}\end{uncoverenv}
+
+\begin{itemize}
+    \item<4-> Exportar paquetes.
+\end{itemize}
+\visible<5->{\includegraphics[width=\textwidth,keepaspectratio]{imgs/rc4exporter.png}}
+\vfill
+\visible<6->{\includegraphics[width=\textwidth,keepaspectratio]{imgs/rc4finder.png}}
+\end{column}
+
+\end{columns}
+\end{frame}
+
+\begin{frame}{Servidores para Nintendo DS}
+
+\begin{center}
+    \visible<2->{\includegraphics[width=\textwidth,height=0.5\textheight,keepaspectratio]{imgs/nds_dwc.eps}}
+\end{center}
+
+\uncover<3->{Vulnerabilidades:}
+\begin{columns}
+\footnotesize
+\begin{column}{0.3333\textwidth}
+    \begin{itemize}
+        \item<4-> Puerto 80 del NAS abierto.
+    \end{itemize}
+\end{column}
+\begin{column}{0.3333\textwidth}
+    \begin{itemize}
+        \item<5-> Contraseña no usada.
+    \end{itemize}
+\end{column}
+\begin{column}{0.3333\textwidth}
+    \begin{itemize}
+        \item<6-> Autenticación simple.
+    \end{itemize}
 \end{column}
 
 \end{columns}
