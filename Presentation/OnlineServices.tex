@@ -128,28 +128,16 @@ void save_adhocPacket(u8* packet,
 
 \begin{frame}{\textit{Download Play}}
 Compartir demos con comunicación inalámbrica ad-hoc.
-
+\vfill
 \uncover<2->{\underline{Problema:}}
-\begin{columns}
-    \begin{column}{0.5\textwidth}
-    \begin{itemize}
-        \item<3-> Envío de código de una consola a otra.
-        \item<5-> El código principales se firman con \texttt{RSA}.
-    \end{itemize}
-    \end{column}
-
-    \begin{column}{0.5\textwidth}
-    \begin{itemize}
-        \item<4-> Se podría interceptar y cambiar para acceder a la consola.
-        \item<6-> Los módulos de código adicional no.
-    \end{itemize}
-    \end{column}
-\end{columns}
-
-\uncover<7->{\underline{Solución:}}
 \begin{itemize}
-    \item<8-> El archivo principal comprueba con \texttt{HMAC} los módulos.
-    \item<9-> La clave y el resultado se guarda en este fichero.
-    \item<10-> Solo si el inicio es \textit{Download Play} y no desde un cartucho.
+    \item<3-> Envío de código de una consola a otra.
+    \item<4-> El código principales se firman con \texttt{RSA}.
+\end{itemize}
+\vfill
+\uncover<5->{\underline{Solución de Nintendo:}}
+\begin{itemize}
+    \item<6-> Comprobar integridad con \texttt{HMAC}.
+    \item<7-> Solo si con \textit{Download Play}.
 \end{itemize}
 \end{frame}
