@@ -1,0 +1,66 @@
+% Copyright (c) 2015 Benito Palacios Sánchez - All Rights Reserved.
+% Esta obra está licenciada bajo la Licencia Creative Commons Atribución 4.0
+% Internacional. Para ver una copia de esta licencia, visita
+% http://creativecommons.org/licenses/by/4.0/.
+
+\section{Recomendaciones}
+\subsection{}
+
+\begin{frame}{Seguridad en ficheros}
+\note<1>[item]{Es de señalar la revelancia de estas recomendaciones, pues hasta la fecha no existe reportado nada similar en la literatura.}
+
+\uncover<1->{Acceso a ficheros:}
+\begin{itemize}
+    \item<2-> Empaquetar ficheros.
+    \note<1>[item]{Guitar Hero: On Tours y Profesor Layton y la Llamada del Espectro.}
+    \begin{itemize}
+        \item<3-> Implementaciones largas (1.900 líneas).
+        \item<4-> Compresión diferente en cada cabecera.
+    \end{itemize}
+
+    \item<5-> Ofuscar nombre de ficheros y directorios.
+    \note<1>[item]{Pokémon Blanco y Negro}
+\end{itemize}
+
+\uncover<6->{Cifrado en textos e imágenes:}
+\begin{itemize}
+    \item<7-> Cifrado \texttt{XOR}.
+    \begin{itemize}
+        \item<8-> No usar claves estáticas.
+    \end{itemize}
+
+    \item<9-> Codificación de caracteres no estándar.
+    \begin{itemize}
+        \item<10-> Desordenar caracteres.
+        \item<11-> Cifrado del archivo de tipografía.
+    \end{itemize}
+
+    \item<12-> Nuevos formatos frente a cifrado.
+\end{itemize}
+
+\uncover<+->{Contenido con derechos de autor sin protección.}
+\end{frame}
+
+\begin{frame}{Seguridad en comunicaciones}
+\begin{wideitemize}
+    \item<+-> HTTPS vs HTTP.
+    \note<1>[item]{Ataques man-in-the-middle.}
+    \begin{itemize}
+        \item<+-> Cerrar puertos de servidores.
+        \item<+-> Diseño del protocolo.
+    \end{itemize}
+
+    \item<+-> Autenticación con contraseña vs reto.
+    \begin{itemize}
+        \item<+-> Comprobar la contraseña.
+    \end{itemize}
+
+    \item<+-> Cifrado y comprobación de integridad en descargas.
+    \begin{itemize}
+        \item<+-> Proteger activación de contenido descargado.
+        \note<1>[item]{Añadir contraseña a la base de datos.}
+    \end{itemize}
+
+    \item<+-> Transmisión segura de código entre dispositivos.
+\end{wideitemize}
+\end{frame}
