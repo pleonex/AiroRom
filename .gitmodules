@@ -31,3 +31,6 @@
 [submodule "Programs/tinke"]
 	path = Programs/tinke
 	url = http://github.com/pleonex/tinke
+[submodule "wiki"]
+	path = wiki
+	url = git@github.com:pleonex/AiroRom.wiki.git
