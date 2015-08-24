@@ -199,7 +199,7 @@ Una de las posibilidades de comunicación inalámbrica que ofrece la \ac{NDS} es q
 En este contexto, dado que la transmisión de código, se hace en un canal compartido (se usa el protocolo \textit{Wi-Fi}), son necesarios mecanismos que protejan la comunicación.
 De esta forma, no sería posible realizar un ataque \textit{man-in-the-midle} para ejecutar código no autorizado introduciendo así una brecha de seguridad.
 
-El protocolo~\cite{GbaTek-MultiBoot} implementa varios mensaje, siendo los más importantes en cuanto seguridad \texttt{RSA signature} y \texttt{data}.
+El protocolo~\cite{GbaTek} implementa varios mensaje, siendo los más importantes en cuanto seguridad \texttt{RSA signature} y \texttt{data}.
 Con el primero se envían los archivos binarios de código principales de la aplicación, uno por procesador.
 Este mensaje está además firmado usando \texttt{SHA-1} para que no se pueda alterar el código.
 El segundo mensaje sirve para transmitir el resto de datos del juego como imágenes, textos y sonidos.
