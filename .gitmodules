@@ -34,3 +34,6 @@
 [submodule "wiki"]
 	path = wiki
 	url = git@github.com:pleonex/AiroRom.wiki.git
+[submodule "Programs/NitroFilcher"]
+	path = Programs/NitroFilcher
+	url = https://github.com/pleonex/NitroFilcher
