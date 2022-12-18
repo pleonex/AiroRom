@@ -9,3 +9,19 @@ Para cada algoritmo se realizará un análisis de eficiencia, calidad y compleji
 En el repositorio se subirán todos programas desarrollados durante el trabajo.
 Los documentos con la información recopilada se puede encontrar en la
 [wiki](https://github.com/pleonex/AiroRom/wiki).
+
+Dependencias para compilar documents en latex:
+
+- mscgen
+- latexmk
+- texlive-parskip
+- texlive-metafont
+- texlive-ec
+- texlive-babel-english
+- texlive-babel-spanish
+- texlive-xmpincl
+- texlive-microtype
+- texlive-acronym
+- texlive-ctable
+- texlive-beamer
+- texlive-fira
